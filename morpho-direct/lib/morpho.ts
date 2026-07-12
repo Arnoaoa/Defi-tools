@@ -1,6 +1,9 @@
-import { encodeAbiParameters, keccak256, formatUnits } from 'viem'
+import { encodeAbiParameters, keccak256, formatUnits, getAddress } from 'viem'
 
-export const MORPHO_BLUE_ADDRESS = '0xBBBBBbbBBb9cC5e90e3b3Af64bdAF62C37EEFFc' as const
+// Canonical Morpho Blue — same address on Ethereum and Base (verified against
+// the Morpho API morphoBlues endpoint). getAddress throws at module load on
+// any typo/checksum error instead of failing silently at read/write time.
+export const MORPHO_BLUE_ADDRESS = getAddress('0xBBBBBbbBBb9cC5e90e3b3Af64bdAF62C37EEFFCb')
 
 export interface MarketParams {
   loanToken: `0x${string}`

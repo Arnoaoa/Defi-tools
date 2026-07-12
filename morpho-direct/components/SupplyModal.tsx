@@ -76,12 +76,15 @@ export function SupplyModal({ market, onClose }: SupplyModalProps) {
   const computedId = computeMarketId(marketParams)
   const idMatchesApi = computedId.toLowerCase() === market.marketId.toLowerCase()
 
+  // Reads target the market's chain explicitly — they work regardless of the
+  // wallet's currently connected network. Only writes require the switch.
   const { data: allowance, refetch: refetchAllowance } = useReadContract({
     address: market.loanAsset.address as `0x${string}`,
     abi: ERC20_ABI,
     functionName: 'allowance',
     args: address ? [address, MORPHO_BLUE_ADDRESS] : undefined,
-    query: { enabled: !!address && !needsSwitch },
+    chainId: txChainId,
+    query: { enabled: !!address },
   })
 
   const { data: balance, refetch: refetchBalance } = useReadContract({
@@ -89,7 +92,8 @@ export function SupplyModal({ market, onClose }: SupplyModalProps) {
     abi: ERC20_ABI,
     functionName: 'balanceOf',
     args: address ? [address] : undefined,
-    query: { enabled: !!address && !needsSwitch },
+    chainId: txChainId,
+    query: { enabled: !!address },
   })
 
   const { data: positionData, refetch: refetchPosition } = useReadContract({
@@ -97,7 +101,8 @@ export function SupplyModal({ market, onClose }: SupplyModalProps) {
     abi: MORPHO_BLUE_ABI,
     functionName: 'position',
     args: address ? [computedId, address] : undefined,
-    query: { enabled: !!address && !needsSwitch },
+    chainId: txChainId,
+    query: { enabled: !!address },
   })
 
   const { data: marketState, refetch: refetchMarket } = useReadContract({
@@ -105,7 +110,7 @@ export function SupplyModal({ market, onClose }: SupplyModalProps) {
     abi: MORPHO_BLUE_ABI,
     functionName: 'market',
     args: [computedId],
-    query: { enabled: !needsSwitch },
+    chainId: txChainId,
   })
 
   const { writeContract, data: txHash, isPending, error: writeError } = useWriteContract()
@@ -350,7 +355,7 @@ export function SupplyModal({ market, onClose }: SupplyModalProps) {
           </div>
         )}
 
-        {address && !needsSwitch && (
+        {address && (
           <div
             className="mb-5 p-3 rounded-lg grid grid-cols-2 gap-3"
             style={{ background: 'var(--background)' }}
