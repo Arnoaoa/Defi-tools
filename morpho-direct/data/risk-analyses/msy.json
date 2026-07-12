@@ -1,0 +1,44 @@
+{
+  "symbol": "msY",
+  "name": "Main Street Yield",
+  "addresses": {
+    "1": "0x890A5122Aa1dA30fEC4286DE7904Ff808F0bd74A"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Depeg permanent deja realise : msUSD -71 a -90%, msY -70 a -85% le 20/06/2026, sans recovery",
+    "Liquidite primaire de facto absente : marche(s) msY/USDC a 100% d'utilisation, retraits geles",
+    "Single point of failure sur un verificateur de reserves tiers unique (Accountable) dont la rupture de contrat a effondre l'actif en quelques heures",
+    "Curator Morpho (AlphaPing) avait deja interrompu sa propre verification de collateral avant le collapse"
+  ],
+  "maxAllocation": "0% (skip)",
+  "summary": "msY est le token de rendement de Main Street Finance, adosse au stablecoin msUSD lui-meme cense etre backe par USDC et deploye dans des strategies de box spread CME off-chain verifiees par un prestataire tiers (Accountable). Le 20/06/2026, Accountable a rompu son contrat en invoquant le non-respect des standards de verification, provoquant un depeg de msUSD (-71 a -90%) et un effondrement de msY (-70 a -85%) en quelques heures, sans recovery depuis (prix constate ~0,35$ contre 1$ theorique). L'APY supply aberrant (~298 000%) observe sur le marche Morpho USDC/msY est l'artefact d'un modele de taux qui s'emballe a 100% d'utilisation sur un marche casse : ce n'est pas un rendement reel mais le signe d'un collateral insolvable et de retraits fonctionnellement geles (perte de ~18M$ deja constatee sur le vault AlphaUSDC Delta V2). Verdict lender : a eviter totalement, le collateral de ce marche est deja sinistre.",
+  "incidents": [
+    "2026-06-20: Accountable met fin a son contrat de verification des reserves avec Main Street Finance ; msUSD depeg (-71 a -90% en 24h), msY chute de 70 a 85% ; vault Morpho AlphaUSDC Delta V2 (curator AlphaPing) subit ~18M$ de pertes, marche(s) msY/USDC bloque(s) a 100% d'utilisation, retraits geles, aucune resolution confirmee au 2026-07-12"
+  ],
+  "controversies": [
+    "2026-06 (suite au collapse): differend public non resolu entre Main Street Finance et Accountable sur la responsabilite de la perte de peg, chacune des parties rejetant la faute sur l'autre",
+    "Historique des fondateurs/litiges anterieurs a juin 2026: non trouve (opacite supplementaire, sans changer la note deja D/skip)"
+  ],
+  "dependencies": {
+    "issuer": "Main Street Finance (Mainstreet.Finance)",
+    "custodians": ["Operateur des positions de box spread CME non identifie publiquement"],
+    "underlyings": ["msUSD"],
+    "keyCounterparties": ["Accountable (ex-verificateur tiers des reserves, contrat rompu le 20/06/2026)", "AlphaPing (curateur du vault Morpho AlphaUSDC Delta V2, ~18M$ d'exposition, avait deja interrompu sa propre verification du collateral avant le collapse)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 27416966,
+    "dailyLiquidityUsd": 11425,
+    "ratioPct": 240061,
+    "note": "Volume msY 24h post-collapse (CoinGecko, 2026-07-12). Marche(s) Morpho a 100% d'utilisation, retraits geles : le ratio n'a plus de sens economique, la sortie est fonctionnellement impossible."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "msy.md"
+}

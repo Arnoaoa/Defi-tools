@@ -1,0 +1,41 @@
+{
+  "symbol": "cbXRP",
+  "name": "Coinbase Wrapped XRP",
+  "addresses": {
+    "8453": "0xcb585250f852C6c6bf90434AB21A00f02833a4af"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Concentration de liquidité : TVL Morpho (37,4 M$) ~= 38% du market cap total cbXRP (~98 M$), volume d'échange 24h très faible (~1,3 M$)"
+  ],
+  "maxAllocation": "5-15%",
+  "summary": "cbXRP est un wrapped XRP émis par Coinbase, même modèle de custody 1:1 et même famille de contrat (héritée de cbETH/OpenZeppelin) que cbBTC, lancé en juin 2025. Forces : émetteur régulé et coté, aucun dépeg ou hack constaté, risque réglementaire XRP fortement réduit depuis le règlement SEC-Ripple de mars 2026. Faiblesses : wrapper récent (13 mois d'historique), liquidité secondaire thin (volume 24h ~1,3 M$ pour ~98 M$ de market cap), et TVL Morpho déjà concentrée à hauteur d'environ 38% du market cap total, ce qui limite la capacité de sortie en cas de stress ; le sous-jacent XRP reste par ailleurs nativement plus volatil que BTC/ETH. Verdict lender : collatéral acceptable mais moins mature que cbBTC, allocation à limiter tant que la liquidité secondaire et l'historique ne se sont pas approfondis.",
+  "incidents": [
+    "2024-01: vol de ~150 M$ de XRP depuis un wallet personnel de Chris Larsen (co-fondateur Ripple) via compromission LastPass — sans lien avec cbXRP/Coinbase",
+    "2025-04: backdoor dans la librairie npm xrpl.js de l'écosystème XRP Ledger — supply-chain attack, sans impact rapporté sur Coinbase ou cbXRP"
+  ],
+  "controversies": [
+    "2020-12 à 2025-05: procès SEC vs Ripple Labs (+ Garlinghouse, Larsen) pour vente non enregistrée de XRP en tant que security (1,3 Md$ levés) ; jugement partagé juillet 2023 (institutionnel = security, retail exchange = non-security), pénalité civile 125 M$ (aout 2024, vs 2 Md$ demandés), abandon d'appel SEC mars 2025, règlement final mai 2025 (50 M$ payés). Risque réglementaire structurel sur XRP (sous-jacent de cbXRP) désormais levé."
+  ],
+  "dependencies": {
+    "issuer": "Coinbase",
+    "custodians": ["Coinbase (garde du XRP natif backant cbXRP)"],
+    "underlyings": ["XRP natif (XRP Ledger)"],
+    "keyCounterparties": ["Coinbase (droits blacklist/pause)", "Chainlink CCIP (bridge exclusif des wrapped assets Coinbase depuis déc. 2025, intégration récente)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 37353433,
+    "dailyLiquidityUsd": 1398588,
+    "ratioPct": 2670.6,
+    "note": "Volume cbXRP 24h agrégé (CoinGecko, 2026-07-12), majoritairement Aerodrome Slipstream CBXRP/WETH (~1,04M$). Ratio très largement au-dessus du seuil red flag de 30% — confirme et quantifie le red flag déjà noté en v1."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "cbxrp.md"
+}

@@ -1,0 +1,44 @@
+{
+  "symbol": "PT-reUSD-10DEC2026",
+  "name": "PT reUSD 10DEC2026",
+  "addresses": {
+    "1": "0xeCfaFdC7741323a945A163ed068B5a3C43483957"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "D",
+    "depegBacking": "D",
+    "counterparty": "C",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Hack confirmé de ~10M$ sur Resupply (émetteur du sous-jacent reUSD) le 26/06/2025, avec bad debt partiellement socialisée sur l'insurance pool (burn de 6M reUSD, ~15,5% du pool) plutôt que couverte intégralement",
+    "Backing en cascade : reUSD est un stablecoin CDP adossé à des tokens de dépôt Curve Lend/Fraxlend (positions en crvUSD/frxUSD), pas à un actif primaire direct ; aucun rapport d'audit nommé publiquement trouvé pour Resupply",
+    "Plus bas historique de reUSD à 0,8885$ atteint en juin 2026 (dans la fenêtre des 6 derniers mois), sans explication publique identifiée",
+    "Liquidité secondaire très fine (market cap reUSD ~32M$) face à 34M$ de TVL cumulée comme collatéral PT sur Morpho : concentration/corrélation en cas de liquidation massive"
+  ],
+  "maxAllocation": "1-3% (ou éviter)",
+  "summary": "PT-reUSD-10DEC2026 est un Principal Token Pendle qui se rachète 1:1 contre reUSD à maturité (10/12/2026) ; il n'a aucune valeur plancher indépendante et hérite intégralement du risque du sous-jacent. reUSD est émis par Resupply Protocol (Convex + Yearn), à ne pas confondre avec l'USR de Resolv : c'est un stablecoin CDP jeune (mars 2025) adossé à des positions de lending Curve/Fraxlend, ayant subi un hack de ~10M$ en juin 2025 (recovery partiellement socialisée sur l'insurance pool) et un plus bas historique à 0,8885$ en juin 2026 sans explication publique claire. Le mécanisme Pendle lui-même est solide (audits ChainSecurity/Dedaub, battle-tested depuis 2021), mais le maillon faible est clairement le sous-jacent : protocole jeune, petite taille, historique de stress répété, backing opaque et peu liquide. Verdict lender : collatéral à éviter en taille significative ou à cantonner à une allocation résiduelle (1-3%), avec surveillance rapprochée du peg reUSD et de la santé de Resupply avant maturité.",
+  "incidents": [
+    "2025-06-26: exploit ~10M$ sur Resupply (bug d'arrondi entier sur un nouveau marché cvcrvUSD), protocole mis en pause, recovery par burn de 6M reUSD de l'insurance pool",
+    "2026-06: reUSD touche un plus bas historique de 0,8885$, cause publique non identifiée"
+  ],
+  "controversies": [
+    "Aucune controverse de gouvernance/légale distincte trouvée pour Resupply, Convex Finance ou Yearn Finance au-delà de l'incident de sécurité de juin 2025 (non trouvé au 2026-07-12, à réévaluer périodiquement)"
+  ],
+  "dependencies": {
+    "issuer": "Pendle Finance (wrapper PT/YT) sur reUSD de Resupply Protocol (sub-DAO Convex Finance + Yearn Finance)",
+    "custodians": [],
+    "underlyings": ["reUSD (Resupply)", "positions de dépôt Curve Lend/Fraxlend (crvUSD, frxUSD) sous-jacentes au backing de reUSD"],
+    "keyCounterparties": ["Convex Finance (gouvernance Resupply)", "Yearn Finance (gouvernance Resupply)", "Curve Finance et Frax Finance (dépendance indirecte via le backing en cascade de reUSD)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 34023965,
+    "dailyLiquidityUsd": 150000,
+    "ratioPct": 22682.6,
+    "note": "Volume direct du PT sur l'AMM Pendle non confirmé distinctement d'un homonyme reUSD (re.xyz/réassurance) partageant le même ticker sur Pendle — non recoupé par adresse de contrat. Proxy prudent : volume du reUSD (Resupply) sous-jacent déjà documenté en v1 (<150 000$/24h, market cap ~32M$). Ratio extrême, très au-dessus du seuil red flag de 30%."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "pt-reusd-10dec2026.md"
+}

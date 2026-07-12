@@ -1,0 +1,30 @@
+{
+  "symbol": "sUSDat",
+  "name": "Staked USDat",
+  "addresses": {
+    "1": "0xD166337499E176bbC38a1FBd113Ab144e5bd2Df7"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "D",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Vulnérabilité critique SAT-001 divulguée publiquement le 14/04/2026 (Innora Security), non corrigée : underflow arithmétique pouvant geler les retraits jusqu'à 30 jours",
+    "Vulnérabilité haute SAT-002 non corrigée : le rôle unique PROCESSOR_ROLE peut théoriquement extraire jusqu'à ~33% de la valeur par cycle de conversion via un double tolerance check",
+    "Dépeg réel du sous-jacent STRC à -17% sous pair (82,50$) le 18/06/2026 lors d'une cascade de liquidations à effet de levier, moins d'un mois avant cette analyse",
+    "Backing entièrement off-chain : fonds BVI + custodian (Clear Street) + administrateur (Securitize) tiers, aucune vérification on-chain temps réel des réserves STRC",
+    "Protocole très jeune (lancé mars 2026, ~4 mois d'existence) sans historique de stress éprouvé"
+  ],
+  "maxAllocation": "skip",
+  "summary": "sUSDat est le vault de staking d'USDat (Saturn Credit), dont le yield provient des dividendes de STRC, l'action préférentielle de Strategy (ex-MicroStrategy) collatéralisée par du Bitcoin. Le stablecoin USDat lui-même est backé par des treasuries tokenisées et sans risque STRC direct, mais 99% du capital déposé finit staké en sUSDat, qui porte l'intégralité du risque STRC malgré le marketing '11% yield, zero STRC risk'. Faiblesses majeures : deux vulnérabilités smart contract (critique + haute) divulguées publiquement en avril 2026 et toujours non corrigées, un dépeg réel du sous-jacent STRC à -17% en juin 2026, et un backing entièrement dépendant d'entités off-chain (fonds BVI, custodian, administrateur) hors du contrôle du protocole. Verdict lender : collatéral à éviter (skip) sur Morpho tant que les vulnérabilités ne sont pas corrigées et que le protocole n'a pas d'historique de stress plus long ; la note D est tirée par le maillon le plus faible (sécurité smart contract ET backing), pas par une seule composante isolée.",
+  "incidents": [
+    "2026-04-14: divulgation publique de deux vulnérabilités smart contract (SAT-001 critique, SAT-002 haute) par le chercheur Innora, non corrigées à ce jour",
+    "2026-06-18: dépeg du sous-jacent STRC à 82,50$ (-17% sous pair) lors d'une cascade de liquidations à effet de levier, rebond à ~89$ en clôture"
+  ],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "susdat.md"
+}

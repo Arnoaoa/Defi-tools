@@ -1,0 +1,28 @@
+{
+  "symbol": "PT-USDat-27AUG2026",
+  "name": "PT USDat 27AUG2026",
+  "addresses": {
+    "1": "0x1D69402390657308C91179aa184bF992908c1e08"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "D",
+    "depegBacking": "C",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Accès permissionné à USDat : mint/redeem réservés aux adresses KYC/onboardées ; incertitude non résolue sur d'éventuelles restrictions de transfert/détention, ce qui menacerait le bon fonctionnement des liquidations permissionless sur Morpho",
+    "Vulnérabilité Critical (SAT-001) et High (SAT-002) divulguée publiquement le 14/04/2026 (Innora Security Research) sur le protocole Saturn, sans confirmation publique de correctif à la date de divulgation (touche sUSDat, pas USDat directement, mais révèle l'immaturité sécuritaire de l'émetteur)",
+    "Émetteur (Saturn Credit) très jeune (lancé mars 2026, ~4 mois d'existence) et sous-capitalisé (~2,8M$ de levées totales) pour un actif utilisé comme collatéral de prêt",
+    "Liquidité secondaire très fine : USDat affiche un turnover d'environ 0,3%/jour (volume 24h ~335K$ pour ~105,3M$ de market cap)"
+  ],
+  "maxAllocation": "1% (ou éviter)",
+  "summary": "PT-USDat-27AUG2026 est un Principal Token Pendle qui se rachète 1:1 contre USDat à maturité (27/08/2026) ; le mécanisme PT lui-même est sain mais hérite intégralement du risque du sous-jacent. USDat est le stablecoin non-yield de Saturn (Saturn Credit), backé par des Treasuries tokenisées via M0 (audité Certora) — un design de backing solide sur le papier, mais l'accès primaire (mint/redeem) est réservé aux adresses KYC/onboardées, avec une incertitude non résolue sur d'éventuelles restrictions de transfert qui pourraient compromettre les liquidations Morpho. Le protocole émetteur est très jeune (4 mois), sous-capitalisé, et a fait l'objet d'une divulgation de vulnérabilité Critical + High en avril 2026 sur son produit sœur sUSDat, sans confirmation publique de correctif. Verdict lender : collatéral à éviter en taille significative — trop jeune, trop opaque sur l'accès/transfert du token, et sécurité de l'émetteur non stabilisée ; allocation résiduelle uniquement (1%) avec surveillance rapprochée avant maturité.",
+  "incidents": [
+    "2026-04-14: divulgation publique (Innora Security Research) de SAT-001 (Critical, underflow dans convertFromStrc() pouvant geler les retraits jusqu'à 30 jours) et SAT-002 (High, extraction jusqu'à 33% via le rôle PROCESSOR) sur le protocole Saturn, affectant sUSDat (pas USDat directement), sans correctif confirmé à la publication"
+  ],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "pt-usdat-27aug2026.md"
+}

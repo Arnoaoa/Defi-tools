@@ -1,0 +1,24 @@
+{
+  "symbol": "wFalconX",
+  "name": "Wrapped FalconX",
+  "addresses": { "1": "0x4614F7A56A3Eb83b2Ff9fA4B4b9575B28Fb68644" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Identité du déployeur et des détenteurs des rôles mint/burn du contrat WrappedAsset non confirmée",
+    "Aucun audit public identifié pour ce contrat spécifique",
+    "Liquidité quasi nulle : 4 détenteurs, 7 transferts au total",
+    "Contrat déployé il y a ~52 jours, aucun historique"
+  ],
+  "maxAllocation": "1-5% ou à éviter",
+  "summary": "wFalconX est un wrapper ERC-20 1:1 (contrat WrappedAsset, Solady + rôles) qui enveloppe le token AA_FalconXUSDC déjà analysé (tranche senior du Credit Vault Pareto/FalconX/M11 Credit) — le sous-jacent est confirmé on-chain, le contrat détenant physiquement 7,88M AA_FalconXUSDC. Force : backing 1:1 vérifiable et hérite de l'historique propre (aucun hack) de la tranche sous-jacente. Faiblesses : contrat récent (~52 jours), aucun audit public trouvé pour le wrapper lui-même, identité du détenteur des rôles mint/burn non confirmée, liquidité quasi inexistante (4 détenteurs, 7 transferts). Verdict lender : ne pas traiter comme équivalent d'AA_FalconXUSDC — la couche de wrapping ajoute un risque de custody/mint opaque et sans historique qui dégrade la note de C à D ; allocation minimale ou à éviter tant que le déployeur et l'audit du wrapper ne sont pas clarifiés.",
+  "incidents": [],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "wfalconx.md"
+}

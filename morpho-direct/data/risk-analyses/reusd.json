@@ -1,0 +1,39 @@
+{
+  "symbol": "reUSD",
+  "name": "Re Protocol Deposit Token",
+  "addresses": {
+    "1": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+    "8453": "0x7D214438D0F27AfCcC23B3d1e1a53906aCE5CFEa"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-10%",
+  "summary": "reUSD est le token senior tranche de Re Protocol (re.xyz), un marché on-chain de réassurance : il capte un rendement (SOFR ou basis-trade sUSDe + 250bps) adossé à des contrats de réassurance réels via un réassureur licencié (CoverRe.com), avec attestation quotidienne des réserves via Chainlink. Ce token n'a aucun rapport avec le reUSD de Resupply Protocol (Convex/Yearn), un projet distinct ayant subi un hack de 10M$ en juin 2025 — vérification par adresse de contrat obligatoire pour éviter la confusion. Forces : audits (Hacken, Certora), protocole établi (~1,5 an, TVL ~475M$), aucun incident de sécurité confirmé. Faiblesses : marché primaire permissionné (KYC/KYB), rachat plafonné basculant en file trimestrielle sous stress, liquidité secondaire faible (~737K$/jour pour 158M$ de market cap), dépendance à la solvabilité d'un réassureur non vérifiable on-chain, et un plus bas historique à -24,7% du peg il y a ~12 mois sans explication publique. Verdict lender : collatéral correct pour une allocation modérée, mais surveiller la liquidité de sortie en cas de liquidation massive.",
+  "incidents": [
+    "2025 (date exacte non trouvée): plus bas historique de reUSD à 0,8734$ (-24,7% vs prix actuel), cause publique non identifiée"
+  ],
+  "controversies": [
+    "Aucune controverse gouvernance/légale/réputationnelle trouvée depuis le lancement (recherches lawsuit/SEC/scandal/CoverRe au 2026-07-12) ; TGE du token $RE en juin 2026 sans dispute de distribution documentée"
+  ],
+  "dependencies": {
+    "issuer": "Re Protocol (Resilience Foundation Cayman LLC + Cover Reinsurance SPC Ltd., réassureur licencié Caïmans)",
+    "custodians": ["Fireblocks", "Trust Regulation 114 (réserves off-chain)"],
+    "underlyings": ["Contrats de réassurance (CoverRe)", "sUSDe basis-trade (Ethena)"],
+    "keyCounterparties": ["CoverRe.com (réassureur unique)", "The Network Firm (attestations)", "Chainlink (attestations + bridge CCIP)", "Ethena"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 25648902,
+    "dailyLiquidityUsd": 723278,
+    "ratioPct": 3546,
+    "note": "Volume 24h 723K$ (CoinGecko 2026-07-12, concentré sur Fluid Ethereum ~499K$), pool Curve reUSD/USDC ~450K$ de depth — ratio >> 30% : sortie secondaire impossible sous stress, atténué par la redemption primaire (buffer >1% du supply, plafonds 10%/rachat et 20%/jour, file trimestrielle sous stress)"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "reusd.md"
+}

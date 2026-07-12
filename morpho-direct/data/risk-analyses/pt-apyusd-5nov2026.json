@@ -1,0 +1,31 @@
+{
+  "symbol": "PT-apyUSD-5NOV2026",
+  "name": "PT apyUSD 5NOV2026",
+  "addresses": {
+    "1": "0xb5Be35D8fF83D431899b95851CB17a2B4bcEF150"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Sous-jacent apyUSD déjà noté D : backing en preferred shares STRC (Strategy) fortement corrélé au Bitcoin, deux dépegs >20% en juin 2026",
+    "Marché PT ouvert peu après ces épisodes de stress, verrouillant l'exposition jusqu'au 05/11/2026 sur un actif dont la cause structurelle (mismatch de liquidité overnight crypto 24/7 vs marché actions) n'est qu'atténuée, pas résolue",
+    "Marché primaire d'apyUSD/apxUSD fermé au grand public (whitelist institutionnelle uniquement)",
+    "Liquidité secondaire du pool Pendle 5NOV2026 spécifique non vérifiable au moment de l'analyse (app Pendle inaccessible) ; le pool précédent (maturité expirée 18/06/2026) affichait ~45M$ mais ce chiffre n'est pas extrapolable avec certitude"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "PT-apyUSD-5NOV2026 est un Principal Token Pendle qui se rachète 1:1 contre apyUSD à maturité (05/11/2026) ; identité confirmée via son contrat SY dédié (SY-apyUSD) qui référence bien l'apyUSD d'Apyx déjà analysé. Le mécanisme Pendle est solide (audits ChainSecurity/Dedaub, battle-tested depuis 2021), mais le PT n'a aucune valeur plancher indépendante et hérite intégralement du risque du sous-jacent, déjà noté D. apyUSD est backé par des actions préférentielles (STRC/Strategy) corrélées au Bitcoin malgré un narratif 'low-volatility', et a subi deux dépegs sévères (>20%) en juin 2026, quelques semaines avant l'ouverture de ce nouveau pool 5NOV2026 (rollover du pool précédent, maturité expirée 18/06/2026). Le post-mortem officiel d'Apyx confirme une cause structurelle (mismatch de liquidité overnight) atténuée par des correctifs mais non éliminée. Verdict lender : collatéral à éviter en taille significative ou à cantonner à une allocation résiduelle, avec surveillance rapprochée du peg apyUSD/apxUSD et de la santé de STRC/Strategy avant la maturité de novembre 2026.",
+  "incidents": [
+    "2026-06-04: apxUSD (sous-jacent) dépeg à 0,93$ suite à la chute du Bitcoin sous 63 000$, STRC tombant à 90,38$",
+    "2026-06-05: pic de liquidations sur Morpho (>4M$ en une journée), sans bad debt",
+    "2026-06-08 (semaine du): post-mortem officiel Apyx identifiant un mismatch structurel de liquidité overnight comme cause racine du stress",
+    "2026-06-25/26: second dépeg plus sévère, apxUSD à ~0,78-0,90$, ATL apyUSD à 0,9736$ (CoinGecko)"
+  ],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "pt-apyusd-5nov2026.md"
+}

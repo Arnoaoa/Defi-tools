@@ -1,0 +1,26 @@
+{
+  "symbol": "savUSD",
+  "name": "Staked avUSD",
+  "addresses": {
+    "1": "0xb8D89678E75a973E74698c976716308abB8a46A4"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "D",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Proof of Reserve annoncée par Avant Protocol mais non encore en production (backing non vérifiable on-chain en temps réel)",
+    "Gouvernance (multisig, timelock) non documentée publiquement : opacité totale sur le contrôle du protocole",
+    "Le collatéral Ethereum est un wrapper Chainlink CCIP (Burn & Mint) du token natif Avalanche, pas le token natif lui-même : dépendance de pont supplémentaire",
+    "Liquidité très faible sur Morpho : ~10M$ de TVL cumulée sur seulement 2 marchés (USDC, frxUSD)"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "savUSD est le token de staking d'avUSD, le stable-token d'Avant Protocol (Avalanche, lancé en juin 2024), dont le yield provient de stratégies market-neutral déléguées à un gestionnaire tiers (0xPartners), sur un modèle proche d'Ethena mais plus jeune et plus petit. Forces : audits par Omniscia et Dedaub, OPSEC review par Trail of Bits, structure de tranches (Reserve Fund puis Junior Tranche) censée absorber les pertes avant les holders de savUSD, aucun incident connu à ce jour. Faiblesses : Proof of Reserve pas encore live, gouvernance et structure de multisig totalement opaques, protocole jeune avec seulement 6,5M$ de seed et 8 personnes dans l'équipe, et surtout le collatéral utilisé sur Morpho Ethereum est une version pontée via Chainlink CCIP du token natif Avalanche, avec une liquidité Morpho très faible (~10M$ sur 2 marchés). Verdict lender : collatéral à éviter ou à allocation résiduelle seulement, l'opacité de gouvernance et l'absence de vérification de réserve en temps réel constituent le maillon faible qui tire la note globale vers D malgré des audits de code corrects.",
+  "incidents": [],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "savusd.md"
+}

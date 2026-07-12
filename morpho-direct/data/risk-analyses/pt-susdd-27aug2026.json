@@ -1,0 +1,31 @@
+{
+  "symbol": "PT-sUSDD-27AUG2026",
+  "name": "PT Savings Usdd 27AUG2026",
+  "addresses": {
+    "1": "0xD341A146A4fD20eA89898E4d86Ae1829bF3A1c23"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "D",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Collatéral de l'émetteur (USDD) significativement composé de son propre token d'écosystème (TRX/sTRX), structure rappelant le défaut de conception d'UST/LUNA malgré la sur-collatéralisation revendiquée",
+    "Deux dépegs historiques confirmés (juin 2022 à 0,97$, début 2023 à 0,96-0,99$) et un troisième épisode de stress en juin 2026 (0,9928-0,999$), dans la fenêtre des 6 derniers mois",
+    "Gouvernance concentrée autour de Justin Sun / Tron Foundation / Rainberry, entité ayant réglé une action civile en fraude de la SEC pour 10M$ en mars 2026",
+    "Ratio de collatéralisation de USDD rapporté de façon incohérente selon les sources (120-130% vs 200-300%), signal d'opacité"
+  ],
+  "maxAllocation": "1-3% (ou éviter)",
+  "summary": "PT-sUSDD-27AUG2026 est un Principal Token Pendle qui se rachète 1:1 contre sUSDD à maturité (27/08/2026) ; le mécanisme PT lui-même est solide (cf. [[pt-reusd-10dec2026]] pour le détail), mais le PT hérite intégralement du risque du sous-jacent. sUSDD (lancé octobre 2025) est le token de staking d'USDD dont le rendement (~12% APY) provient du 'Smart Allocator', un module qui redéploie les réserves vers Aave/JustLend, ajoutant une couche de risque de gestion active. USDD est émis par l'écosystème Tron DAO Reserve / USDD.io, fondé par Justin Sun dans le sillage direct de l'effondrement UST/Terra en 2022, avec un panier de réserve significativement composé du token natif de l'émetteur (TRX/sTRX), un ratio de collatéralisation rapporté de façon incohérente selon les sources, deux dépegs historiques confirmés et un nouvel épisode de stress mineur en juin 2026. Les audits sont réels et réguliers (CertiK, ChainSecurity) mais ne compensent pas une gouvernance concentrée autour d'un individu ayant réglé une poursuite en fraude de la SEC. Verdict lender : collatéral à éviter en taille significative ou à cantonner à une allocation résiduelle (1-3%), avec surveillance rapprochée du peg USDD/sUSDD avant maturité.",
+  "incidents": [
+    "2022-06: USDD perd son peg, chute à 0,97$ ; recovery en ~1 semaine après renforcement du panier de collatéral par le Tron DAO Reserve",
+    "2023 (début d'année): second épisode de sous-peg, plusieurs semaines entre 0,96$ et 0,99$",
+    "2026-06: nouvel épisode de sous-peg mineur (0,9928-0,999$), retour à 1,00$ début juillet 2026, cause publique précise non trouvée",
+    "2026-03: Justin Sun / Rainberry Inc. règlent une action civile en fraude de la SEC (Tronix/BitTorrent) pour 10M$ — incident réglementaire distinct de USDD mais impliquant l'entité qui contrôle son émission"
+  ],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "pt-susdd-27aug2026.md"
+}

@@ -1,0 +1,41 @@
+{
+  "symbol": "cbBTC",
+  "name": "Coinbase Wrapped BTC",
+  "addresses": {
+    "1": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+    "8453": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf"
+  },
+  "grade": "B",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "B",
+    "depegBacking": "A",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "15-25%",
+  "summary": "cbBTC est un wrapped BTC émis par Coinbase, backé 1:1 par du Bitcoin en custody, avec Proof of Reserves vérifiable en temps réel via Chainlink et contrat audité par OpenZeppelin. Forces : transparence des réserves supérieure à la moyenne, émetteur régulé et coté (NASDAQ: COIN), aucun dépeg depuis le lancement en septembre 2024, premier collatéral BTC de Morpho par TVL. Faiblesses : custodian unique avec droits de blacklist/pause sur le contrat, marché primaire gated par KYC Coinbase, gouvernance 100% centralisée sans DAO. Verdict lender : collatéral solide comparable à un WBTC de nouvelle génération, adapté à une allocation modérée à significative malgré la centralisation inhérente au modèle custodial.",
+  "incidents": [
+    "2025-05-15: brèche de données Coinbase (support client sous-traité, ~70k comptes) — aucun fonds ni custody BTC affectés"
+  ],
+  "controversies": [
+    "2023-06 à 2025-02: SEC v. Coinbase (opération d'échange/broker non enregistrée) — dismissed with prejudice le 28/02/2025, aucun impact matériel",
+    "2023-06/07: actions de régulateurs d'État US (10 États) contre le programme de staking-as-a-service Coinbase — accords de suspension temporaire dans 4 États",
+    "2021-12: plainte actionnariale dérivée (NY) contre Coinbase et ses dirigeants pour manquement fiduciaire — litige de gouvernance d'entreprise, sans rapport direct avec cbBTC"
+  ],
+  "dependencies": {
+    "issuer": "Coinbase, Inc. (filiale de Coinbase Global, Inc., NASDAQ: COIN)",
+    "custodians": ["Coinbase (custody interne, cold storage US + Europe)"],
+    "underlyings": ["BTC natif"],
+    "keyCounterparties": ["Coinbase (droits admin Blacklister/Pauser sur le contrat)", "OpenZeppelin (audit du contrat, base cbETH)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 1729684816,
+    "dailyLiquidityUsd": 36400000,
+    "ratioPct": 4753,
+    "note": "Volume DEX 24h cumulé (cbBTC/USDC Uniswap Base ~33M + cbBTC/WBTC Uniswap Arbitrum ~3,35M ; pool Curve Base quasi inactif) très fin face à la TVL Morpho, mais la vraie voie de sortie est la redemption directe 1:1 via Coinbase (gated KYC, backée ~5,6Md$ de réserves BTC), bien plus profonde que les pools DEX — source : GeckoTerminal/Uniswap 2026-07-12"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "cbbtc.md"
+}

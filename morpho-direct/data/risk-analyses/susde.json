@@ -1,0 +1,45 @@
+{
+  "symbol": "sUSDe",
+  "name": "Staked USDe",
+  "addresses": {
+    "1": "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497",
+    "8453": "0x211Cc4DD073734dA055fbF44a2b4667d5E5fE5d2"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "sUSDe est le token de staking ERC-4626 de USDe (Ethena Labs) : un exchange-rate token qui capture le yield de la position delta-neutre sous-jacente (funding rate CEX + staking ETH natif) sans dépeg spot direct. Forces : même base d'audits qu'USDe (Zellic, Pashov, Quantstamp, Cyfrin), aucun hack du contrat de staking, et une résistance démontrée au dépeg spot du 11/10/2025 (l'oracle sUSDe est resté stable pendant que USDe chutait à 0,65$ sur Binance). Faiblesses : hérite intégralement des risques de USDe (reserve fund thin ~1,1-1,2% TVL, dépendance aux desks dérivés CEX) et ajoute un cooldown d'unstaking (1 à 7 jours, dynamique depuis mars 2026, historiquement fixe à 7 jours) qui retarde la sortie précisément pendant les périodes de stress où le backing peut se dégrader. Verdict lender : collatéral acceptable en allocation limitée (5-15%), avec vigilance accrue sur la liquidité de sortie en cas de funding négatif prolongé — le cooldown est un frein réel à la liquidation d'urgence.",
+  "incidents": [
+    "2025-10-11: dépeg spot USDe à 0,65$ sur Binance (~90min, défaut oracle Binance) ; sUSDe resté stable sur son exchange rate théorique, sortie de ~8,7 Md$ de supply USDe absorbée sans gel du protocole, pic de rachat à 28,9% de la supply sUSDe en une journée",
+    "2025-02-21: hack Bybit (1,46 Md$), ~30M$ d'exposition dérivée Ethena absorbée par le reserve fund sans perte pour les holders sUSDe",
+    "2026-04: exploit KelpDAO (293M$, sans lien direct), Ethena a mis en pause ses bridges LayerZero OFT par précaution (~6h)"
+  ],
+  "controversies": [
+    "2024-02: communiqué de presse de levée de fonds ($14M) contenant des noms d'investisseurs inexacts (PayPal, Franklin Templeton, Avon Ventures/Fidelity), corrigé sous 24h, qualifié d'erreur honnête par Guy Young, sans suite réglementaire",
+    "2024-04: controverse sur les règles de lock/vesting de l'airdrop ENA (50% minimum) perçues comme un moyen de retenir la valeur avant les débloquages équipe/investisseurs ; débat parallèle sur la comparaison du rendement USDe avec Terra/UST (risque structurel de funding rate négatif prolongé, tempéré par un backing en actifs liquides ETH/BTC)",
+    "2024-10: accusation d'utilisation abusive de 180M ENA par Ethena Labs dans le farming Season 3, démentie par le protocole (tokens de la fondation, wallets suspects exclus des récompenses)",
+    "2025-07: rencontre réglementaire informelle entre Ethena Labs et le SEC Crypto Task Force (memo public), pas d'action en justice ni d'enquête identifiée",
+    "non daté: concentration historique des custodians off-exchange (Copper, Ceffu, Cobo) jusqu'à l'arrivée de Kraken Custody en 2026-01 ; aucun scandale de custody documenté à ce jour mais dépendance à un nombre réduit d'acteurs"
+  ],
+  "dependencies": {
+    "issuer": "Ethena Labs (entité BVI, fondateur Guy Young)",
+    "custodians": ["Copper Markets AG (~1,31 Md$)", "CEFFU / CH Europe Digital Solution (~1,33 Md$)", "Cobo Global HK Limited (~5,52 M$)", "Kraken Custody (depuis 2026-01-06)"],
+    "underlyings": ["USDe", "ETH/BTC staké (jambe longue collatéralisée)", "positions short perpétuelles delta-neutres sur CEX", "reserve fund en stablecoins liquides (~1,1-1,2% TVL)"],
+    "keyCounterparties": ["Binance", "Bybit", "OKX", "Deribit", "Gemini", "Kraken (exchanges hébergeant les positions short delta-neutres)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 62531173,
+    "dailyLiquidityUsd": 3100000,
+    "ratioPct": 2017,
+    "note": "Liquidité DEX directe USDe/sUSDe sur Curve (GeckoTerminal, 07/2026) : USDe/FRAX 66,46M$ liq/1,67M$ vol24h, sDAI/sUSDe 9,55M$/0,49M$, USDe/USDC 6,58M$/0,89M$, crvUSD/sUSDe 0,65M$/0,055M$ ; total ~3,1M$/jour. Ratio TVL Morpho/liquidité 24h très supérieur au seuil red flag (30%) si on isole la sortie DEX ; à nuancer par le canal de redemption natif USDe (whitelist) et surtout le cooldown sUSDe (1-7j dynamique) qui reste le facteur limitant principal en cas de stress."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "susde.md"
+}

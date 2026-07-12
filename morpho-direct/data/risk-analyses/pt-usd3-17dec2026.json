@@ -1,0 +1,27 @@
+{
+  "symbol": "PT-USD3-17DEC2026",
+  "name": "PT USD3 17DEC2026",
+  "addresses": {
+    "1": "0x7f47c3e6b2c00fC4eB4d5Ae50d0Ab0Ab6888Eb4D"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "D",
+    "depegBacking": "D",
+    "counterparty": "C",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Protocole émetteur du sous-jacent (3Jane) en mainnet depuis ~1 mois seulement, aucun cycle de stress traversé",
+    "Aucun audit tiers nommé/daté publiquement trouvé pour 3Jane (doc mentionne des audits de façon générique, sans preuve)",
+    "Backing du sous-jacent USD3 (3Jane) par du crédit non-collatéralisé (0% collateral loans) à des marchands, recouvrement dépendant de mécanismes hors-chaîne (Plaid, credit score, Credit Slasher) — design de backing le plus risqué de la taxonomie",
+    "Liquidité secondaire du pool Pendle (~1,1M$) très inférieure à la TVL Morpho de ce PT comme collatéral (9,78M$), risque de concentration/illiquidité en sortie forcée",
+    "TVL du protocole 3Jane en croissance très rapide et récente (+55%/semaine), signe de yield incentivé (récompenses JANE) plutôt qu'organique stabilisé"
+  ],
+  "maxAllocation": "0-2% (skip recommandé)",
+  "summary": "PT-USD3-17DEC2026 se rachète 1:1 contre USD3 à maturité (17/12/2026) ; attention, ce USD3 est émis par 3Jane Protocol, pas par Reserve Protocol (homonyme distinct, déjà analysé séparément avec grade C) — vérification on-chain de l'adresse du SY sous-jacent obligatoire en cas de doute. 3Jane est un protocole de crédit non-collatéralisé (0% collateral loans à des marchands, souscrits via données off-chain), lancé en mainnet il y a environ un mois, financé par un seed Paradigm de 5,2M$, sans audit tiers nommé publiquement trouvé. USD3 (3Jane) est la tranche senior d'un livre de crédit non garanti, backing structurellement plus opaque et plus risqué qu'un stablecoin adossé à des positions DeFi ou du cash, et jamais testé en conditions de stress réel. Le mécanisme PT Pendle est solide en soi mais la liquidité secondaire du pool (~1,1M$) est faible face à la TVL Morpho de ce PT (9,78M$). Verdict lender : collatéral expérimental à éviter comme exposition significative, sous-jacent trop jeune et backing trop opaque pour justifier une allocation au-delà du résiduel.",
+  "incidents": [],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "pt-usd3-17dec2026.md"
+}

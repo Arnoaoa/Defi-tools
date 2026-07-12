@@ -1,0 +1,27 @@
+{
+  "symbol": "stUSDS",
+  "name": "Staked USDS",
+  "addresses": {
+    "1": "0x99CD4Ec3f88A45940936F469E4bB72A2A701EEB9"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Mécanisme de \"haircut\"/slashing explicitement documenté par l'émetteur en cas de bad debt sur le book de prêts SKY-backed financé par stUSDS : une chute du prix de SKY peut réduire de façon permanente la valeur de rachat de stUSDS, sans dépeg de marché préalable détectable par un oracle",
+    "Retrait du marché primaire potentiellement contraint quand le taux d'utilisation (cible ~90%) est élevé, contrairement à sUSDS"
+  ],
+  "maxAllocation": "1-5% ou à éviter comme collatéral",
+  "summary": "stUSDS est le premier \"Expert token\" de Sky Protocol (ex-MakerDAO), lancé en septembre 2025 : l'USDS déposé finance en levier les emprunts des stakers SKY, en échange d'un rendement supérieur à la SSR de sUSDS. Vérifié par adresse de contrat pour ne pas le confondre avec sUSDS : il s'agit d'un actif structurellement différent et bien plus risqué, adossé au même émetteur (Sky) mais conçu explicitement comme capital à risque. Forces : infrastructure Sky mature, audit ChainSecurity publié, aucun hack connu. Faiblesses majeures : mécanisme de haircut documenté par l'émetteur lui-même en cas de bad debt sur les prêts SKY-backed, réflexivité au prix du token de gouvernance SKY, liquidité de retrait potentiellement contrainte à haute utilisation, historique de seulement 10 mois n'ayant traversé aucun stress de marché. Verdict lender : à éviter ou allocation minimale comme collatéral Morpho, la perte de valeur peut être actée avant toute liquidation propre.",
+  "incidents": [
+    "Aucun incident de sécurité (hack/exploit) connu sur stUSDS au 2026-07-12",
+    "Actif lancé le 2025-09-04, n'a pas encore traversé de cycle de stress complet sur le prix de SKY ; le mécanisme de haircut n'a jamais été déclenché à ce jour à notre connaissance"
+  ],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "stusds.md"
+}

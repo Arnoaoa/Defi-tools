@@ -1,0 +1,53 @@
+[project]
+name = "position-monitor"
+version = "0.1.0"
+description = "DeFi position monitor — composite strategies surveillance"
+authors = [{name = "Arnaud"}]
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28.0",
+    "hyperliquid-python-sdk>=0.18.0",
+    # Note: apexomni intentionally NOT installed. The lib pins pytest<5.0
+    # (broken dep), and we use Mode B (public-only endpoints via httpx direct
+    # — see decisions.md). If you ever switch to Mode A, install it separately
+    # with --no-deps to bypass the pytest conflict.
+    # Note: dydx-v4-client NOT installed in V1 — no dYdX adapter yet; user has
+    # no dYdX positions. Add back when implementing dYdX adapter.
+    "gql[httpx]>=3.5.0",
+    "web3>=7.7.0",
+    "python-telegram-bot>=21.0",
+    "APScheduler==3.11.2",
+    "loguru>=0.7.3",
+    "ruamel.yaml>=0.18.0",
+    "pydantic>=2.9.0",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "responses>=0.25.0",
+    "ruff>=0.7.0",
+    "mypy>=1.13.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "W"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["src"]

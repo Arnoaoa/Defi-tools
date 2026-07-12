@@ -1,0 +1,42 @@
+{
+  "symbol": "wstETH",
+  "name": "Wrapped liquid staked Ether 2.0",
+  "addresses": {
+    "1": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+    "8453": "0xc1CBa3fCea344f92D9239c08C0568f6F2F0ee452"
+  },
+  "grade": "B",
+  "components": {
+    "assetDesign": "A",
+    "issuer": "A",
+    "depegBacking": "B",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "20-25%",
+  "summary": "wstETH est la version non-rebasing du stETH de Lido, le plus gros protocole de liquid staking Ethereum (leader du marché, largement audité, gouvernance DAO avec Dual Governance). Forces : liquidité secondaire massive, marché primaire sans KYC, backing 1:1 vérifiable on-chain, redemption native depuis Shapella (2023). Faiblesses : dépeg réel et significatif en 2022 (pré-Shapella, jusqu'à -8%), concentration ~23-28% de l'ETH staké total (risque systémique de centralisation), et exposition indirecte du vault périphérique Lido EarnETH au hack du bridge Kelp DAO en avril 2026 (staking core non affecté). Verdict lender : collatéral de premier plan, note tirée vers B par l'historique de dépeg et la centralisation plutôt que par un risque de backing ou d'audit.",
+  "incidents": [
+    "2022-05/06: dépeg stETH jusqu'à -6/-8% (contagion Terra/3AC/Celsius, absence de redemption native à l'époque)",
+    "2022-11-24: dépeg secondaire à 0,9671 ETH (retrait whale de liquidité Curve)",
+    "2026-04-18: hack du bridge rsETH de Kelp DAO (Lazarus Group) exposant le vault périphérique Lido EarnETH à hauteur de 21,6 M$ (9% du vault) ; staking core stETH/wstETH non affecté"
+  ],
+  "controversies": [
+    "2023-12-17: Samuels v. Lido DAO — class action alléguant que LDO est un security non enregistré ; tribunal californien a rejeté la motion to dismiss (2024/2025) et jugé que les tokenholders de la DAO peuvent être des general partners au sens du droit des partnerships — précédent novateur, procédure en cours, concerne LDO pas stETH/wstETH directement",
+    "2023-06: la SEC vise nommément stETH (et rETH) comme security non enregistrée dans son action contre Consensys/MetaMask Staking — scrutiny réglementaire direct sur la classification, sans action contre Lido DAO lui-même"
+  ],
+  "dependencies": {
+    "issuer": "Lido DAO",
+    "custodians": [],
+    "underlyings": ["ETH staké (stETH)"],
+    "keyCounterparties": ["Node operators Lido (set curaté + modules Simple DVT Obol/SSV)", "Oracle Committee Lido (reporting des balances de staking)", "Multisig Easy Track (timelock + fenêtre d'objection 72h)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 350447751,
+    "dailyLiquidityUsd": 11000000,
+    "ratioPct": 3186,
+    "note": "Pool Curve ETH/stETH ~11M$/24h (TVL pool ~15,1M$), wstETH/WETH Uniswap ~1,01M$/24h, volume global wstETH ~1,78M$/24h — thin en DEX pur, mais unwrap natif 1:1 vers stETH + file d'attente de sortie des validateurs (heures à jours) offre un canal de sortie indépendant de la profondeur DEX — source GeckoTerminal/HackMD 2026-07-12"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "wsteth.md"
+}

@@ -1,0 +1,40 @@
+{
+  "symbol": "kBTC",
+  "name": "Kraken Wrapped Bitcoin",
+  "addresses": { "1": "0x73E0C0d45E048D25Fc26Fa3159b0aA04BfA4Db98" },
+  "grade": "B",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "10-15%",
+  "summary": "kBTC est un BTC wrappé émis par Kraken, backé 1:1 par du Bitcoin détenu chez Kraken Financial (banque à charte SPDI Wyoming, réserve pleine légale, preuve de réserve on-chain publique). Points forts : émetteur établi et régulé, audit Trail of Bits, aucun historique de dépeg, migration proactive du bridge LayerZero vers Chainlink CCIP après l'exploit Kelp DAO d'avril 2026. Points faibles : actif récent (lancé octobre 2024), liquidité secondaire encore limitée (pas de marché spot au lancement, seulement 3 marchés Morpho pour 217M$ de TVL contre 1,7 Md$ pour cbBTC), et dépendance totale à un émetteur centralisé unique. Verdict lender : collatéral raisonnable pour un lender Morpho, comparable à cbBTC en structure mais avec moins de recul et de liquidité, allocation à limiter au bas de la fourchette B tant que l'adoption et l'historique ne se sont pas étoffés.",
+  "incidents": [
+    "2026-04: exploit Kelp DAO (292M$) via LayerZero, infra cross-chain utilisée par kBTC à ce moment (pas d'impact direct sur kBTC)",
+    "2026-05-14: Kraken migre kBTC de LayerZero vers Chainlink CCIP suite à l'exploit",
+    "2024-06: Kraken (exchange) victime d'un vol de 3M$ via faille zero-day, sans lien direct avec le contrat kBTC"
+  ],
+  "controversies": [
+    "2021-09: CFTC sanctionne Kraken (Payward Ventures) de 1,25M$ pour transactions margées de détail non enregistrées",
+    "2023-11 à 2025: SEC v. Kraken (opération d'échange/broker/clearing agency non enregistrée depuis 2018) — dismissed en 2025 dans le cadre du changement d'approche réglementaire",
+    "2024-02: Kraken accepte 30M$ d'amende SEC et cesse le staking-as-a-service US (offre de securities non enregistrée), sans lien avec kBTC"
+  ],
+  "dependencies": {
+    "issuer": "Kraken (Payward, Inc.) via Kraken Financial (SPDI Wyoming)",
+    "custodians": ["Kraken Financial (custody BTC native, segregated)"],
+    "underlyings": ["BTC natif"],
+    "keyCounterparties": ["Kraken (mint/redeem, custodian unique)", "Chainlink CCIP (bridge cross-chain depuis mai 2026)", "Trail of Bits (audit)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 217401490,
+    "dailyLiquidityUsd": 632554,
+    "ratioPct": 34372,
+    "note": "Volume 24h kBTC tous exchanges/pools confondus ~632k$ (paire la plus active kBTC/USDT0 sur Nado, ~26,7k$), en forte baisse. Ratio TVL Morpho/liquidité 24h de loin le plus dégradé des 4 actifs de cette passe, mais canal de sortie réel = redemption 1:1 directe via compte Kraken (custody SPDI), pas le DEX — source CoinGecko/DefiLlama 2026-07-12"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "kbtc.md"
+}

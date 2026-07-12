@@ -1,0 +1,27 @@
+{
+  "symbol": "mHYPER",
+  "name": "Midas Hyperithm",
+  "addresses": { "1": "0x9b5528528656DBC094765E2abB79F293c21191B9" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "B",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Contagion directe et documentée avec Stream Finance (protocole devenu insolvable) : position à effet de levier de ~75M$ en mHYPER dénouée en urgence en novembre 2025",
+    "Stratégie active à effet de levier (basis trading, leverage USDe sur Aave, farming Pendle) avec >12M$ d'avoirs sur exchanges centralisés non vérifiables (analyse tierce Serenity Research)",
+    "NAV mise à jour uniquement hebdomadairement, pas de méthodologie oracle publique documentée (contrairement à mF-ONE/Steakhouse)",
+    "Détenteurs de mHYPER en statut de créancier subordonné vis-à-vis de Midas Software GmbH (non bankruptcy-remote)",
+    "Contraction de TVL d'environ 82% depuis le pic pré-crise (~263M$ -> ~46M$ market cap)"
+  ],
+  "maxAllocation": "1-3% ou à éviter",
+  "summary": "mHYPER est un certificat tokenisé Midas répliquant une stratégie crypto active à effet de levier gérée par Hyperithm (basis trading, leverage USDe sur Aave, farming Pendle), fondamentalement plus risqué que les autres produits Midas de crédit privé. L'émetteur Midas est audité et licencié BaFin, mais le contrat mHYPER lui-même n'a pas d'audit spécifique, la NAV n'est mise à jour qu'hebdomadairement et les positions de basis trading ne sont pas vérifiables indépendamment. Surtout, mHYPER a été directement impliqué dans la contagion Stream Finance de novembre 2025 : Stream détenait une position à effet de levier de 75M$ en mHYPER, dénouée en urgence, avec plus de 150M$ de rachats traités en 48h et une TVL qui a chuté d'environ 82% depuis. Verdict : à éviter ou allocation résiduelle seulement, malgré l'absence de perte confirmée pour les détenteurs à ce jour.",
+  "incidents": [
+    "2025-11-04/06: Contagion Stream Finance/xUSD — Stream Finance détenait ~75M$ de position à effet de levier en mHYPER, dénouée avec le soutien de Hyperithm/Midas ; mHYPER a traité 150M$+ de rachats en 48h ; Hyperithm confirme absence de drawdown/bad debt mais TVL contractée de ~263M$ à ~46M$"
+  ],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "mhyper.md"
+}

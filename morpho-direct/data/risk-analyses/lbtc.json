@@ -1,0 +1,43 @@
+{
+  "symbol": "LBTC",
+  "name": "Lombard Staked Bitcoin",
+  "addresses": {
+    "1": "0x8236a87084f8B84306f72007F36F2618A5634494",
+    "8453": "0xecAc9C5F704e954931349Da37F60E39f515c11c1"
+  },
+  "grade": "B",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "15-25%",
+  "summary": "LBTC est un LST BTC émis par Lombard Finance, backé 1:1 par du BTC staké via le protocole Babylon et détenu par un consortium de 14 institutions (Security Consortium) sous signature à seuil, avec proof-of-reserves temps réel RedStone/Chainlink. Le protocole est audité (OpenZeppelin, Veridise, bug bounty Immunefi), n'a jamais subi de hack direct de son contrat ni de dépeg permanent, et a migré proactivement vers Chainlink CCIP après l'exploit Kelp sur LayerZero. Faiblesses : protocole jeune (~2 ans), délai de retrait jusqu'à 10 jours (unbonding Babylon), exposition résiduelle au risque de slashing Babylon (~0,1% rapporté) et précédent de contrefaçon de token (hack Ionic Money février 2025, faux LBTC, pas le vrai contrat). Verdict lender : collatéral solide de tier intermédiaire, allocation raisonnable en diversifiant avec d'autres BTC wrappés/LST plutôt qu'en position unique.",
+  "incidents": [
+    "2025-02: hack Ionic Money (Mode, ~8,6M$) via un faux token LBTC contrefait, le vrai contrat LBTC n'a pas été compromis",
+    "2025: migration proactive de LayerZero vers Chainlink CCIP suite à l'exploit Kelp (292M$)",
+    "2026-07: audit OpenZeppelin sur le rate-limiting, 1 issue de faible sévérité, 0 critique/haute/moyenne"
+  ],
+  "controversies": [
+    "2025-09: airdrop du token BARD (4% supply), débat communautaire classique sur le risque de points farming mercenaire et de vente post-airdrop (tokenomics, pas un incident de sécurité)",
+    "2026-07: hypothèse d'un dépeg LBTC fin juin 2025 non confirmée par la recherche ; seul signal trouvé = baisse ~42,7% de l'utilisation du pool LBTC sur Aave depuis juin 2025 (usage de marché, pas un dépeg ni un incident de sécurité)",
+    "Aucun procès ni scandale de gouvernance/custody documenté visant spécifiquement Lombard Finance/LBTC ; les résultats de recherche 'Lombard controversy/lawsuit' renvoient vers des entités homonymes sans lien (Lombard Odier, Lombard International, Lombard Trading International)"
+  ],
+  "dependencies": {
+    "issuer": "Lombard Finance",
+    "custodians": ["Lombard Security Consortium (14 institutions à seuil, quorum requis) : Galaxy, DCG, OKX, Wintermute, Amber Group, Antpool, F2Pool nommées publiquement + 7 membres non identifiés nommément dans la documentation publique", "Cubist (gestion des clés, CubeSigner HSM)"],
+    "underlyings": ["BTC natif staké via le protocole Babylon"],
+    "keyCounterparties": ["Babylon (finality providers/validateurs, risque de slashing ~0,1% rapporté)", "RedStone (oracle proof-of-reserves)", "Chainlink (oracle proof-of-reserves + CCIP pour le bridging cross-chain)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 51371624,
+    "dailyLiquidityUsd": 139812,
+    "ratioPct": 367,
+    "note": "Volume 24h agrégé des pools DEX principaux (CoinGecko, 2026-07-12) très inférieur au TVL Morpho (ratio 367%, > seuil red flag 30%). Nuance : le canal de sortie réel pour une position de cette taille est la redemption directe 1:1 vers BTC natif (pas de limite documentée), mais avec délai jusqu'à 10 jours (unbonding Babylon + rebalancing). Profondeur totale des pools DEX auto-déclarée par Lombard à $100M+ cross-chain (non vérifiée indépendamment)."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "lbtc.md"
+}

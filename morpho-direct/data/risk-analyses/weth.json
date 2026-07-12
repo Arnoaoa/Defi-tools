@@ -1,0 +1,39 @@
+{
+  "symbol": "WETH",
+  "name": "Wrapped Ether",
+  "addresses": {
+    "1": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "8453": "0x4200000000000000000000000000000000000006"
+  },
+  "grade": "A",
+  "components": {
+    "assetDesign": "A",
+    "issuer": "A",
+    "depegBacking": "A",
+    "counterparty": "A",
+    "recentSecurity": "A"
+  },
+  "redFlags": [],
+  "maxAllocation": "30-50%",
+  "summary": "WETH est le wrapper ERC-20 canonique de l'ETH : contrat immuable de 2017, sans émetteur, sans admin ni droits de mint/blacklist, avec redemption 1:1 permissionless et instantanée (l'ETH est verrouillé dans le contrat même, dépeg impossible par construction). Zéro exploit en ~8,5 ans sur des milliards de dollars ; sur Base, c'est le predeploy OP Stack standard avec le même modèle de confiance. Pas d'audit formel soumis, mais c'est le contrat le plus battle-tested de la DeFi et la liquidité secondaire la plus profonde du marché. Verdict lender : aucun risque d'insolvabilité de l'actif — le seul risque des marchés WETH est la volatilité du prix de l'ETH (liquidations côté emprunteur), à gérer via le LLTV et l'oracle de chaque marché.",
+  "incidents": [],
+  "controversies": [
+    "2016-06: hack de The DAO (~60M$ d'ETH volés) suivi du hard fork controversé du 2016-07-20 qui a annulé la transaction du hacker, provoquant le split Ethereum/Ethereum Classic (antérieur à la création de WETH en 2017, aucun impact sur l'actif lui-même)",
+    "2022-09: transition Proof-of-Stake ('The Merge') — controverses sur la centralisation du staking liquide (Lido proche de 33% du stake) et sur la requalification possible d'ETH en security (test de Howey, déclarations Gensler/SEC)",
+    "2023-03 à 2024-05: enquête formelle de la SEC visant la Fondation Ethereum et la classification d'ETH ; Consensys a poursuivi la SEC en justice (2024-04-25) ; enquête close sans action d'exécution après l'approbation des ETF spot ETH (mai 2024)"
+  ],
+  "dependencies": {
+    "issuer": "Aucun émetteur classique — contrat WETH9 immuable (Ethereum mainnet, 2017) et predeploy OP Stack standard (Base) ; dépendance ultime au protocole Ethereum (consensus PoS, validateurs) plutôt qu'à une entité",
+    "custodians": [],
+    "underlyings": ["ETH natif (Ethereum mainnet)", "ETH natif via bridge officiel OP Stack (Base)"],
+    "keyCounterparties": ["Ethereum Foundation (R&D protocole, aucun contrôle sur le contrat WETH9)", "Validateurs du consensus PoS Ethereum (risque de centralisation, ex. Lido)", "Optimism/OP Stack (predeploy sur Base)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 79531235,
+    "dailyLiquidityUsd": 7432671228,
+    "ratioPct": 1.07,
+    "note": "Volume d'échange ETH agrégé 24h (CEX+DEX, source CoinMarketCap) ; WETH étant convertible 1:1 instantanément en ETH natif, la liquidité ETH globale sert de proxy de liquidité de sortie. Ratio très largement sous le seuil de vigilance de 10%."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "weth.md"
+}

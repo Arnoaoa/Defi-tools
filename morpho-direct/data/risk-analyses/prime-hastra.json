@@ -1,0 +1,45 @@
+{
+  "symbol": "PRIME",
+  "name": "Hastra PRIME",
+  "addresses": {
+    "1": "0x19ebb35279A16207Ec4ba82799CC64715065F7F6"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Liquidité secondaire très fine (~1-2M$/jour tous DEX) au regard des 109M$ déposés comme collatéral Morpho",
+    "Rachat primaire non instantané, en 2 étapes, dépendant d'une entité off-chain centralisée (Hastra/Figure)",
+    "Protocole Hastra et marché Morpho PRIME/PYUSD lancés depuis moins de 8 mois",
+    "Volatilité de prix secondaire de +50% en 3 mois (0,99$ à 1,50$), incohérente avec la thèse de NAV stable croissante",
+    "Ratio TVL Morpho / liquidité de sortie 24h = 49,9% (109,1M$ / 2,19M$), très supérieur au seuil red flag de 30% du framework"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "Attention : PRIME sur Morpho n'est PAS le token gaming Echelon Prime (Parallel) mais Hastra PRIME, un liquid staking token adossé aux pools de prêts HELOC (home equity) originés par Figure Technology Solutions (Nasdaq: FIGR) via Provenance Blockchain, vérifié par l'adresse de contrat. Le backing sous-jacent (crédit immobilier américain régulé) est plus solide qu'un token utility classique, mais le rachat primaire est lent et géré par une entité off-chain centralisée, la liquidité secondaire est très faible face à l'exposition Morpho, et le protocole comme le marché Morpho associé sont très récents (moins de 8 mois). Verdict lender : collatéral expérimental, allocation minimale ou à éviter tant que la liquidité de sortie et l'historique de stress ne sont pas éprouvés.",
+  "incidents": [],
+  "controversies": [
+    "2017-09: Mike Cagney (co-fondateur de Figure) démissionne immédiatement de la direction de SoFi (autre société qu'il dirigeait) suite à une plainte pour harcèlement sexuel et des accusations de culture d'entreprise toxique rapportées par plus de 30 employés — facteur de risque réputationnel du fondateur, sans lien direct avec le token PRIME ni Figure Technology Solutions",
+    "2024-06: Class action (Ward v. Figure Lending LLC) alléguant que Figure Lending commercialise en 'bait-and-switch' des prêts présentés comme des HELOC alors qu'il s'agirait de prêts à décaissement unique avec frais d'origination excessifs — ces mêmes pools 'Democratized Prime' sont le sous-jacent générant le yield de PRIME",
+    "2026-02: Cyberattaque (groupe ShinyHunters, phishing vocal ciblant l'environnement Okta) chez Figure Lending, exposant les données personnelles (nom, adresse, date de naissance, téléphone) d'environ 967 200 comptes ; class action fédérale déposée le 19/02/2026 (Mardikian v. Figure Lending LLC)",
+    "2026-04: Le short-seller Morpheus Research publie un rapport allégeant que Figure Technology Solutions surreprésente son usage réel de la blockchain dans l'origination des prêts — les dépôts SEC de Figure indiquent que son Loan Origination System 'ne repose pas sur la blockchain technology' ; l'action FIGR chute de ~78$ (janvier 2026) à ~37$. Figure conteste et affirme que la blockchain intervient après le financement du prêt (transferts de propriété et nantissements enregistrés on-chain). Pertinent pour PRIME car la thèse de transparence on-chain du sous-jacent HELOC repose précisément sur cette intégration blockchain contestée"
+  ],
+  "dependencies": {
+    "issuer": "Hastra (Figure Technology Solutions / Provenance Blockchain Foundation)",
+    "custodians": ["Entité off-chain 'rewards administrator' contrôlée par Hastra/Figure, qui finance le vault de rachat depuis des sources de liquidité externes avant de compléter la transaction"],
+    "underlyings": ["wYLDS (version wrappée de YLDS, certificat monétaire à rendement enregistré SEC émis par Figure Certificate Company)", "Prêts HELOC 'Democratized Prime' originés par Figure Lending LLC"],
+    "keyCounterparties": ["Figure Technology Solutions (Nasdaq: FIGR)", "Figure Lending LLC (originateur unique des prêts HELOC sous-jacents)", "Provenance Blockchain Foundation (registre on-chain eNote)", "Mike Cagney (fondateur/CEO de l'écosystème Figure/Hastra)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 109120632,
+    "dailyLiquidityUsd": 2188865,
+    "ratioPct": 49.9,
+    "note": "Volume 24h CoinGecko au 2026-07-12, PRIME multi-chaînes (Solana+Ethereum) : Orca PYUSD/PRIME 1,86M$ (60,6%), Uniswap V3 PRIME/USDC 0,87M$ (28,4%), Manifest PRIME/USDC 0,31M$ (10,2%), Hydration HOLLAR/PRIME 0,02M$ ; ratio TVL Morpho (109,1M$) / liquidité 24h = 49,9%, très supérieur au seuil red flag de 30%"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "prime-hastra.md"
+}

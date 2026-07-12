@@ -1,0 +1,28 @@
+{
+  "symbol": "PST",
+  "name": "PayFi Strategy Token (Huma Finance)",
+  "addresses": {
+    "1": "0x22aE3D9a738471f405169Af055d31c687087d4c7"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Rachat primaire non instantané, gated par des périodes de lock (0/3/6 mois) et un plafond de rachat journalier",
+    "Composition réelle des receivables de financement de paiement non vérifiable on-chain (opacité RWA)",
+    "Exploit du 11/05/2026 sur les contrats V1 dépréciés de Huma Finance (~101K$ sur Polygon), PST/V2 non affecté mais incident récent chez l'émetteur",
+    "Marché Morpho unique et concentré : 1 seul marché, loan token USDC uniquement, 16,5M$ TVL"
+  ],
+  "maxAllocation": "5-15%",
+  "summary": "PST (PayFi Strategy Token) est le LP token de Huma Finance, adossé à des créances de financement de paiements transfrontaliers à courte durée (receivables réels, pas d'émission inflationniste). La version utilisée sur Morpho est une représentation Ethereum pontée depuis Solana via Chainlink CCIP. Le protocole est audité sur toutes ses chaînes (Spearbit, Halborn, Sec3, Certora) et n'a jamais subi de dépeg de PST, mais le rachat primaire est limité par des lockups et des plafonds journaliers, la composition exacte des receivables reste opaque, et un exploit a touché des contrats V1 dépréciés du même émetteur en mai 2026 (sans impact sur PST). Verdict lender : collatéral risqué mais pas expérimental, allocation modeste tant que le marché Morpho associé (unique, 16,5M$) et la liquidité de sortie ne sont pas éprouvés dans la durée.",
+  "incidents": [
+    "2026-05-11: Exploit des contrats V1 dépréciés de Huma Finance (BaseCreditPool, Polygon) — ~101 400 USDC/USDC.e drainés via une faille logique, PST/V2 non affecté"
+  ],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "pst.md"
+}

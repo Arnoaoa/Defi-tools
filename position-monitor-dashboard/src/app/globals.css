@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+/* ===========================================================================
+   Position Monitor — design tokens
+   Direction: "Quiet Editorial" — warm-dark trader's notebook.
+   Avoid: slate/zinc grey, neon colors, generic gradients.
+=========================================================================== */
+
+:root {
+  /* warm-dark surfaces (parchment-on-charcoal feel) */
+  --bg: #0a0908;
+  --surface: #13110f;
+  --surface-2: #1a1815;
+  --border: rgba(232, 226, 212, 0.07);
+  --border-strong: rgba(232, 226, 212, 0.14);
+
+  /* warm ivory text scale */
+  --ink: #e8e2d4;
+  --ink-mute: #a59d8a;
+  --ink-dim: #6b6557;
+
+  /* status palette — historical / muted, never bootstrap red */
+  --st-healthy: #84a98c;
+  --st-healthy-bg: rgba(132, 169, 140, 0.12);
+  --st-watch: #c9a878;
+  --st-watch-bg: rgba(201, 168, 120, 0.14);
+  --st-urgent: #c97d68;
+  --st-urgent-bg: rgba(201, 125, 104, 0.15);
+  --st-critical: #b04a4a;
+  --st-critical-bg: rgba(176, 74, 74, 0.18);
+
+  /* accents — used sparingly */
+  --accent: #dab979;
+  --accent-mute: rgba(218, 185, 121, 0.6);
+
+  /* signed values */
+  --pos: #84a98c;
+  --neg: #c97d68;
+
+  color-scheme: dark;
+}
+
+/* Light mode — kept available but dark is default and primary. */
+@media (prefers-color-scheme: light) {
+  :root.theme-light {
+    --bg: #f5f1e8;
+    --surface: #ffffff;
+    --surface-2: #faf6ec;
+    --border: rgba(20, 14, 8, 0.08);
+    --border-strong: rgba(20, 14, 8, 0.16);
+    --ink: #1a1612;
+    --ink-mute: #6b6557;
+    --ink-dim: #a59d8a;
+    color-scheme: light;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ink: var(--ink);
+  --color-ink-mute: var(--ink-mute);
+  --color-ink-dim: var(--ink-dim);
+  --color-healthy: var(--st-healthy);
+  --color-healthy-bg: var(--st-healthy-bg);
+  --color-watch: var(--st-watch);
+  --color-watch-bg: var(--st-watch-bg);
+  --color-urgent: var(--st-urgent);
+  --color-urgent-bg: var(--st-urgent-bg);
+  --color-critical: var(--st-critical);
+  --color-critical-bg: var(--st-critical-bg);
+  --color-accent: var(--accent);
+  --color-pos: var(--pos);
+  --color-neg: var(--neg);
+
+  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+
+  /* Editorial radii — restrained, never pill except for badges */
+  --radius-card: 14px;
+  --radius-input: 6px;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+code, pre, .font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Subtle paper grain — only visible on dark surfaces. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(
+      circle at 20% 30%,
+      rgba(218, 185, 121, 0.02) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(132, 169, 140, 0.015) 0%,
+      transparent 50%
+    );
+  mix-blend-mode: screen;
+}
+
+/* Selection: warm */
+::selection {
+  background: rgba(218, 185, 121, 0.25);
+  color: var(--ink);
+}
+
+/* Scrollbar — almost invisible, warm */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 8px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-dim);
+}
+
+/* Editorial display title — used for page H1s + serif marks */
+.display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  font-feature-settings: "lnum";
+}
+.display em,
+.display i {
+  font-style: italic;
+}
+
+/* Tabular numbers utility for all monetary readings */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum", "zero";
+}
+
+/* Eyebrow caps — small caps tracking for section labels */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  font-weight: 500;
+}
+
+/* Subtle hover lift used on interactive cards */
+.lift {
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    background-color 220ms ease,
+    border-color 220ms ease;
+}
+.lift:hover {
+  transform: translateY(-1px);
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+}
+
+/* Hairline divider used in editorial composition */
+.hairline {
+  height: 1px;
+  width: 100%;
+  background: var(--border);
+}
+
+/* Animation utilities */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-in {
+  animation: fade-in 360ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.pulse-soft {
+  animation: pulse-soft 2.4s ease-in-out infinite;
+}
+
+/* Live dot — small pulsing indicator */
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 0 currentColor;
+  animation: live-ring 2s ease-out infinite;
+}
+@keyframes live-ring {
+  0% { box-shadow: 0 0 0 0 rgba(132, 169, 140, 0.5); }
+  70% { box-shadow: 0 0 0 8px rgba(132, 169, 140, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(132, 169, 140, 0); }
+}

@@ -1,0 +1,7 @@
+# local git history backups
+.git.old/
+
+# safety net (each project has its own .gitignore too)
+.env
+.env.local
+node_modules/

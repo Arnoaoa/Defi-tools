@@ -1,0 +1,47 @@
+{
+  "symbol": "WBTC",
+  "name": "Wrapped Bitcoin (BitGo)",
+  "addresses": { "1": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "WBTC est le wrapped BTC le plus ancien de DeFi, backing prouvé et jamais insolvable, mais le transfert de custody vers la JV BiT Global liée à Justin Sun en 2024 a poussé MakerDAO/Sky à l'offboarder totalement et Coinbase à le delister. Le contrôle des clés multisig est revenu majoritairement à BitGo début 2026, réduisant mais n'éliminant pas le risque de centralisation/jurisdiction. Aucun hack ni dépeg permanent, mais perte continue de parts de marché face à cbBTC et LBTC. Verdict lender : actif solide sur le plan technique, mais le précédent de 2024 justifie une allocation prudente et une exposition en priorité aux marchés Morpho combinant WBTC avec d'autres BTC wrappés (LBTC, cbBTC) plutôt qu'une concentration exclusive.",
+  "incidents": [
+    "2022-11: dépeg temporaire à ~0,985 BTC pendant la contagion FTX/Alameda, résolu",
+    "2024-08: transfert de custody annoncé vers JV BitGo/BiT Global (Justin Sun)",
+    "2024-09: Sky (MakerDAO) vote l'offboarding total de WBTC comme collatéral",
+    "2024-12: Coinbase delist WBTC pour risque lié à Justin Sun",
+    "2025-06: fin du litige judiciaire Coinbase/BiT Global (dismissal with prejudice)",
+    "2026-03: réalignement des clés multisig, BitGo reprend le contrôle majoritaire",
+    "2026-05: Aave réduit les supply caps WBTC pour baisse de liquidité/usage"
+  ],
+  "controversies": [
+    "2024-08: transfert de custody vers la JV BitGo/BiT Global liée à Justin Sun, dénoncé comme risque de centralisation (offboarding MakerDAO/Sky, delisting Coinbase)",
+    "2026-01: IPO de BitGo Holdings (NYSE: BTGO) suivie de pertes nettes croissantes et d'une chute de 57% du titre, déclenchant plusieurs class actions pour fraude en valeurs mobilières (deadline lead plaintiff 2026-08-07)"
+  ],
+  "dependencies": {
+    "issuer": "BitGo Trust Company (US) en joint-venture avec BiT Global (Hong Kong, lié à Justin Sun/Tron)",
+    "custodians": ["BitGo US", "BitGo Singapour", "BiT Global (Hong Kong)"],
+    "underlyings": ["BTC"],
+    "keyCounterparties": [
+      "Merchants institutionnels approuvés (KYC/AML) pour le mint/burn primaire",
+      "Kyber Network et Ren Protocol (membres fondateurs 2019, rôle de gouvernance uniquement, jamais de custody des clés multisig)",
+      "BitGo Holdings, Inc. (maison mère cotée NYSE: BTGO, exposée à des class actions en 2026)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 191302726,
+    "dailyLiquidityUsd": 120361186,
+    "ratioPct": 158.9,
+    "note": "Volume 24h agrégé CoinGecko (2026-07-12) ≈120,4M$ pour un market cap ≈7,22Md$ (~120k WBTC). Ratio TVL Morpho/volume 24h ≈159% > seuil red flag du protocole (30%), mais ce critère n'est pas dans la liste des red flags absolus du framework §6 donc pas de dégradation automatique de la note."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "wbtc.md"
+}

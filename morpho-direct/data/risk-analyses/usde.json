@@ -1,0 +1,44 @@
+{
+  "symbol": "USDe",
+  "name": "Ethena USDe",
+  "addresses": {
+    "1": "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3",
+    "8453": "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "USDe est un dollar synthétique delta-neutre (long ETH/BTC staké, short perpetual futures sur CEX) émis par Ethena Labs, audité par 5 cabinets et adossé à plusieurs milliards de dollars de TVL. Forces : custody off-exchange via Copper/Ceffu/Fireblocks, aucun hack direct du protocole, historique de funding généralement positif. Faiblesses : mint/redeem primaire réservé aux acteurs KYC institutionnels, reserve fund faible (~1,1-1,2% de la TVL) face au risque de funding négatif prolongé, et un dépeg réel à 0,65$ sur Binance en octobre 2025 (bref, lié à un défaut d'oracle de l'exchange, pas à une défaillance du backing). Verdict lender : collatéral acceptable en allocation limitée (5-15%), à surveiller de près en période de funding négatif ou de stress de marché généralisé.",
+  "incidents": [
+    "2025-09: compromission du registrar de domaine Ethena, frontend hors ligne temporairement, fonds non affectés",
+    "2025-02-21: hack Bybit (1,46 Md$), ~30M$ d'exposition dérivée Ethena absorbée par le reserve fund sans perte pour les holders",
+    "2025-10-11: dépeg USDe à 0,65$ sur Binance spot pendant ~90 minutes (défaut oracle Binance, Curve n'a bougé que de 0,3%), liquidations en cascade sur Binance",
+    "2026-04: exploit KelpDAO (293M$, sans lien direct) a provoqué ~1,6 Md$ de sorties USDe par contagion de confiance"
+  ],
+  "controversies": [
+    "2024-10: controverse farming ENA Season 3 — accusation (enquêteur \"Nomad\") qu'Ethena Labs a fait staker ~25% du supply ENA par ses propres wallets d'équipe via un wallet Coinbase Prime, captant une part disproportionnée des récompenses ; Ethena dément (tokens déjà déverrouillés selon vesting public), prix ENA -6%, aucune suite réglementaire confirmée",
+    "2024 (récurrent): comparaisons répétées à l'effondrement UST de Terra en raison du rendement élevé de sUSDe (~37% APY en 2024) — controverse narrative/réputationnelle",
+    "2025-07: rencontre documentée Ethena Labs, S.A. / SEC (memo Morrison Cohen) — scrutiny réglementaire actif sur la classification d'USDe, sans procédure ni sanction identifiée"
+  ],
+  "dependencies": {
+    "issuer": "Ethena Labs (Ethena Labs, S.A., entité offshore) / Ethena Foundation (gouvernance ENA)",
+    "custodians": ["Copper", "Ceffu", "Fireblocks"],
+    "underlyings": ["ETH/BTC staké (LST/LRT ou spot, jambe longue)", "Short perpetual futures CEX (jambe courte)"],
+    "keyCounterparties": ["Desks dérivés CEX (Binance, Bybit, OKX, Deribit) pour la jambe short", "Ethena Labs (mint/redeem KYC institutionnel)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 233665056,
+    "dailyLiquidityUsd": 159964555,
+    "ratioPct": 146,
+    "note": "Volume 24h agrégat CEX+DEX ~160M$ (CoinMarketCap) ; profondeur pools DEX ~645M$ cumulés sur Arbitrum/Base/Linea. Ratio en zone de vigilance/red flag sur les deux mesures ; marché primaire fermé au retail (KYC institutionnel), cohérent avec la note C déjà attribuée en v1 — source CoinMarketCap/DefiLlama 2026-07-12"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "usde.md"
+}

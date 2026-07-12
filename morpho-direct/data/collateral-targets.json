@@ -1,0 +1,597 @@
+[
+  {
+    "symbol": "cbBTC",
+    "name": "Coinbase Wrapped BTC",
+    "addresses": {
+      "1": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
+      "8453": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf"
+    },
+    "markets": 30,
+    "totalTvlUsd": 1729684816,
+    "loanTokens": [
+      "USDC",
+      "USDT",
+      "WETH",
+      "EURCV",
+      "RLUSD",
+      "USDS",
+      "PYUSD",
+      "EURC",
+      "tGBP",
+      "FXUSD",
+      "XSGD",
+      "WBTC",
+      "frxUSD",
+      "VCHF",
+      "AUSD",
+      "MXNB",
+      "LBTC"
+    ]
+  },
+  {
+    "symbol": "wstETH",
+    "name": "Wrapped liquid staked Ether 2.0",
+    "addresses": {
+      "1": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+      "8453": "0xc1CBa3fCea344f92D9239c08C0568f6F2F0ee452"
+    },
+    "markets": 30,
+    "totalTvlUsd": 350447751,
+    "loanTokens": [
+      "USDC",
+      "USDT",
+      "WETH",
+      "EURCV",
+      "EURC",
+      "USDS",
+      "RLUSD",
+      "PYUSD",
+      "msETH",
+      "eUSD",
+      "AUSD",
+      "XSGD",
+      "tGBP",
+      "FXUSD"
+    ]
+  },
+  {
+    "symbol": "USDe",
+    "name": "USDe",
+    "addresses": {
+      "1": "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3",
+      "8453": "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34"
+    },
+    "markets": 4,
+    "totalTvlUsd": 233665056,
+    "loanTokens": [
+      "USDC",
+      "USDtb",
+      "DAI"
+    ]
+  },
+  {
+    "symbol": "kBTC",
+    "name": "Kraken Wrapped Bitcoin",
+    "addresses": {
+      "1": "0x73E0C0d45E048D25Fc26Fa3159b0aA04BfA4Db98"
+    },
+    "markets": 3,
+    "totalTvlUsd": 217401490,
+    "loanTokens": [
+      "RLUSD",
+      "PYUSD",
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "WBTC",
+    "name": "Wrapped BTC",
+    "addresses": {
+      "1": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
+    },
+    "markets": 19,
+    "totalTvlUsd": 191302726,
+    "loanTokens": [
+      "USDC",
+      "USDT",
+      "WETH",
+      "EURCV",
+      "PYUSD",
+      "RLUSD",
+      "EURC",
+      "eUSD",
+      "LBTC",
+      "tGBP",
+      "AUSD"
+    ]
+  },
+  {
+    "symbol": "weETH",
+    "name": "Wrapped eETH",
+    "addresses": {
+      "1": "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
+      "8453": "0x04C0599Ae5A44757c0af6F9eC3b93da8976c150A"
+    },
+    "markets": 16,
+    "totalTvlUsd": 141771127,
+    "loanTokens": [
+      "USDC",
+      "RLUSD",
+      "PYUSD",
+      "USDT",
+      "WETH",
+      "msETH",
+      "AUSD",
+      "tGBP"
+    ]
+  },
+  {
+    "symbol": "syrupUSDC",
+    "name": "Syrup USDC",
+    "addresses": {
+      "1": "0x80ac24aA929eaF5013f6436cdA2a7ba190f5Cc0b",
+      "8453": "0x660975730059246A68521a3e2FBD4740173100f5"
+    },
+    "markets": 7,
+    "totalTvlUsd": 131310172,
+    "loanTokens": [
+      "PYUSD",
+      "RLUSD",
+      "AUSD",
+      "USDT",
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "PRIME",
+    "name": "Hastra PRIME",
+    "addresses": {
+      "1": "0x19ebb35279A16207Ec4ba82799CC64715065F7F6"
+    },
+    "markets": 4,
+    "totalTvlUsd": 109120632,
+    "loanTokens": [
+      "PYUSD",
+      "USDC",
+      "AUSD",
+      "msUSD"
+    ]
+  },
+  {
+    "symbol": "WETH",
+    "name": "Wrapped Ether",
+    "addresses": {
+      "1": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "8453": "0x4200000000000000000000000000000000000006"
+    },
+    "markets": 17,
+    "totalTvlUsd": 79531235,
+    "loanTokens": [
+      "USDC",
+      "USDT",
+      "EURC",
+      "USDS",
+      "tGBP",
+      "XSGD",
+      "PYUSD",
+      "RLUSD",
+      "AUSD",
+      "VCHF"
+    ]
+  },
+  {
+    "symbol": "sUSDS",
+    "name": "Savings USDS",
+    "addresses": {
+      "1": "0xa3931d71877C0E7a3148CB7Eb4463524FEc27fbD"
+    },
+    "markets": 4,
+    "totalTvlUsd": 68781733,
+    "loanTokens": [
+      "USDT",
+      "AUSD",
+      "tGBP",
+      "RLUSD"
+    ]
+  },
+  {
+    "symbol": "sUSDe",
+    "name": "Staked USDe",
+    "addresses": {
+      "1": "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497",
+      "8453": "0x211Cc4DD073734dA055fbF44a2b4667d5E5fE5d2"
+    },
+    "markets": 10,
+    "totalTvlUsd": 62531173,
+    "loanTokens": [
+      "USDC",
+      "PYUSD",
+      "USDtb",
+      "USDT",
+      "DAI",
+      "msUSD",
+      "AUSD"
+    ]
+  },
+  {
+    "symbol": "LBTC",
+    "name": "Lombard Staked Bitcoin",
+    "addresses": {
+      "1": "0x8236a87084f8B84306f72007F36F2618A5634494",
+      "8453": "0xecAc9C5F704e954931349Da37F60E39f515c11c1"
+    },
+    "markets": 10,
+    "totalTvlUsd": 51371624,
+    "loanTokens": [
+      "PYUSD",
+      "USDC",
+      "cbBTC",
+      "WBTC",
+      "EURCV",
+      "WETH"
+    ]
+  },
+  {
+    "symbol": "AA_FalconXUSDC",
+    "name": "Pareto AA Tranche - FalconXUSDC",
+    "addresses": {
+      "1": "0xC26A6Fa2C37b38E549a4a1807543801Db684f99C"
+    },
+    "markets": 3,
+    "totalTvlUsd": 48349585,
+    "loanTokens": [
+      "USDC",
+      "AUSD"
+    ]
+  },
+  {
+    "symbol": "cbXRP",
+    "name": "Coinbase Wrapped XRP",
+    "addresses": {
+      "8453": "0xcb585250f852C6c6bf90434AB21A00f02833a4af"
+    },
+    "markets": 2,
+    "totalTvlUsd": 37353433,
+    "loanTokens": [
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "PT-reUSD-10DEC2026",
+    "name": "PT reUSD 10DEC2026",
+    "addresses": {
+      "1": "0xeCfaFdC7741323a945A163ed068B5a3C43483957"
+    },
+    "markets": 3,
+    "totalTvlUsd": 34023965,
+    "loanTokens": [
+      "USDC",
+      "USDT",
+      "AUSD"
+    ]
+  },
+  {
+    "symbol": "msY",
+    "name": "msY",
+    "addresses": {
+      "1": "0x890A5122Aa1dA30fEC4286DE7904Ff808F0bd74A"
+    },
+    "markets": 1,
+    "totalTvlUsd": 27416966,
+    "loanTokens": [
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "siUSD",
+    "name": "Staked infiniFi USD",
+    "addresses": {
+      "1": "0xDBDC1Ef57537E34680B898E1FEBD3D68c7389bCB"
+    },
+    "markets": 2,
+    "totalTvlUsd": 26903766,
+    "loanTokens": [
+      "msUSD",
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "reUSD",
+    "name": "Re Protocol Deposit Token",
+    "addresses": {
+      "1": "0x5086bf358635B81D8C47C66d1C8b9E567Db70c72",
+      "8453": "0x7D214438D0F27AfCcC23B3d1e1a53906aCE5CFEa"
+    },
+    "markets": 4,
+    "totalTvlUsd": 25648902,
+    "loanTokens": [
+      "USDC",
+      "USDT",
+      "AUSD"
+    ]
+  },
+  {
+    "symbol": "wsrUSD",
+    "name": "Wrapped Savings rUSD",
+    "addresses": {
+      "1": "0xd3fD63209FA2D55B07A0f6db36C2f43900be3094",
+      "8453": "0x62344be8CA1c339B46274a4017dd87AF436900B1"
+    },
+    "markets": 6,
+    "totalTvlUsd": 21642870,
+    "loanTokens": [
+      "USDC",
+      "USDT",
+      "rUSD",
+      "AUSD"
+    ]
+  },
+  {
+    "symbol": "USD3",
+    "name": "USD3",
+    "addresses": {
+      "1": "0x0d86883FAf4FfD7aEb116390af37746F45b6f378"
+    },
+    "markets": 2,
+    "totalTvlUsd": 21042293,
+    "loanTokens": [
+      "USDC",
+      "eUSD"
+    ]
+  },
+  {
+    "symbol": "stUSDS",
+    "name": "Staked USDS",
+    "addresses": {
+      "1": "0x99CD4Ec3f88A45940936F469E4bB72A2A701EEB9"
+    },
+    "markets": 3,
+    "totalTvlUsd": 18513505,
+    "loanTokens": [
+      "USDC",
+      "USDS",
+      "USDT"
+    ]
+  },
+  {
+    "symbol": "PST",
+    "name": "PayFi Strategy Token",
+    "addresses": {
+      "1": "0x22aE3D9a738471f405169Af055d31c687087d4c7"
+    },
+    "markets": 1,
+    "totalTvlUsd": 16510209,
+    "loanTokens": [
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "mF-ONE",
+    "name": "Midas Fasanara ONE",
+    "addresses": {
+      "1": "0x238a700eD6165261Cf8b2e544ba797BC11e466Ba"
+    },
+    "markets": 2,
+    "totalTvlUsd": 16320767,
+    "loanTokens": [
+      "USDC",
+      "AUSD"
+    ]
+  },
+  {
+    "symbol": "cbETH",
+    "name": "Coinbase Wrapped Staked ETH",
+    "addresses": {
+      "8453": "0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22"
+    },
+    "markets": 8,
+    "totalTvlUsd": 13665505,
+    "loanTokens": [
+      "USDC",
+      "EURC",
+      "WETH",
+      "VCHF",
+      "XSGD"
+    ]
+  },
+  {
+    "symbol": "apyUSD",
+    "name": "apyUSD",
+    "addresses": {
+      "1": "0x38EEb52F0771140d10c4E9A9a72349A329Fe8a6A"
+    },
+    "markets": 2,
+    "totalTvlUsd": 13625716,
+    "loanTokens": [
+      "USDC",
+      "apxUSD"
+    ]
+  },
+  {
+    "symbol": "PT-sUSDD-27AUG2026",
+    "name": "PT Savings Usdd 27AUG2026",
+    "addresses": {
+      "1": "0xD341A146A4fD20eA89898E4d86Ae1829bF3A1c23"
+    },
+    "markets": 2,
+    "totalTvlUsd": 12364407,
+    "loanTokens": [
+      "USDT",
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "dCOMP",
+    "name": "dCOMP",
+    "addresses": {
+      "1": "0x91d14789071e5E195FFC9F745348736677De3292"
+    },
+    "markets": 1,
+    "totalTvlUsd": 11970466,
+    "loanTokens": [
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "savUSD",
+    "name": "Staked avUSD",
+    "addresses": {
+      "1": "0xb8D89678E75a973E74698c976716308abB8a46A4"
+    },
+    "markets": 2,
+    "totalTvlUsd": 9958344,
+    "loanTokens": [
+      "USDC",
+      "frxUSD"
+    ]
+  },
+  {
+    "symbol": "PT-USD3-17DEC2026",
+    "name": "PT USD3 17DEC2026",
+    "addresses": {
+      "1": "0x7f47c3e6b2c00fC4eB4d5Ae50d0Ab0Ab6888Eb4D"
+    },
+    "markets": 1,
+    "totalTvlUsd": 9775868,
+    "loanTokens": [
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "AZND",
+    "name": "Asian Dollar",
+    "addresses": {
+      "1": "0x52c66B5E7f8Fde20843De900C5C8B4b0F23708A0"
+    },
+    "markets": 1,
+    "totalTvlUsd": 8819396,
+    "loanTokens": [
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "stcUSD",
+    "name": "Staked cap USD",
+    "addresses": {
+      "1": "0x88887bE419578051FF9F4eb6C858A951921D8888"
+    },
+    "markets": 3,
+    "totalTvlUsd": 8397367,
+    "loanTokens": [
+      "USDC",
+      "USDT",
+      "AUSD"
+    ]
+  },
+  {
+    "symbol": "mM1-USD",
+    "name": "Midas M1 USD Market Neutral",
+    "addresses": {
+      "1": "0xCc5C22C7A6BCC25e66726AeF011dDE74289ED203"
+    },
+    "markets": 1,
+    "totalTvlUsd": 8388029,
+    "loanTokens": [
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "PT-USDat-27AUG2026",
+    "name": "PT USDat 27AUG2026",
+    "addresses": {
+      "1": "0x1D69402390657308C91179aa184bF992908c1e08"
+    },
+    "markets": 2,
+    "totalTvlUsd": 8257392,
+    "loanTokens": [
+      "USDC",
+      "AUSD"
+    ]
+  },
+  {
+    "symbol": "OETH",
+    "name": "Origin Ether",
+    "addresses": {
+      "1": "0x856c4Efb76C1D1AE02e20CEB03A2A6a08b0b8dC3"
+    },
+    "markets": 1,
+    "totalTvlUsd": 7945228,
+    "loanTokens": [
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "sUSDat",
+    "name": "Staked USDat",
+    "addresses": {
+      "1": "0xD166337499E176bbC38a1FBd113Ab144e5bd2Df7"
+    },
+    "markets": 1,
+    "totalTvlUsd": 7727643,
+    "loanTokens": [
+      "AUSD"
+    ]
+  },
+  {
+    "symbol": "wFalconX",
+    "name": "Wrapped FalconX",
+    "addresses": {
+      "1": "0x4614F7A56A3Eb83b2Ff9fA4B4b9575B28Fb68644"
+    },
+    "markets": 1,
+    "totalTvlUsd": 7527177,
+    "loanTokens": [
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "PT-apyUSD-5NOV2026",
+    "name": "PT apyUSD 5NOV2026",
+    "addresses": {
+      "1": "0xb5Be35D8fF83D431899b95851CB17a2B4bcEF150"
+    },
+    "markets": 2,
+    "totalTvlUsd": 5889773,
+    "loanTokens": [
+      "USDC",
+      "apxUSD"
+    ]
+  },
+  {
+    "symbol": "mHYPER",
+    "name": "Midas Hyperithm",
+    "addresses": {
+      "1": "0x9b5528528656DBC094765E2abB79F293c21191B9"
+    },
+    "markets": 2,
+    "totalTvlUsd": 5823220,
+    "loanTokens": [
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "v-wmtUSDC",
+    "name": "wmtUSDC [4626 Vault Shares]",
+    "addresses": {
+      "1": "0xF65460B84c13eeb911303336Ab0f9D63CC79839f"
+    },
+    "markets": 1,
+    "totalTvlUsd": 5272405,
+    "loanTokens": [
+      "USDC"
+    ]
+  },
+  {
+    "symbol": "PT-sUSDE-13AUG2026",
+    "name": "PT Ethena sUSDE 13AUG2026",
+    "addresses": {
+      "1": "0x5A19fa369F2895dCD8d2cEE62E4Ceae58eF92BBb"
+    },
+    "markets": 2,
+    "totalTvlUsd": 4998917,
+    "loanTokens": [
+      "RLUSD",
+      "PYUSD"
+    ]
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "symbol": "apyUSD",
+  "name": "apyUSD",
+  "addresses": {
+    "1": "0x38EEb52F0771140d10c4E9A9a72349A329Fe8a6A"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Backing en actions préférentielles (STRC/Strategy) présenté comme 'low-volatility' mais empiriquement corrélé au Bitcoin, avec dépegs de plus de 20% en juin 2026",
+    "Marché primaire de mint/redeem réservé aux institutionnels whitelistés, grand public dépendant de la liquidité secondaire",
+    "Preuve de réserves annoncée mais pas encore effective/publiée au moment de l'analyse",
+    "Custodian du collatéral non identifié publiquement"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "apyUSD est le token ERC-4626 rémunéré du protocole Apyx (apyx.fi), qui enveloppe apxUSD et distribue le rendement de dividendes d'actions préférentielles émises par des Digital Asset Treasuries, principalement Strategy (STRC). Forces : quatre audits reconnus (Halborn, Quantstamp, Zellic, Certora) et un oracle Morpho basé sur l'accrual des dividendes qui a évité toute bad debt lors du stress de juin 2026. Faiblesses majeures : le backing présenté comme peu volatil s'est révélé fortement corrélé au Bitcoin, avec des dépegs répétés dépassant 20% en juin 2026 (à peine un mois avant l'analyse), un marché primaire fermé au grand public, un custodian non nommé, et une preuve de réserves pas encore publiée. Verdict lender : actif trop récent et trop instable pour servir de collatéral significatif ; allocation minimale ou à éviter tant que le protocole n'a pas fait ses preuves sur plusieurs cycles de marché.",
+  "incidents": [
+    "2026-06-04: apxUSD (sous-jacent) dépeg à 0,93$ suite à la chute du Bitcoin sous 63 000$ et de STRC à 90,38$",
+    "2026-06-05: pic de liquidations sur Morpho (>4M$ en une journée), sans bad debt",
+    "2026-06-25/26: second dépeg plus sévère, apxUSD à ~0,78-0,90$, ATL apyUSD à 0,9736$ (CoinGecko)"
+  ],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "apyusd.md"
+}

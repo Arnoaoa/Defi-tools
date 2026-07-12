@@ -1,0 +1,35 @@
+{
+  "symbol": "AA_FalconXUSDC",
+  "name": "Pareto AA Tranche - FalconXUSDC",
+  "addresses": { "1": "0xC26A6Fa2C37b38E549a4a1807543801Db684f99C" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "AA_FalconXUSDC est la tranche senior (AA) d'un Credit Vault Pareto (ex-Idle Finance) adossé à des prêts institutionnels originés par FalconX et curatés par M11 Credit, pas un stablecoin malgré son nom. Forces : protocole audité à plusieurs reprises depuis 2020, gouvernance DAO/timelock, structure SPV bankruptcy-remote overcollatéralisée, aucun hack connu. Faiblesses : concentration sur un seul originateur de crédit (FalconX), rachats limités à des fenêtres mensuelles avec risque de gating en cas de défauts corrélés, opacité relative du book de prêts sous-jacent. Verdict lender : collatéral acceptable en allocation modérée, mais à surveiller de près en cas de stress de crédit institutionnel.",
+  "incidents": [],
+  "controversies": [
+    "2022-12: M11 Credit (curateur de ce vault) gère un défaut de 36 M$ d'Orthogonal Trading et une quasi-défaillance de 3 M$ d'Auros Global sur des pools Maple Finance distincts, dans le sillage de la contagion FTX ; restructuration plutôt que défaut immédiat, capital recouvré à 100% ; épisode antérieur au vault FalconX mais révélateur du risque de concentration propre au modèle M11",
+    "2024-05: FalconX (originateur unique des prêts de ce vault) règle avec la CFTC pour 1,8 M$ suite à un défaut d'enregistrement en tant que futures commission merchant (FCM) sur son produit Edge"
+  ],
+  "dependencies": {
+    "issuer": "Pareto (opéré par Idle DAO LLC, ex-Idle Finance)",
+    "custodians": ["SPV bankruptcy-remote OspreyX 2024-A Limited"],
+    "underlyings": ["Prêts institutionnels de crédit privé originés par FalconX"],
+    "keyCounterparties": ["FalconX (originateur unique du book de prêts)", "M11 Credit / Maven 11 (curateur et gérant du risque de crédit)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 48349585,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": null,
+    "note": "Aucun marché secondaire DEX/CEX identifié ; sortie uniquement via fenêtres de rachat mensuelles IdleCDO (NAV). Usage émergent comme collatéral sur Term Finance (prêt à taux fixe) mais sans liquidité de sortie immédiate. Ratio non calculable — red flag structurel de liquidité déjà noté en v1."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "aa-falconxusdc.md"
+}

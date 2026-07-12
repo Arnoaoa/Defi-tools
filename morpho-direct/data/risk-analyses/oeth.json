@@ -1,0 +1,24 @@
+{
+  "symbol": "OETH",
+  "name": "Origin Ether",
+  "addresses": {
+    "1": "0x856c4Efb76C1D1AE02e20CEB03A2A6a08b0b8dC3"
+  },
+  "grade": "B",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "15-20%",
+  "summary": "OETH est un LST rebasing d'Origin Protocol, majoritairement backé par de l'ETH staké nativement via des validateurs DVT (SSV Network) plutôt que par des LST tiers wrappés. Forces : redemption directe sans KYC, backing 1:1 transparent, gouvernance DAO (veOGV) avec timelock depuis 2023, cadence d'audits continue (OpenZeppelin, Narya, Perimeter) sans incident propre à OETH. Faiblesses : mécanisme rebasing plus complexe, liquidité Curve dominée par du protocol-owned liquidity (~83% du pool, peu de profondeur tierce réelle), multisig strategist 2-sur-9 avec pouvoir de pause hors vote DAO, et un historique de hack sur le prédécesseur OUSD en 2020 (compensé intégralement, antérieur à OETH). Verdict lender : collatéral B correct sur le papier, mais le marché Morpho concerné est extrêmement petit (8 M$, 1 seul marché USDC) — la liquidité de liquidation réelle sur Morpho reste à valider avant toute allocation significative.",
+  "incidents": [
+    "2020-11-17: hack du prédécesseur OUSD (reentrancy VaultCore, ~7,7 M$), antérieur à OETH, intégralement compensé",
+    "2023-06: désancrage mineur et transitoire d'OETH, résorbé par arbitrage"
+  ],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "oeth.md"
+}

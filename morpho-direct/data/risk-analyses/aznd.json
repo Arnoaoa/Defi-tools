@@ -1,0 +1,28 @@
+{
+  "symbol": "AZND",
+  "name": "Asian Dollar (Mu Digital)",
+  "addresses": {
+    "1": "0x52c66B5E7f8Fde20843De900C5C8B4b0F23708A0"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "D",
+    "depegBacking": "C",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Marche Morpho USDC/AZND a 100% d'utilisation avec APY supply aberrant (~145 000%) constate au moment de l'analyse : retraits geles pour les lenders actuels",
+    "Liquidite secondaire quasi inexistante (~475$/jour sur Curve AZND/AUSD, Monad) : pas de marche de sortie organique independant de Morpho",
+    "Concentration extreme : quasi-totalite de la market cap d'AZND (8,36M$) parquee dans ce seul marche Morpho (8,8M$ de TVL collaterale)",
+    "Audit non confirme malgre une question FAQ dediee non repondue publiquement (opacite)"
+  ],
+  "maxAllocation": "0-1% (skip recommande)",
+  "summary": "AZND est un dollar synthetique RWA de Mu Digital (protocole tres jeune, <1 an), adosse a un portefeuille de credit asiatique investment grade custodie par un gestionnaire de fonds singapourien. Contrairement au cas msY, aucun depeg n'est constate : le prix reste stable entre 0,98$ et 1,00$ sur toute la periode observee. Le marche Morpho USDC/AZND affichait cependant un APY supply aberrant (~145 000%) a 100% d'utilisation, signe d'un gel effectif des retraits pour les lenders, aggrave par une liquidite secondaire quasi nulle et une concentration extreme du supply dans ce seul marche. Verdict lender : le collateral lui-meme n'est pas (encore) sinistre comme msY, mais l'absence d'audit confirme, la jeunesse du protocole et le gel de liquidite actuel justifient une note D et une allocation nulle a tres faible tant que le marche reste sature.",
+  "incidents": [
+    "2026-07-12: marche Morpho USDC/AZND observe a 100% d'utilisation avec APY supply anormal (~145 000%) ; aucun depeg confirme du token AZND a cette date, situation a surveiller"
+  ],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "aznd.md"
+}

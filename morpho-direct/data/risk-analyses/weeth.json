@@ -1,0 +1,45 @@
+{
+  "symbol": "weETH",
+  "name": "Wrapped eETH",
+  "addresses": {
+    "1": "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
+    "8453": "0x04C0599Ae5A44757c0af6F9eC3b93da8976c150A"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "weETH est le liquid restaking token (LRT) d'Ether.fi : ETH staké et restaké sur EigenLayer, wrappé en version non-rebasing pour la composabilité DeFi. Forces : multi-audits (Nethermind, Zellic, Certora, Halborn), bug bounty public, gouvernance dual-multisig avec timelock, TVL multi-milliardaire et historique propre de plus de 2 ans. Faiblesses : concentration des validateurs opérés en interne par Ether.fi (~2/3 historiquement), signal d'oracle de consensus TVL centralisé relevé par un audit tiers, et exposition structurelle au risque de slashing EigenLayer désormais enforceable depuis 2025/2026. Le hack Kelp DAO (292 M$, avril 2026) via bridge LayerZero n'a pas touché Ether.fi directement mais a forcé une pause préventive des bridges weETH, illustrant un risque sectoriel réel sur les LRT cross-chain. Verdict lender : collatéral solide et liquide pour un marché Morpho isolé, mais à allouer avec prudence (5-15%) compte tenu du risque de restaking et des zones d'opacité sur la centralisation des validateurs.",
+  "incidents": [
+    "2026-04-18: hack Kelp DAO (292 M$, bridge LayerZero) — contagion sectorielle, Ether.fi non touché directement mais pause préventive des bridges weETH/eETH et durcissement de la sécurité cross-chain"
+  ],
+  "controversies": [
+    "2024-02: controverse \"missing points\" — ~10% de points EigenLayer manquants vs Renzo pour un stake identique, résolu comme bug d'affichage frontend, pas de perte réelle",
+    "2024-03: controverse airdrop ETHFI — 85% des tokens au top 100 wallets vs 15% pour ~75 000 wallets, Justin Sun reçoit ~3,5M ETHFI (~20M$), token -25% au lancement, allocation ajustée après tollé communautaire",
+    "2025-11: fraude sur les cartes Ether.fi Cash — charges non autorisées signalées, CEO confirme investigation et remboursement intégral promis (incident produit carte, pas protocole weETH)"
+  ],
+  "dependencies": {
+    "issuer": "Ether.fi",
+    "custodians": [],
+    "underlyings": ["ETH"],
+    "keyCounterparties": [
+      "Opérateurs de validateurs (~2/3 internes Ether.fi, reste tiers)",
+      "AVS operators EigenLayer (risque de slashing par AVS)",
+      "Bridges cross-chain LayerZero OFT (weETH multi-chain)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 141771127,
+    "dailyLiquidityUsd": 4346360,
+    "ratioPct": 3262,
+    "note": "Volume 24h weETH tous exchanges (CoinGecko, juil. 2026), essentiellement Curve. Ratio très au-dessus du seuil red flag (30%) mais typique d'un LST/LRT peu tradé sur DEX (détenu plutôt que échangé) ; canal de sortie natif (unwrap + file d'exit ETH) lent mais existant."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "weeth.md"
+}

@@ -1,0 +1,40 @@
+{
+  "symbol": "siUSD",
+  "name": "Staked infiniFi USD",
+  "addresses": {
+    "1": "0xDBDC1Ef57537E34680B898E1FEBD3D68c7389bCB"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Indice de découplage exchange rate / prix secondaire : CoinGecko rapporte un plus bas historique de 0,3616$ et un plus haut de 1,07$ pour siUSD (dates non confirmées) — pattern assimilable au red flag C-token/CUSDO du framework",
+    "Backing non intégralement liquide par design (réserve fractionnaire iUSD), ratio de réserve exact non divulgué publiquement",
+    "Protocole jeune (~1 an au 2026-07-12), jamais testé sous un vrai scénario de rachat massif"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "siUSD est le vault token ERC-4626 de staking d'iUSD, le stablecoin à réserve fractionnaire du protocole infiniFi (infiniFi Labs, levée pre-seed menée par Electric Capital en février 2025). Le backing d'iUSD n'est pas intégralement liquide par construction : une partie est déployée dans des stratégies de duration (Aave, sUSDe d'Ethena, PT Pendle) pour générer un rendement supérieur, ce qui expose siUSD à un risque de duration mismatch en cas de rachats massifs simultanés. Forces : formal verification Certora ayant corrigé un bug de logique de rachat avant mise en production, aucun hack confirmé du protocole lui-même, hiérarchie de pertes codée (liUSD absorbe les pertes avant siUSD), dashboard de transparence public. Faiblesses : protocole jeune (~1 an), ratio de réserve liquide non divulgué précisément, couverture d'audit plus légère que des comparables tier-1, et un signal de découplage prix/valeur théorique rapporté par CoinGecko (0,36$ à 1,07$, dates non confirmées) qui correspond au red flag explicite du framework sur les exchange-rate tokens. Verdict lender : collatéral encore expérimental, à allocation minimale ou à éviter tant que le mécanisme n'a pas été testé sous un vrai stress de rachat.",
+  "incidents": [],
+  "controversies": [
+    "2025-07: critiques structurelles publiques (Nansen, Blockworks, thread @mattdotfi) sur le risque de bank run du design fractionnaire et la dépendance du peg à sUSDe — risque disclosé, pas un scandale ; aucun procès, action réglementaire ou dispute fondateurs trouvé depuis la création"
+  ],
+  "dependencies": {
+    "issuer": "infiniFi Labs (pre-seed Electric Capital, fév. 2025)",
+    "custodians": [],
+    "underlyings": ["iUSD", "USDC (Aave)", "sUSDe (Ethena)", "PT Pendle"],
+    "keyCounterparties": ["Aave", "Ethena", "Pendle", "Circle (USDC)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 26903766,
+    "dailyLiquidityUsd": 476,
+    "ratioPct": 5652000,
+    "note": "Volume 24h ~476$ (paire siUSD/sUSDe Balancer V3, CoinGecko 2026-07-12), aucun pool Curve/Uniswap — marché secondaire quasi inexistant, sortie uniquement via le redeem protocolaire fractionnaire : red flag liquidité, cohérent avec la note D existante"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "siusd.md"
+}

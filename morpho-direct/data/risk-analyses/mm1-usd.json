@@ -1,0 +1,27 @@
+{
+  "symbol": "mM1-USD",
+  "name": "Midas M1 USD Market Neutral",
+  "addresses": {
+    "1": "0xCc5C22C7A6BCC25e66726AeF011dDE74289ED203"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "B",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Aucune méthodologie NAV/oracle publique trouvée pour ce marché Morpho (contrairement à mF-ONE/Steakhouse)",
+    "Sous-jacent = stratégie de trading à effet de levier (basis trading, funding-rate arbitrage, recursive lending) avec exposition non divulguée à des exchanges centralisés",
+    "Liquidité secondaire quasi nulle : 18 détenteurs, 1 seul marché Morpho",
+    "Produit lancé en mars 2026 (~4 mois) : aucun historique traversant un cycle de stress",
+    "Etherscan signale l'absence d'audit soumis spécifiquement pour ce contrat"
+  ],
+  "maxAllocation": "1-3% ou à éviter",
+  "summary": "mM1-USD est un certificat tokenisé émis par Midas Software GmbH (même émetteur licencié BaFin que mF-ONE) répliquant une stratégie de hedge fund crypto market-neutral gérée par M1 Capital (Amsterdam, ~190M$ AUM) : arbitrage de prix, recursive lending et basis trading. Contrairement à mF-ONE dont le sous-jacent est un fonds de crédit privé avec une documentation NAV/oracle publiée par Steakhouse, mM1-USD manque de transparence sur sa méthodologie de valorisation, expose probablement le porteur à des contreparties d'exchanges centralisés non divulguées, et repose sur un effet de levier interne (recursive lending). Le produit est très récent (lancé mars 2026), avec une liquidité secondaire quasi inexistante (18 détenteurs) et un seul marché Morpho de 8,4M$ TVL. Verdict lender : collatéral expérimental et opaque, allocation minimale ou à éviter tant qu'aucune documentation de risque publique équivalente à celle de mF-ONE n'est disponible.",
+  "incidents": [],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "mm1-usd.md"
+}

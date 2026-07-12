@@ -1,0 +1,26 @@
+{
+  "symbol": "stcUSD",
+  "name": "Staked cap USD",
+  "addresses": {
+    "1": "0x88887bE419578051FF9F4eb6C858A951921D8888"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Opacité sur l'identité et les positions réelles des Operators de trading qui génèrent le yield (exécution hors chaîne, non vérifiable)",
+    "Structure de gouvernance/multisig de Cap Labs non documentée publiquement (non trouvé)"
+  ],
+  "maxAllocation": "5-15%",
+  "summary": "stcUSD est le jeton de rendement du protocole Cap (Cap Labs), obtenu en stakant du cUSD, un stablecoin backé 1:1 par un panier diversifié de stablecoins/RWA régulés (USDC, USDT, PYUSD, BUIDL, BENJI). Forces : audits multiples de firmes reconnues (Trail of Bits, Zellic, Certora, Sherlock), backers institutionnels crédibles (Franklin Templeton, Kraken Ventures), aucun incident de sécurité ou dépeg connu à ce jour. Faiblesses : design structurellement complexe et récent (~11 mois) où le yield dépend d'Operators de trading opaques assurés par une couche de restaking (EigenLayer/Symbiotic) elle-même jeune et non éprouvée sur un cycle de stress complet, empilement de contreparties (émetteurs stablecoins centralisés + dépendance à Aave pour 80% des réserves + Operators + restakers), gouvernance non documentée publiquement. Verdict lender : collatéral correctement audité et backé, mais trop récent et trop dépendant de mécanismes de yield non organiques et opaques pour dépasser une note C ; allocation modérée uniquement.",
+  "incidents": [
+    "Aucun incident (dépeg/hack/bad debt) connu sur Cap, cUSD ou stcUSD au 2026-07-12 ; protocole lancé en août 2025, n'a pas encore traversé un cycle de stress de marché complet"
+  ],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "stcusd.md"
+}

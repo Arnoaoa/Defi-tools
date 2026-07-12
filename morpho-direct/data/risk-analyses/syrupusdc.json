@@ -1,0 +1,43 @@
+{
+  "symbol": "syrupUSDC",
+  "name": "Syrup USDC",
+  "addresses": {
+    "1": "0x80ac24aA929eaF5013f6436cdA2a7ba190f5Cc0b",
+    "8453": "0x660975730059246A68521a3e2FBD4740173100f5"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-10%",
+  "summary": "syrupUSDC est le vault token ERC-4626 de Maple Finance (Syrup), qui prête l'USDC déposé à des institutions crypto-natives via des pools de crédit désormais surcollatéralisés (BTC/ETH/SOL/XRP). Forces : 7 ans d'historique, 7+ audits par des cabinets tier-1, retrait rapide via un buffer de liquidité instantanée, et une gestion propre de l'exposition indirecte au hack rsETH d'avril 2026 (aucune perte, redemptions honorées en totalité). Faiblesses : précédent réel de défaut en 2022 (Orthogonal Trading, ~36 M$+, jusqu'à 80 % de haircut pour les lenders sans backstop protocole), ratios de collatéralisation actuels incohérents selon les sources, et opacité sur la composition détaillée du loan book et le multisig de gouvernance. Verdict lender : collatéral acceptable mais à traiter comme une exposition de crédit institutionnel plutôt qu'un stablecoin classique, allocation prudente recommandée.",
+  "incidents": [
+    "2022-12: défaut Orthogonal Trading / M11 Credit sur 36 M$ de prêts, ~80% de haircut sur le pool concerné",
+    "2022-11: défaut Auros Global sur 3-7,5 M$, restructuré ensuite",
+    "2022-07: défaut Babel Finance sur 10 M$, ~7,9 M$ de perte sur le pool concerné",
+    "2026-04-18: exploit rsETH Kelp DAO, exposition indirecte de Maple dénouée sous 24h sans perte, redemptions syrupUSDC honorées en totalité (800 M$+ en 72h)"
+  ],
+  "controversies": [
+    "2022-12: Orthogonal Trading placé en liquidation provisoire par la Cour des BVI après son défaut; Maple/M11 Credit annoncent des poursuites légales (arbitrage/litige) pour recouvrement, issue finale non documentée",
+    "2025-11: Core Foundation obtient une injonction de la Cour des Îles Caïmans contre Maple Finance (violation alléguée de confidentialité/exclusivité sur le partenariat lstBTC), bloquant le lancement de syrupBTC; Maple conteste, arbitrage en cours"
+  ],
+  "dependencies": {
+    "issuer": "Maple Finance",
+    "custodians": [],
+    "underlyings": ["prêts USDC surcollatéralisés BTC/ETH/SOL/XRP"],
+    "keyCounterparties": ["pool delegates (M11 Credit, Maven11, Icebreaker Capital)", "emprunteurs institutionnels (trading firms, market makers, mineurs BTC)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 131310172,
+    "dailyLiquidityUsd": 1058471,
+    "ratioPct": 12405,
+    "note": "Volume DEX 24h agrégé CoinGecko (~1,06M$, très fragmenté selon la paire) peu représentatif pour ce vault token; verdict basé sur le stress test réel d'avril 2026 (800M$+ rachetés en 72h via le buffer de liquidité Maple, ~6x la TVL Morpho)"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "syrupusdc.md"
+}

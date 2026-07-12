@@ -1,0 +1,165 @@
+# Position Monitor — strategies configuration template
+#
+# Copy this file to strategies.yaml (gitignored) and fill with your real wallets.
+# NEVER commit strategies.yaml.
+
+# --------------------------------------------------------------------
+# Global RPC providers (resolves ${ENV} from .env)
+# --------------------------------------------------------------------
+rpc:
+  ethereum: ${ALCHEMY_ETH_URL}
+  arbitrum: ${ALCHEMY_ARB_URL}
+  base: ${ALCHEMY_BASE_URL}
+  avalanche: ${ANKR_AVAX_URL}
+  optimism: ${ALCHEMY_OPT_URL}
+
+# --------------------------------------------------------------------
+# Global default thresholds (can be overridden per strategy)
+# --------------------------------------------------------------------
+defaults:
+  hf_warning: 1.5
+  hf_urgent: 1.2
+  hf_critical: 1.05
+  funding_flip_n_prints: 3
+  depeg_threshold_pct: 1.0
+  depeg_persistence_min: 15
+  drawdown_24h_pct: 15
+
+# --------------------------------------------------------------------
+# Wallets — declared once, referenced everywhere.
+#   group: 'self'   → counts toward portfolio + drives alerts.
+#   group: 'watch'  → read-only observation, no alerts.
+# --------------------------------------------------------------------
+wallets:
+  - id: arnaud_main
+    label: "Main"
+    address: "0xYourMainEthWallet"
+    chain: ethereum
+    group: self
+
+  - id: arnaud_hot
+    label: "Hot trading"
+    address: "0xYourHotWallet"
+    chain: ethereum
+    group: self
+
+  - id: arnaud_hyperliquid
+    label: "Hyperliquid account"
+    address: "0xYourHyperliquidAccount"
+    chain: hyperliquid
+    group: self
+    notes: "Native L1 — same address as ETH wallet, separate Hyperliquid identity"
+
+  # Example watch wallet — observe a whale's strategy, no alerts
+  - id: watch_pascal
+    label: "Pascal Tallarida"
+    address: "0xPascalAddressIfKnown"
+    chain: ethereum
+    group: watch
+    notes: "Reference for USDe carry trade allocation"
+
+# --------------------------------------------------------------------
+# Strategies — composite groups of positions, referenced by wallet_id.
+# --------------------------------------------------------------------
+strategies:
+
+  - id: hodl_btc_eth
+    name: "BTC/ETH HODL"
+    type: passive
+    legs:
+      - protocol: spot
+        wallet_id: arnaud_main
+        chain: ethereum
+        asset: WBTC
+        role: spot
+      - protocol: spot
+        wallet_id: arnaud_main
+        chain: ethereum
+        asset: WETH
+        role: spot
+    thresholds:
+      drawdown_24h_pct: 15
+
+  - id: delta_neutre_btc
+    name: "Delta neutre BTC self-collat"
+    type: delta_neutral
+    delta_target_pct: 0
+    legs:
+      - protocol: hyperliquid
+        wallet_id: arnaud_hyperliquid
+        asset: BTC
+        role: short_perp
+
+  - id: delta_neutre_or
+    name: "Delta neutre Or — Morpho + Apex"
+    type: delta_neutral
+    delta_target_pct: 0
+    legs:
+      - protocol: morpho
+        wallet_id: arnaud_main
+        chain: ethereum
+        market_id: "0xMorphoGoldMarketId"
+        role: collateral_and_debt
+      - protocol: apex_omni
+        symbol: "XAU-USDT"
+        role: short_hedge
+        # MODE B — static config (no API key on machine)
+        size_native: 5.2
+        entry_price: 2350
+        entry_ts: "2026-05-15T10:00:00Z"
+
+  - id: pt_kaito_neutral
+    name: "PT Kaito + short Hyperliquid"
+    type: delta_neutral
+    delta_target_pct: 0
+    legs:
+      - protocol: pendle
+        wallet_id: arnaud_main
+        chain: ethereum
+        pt_contract: "0xPTKaitoContract"
+        role: pt_long
+      - protocol: hyperliquid
+        wallet_id: arnaud_hyperliquid
+        asset: KAITO
+        role: short_perp
+    thresholds:
+      pendle_expiry_warning_days: 30
+      pendle_expiry_urgent_days: 7
+      pendle_expiry_critical_days: 1
+
+  - id: looping_steth_aave
+    name: "Looping stETH on Aave"
+    type: leveraged_yield
+    delta_target_pct: 0
+    legs:
+      - protocol: aave
+        wallet_id: arnaud_main
+        chain: ethereum
+        role: collateral_and_debt
+
+  - id: looping_euler
+    name: "Looping on Euler V2"
+    type: leveraged_yield
+    delta_target_pct: 0
+    legs:
+      - protocol: euler
+        wallet_id: arnaud_main
+        chain: ethereum
+        market_id: "0xEulerVaultId"
+        role: collateral_and_debt
+
+# --------------------------------------------------------------------
+# Manual positions — for assets the monitor cannot auto-fetch:
+# OTC spot, non-tokenized LP shares, off-chain assets, exotics.
+# These are treated as static (value updated via oracle mark only).
+# --------------------------------------------------------------------
+manual_positions:
+  # Example: a spot bag held off Etherscan-visible chains
+  # - id: cold_btc
+  #   wallet_id: arnaud_main
+  #   chain: bitcoin
+  #   asset: BTC
+  #   size_native: 0.5
+  #   entry_price: 95000
+  #   entry_ts: "2026-01-15T00:00:00Z"
+  #   notes: "Cold wallet — manual tracking"

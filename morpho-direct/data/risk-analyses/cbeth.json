@@ -1,0 +1,24 @@
+{
+  "symbol": "cbETH",
+  "name": "Coinbase Wrapped Staked ETH",
+  "addresses": {
+    "8453": "0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "cbETH est un LST émis par Coinbase, représentant de l'ETH staké en custody Coinbase plus les rewards accumulés (commission Coinbase de 25% sur le rendement). Forces : émetteur régulé et coté (NASDAQ: COIN), contrat audité par OpenZeppelin sans problème critique, mécanisme de taux de change vérifiable on-chain quotidiennement, risque réglementaire réduit depuis l'abandon du procès SEC en février 2025. Faiblesses : liquidité secondaire on-chain très concentrée (plus de 97% sur Coinbase CEX, environ 6% de la profondeur de stETH), escompte historique le plus persistant parmi les LST majeurs, rôles admin/pauser/blacklister tous contrôlés par des EOA Coinbase sans multisig identifié, et TVL Morpho la plus faible parmi les collatéraux LST/wrapped ETH analysés (13,6 M$ sur 8 marchés Base uniquement). Verdict lender : collatéral acceptable mais moins liquide que wstETH ou cbBTC, allocation à limiter et vigilance particulière sur la capacité de liquidation en cas de stress de marché.",
+  "incidents": [
+    "2025-05-15: brèche de données Coinbase (support client sous-traité, ~70k comptes) — aucun fonds ni custody ETH affectés",
+    "2023-04: volatilité transitoire du prix secondaire lors de l'activation des retraits Ethereum (Shapella), résorbée rapidement"
+  ],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "cbeth.md"
+}

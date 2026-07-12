@@ -1,0 +1,37 @@
+{
+  "symbol": "wsrUSD",
+  "name": "Wrapped Savings rUSD",
+  "addresses": {
+    "1": "0xd3fD63209FA2D55B07A0f6db36C2f43900be3094",
+    "8453": "0x62344be8CA1c339B46274a4017dd87AF436900B1"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "wsrUSD est le wrapper ERC-4626 de srUSD, la version yield-bearing de rUSD, le stablecoin du Reservoir Protocol (incubé par FortunaFi), backé par un mix d'actifs RWA (T-bills) et d'actifs on-chain générateurs de yield. Forces : PSM de rachat 1:1 accessible sans KYC apparent, 3 audits Halborn, aucun hack ni dépeg constaté sur ce protocole à ce jour. Faiblesses : protocole jeune (~20 mois), composition exacte des réserves non détaillée publiquement, gouvernance concentrée (multisig potentiellement <4 signataires, non confirmé officiellement), risk factors officiels excluant toute garantie de rachat 1:1 en cas de stress, et liquidité secondaire de wsrUSD quasi inexistante hors PSM. Verdict lender : collatéral acceptable en allocation limitée (5-15%), à ne pas confondre avec les homonymes reUSD (Resupply, hacké) et USR (Resolv, exploité) qui sont des protocoles distincts.",
+  "incidents": [],
+  "controversies": [
+    "Aucune controverse gouvernance/légale/réputationnelle trouvée sur Reservoir Protocol ni FortunaFi depuis le lancement (recherches lawsuit/SEC/scandal au 2026-07-12) ; claim tiers 'multisig <4 signataires' toujours non confirmé ni réfuté par une source officielle — opacité de gouvernance persistante"
+  ],
+  "dependencies": {
+    "issuer": "Reservoir Protocol (incubé par FortunaFi / Fortunafi Capital Management LLC)",
+    "custodians": ["Gnosis Safe + wallets MPC institutionnels (non nommés)", "NAV Fund Administration (reporting NAV RWA)"],
+    "underlyings": ["rUSD", "srUSD", "T-bills/RWA via FortunaFi", "positions on-chain (Curve, Morpho, AMMs)", "USDC/USDT/USD1 (PSM)"],
+    "keyCounterparties": ["FortunaFi Capital Management LLC (gérant unique des réserves RWA)", "multisig manager (signataires non divulgués)", "LayerZero (bridge Base)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 21642870,
+    "dailyLiquidityUsd": 18,
+    "ratioPct": 120238000,
+    "note": "Volume 24h ~18$ (CoinGecko 2026-07-12, trading arrêté sur tous les exchanges listés) — marché secondaire de facto inexistant, sortie à 100% via la PSM du protocole (rachat 1:1 USDC/USDT/USD1, non garanti sous stress selon les risk factors officiels)"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "wsrusd.md"
+}

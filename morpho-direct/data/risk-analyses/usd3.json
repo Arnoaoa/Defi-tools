@@ -1,0 +1,24 @@
+{
+  "symbol": "USD3",
+  "name": "Web 3 Dollar",
+  "addresses": {
+    "1": "0x0d86883FAf4FfD7aEb116390af37746F45b6f378"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-10%",
+  "summary": "USD3 est un RToken du Reserve Protocol : stablecoin yield-bearing adossé à un panier diversifié de positions dans Aave, Compound, Sky et un vault Morpho Steakhouse USDC, avec overcollateralisation par staking RSR (first-loss capital). Forces : protocole mature (RSR depuis 2019, architecture RToken éprouvée depuis eUSD en 2023 avec résistance démontrée au dépeg USDC de mars 2023), plusieurs audits (Halborn, 2 contests Code4rena), mint/redeem permissionless sans KYC. Faiblesses : liquidité secondaire très faible (market cap ~4,6M$, ~138 holders), composition du panier modifiable par gouvernance RSR, dépendance circulaire au vault Morpho dans son propre backing, et exposition indirecte récente à l'exploit Kelp DAO (avril 2026) ayant forcé une suspension temporaire du mint/rebalancing par précaution. Verdict lender : collatéral acceptable en allocation limitée et prudente (5-10%), en surveillant particulièrement la faible profondeur de marché en cas de besoin de liquidation rapide.",
+  "incidents": [
+    "2026-04-20: exploit Kelp DAO / LayerZero (292M$) — Reserve a suspendu par précaution le mint, le rebalancing et l'unstaking RSR sur USD3 et eUSD (exposition indirecte via Aave v3 USDC), redemption restée ouverte, aucune perte confirmée",
+    "2023-03: dépeg USDC (SVB) — impact indirect via le RToken sœur eUSD, revenu à son peg avant USDC ; pas d'incident direct sur USD3 (lancé après cet épisode)"
+  ],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "usd3.md"
+}

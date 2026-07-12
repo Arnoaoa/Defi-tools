@@ -1,0 +1,44 @@
+{
+  "symbol": "sUSDS",
+  "name": "Savings USDS",
+  "addresses": {
+    "1": "0xa3931d71877C0E7a3148CB7Eb4463524FEc27fbD"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "USDS intègre une fonction freeze/upgradabilité (absente de DAI, immuable), activable par vote de gouvernance SKY : capacité de censure structurelle non présente sur le prédécesseur, inactive à ce jour mais non nulle"
+  ],
+  "maxAllocation": "10-15%",
+  "summary": "sUSDS est le jeton de rendement de Sky (ex-MakerDAO), obtenu en déposant de l'USDS (ex-DAI) dans le module Sky Savings Rate, avec une mécanique héritée du DSR actif sans incident depuis 2019. Forces : marché primaire permissionless sans KYC, protocole le plus ancien et le plus battle-tested de la DeFi, backing diversifié (PSM USDC, RWA, vaults crypto), aucun dépeg propre à USDS/sUSDS. Faiblesses : la migration DAI vers USDS a introduit une fonction freeze/upgradabilité activable par gouvernance (absente sur DAI immuable), une dépendance croissante aux RWA et à leurs gestionnaires externes (BlockTower, Centrifuge, Monetalis), et un historique de bad debt non compensée lors du Black Thursday 2020. Verdict lender : collatéral globalement solide et parmi les plus matures du marché, mais la régression de centralisation liée au freeze function plafonne la note à C ; allocation modérée justifiée.",
+  "incidents": [
+    "2020-03-12: Black Thursday, chute de 43% de l'ETH en 24h, liquidations à 0 DAI, ~5,67M DAI de bad debt non couverte, gouvernance a refusé toute compensation aux vault owners",
+    "Aucun hack/exploit connu sur Sky, USDS ou sUSDS au 2026-07-12"
+  ],
+  "controversies": [
+    "2022-05/2024-06: plan Endgame de Rune Christensen (réorganisation en SubDAO, dépeg volontaire de DAI à terme) critiqué par a16z et Hasu comme centralisé (une adresse liée à Christensen jusqu'à 63-74% du pouvoir de vote), départs d'ingénieurs core",
+    "2024-09: rebranding MakerDAO -> Sky (MKR/DAI -> SKY/USDS), backlash communautaire (10,7% seulement de conversion MKR->SKY), vote de novembre 2024 confirmant Sky mais concentration forte du pouvoir de vote (4 entités ~80%)",
+    "2022-2024: montée des RWA (Monetalis Clydesdale jusqu'à 1,25 Md$, BlockTower Credit jusqu'à 220M$) devenues ~80% des revenus du protocole ; controverse récurrente sur la dépendance aux gérants tiers off-chain et le risque de sanctions (Christensen a évoqué un scénario d'emergency shutdown en cas de sanction des contrats DAI)",
+    "2025-02: controverse gouvernance -- proposition d'urgence de Christensen modifiant les paramètres d'emprunt contre MKR (ratio de liquidation 200%->125%, frais de sortie supprimés), justifiée par une prétendue attaque de gouvernance du groupe ImperiumPaper, qui dément et dénonce un vote surprise sans débat"
+  ],
+  "dependencies": {
+    "issuer": "Sky Protocol (ex-MakerDAO)",
+    "custodians": ["Aucun custodian centralisé unique pour le collatéral crypto (vaults on-chain) ; Circle pour les réserves USDC détenues via le PSM"],
+    "underlyings": ["USDS (ex-DAI)", "réserves USDC (PSM)", "bons du Trésor US tokenisés (RWA)", "ETH/wstETH/WBTC (vaults crypto)"],
+    "keyCounterparties": ["BlockTower Credit", "Monetalis (Clydesdale)", "Centrifuge", "Circle (émetteur USDC)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 68781733,
+    "dailyLiquidityUsd": 800000000,
+    "ratioPct": 8.6,
+    "note": "DEX direct thin (~5,47M$/24h combinés USDS+sUSDS, CoinGecko juil. 2026, ratio brut ~1257% si limité au DEX) mais canal de sortie réel = redemption native sUSDS->USDS (instantané, sans pool externe) puis USDS->USDC via PSM (~4,13 Md$ de réserves, capacité de rafraîchissement journalière ~800M$, proposition BA Labs juin 2026 pour la porter à 1,6 Md$) -> ratio réel sous le seuil OK (<10%)"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "susds.md"
+}

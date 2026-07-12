@@ -1,0 +1,27 @@
+{
+  "symbol": "v-wmtUSDC",
+  "name": "wmtUSDC [4626 Vault Shares]",
+  "addresses": { "1": "0xF65460B84c13eeb911303336Ab0f9D63CC79839f" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Créance non garantie (uncollateralized) sur un unique emprunteur, sans assurance ni sûreté",
+    "Conflit d'intérêt structurel : Wintermute est à la fois emprunteur non garanti et curateur (Armitage) du vault Morpho qui accepte sa propre dette en collatéral",
+    "Aucun marché secondaire ; sortie dépendante de withdrawal batches gatés par le reserve ratio fixé par l'emprunteur lui-même",
+    "Précédent de défaut réel (partiel) sur un autre marché du même protocole Wildcat (Kinto, 2026, ~24% de perte pour les prêteurs)",
+    "Pricing on-chain probablement basé sur une comptabilité interne plutôt qu'un signal de marché reflétant le risque de crédit réel de Wintermute (non confirmé formellement)"
+  ],
+  "maxAllocation": "1-5% ou à éviter",
+  "summary": "v-wmtUSDC est un wrapper ERC-4626 (contrat vérifié Wildcat4626Wrapper) qui tokenise une créance non garantie sur Wintermute, emprunteur unique d'un marché de crédit undercollateralisé du protocole Wildcat, à 9,25% APR fixe. Force : protocole Wildcat audité deux fois publiquement (Code4rena 2023 et 2024), architecture d'isolation par marché qui a effectivement contenu un défaut récent (Kinto) sans contagion. Faiblesses majeures : aucun collatéral ni assurance derrière la dette, aucun marché secondaire, retraits gatés par des withdrawal batches dont la liquidité dépend du reserve ratio fixé par l'emprunteur, et surtout un conflit d'intérêt structurel puisque Wintermute est à la fois l'emprunteur non garanti et le curateur du vault Morpho (Armitage) qui accepte ce même token en collatéral. Verdict lender : exposition de crédit single-name concentrée et auto-référentielle, avec un précédent de perte réelle sur un marché comparable du même protocole — allocation minimale ou à éviter tant que la transparence sur le bilan de Wintermute et la séparation curateur/emprunteur ne sont pas améliorées.",
+  "incidents": [
+    "2026: défaut de l'emprunteur Kinto sur un marché Wildcat distinct (suite exploit ayant drainé 1,55M$), prêteurs indemnisés à ~76% du principal, aucune contagion confirmée aux autres marchés dont celui de Wintermute"
+  ],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "v-wmtusdc.md"
+}

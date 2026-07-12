@@ -1,0 +1,26 @@
+{
+  "symbol": "dCOMP",
+  "name": "Delegated COMP (wrapper de gouvernance, curateur Api3)",
+  "addresses": {
+    "1": "0x91d14789071e5E195FFC9F745348736677De3292"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "B",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Marché primaire (mint) fermé au public, réservé à une liste blanche d'adresses (updateWhitelistedDepositors)",
+    "Aucun audit indépendant public identifié pour le contrat wrapper dCOMP",
+    "Centralisation forte : owner unique (Ownable2Step, pas de multisig documenté) contrôlant whitelist et délégation de vote",
+    "Marché Morpho mono-emprunteur : toute la bad debt potentielle repose sur une seule position ($11,97M)"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "dCOMP est un wrapper 1:1 bespoke sur le token de gouvernance COMP de Compound, permettant à un détenteur de conserver son pouvoir de vote tout en empruntant des stablecoins sur Morpho ; ce n'est pas un token émis par Compound lui-même. Le marché associé est curaté par Api3 mais reste un marché à emprunteur unique, avec un mint (marché primaire) fermé au public via whitelist et aucun audit indépendant identifié pour ce contrat spécifique. Le retrait (unwrap vers COMP) est heureusement permissionless, ce qui laisse une voie de liquidation, mais la centralisation de l'owner (whitelist + délégation de vote, sans multisig documenté) et la concentration sur un seul emprunteur sont des faiblesses structurelles. Verdict lender : instrument de niche à éviter ou à exposer marginalement, le sous-jacent COMP étant liquide mais l'enveloppe elle-même opaque et centralisée.",
+  "incidents": [],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "dcomp.md"
+}

@@ -1,0 +1,21 @@
+{
+  "symbol": "mF-ONE",
+  "name": "Midas Fasanara ONE",
+  "addresses": {
+    "1": "0x238a700eD6165261Cf8b2e544ba797BC11e466Ba"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "mF-ONE est un certificat tokenisé émis par Midas (licence BaFin, Allemagne) traçant le fonds de crédit privé F-ONE de Fasanara Capital (créances fintech, SME lending, crédit immobilier, stratégies delta-neutres). Points forts : émetteur régulé et audité (Sherlock x2, Hacken x2), architecture de liquidité à 3 couches et décote oracle (7,7%) conçues par Steakhouse pour protéger les prêteurs Morpho, aucun incident connu. Points faibles : marché primaire gated KYC avec fonds sous-jacent structurellement illiquide (souscriptions mensuelles, rachats trimestriels, ticket 150K$), NAV marquée hebdomadairement par un seul gérant sans granularité prêt par prêt, quasi-absence de liquidité secondaire du token, chaîne de dépendances centralisées (Fasanara/Midas/eOracle/Steakhouse). Verdict lender : collatéral RWA sérieux mais encore jeune (~1 an) et opaque sur le crédit sous-jacent, allocation modérée recommandée.",
+  "incidents": [],
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "mf-one.md"
+}
