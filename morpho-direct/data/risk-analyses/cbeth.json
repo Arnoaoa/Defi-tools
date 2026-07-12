@@ -19,6 +19,26 @@
     "2025-05-15: brèche de données Coinbase (support client sous-traité, ~70k comptes) — aucun fonds ni custody ETH affectés",
     "2023-04: volatilité transitoire du prix secondaire lors de l'activation des retraits Ethereum (Shapella), résorbée rapidement"
   ],
+  "controversies": [
+    "2021-03: amende CFTC de 6,5M$ (reporting trompeur et wash trading d'un ex-employé sur GDAX, faits 2015-2018)",
+    "2021-07: class action Ramsey v. Coinbase (Securities Act 1933, déclarations lors du Direct Listing)",
+    "2022-08: class action Kattula et al. (failles de sécurité, comptes bloqués, 54 plaignants)",
+    "2023-06: procès SEC pour exchange non enregistré — abandonné en février 2025",
+    "En cours: class actions Digital Asset Securities et Carolus (scams pig butchering)",
+    "2026: litiges états (Michigan, Illinois, Connecticut) sur les prediction markets ; poursuite de l'État de New York (2,2Md$ réclamés) — sans lien direct avec cbETH ni la custody ETH"
+  ],
+  "dependencies": {
+    "issuer": "Coinbase (NASDAQ: COIN) — tous les rôles du contrat (admin, minter, pauser, blacklister, oracle) via des EOA Coinbase",
+    "custodians": ["Coinbase Custody Trust Company LLC (Limited Purpose Trust chartérée NYDFS, Qualified Custodian)"],
+    "underlyings": ["ETH staké sur le beacon chain — Coinbase node operator centralisé, pas de validateurs tiers documentés"],
+    "keyCounterparties": ["Coinbase uniquement — acteur unique sur toute la chaîne : émission, custody, staking, oracle du taux, >97% de la liquidité secondaire (CEX)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 13665505,
+    "dailyLiquidityUsd": 8180000,
+    "ratioPct": 167,
+    "note": "Volume 24h global ~8,18M$ (CoinGecko ; CMC ~3,53M$ → ratio jusqu'à ~387%) — au-dessus du seuil de red flag de sortie (>30%) ; liquidité on-chain faible (Curve quasi morte ~411K$, Aerodrome Base ~3,7K cbETH le venue le plus profond), l'unwrap primaire via Coinbase (KYC, ~27h+) n'aide pas les liquidateurs Morpho sur Base"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "cbeth.md"
 }

@@ -23,6 +23,23 @@
   "incidents": [
     "2026-07-12: marche Morpho USDC/AZND observe a 100% d'utilisation avec APY supply anormal (~145 000%) ; aucun depeg confirme du token AZND a cette date, situation a surveiller"
   ],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Mu Digital",
+    "custodians": ["Gestionnaire de fonds licencié à Singapour (non nommé publiquement)"],
+    "underlyings": ["Portefeuille de crédit asiatique (obligations gouvernementales/corporate >BBB, private credit)"],
+    "keyCounterparties": [
+      "Banques d'investissement co-underwriting le private credit (non nommées)",
+      "Curated (partenaire de distribution, KYC)",
+      "UOB Venture Management (investisseur pre-seed)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 8819396,
+    "dailyLiquidityUsd": 475,
+    "ratioPct": 1857000,
+    "note": "Volume 24h Curve AZND/AUSD (Monad) ≈475$ — liquidité de sortie quasi inexistante, red flag confirmé ; cohérent avec le marché Morpho gelé à 100% d'utilisation (voir adaptive-curve-irm)."
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "aznd.md"
 }

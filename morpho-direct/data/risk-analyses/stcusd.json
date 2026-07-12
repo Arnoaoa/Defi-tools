@@ -21,6 +21,24 @@
   "incidents": [
     "Aucun incident (dépeg/hack/bad debt) connu sur Cap, cUSD ou stcUSD au 2026-07-12 ; protocole lancé en août 2025, n'a pas encore traversé un cycle de stress de marché complet"
   ],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Cap Labs (protocole Cap)",
+    "custodians": [],
+    "underlyings": ["cUSD (panier USDC, USDT, PYUSD, BUIDL, BENJI)"],
+    "keyCounterparties": [
+      "Aave V3 Core (>80% des réserves cUSD déployées comme buffer de liquidité)",
+      "Operators de trading institutionnels (identité non divulguée)",
+      "Restakers EigenLayer/Symbiotic (couche d'assurance/slashing)",
+      "Émetteurs des stablecoins du panier (Circle, Tether, PayPal, BlackRock, Franklin Templeton)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 8397367,
+    "dailyLiquidityUsd": 594,
+    "ratioPct": 1413700,
+    "note": "Pool Uniswap V4 stcUSD/ETH quasi mort (~594$ de liquidité totale, 0 volume 24h, GeckoTerminal 2026-07-12) : red flag si on ne considère que ce DEX. La vraie voie de sortie est le mécanisme primaire (unstake stcUSD→cUSD puis redeem cUSD contre le panier, cUSD ~282M$ market cap / TVL Cap ~260-315M$), mais aucune limite de redemption journalière publiée n'a été trouvée pour la quantifier précisément."
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "stcusd.md"
 }

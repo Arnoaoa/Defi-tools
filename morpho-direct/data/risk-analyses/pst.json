@@ -23,6 +23,21 @@
   "incidents": [
     "2026-05-11: Exploit des contrats V1 dépréciés de Huma Finance (BaseCreditPool, Polygon) — ~101 400 USDC/USDC.e drainés via une faille logique, PST/V2 non affecté"
   ],
+  "controversies": [
+    "Aucune controverse majeure (gouvernance, légale, réputationnelle) trouvée sur Huma Finance au 2026-07-12 — recherches lawsuit/SEC/TVL manipulation sans résultat pertinent"
+  ],
+  "dependencies": {
+    "issuer": "Huma Finance (fondateurs Richard Liu et Erbil Karaman, ex-EarnIn ; Series A 38M$ sept. 2024)",
+    "custodians": ["Multisig Fireblocks géré par le strategy manager (seuil de signataires non publié)"],
+    "underlyings": ["Receivables de paiement transfrontalier (originateur principal : Arf)", "~20% en stratégies DeFi liquides (Kamino Lend, Jupiter Lend, Aave, Pendle)"],
+    "keyCounterparties": ["Arf (originateur des receivables — concentration)", "RockawayX (curateur du vault Morpho, timelock 24h)", "Chainlink CCIP (pont Solana→Ethereum du token utilisé sur Morpho)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 16510209,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": 0,
+    "note": "Non trouvé : pools PST/USDC actifs sur Jupiter/Meteora (Solana) sans chiffres de volume/depth publiés ; le token Morpho est la version pontée Ethereum, une sortie de taille nécessiterait un repontage CCIP vers Solana — liquidité non quantifiable, vigilance"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "pst.md"
 }

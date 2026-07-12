@@ -26,6 +26,22 @@
     "2026-06-08 (semaine du): post-mortem officiel Apyx identifiant un mismatch structurel de liquidité overnight comme cause racine du stress",
     "2026-06-25/26: second dépeg plus sévère, apxUSD à ~0,78-0,90$, ATL apyUSD à 0,9736$ (CoinGecko)"
   ],
+  "controversies": [
+    "Aucune procédure judiciaire ou action SEC/régulateur trouvée visant spécifiquement Apyx Finance ou apxUSD/apyUSD",
+    "Controverse indirecte persistante : la stratégie de levier de Strategy (MSTR)/Michael Saylor, dont STRC est le collatéral principal d'apxUSD, est régulièrement critiquée par des analystes externes qui questionnent sa soutenabilité en cas de baisse prolongée du Bitcoin"
+  ],
+  "dependencies": {
+    "issuer": "Pendle Finance (wrapper) sur Apyx (apyx.fi)",
+    "custodians": [],
+    "underlyings": ["apyUSD/apxUSD (Apyx)", "STRC (Strategy/ex-MicroStrategy, backing sous-jacent)"],
+    "keyCounterparties": ["Strategy (MSTR) via STRC"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 5889773,
+    "dailyLiquidityUsd": 4398222,
+    "ratioPct": 134,
+    "note": "Liquidité = profondeur du pool Pendle 5NOV2026 (api-v2.pendle.finance, consultée 2026-07-12), pas un volume 24h ; ratio TVL Morpho / liquidité pool très au-dessus du seuil red flag (30%) du framework"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "pt-apyusd-5nov2026.md"
 }

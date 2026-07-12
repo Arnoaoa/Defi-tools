@@ -19,6 +19,21 @@
   "maxAllocation": "1-5% ou à éviter",
   "summary": "wFalconX est un wrapper ERC-20 1:1 (contrat WrappedAsset, Solady + rôles) qui enveloppe le token AA_FalconXUSDC déjà analysé (tranche senior du Credit Vault Pareto/FalconX/M11 Credit) — le sous-jacent est confirmé on-chain, le contrat détenant physiquement 7,88M AA_FalconXUSDC. Force : backing 1:1 vérifiable et hérite de l'historique propre (aucun hack) de la tranche sous-jacente. Faiblesses : contrat récent (~52 jours), aucun audit public trouvé pour le wrapper lui-même, identité du détenteur des rôles mint/burn non confirmée, liquidité quasi inexistante (4 détenteurs, 7 transferts). Verdict lender : ne pas traiter comme équivalent d'AA_FalconXUSDC — la couche de wrapping ajoute un risque de custody/mint opaque et sans historique qui dégrade la note de C à D ; allocation minimale ou à éviter tant que le déployeur et l'audit du wrapper ne sont pas clarifiés.",
   "incidents": [],
+  "controversies": [
+    "2024-05-13: FalconX règle avec la CFTC (1,8M$) pour activité de futures commission merchant non enregistré et lacunes KYC sur son produit Edge — antérieur au wrapper mais pertinent car FalconX est l'emprunteur unique du sous-jacent AA_FalconXUSDC"
+  ],
+  "dependencies": {
+    "issuer": "Contrat WrappedAsset (déployeur non identifié) sur Pareto (ex-Idle Finance) / M11 Credit / FalconX",
+    "custodians": ["FalconX (emprunteur unique du Credit Vault)"],
+    "underlyings": ["AA_FalconXUSDC"],
+    "keyCounterparties": ["FalconX", "M11 Credit (curator)", "Pareto", "détenteur non identifié des rôles mint/burn du wrapper"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 7527177,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": null,
+    "note": "Aucune paire DEX identifiée (marché secondaire inexistant, 4 détenteurs/7 transferts au total) ; sortie réelle = burn vers AA_FalconXUSDC puis rachat sur fenêtres mensuelles du Credit Vault Pareto — non trouvé de liquidité 24h"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "wfalconx.md"
 }

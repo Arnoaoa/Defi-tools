@@ -14,6 +14,23 @@
   "maxAllocation": "5-15%",
   "summary": "Principal Token Pendle sur sUSDe d'Ethena, maturité 13/08/2026 (~1 mois). Mécanisme PT bien audité et établi (Pendle V2 Core, ChainSecurity/Dedaub), maturité proche réduisant le risque de duration/discount. Mais le PT hérite intégralement du profil de risque du sous-jacent sUSDe (note C : reserve fund thin, dépendance aux desks dérivés CEX, cooldown d'unstaking), et aucune valeur plancher indépendante n'existe avant maturité. TVL Morpho modeste (~5M$ sur 2 marchés, loan tokens RLUSD/PYUSD moins liquides que USDC/USDT) : verdict lender, note C par maillon faible, allocation à limiter au bas de la fourchette 5-15%.",
   "incidents": [],
+  "controversies": [
+    "Ethena Labs: rejet par le régulateur allemand (BaFin) de la demande de licence MiCA en 2025 ('déficiences sérieuses', suspicion que sUSDe soit un titre financier non enregistré), retrait du marché allemand",
+    "Ethena Labs: discussions en cours avec la SEC (Crypto Task Force, juillet 2025) pour clarifier le statut réglementaire d'USDe, non couvert par GENIUS/STABLE Act",
+    "Ethena Labs: accusations de mésusage de 180M ENA tokens lors d'un événement de farming, démenties par Ethena Labs"
+  ],
+  "dependencies": {
+    "issuer": "Pendle Finance (wrapper) sur sUSDe d'Ethena Labs",
+    "custodians": [],
+    "underlyings": ["sUSDe (Ethena Labs)", "USDe"],
+    "keyCounterparties": ["desks dérivés CEX non nommés publiquement (jambe short du basis trade Ethena)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 4998917,
+    "dailyLiquidityUsd": 8333669,
+    "ratioPct": 60,
+    "note": "Liquidité = profondeur du pool Pendle 13AUG2026 (api-v2.pendle.finance, consultée 2026-07-12), pas un volume 24h ; ratio au-dessus du seuil de vigilance (30%) du framework, non quantifié en v1 (qui citait un chiffre agrégé toutes maturités, non représentatif)"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "pt-susde-13aug2026.md"
 }

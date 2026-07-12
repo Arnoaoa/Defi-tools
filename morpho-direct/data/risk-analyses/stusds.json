@@ -22,6 +22,26 @@
     "Aucun incident de sécurité (hack/exploit) connu sur stUSDS au 2026-07-12",
     "Actif lancé le 2025-09-04, n'a pas encore traversé de cycle de stress complet sur le prix de SKY ; le mécanisme de haircut n'a jamais été déclenché à ce jour à notre connaissance"
   ],
+  "controversies": [
+    "2020-03: Black Thursday MakerDAO — liquidations à 0$, class actions contre MakerDAO/Maker Foundation (San Francisco)",
+    "2021-10: Rune Christensen propose de démettre le Facilitator de la Real-World Finance Core Unit — controverse sur l'usage du pouvoir de gouvernance",
+    "2023-02: fonds de défense juridique de 5M$ pour les participants MakerDAO (tensions réglementaires anticipées)",
+    "2024-09: vote de rebranding Maker→Sky avec ~80% du poids de vote concentré sur 4 entités + controverse sur la fonction freeze de l'USDS",
+    "2025-02: Governance Wars — changements d'urgence passés par Christensen, accusations croisées de tentative de prise de contrôle par gouvernance",
+    "2025: notation S&P Global B- citant la gouvernance centralisée de facto (délégations à Christensen) et un ratio de capital de 0,4%"
+  ],
+  "dependencies": {
+    "issuer": "Sky Protocol (ex-MakerDAO)",
+    "custodians": [],
+    "underlyings": ["USDS", "book de prêts adossés au staking SKY (Lockstake Engine)", "SKY (réflexivité au token de gouvernance)"],
+    "keyCounterparties": ["Sky.money (curateur du marché Morpho stUSDS/USDS)", "Gouvernance Sky DAO / Rune Christensen (concentration effective du vote)", "Stakers SKY emprunteurs (contrepartie du book de prêts)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 18513505,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": 0,
+    "note": "Non trouvé : pool Curve USDS/stUSDS existant (500K USDS d'incitations sur 3 mois) sans données volume/TVL fiables ; retrait primaire non garanti à haute utilisation (cible ~90%) — liquidité de sortie non quantifiable, signal négatif"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "stusds.md"
 }

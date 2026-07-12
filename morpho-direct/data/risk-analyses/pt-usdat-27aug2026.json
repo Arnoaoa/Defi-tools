@@ -23,6 +23,21 @@
   "incidents": [
     "2026-04-14: divulgation publique (Innora Security Research) de SAT-001 (Critical, underflow dans convertFromStrc() pouvant geler les retraits jusqu'à 30 jours) et SAT-002 (High, extraction jusqu'à 33% via le rôle PROCESSOR) sur le protocole Saturn, affectant sUSDat (pas USDat directement), sans correctif confirmé à la publication"
   ],
+  "controversies": [
+    "2026-07 (recherche): aucune controverse de gouvernance, procès ou scandale identifié visant spécifiquement Saturn Credit ou ses fondateurs ; écosystème partagé avec sUSDat (cf. enquête Rosen Law Firm sur Strategy/STRC du 24/06/2026, non directement applicable à USDat)"
+  ],
+  "dependencies": {
+    "issuer": "Pendle Finance (wrapper PT/YT/SY) sur Saturn Credit (Saturn Labs, émetteur USDat)",
+    "custodians": [],
+    "underlyings": ["USDat"],
+    "keyCounterparties": ["M0 protocol ($wM)", "Galaxy", "Securitize", "Clear Street", "Pool AMM Pendle"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 8257392,
+    "dailyLiquidityUsd": 6670000,
+    "ratioPct": 124,
+    "note": "Volume 24h agrégé du marché USDat sur Pendle (dashboard Pendle, non revérifié en direct) ; à maturité, sortie alternative via marché USDat direct (~335K$/jour, plus fin encore)"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "pt-usdat-27aug2026.md"
 }

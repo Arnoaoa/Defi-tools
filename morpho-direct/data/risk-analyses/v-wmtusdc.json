@@ -22,6 +22,24 @@
   "incidents": [
     "2026: défaut de l'emprunteur Kinto sur un marché Wildcat distinct (suite exploit ayant drainé 1,55M$), prêteurs indemnisés à ~76% du principal, aucune contagion confirmée aux autres marchés dont celui de Wintermute"
   ],
+  "controversies": [
+    "2022-09-20: hack Wintermute ~160M$ (outil de génération d'adresses vanity 'Profanity', vulnérabilité signalée publiquement 5 jours avant l'attaque) ; DeFi ops affectées, CeFi/OTC non affecté, solvabilité maintenue, prime white hat 10% proposée",
+    "2023-06: procès Celsius (investisseurs) incluant Wintermute pour accusations de wash trading sur le token CEL, non résolu, nié par Wintermute",
+    "2023-08: controverse de gouvernance Yearn Finance (proposition de prêt YFI jugée prédatrice par la communauté)",
+    "2025-10: rumeurs de procès contre Binance après le flash crash du 10-11 octobre 2025, démenties par le CEO de Wintermute"
+  ],
+  "dependencies": {
+    "issuer": "Wintermute (emprunteur unique) via le protocole Wildcat",
+    "custodians": [],
+    "underlyings": [],
+    "keyCounterparties": ["Wintermute (emprunteur unique ET curateur Armitage du vault Morpho)", "Wildcat (protocole technique)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 5272405,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": null,
+    "note": "Aucun marché secondaire (DEX) pour v-wmtUSDC ; sortie uniquement via withdrawal batch Wildcat plafonnée par le reserve ratio fixé par l'emprunteur (Wintermute), paramètre exact non public (page DefiLlama Wildcat inaccessible, 403)"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "v-wmtusdc.md"
 }

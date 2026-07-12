@@ -19,6 +19,22 @@
     "2020-11-17: hack du prédécesseur OUSD (reentrancy VaultCore, ~7,7 M$), antérieur à OETH, intégralement compensé",
     "2023-06: désancrage mineur et transitoire d'OETH, résorbé par arbitrage"
   ],
+  "controversies": [
+    "2023-03: gouvernance OGN staking — adresses liées à des employés d'Origin Protocol représentant >50% du pouvoir de vote sur une proposition de subvention (signal de centralisation de la gouvernance)",
+    "2020-11 (suites hack OUSD): bounty de 1M$ non abouti, fonds blanchis via Tornado Cash/renBTC, aucune poursuite judiciaire engagée"
+  ],
+  "dependencies": {
+    "issuer": "Origin Protocol",
+    "custodians": [],
+    "underlyings": ["ETH natif staké (validateurs SSV/DVT)", "résidu stETH/rETH/frxETH (legacy)"],
+    "keyCounterparties": ["SSV Network", "P2P Validator", "Pool Curve OETH/WETH (protocol-owned liquidity)", "Multisig strategist 2-sur-9"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 7945228,
+    "dailyLiquidityUsd": 37682,
+    "ratioPct": 21084,
+    "note": "Ratio calculé sur le seul pool Curve OETH/ETH (secondaire, quasi illiquide, source GeckoTerminal/Curve) ; la vraie route de sortie est la withdrawal queue native (1:1, 1-8 jours, permissionless, capacité largement suffisante mais non instantanée)"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "oeth.md"
 }

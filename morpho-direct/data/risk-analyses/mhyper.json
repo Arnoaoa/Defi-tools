@@ -22,6 +22,22 @@
   "incidents": [
     "2025-11-04/06: Contagion Stream Finance/xUSD — Stream Finance détenait ~75M$ de position à effet de levier en mHYPER, dénouée avec le soutien de Hyperithm/Midas ; mHYPER a traité 150M$+ de rachats en 48h ; Hyperithm confirme absence de drawdown/bad debt mais TVL contractée de ~263M$ à ~46M$"
   ],
+  "controversies": [
+    "Hyperithm accusé d'avoir lancé un nouveau produit DeFi via Midas sans soumettre l'évaluation de risque obligatoire aux régulateurs sud-coréens (obligation VASP), date exacte non confirmée",
+    "Aucune autre procédure judiciaire ou action SEC trouvée visant spécifiquement mHYPER ou Hyperithm"
+  ],
+  "dependencies": {
+    "issuer": "Midas Software GmbH (Allemagne, licence BaFin)",
+    "custodians": ["Fordefi (custody MPC)"],
+    "underlyings": ["USDe (levier via Aave)", "Hyperliquid (funding-rate arbitrage)", "Pendle (farming)"],
+    "keyCounterparties": ["Hyperithm (gérant de stratégie)", "Stream Finance (contrepartie devenue insolvable, ex-~75M$ de position à effet de levier)", "venues centralisées non divulguées (>12M$ selon Serenity Research)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 5823220,
+    "dailyLiquidityUsd": 72,
+    "ratioPct": 8000000,
+    "note": "Volume 24h DEX mHYPER (CoinGecko, consulté 2026-07-12) ≈72,49$ — quasi nul ; seule sortie fonctionnelle = rachat KYC via Midas (NAV hebdomadaire)"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "mhyper.md"
 }

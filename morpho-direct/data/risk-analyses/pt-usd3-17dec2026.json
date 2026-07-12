@@ -22,6 +22,24 @@
   "maxAllocation": "0-2% (skip recommandé)",
   "summary": "PT-USD3-17DEC2026 se rachète 1:1 contre USD3 à maturité (17/12/2026) ; attention, ce USD3 est émis par 3Jane Protocol, pas par Reserve Protocol (homonyme distinct, déjà analysé séparément avec grade C) — vérification on-chain de l'adresse du SY sous-jacent obligatoire en cas de doute. 3Jane est un protocole de crédit non-collatéralisé (0% collateral loans à des marchands, souscrits via données off-chain), lancé en mainnet il y a environ un mois, financé par un seed Paradigm de 5,2M$, sans audit tiers nommé publiquement trouvé. USD3 (3Jane) est la tranche senior d'un livre de crédit non garanti, backing structurellement plus opaque et plus risqué qu'un stablecoin adossé à des positions DeFi ou du cash, et jamais testé en conditions de stress réel. Le mécanisme PT Pendle est solide en soi mais la liquidité secondaire du pool (~1,1M$) est faible face à la TVL Morpho de ce PT (9,78M$). Verdict lender : collatéral expérimental à éviter comme exposition significative, sous-jacent trop jeune et backing trop opaque pour justifier une allocation au-delà du résiduel.",
   "incidents": [],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "3Jane Protocol (émetteur de USD3, sous-jacent du PT Pendle)",
+    "custodians": [],
+    "underlyings": ["USD3 (3Jane)"],
+    "keyCounterparties": [
+      "Marchands emprunteurs (lignes de crédit non collatéralisées)",
+      "Partenaires TradFi non nommés (warehouse line 10M$, forward flow agreement 50M$)",
+      "Pendle Finance (wrapper SY/PT/YT)",
+      "Paradigm (lead investisseur seed)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 9775868,
+    "dailyLiquidityUsd": 1220000,
+    "ratioPct": 801,
+    "note": "Pool Pendle USD3·3Jane : ~1,11M$ de profondeur, ~1,22M$ de volume 24h (Pendle app / X @0xKingsKuan, 2026-07-12). TVL Morpho très supérieure au volume quotidien du pool → red flag sortie (>30%)."
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "pt-usd3-17dec2026.md"
 }

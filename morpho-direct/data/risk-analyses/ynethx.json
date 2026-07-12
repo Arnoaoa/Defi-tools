@@ -1,0 +1,38 @@
+{
+  "symbol": "ynETHx",
+  "name": "ynETH MAX (YieldNest)",
+  "addresses": {
+    "1": "0x657d9ABA1DBb59e53f9F3eCAA878447dCfC96dCb"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "ynETHx (ynETH MAX) est un liquid restaking token de YieldNest empilant staking, restaking EigenLayer et stratégies DeFi à effet de levier pour viser 10-15% d'APY. Forces : audits multiples (ChainSecurity, Zokyo, Composable Security, NFR) avec bug bounty Immunefi actif, aucun hack ni dépeg constaté depuis la création du protocole en 2023. Faiblesses : liquidité secondaire quasi nulle (pool Curve ~920K$, volume 24h proche de zéro), TVL du protocole en effondrement de plus de 95% depuis un pic ~500M$ (mercenary capital post-points-farming), gouvernance encore 100% contrôlée par 4 multisigs superposés de l'équipe, oracle de prix unique sans redondance, retraits suspendables si le buffer de liquidité est vidé. Verdict lender : collatéral d'un protocole jeune et en perte de traction, à traiter comme risqué malgré l'absence d'incident de sécurité — cohérent avec le marché Morpho concerné, minuscule (28K$ TVL) et sous tension extrême (utilisation 71%, borrow APR ~141%).",
+  "incidents": [],
+  "controversies": [
+    "2024-2025: TVL du protocole YieldNest chute d'un pic rapporté ~500M$ à ~20,3M$ (2026-07-12), soit environ -95%, signe de capital mercenaire attiré par le programme de points 'Seeds' puis parti après conversion en airdrop",
+    "2025-06 à 2026-07: le token de gouvernance YND (TGE mi-2025) chute de plus de 98% depuis son ATH (~0,038$ à ~0,0004$), volume de trading résiduel quasi nul",
+    "2023-2026: gouvernance encore entièrement contrôlée par l'équipe via 4 multisigs superposés (YN Security Council 3/5, YNDelegator 2/3, YNValidatorService 2/3, YNDev 2/3) ; transition vers une DAO (veYND) annoncée mais non achevée au 2026-07-12 (facteur de centralisation persistant identifié par l'audit LlamaRisk)"
+  ],
+  "dependencies": {
+    "issuer": "YieldNest (fondé 2023, mainnet ynETH mai 2024, ~5,2M$ levés en Series A avril 2024, ~9 employés)",
+    "custodians": [],
+    "underlyings": ["wstETH", "stETH", "ynETH", "WOETH", "oETH", "sfrxETH", "mETH (panier de LST/LRT restakés via EigenLayer)"],
+    "keyCounterparties": ["EigenLayer (restaking, risque de slashing via ELIP-002 déployé Q1 2025)", "Curve/Kernel/Thena (venues de stratégies DeFi actives)", "LSDRateProvider (oracle de prix unique, pas de redondance)", "HyperNative (monitoring sécurité temps réel)", "YN Security Council (multisig 3/5, contrôle proxy admin + oracle manager)", "YNDelegator/YNValidatorService/YNDev (multisigs 2/3 additionnels)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 28000,
+    "dailyLiquidityUsd": 10500,
+    "ratioPct": 266,
+    "note": "Pool Curve ynETHx/WETH ~922K$ de profondeur mais volume 24h mesuré entre 0$ (0 transaction, GeckoTerminal) et ~10,5K$ selon le moment de mesure, aucune autre pool profonde identifiée ; même en retenant l'hypothèse la plus favorable, la TVL Morpho (pourtant minuscule) dépasse déjà la liquidité de sortie réelle du token — source GeckoTerminal 2026-07-12"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "ynethx.md"
+}

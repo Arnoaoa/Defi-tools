@@ -16,6 +16,21 @@
   "maxAllocation": "5-15%",
   "summary": "mF-ONE est un certificat tokenisé émis par Midas (licence BaFin, Allemagne) traçant le fonds de crédit privé F-ONE de Fasanara Capital (créances fintech, SME lending, crédit immobilier, stratégies delta-neutres). Points forts : émetteur régulé et audité (Sherlock x2, Hacken x2), architecture de liquidité à 3 couches et décote oracle (7,7%) conçues par Steakhouse pour protéger les prêteurs Morpho, aucun incident connu. Points faibles : marché primaire gated KYC avec fonds sous-jacent structurellement illiquide (souscriptions mensuelles, rachats trimestriels, ticket 150K$), NAV marquée hebdomadairement par un seul gérant sans granularité prêt par prêt, quasi-absence de liquidité secondaire du token, chaîne de dépendances centralisées (Fasanara/Midas/eOracle/Steakhouse). Verdict lender : collatéral RWA sérieux mais encore jeune (~1 an) et opaque sur le crédit sous-jacent, allocation modérée recommandée.",
   "incidents": [],
+  "controversies": [
+    "Aucune controverse trouvée pour Midas (midas.app) ni Fasanara Capital au 2026-07-12 ; deux homonymes vérifiés et exclus : Midas Capital (lending BSC hacké en 2023) et Midas Investments (CeFi effondrée fin 2022, sanctions Wisconsin/Californie) — aucun lien avec l'émetteur"
+  ],
+  "dependencies": {
+    "issuer": "Midas (Midas Software GmbH, Berlin, licence BaFin) — multisig et seuil de signataires non publiés",
+    "custodians": ["Midas (mint/redeem/pause du token)"],
+    "underlyings": ["Fonds F-ONE de Fasanara Capital (créances fintech, SME lending, crédit immobilier, delta-neutre crypto)", "mTBILL (poche de liquidité instantanée en T-bills tokenisés)"],
+    "keyCounterparties": ["Fasanara Capital / Francesco Filia (marque NAV hebdomadaire unique)", "eOracle (vérification et publication des attestations NAV)", "Steakhouse Financial (curateur Morpho, décote 7,7% et paramètres de liquidation)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 16320767,
+    "dailyLiquidityUsd": 900000,
+    "ratioPct": 1813,
+    "note": "Liquidité atomique instantanée ~0,9M$ via mTBILL (source eOracle/Midas, frais 0,50%) — ratio ~1800% sur la seule couche instantanée ; les couches 2-3 (discount window, rachats mensuels/trimestriels du fonds) rendent la sortie possible mais lente et potentiellement à décote"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "mf-one.md"
 }

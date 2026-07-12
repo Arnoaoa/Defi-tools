@@ -23,9 +23,24 @@
   "incidents": [
     "2022-06: USDD perd son peg, chute à 0,97$ ; recovery en ~1 semaine après renforcement du panier de collatéral par le Tron DAO Reserve",
     "2023 (début d'année): second épisode de sous-peg, plusieurs semaines entre 0,96$ et 0,99$",
-    "2026-06: nouvel épisode de sous-peg mineur (0,9928-0,999$), retour à 1,00$ début juillet 2026, cause publique précise non trouvée",
-    "2026-03: Justin Sun / Rainberry Inc. règlent une action civile en fraude de la SEC (Tronix/BitTorrent) pour 10M$ — incident réglementaire distinct de USDD mais impliquant l'entité qui contrôle son émission"
+    "2026-06: nouvel épisode de sous-peg mineur (0,9928-0,999$), retour à 1,00$ début juillet 2026, cause publique précise non trouvée"
   ],
+  "controversies": [
+    "2026-03: Justin Sun / Rainberry Inc. règlent une action civile en fraude de la SEC (Tronix/BitTorrent) pour 10M$ — incident réglementaire distinct de USDD mais impliquant l'entité qui contrôle son émission",
+    "2026-04/05: conflit juridique ouvert avec World Liberty Financial (projet affilié à la famille Trump) — Justin Sun poursuit WLFI pour fraude (45M$ de tokens WLFI bloqués), WLFI contre-attaque en diffamation et allègue une campagne de vente à découvert orchestrée par des entités liées à Sun"
+  ],
+  "dependencies": {
+    "issuer": "USDD.io / Tron DAO Reserve (écosystème Justin Sun / Rainberry Inc.)",
+    "custodians": [],
+    "underlyings": ["sUSDD", "USDD", "panier de réserve USDD (TRX, sTRX, BTC, USDT, USDC)"],
+    "keyCounterparties": ["Justin Sun / Rainberry Inc. — contrôle de l'émission et de la gouvernance", "Smart Allocator — redéploiement des réserves USDD vers Aave/JustLend"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 12364407,
+    "dailyLiquidityUsd": 4000000,
+    "ratioPct": 309,
+    "note": "Profondeur du pool Pendle PT-sUSDD (swap de 4M$ à <0,13% price impact) ; volume spot 24h d'USDD nettement plus faible (~520 797$, CoinGecko) — ratio TVL Morpho/liquidité au-dessus du seuil red flag de 30% dans les deux cas"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "pt-susdd-27aug2026.md"
 }

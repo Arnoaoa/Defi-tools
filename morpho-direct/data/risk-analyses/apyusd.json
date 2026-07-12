@@ -16,7 +16,9 @@
     "Backing en actions préférentielles (STRC/Strategy) présenté comme 'low-volatility' mais empiriquement corrélé au Bitcoin, avec dépegs de plus de 20% en juin 2026",
     "Marché primaire de mint/redeem réservé aux institutionnels whitelistés, grand public dépendant de la liquidité secondaire",
     "Preuve de réserves annoncée mais pas encore effective/publiée au moment de l'analyse",
-    "Custodian du collatéral non identifié publiquement"
+    "Custodian du collatéral non identifié publiquement",
+    "Liquidité de sortie Curve quasi intégralement protocole-propriétaire, retirable unilatéralement par la Guardian Safe (ratio TVL Morpho/liquidité 24h ~2696%)",
+    "STRC (backing principal) en investigation boursière (Rosen Law Firm) et en chute de 26% sous son pair, risque de 'death spiral' de l'émetteur Strategy Inc."
   ],
   "maxAllocation": "1-5% ou skip",
   "summary": "apyUSD est le token ERC-4626 rémunéré du protocole Apyx (apyx.fi), qui enveloppe apxUSD et distribue le rendement de dividendes d'actions préférentielles émises par des Digital Asset Treasuries, principalement Strategy (STRC). Forces : quatre audits reconnus (Halborn, Quantstamp, Zellic, Certora) et un oracle Morpho basé sur l'accrual des dividendes qui a évité toute bad debt lors du stress de juin 2026. Faiblesses majeures : le backing présenté comme peu volatil s'est révélé fortement corrélé au Bitcoin, avec des dépegs répétés dépassant 20% en juin 2026 (à peine un mois avant l'analyse), un marché primaire fermé au grand public, un custodian non nommé, et une preuve de réserves pas encore publiée. Verdict lender : actif trop récent et trop instable pour servir de collatéral significatif ; allocation minimale ou à éviter tant que le protocole n'a pas fait ses preuves sur plusieurs cycles de marché.",
@@ -25,6 +27,22 @@
     "2026-06-05: pic de liquidations sur Morpho (>4M$ en une journée), sans bad debt",
     "2026-06-25/26: second dépeg plus sévère, apxUSD à ~0,78-0,90$, ATL apyUSD à 0,9736$ (CoinGecko)"
   ],
+  "controversies": [
+    "2026-06: Rosen Law Firm ouvre une enquête boursière sur Strategy Inc./Michael Saylor concernant d'éventuelles déclarations trompeuses sur la stratégie de trésorerie Bitcoin",
+    "2026-07: STRC (backing principal d'apxUSD) chute à 73,62$ (-26% sous le pair de 100$), Strategy suspend les ventes ATM de STRC, risque de 'death spiral' évoqué par des analystes"
+  ],
+  "dependencies": {
+    "issuer": "Apyx (apyx.fi)",
+    "custodians": [],
+    "underlyings": ["apxUSD", "preferred shares DAT (principalement STRC / Strategy Inc.)"],
+    "keyCounterparties": ["Strategy Inc. (Michael Saylor) — émetteur des preferred shares STRC détenues en trésorerie", "Guardian Safe — multisig contrôlant la LP Curve apyUSD/apxUSD"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 13625716,
+    "dailyLiquidityUsd": 505440,
+    "ratioPct": 2696,
+    "note": "Volume 24h du pool Curve apyUSD/apxUSD (GeckoTerminal) ; profondeur nominale ~14,8M$ mais quasi intégralement protocole-propriétaire (Apyx-owned LP, TID Research), retirable unilatéralement par la Guardian Safe — ratio très supérieur au seuil red flag de 30%"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "apyusd.md"
 }

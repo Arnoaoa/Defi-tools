@@ -19,6 +19,22 @@
     "2026-04-20: exploit Kelp DAO / LayerZero (292M$) — Reserve a suspendu par précaution le mint, le rebalancing et l'unstaking RSR sur USD3 et eUSD (exposition indirecte via Aave v3 USDC), redemption restée ouverte, aucune perte confirmée",
     "2023-03: dépeg USDC (SVB) — impact indirect via le RToken sœur eUSD, revenu à son peg avant USDC ; pas d'incident direct sur USD3 (lancé après cet épisode)"
   ],
+  "controversies": [
+    "2023-07: suspension forcée des dépôts/retraits de l'app RPay de Reserve au Venezuela et 5 autres pays d'Amérique latine (conformité sanctions US/OFAC, ~500K utilisateurs) — événement réglementaire documenté, antérieur à USD3 et sans lien avec les RTokens",
+    "Aucune action SEC, procès ni scandale de gouvernance trouvé sur Reserve/RSR depuis 2019 ; critiques réputationnelles mineures sur le marketing humanitaire initial (parallèle EA/SBF), sans suite"
+  ],
+  "dependencies": {
+    "issuer": "Reserve Protocol / ABC Labs (depuis 2019, backé par Sam Altman, Peter Thiel, Coinbase Ventures)",
+    "custodians": [],
+    "underlyings": ["sUSDS (Sky)", "vault Morpho Steakhouse USDC (dépendance circulaire)", "Compound v3 USDC", "Aave v3 USDC", "USDC (Circle) en amont"],
+    "keyCounterparties": ["Stakers RSR (first-loss + gouvernance du panier)", "Steakhouse Financial (curator Morpho)", "Aave", "Compound", "Sky"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 21042293,
+    "dailyLiquidityUsd": 38755,
+    "ratioPct": 54295,
+    "note": "Volume 24h ~38,8K$ quasi exclusivement sur Curve (CoinGecko 2026-07-12), market cap ~4,58M$ (138 holders) — ratio >> 30% : liquidation impossible via le marché secondaire, atténué par le redeem primaire permissionless au NAV (resté actif pendant l'épisode Kelp DAO) ; la TVL Morpho de 21M$ est celle des marchés, le USD3 déposable est borné par le market cap"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "usd3.md"
 }

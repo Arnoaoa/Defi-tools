@@ -25,6 +25,22 @@
     "2026-04-14: divulgation publique de deux vulnérabilités smart contract (SAT-001 critique, SAT-002 haute) par le chercheur Innora, non corrigées à ce jour",
     "2026-06-18: dépeg du sous-jacent STRC à 82,50$ (-17% sous pair) lors d'une cascade de liquidations à effet de levier, rebond à ~89$ en clôture"
   ],
+  "controversies": [
+    "2026-06-24: Rosen Law Firm ouvre une enquête sur Strategy Inc./Michael Saylor pour déclarations potentiellement trompeuses (opérations, stratégie BTC, risques, informations financières) couvrant les 5 titres cotés dont STRC — pas de plainte formelle ni de faute prouvée à ce stade",
+    "2026-07-03: JPMorgan alerte sur un risque baissier accru pour les détenteurs retail de STRC ; Strategy vend 3 588 BTC (~216M$) début juillet 2026 pour financer les dividendes Digital Credit (~1,2 Md$/an nécessaires)"
+  ],
+  "dependencies": {
+    "issuer": "Saturn Credit (Saturn Labs)",
+    "custodians": ["Clear Street (custodian STRC)", "Securitize (administrateur)", "fonds professionnel BVI"],
+    "underlyings": ["STRC (Strategy Inc.)", "USDat"],
+    "keyCounterparties": ["Strategy Inc. / Michael Saylor", "adresse unique PROCESSOR_ROLE"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 7727643,
+    "dailyLiquidityUsd": 185549,
+    "ratioPct": 4164,
+    "note": "Volume 24h paire Curve USDC/sUSDat (source CoinGecko) ; route primaire (unstaking) fonctionne comme un ordre à cours limité, exécuté seulement si les conditions de marché le permettent — aucune garantie en cas de stress"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "susdat.md"
 }

@@ -21,6 +21,21 @@
   "maxAllocation": "1-5% ou skip",
   "summary": "dCOMP est un wrapper 1:1 bespoke sur le token de gouvernance COMP de Compound, permettant à un détenteur de conserver son pouvoir de vote tout en empruntant des stablecoins sur Morpho ; ce n'est pas un token émis par Compound lui-même. Le marché associé est curaté par Api3 mais reste un marché à emprunteur unique, avec un mint (marché primaire) fermé au public via whitelist et aucun audit indépendant identifié pour ce contrat spécifique. Le retrait (unwrap vers COMP) est heureusement permissionless, ce qui laisse une voie de liquidation, mais la centralisation de l'owner (whitelist + délégation de vote, sans multisig documenté) et la concentration sur un seul emprunteur sont des faiblesses structurelles. Verdict lender : instrument de niche à éviter ou à exposer marginalement, le sous-jacent COMP étant liquide mais l'enveloppe elle-même opaque et centralisée.",
   "incidents": [],
+  "controversies": [
+    "2024-05/07: attaque de gouvernance du groupe 'Golden Boys' (whale 'Humpy') sur la DAO Compound (sous-jacent COMP) — trois propositions successives pour transférer des centaines de milliers de COMP du trésor vers un vault contrôlé par le groupe, Proposition 289 adoptée le 28/07/2024 puis annulée le 30/07/2024 sous pression communautaire ; incident distinct de dCOMP mais illustrant la capturabilité de la gouvernance COMP"
+  ],
+  "dependencies": {
+    "issuer": "Api3 (curateur du vault Morpho ; propriété du contrat wrapper non confirmée indépendamment)",
+    "custodians": [],
+    "underlyings": ["COMP"],
+    "keyCounterparties": ["Owner du contrat wrapper (Ownable2Step, adresse non labellisée)", "Emprunteur unique du marché dCOMP/USDC"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 11970466,
+    "dailyLiquidityUsd": 7770876,
+    "ratioPct": 154,
+    "note": "Pas de pool DEX propre à dCOMP ; sortie uniquement via unwrap() vers COMP puis vente. Volume mondial COMP 24h ~7,77M$ (CoinGecko) — ratio au-dessus du seuil red flag de 30% même avec l'estimation haute (28M$) trouvée dans une autre source"
+  },
   "analyzedAt": "2026-07-12",
   "vaultNote": "dcomp.md"
 }
