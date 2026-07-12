@@ -35,7 +35,15 @@ for (const file of files) {
       incidents: analysis.incidents ?? [],
       controversies: analysis.controversies ?? [],
       dependencies: analysis.dependencies ?? null,
-      exitLiquidity: analysis.exitLiquidity ?? null,
+      exitLiquidity: analysis.exitLiquidity
+        ? {
+            ...analysis.exitLiquidity,
+            // Agents write null when figures are unavailable — normalize to 0 (not displayed)
+            morphoTvlUsd: analysis.exitLiquidity.morphoTvlUsd ?? 0,
+            dailyLiquidityUsd: analysis.exitLiquidity.dailyLiquidityUsd ?? 0,
+            ratioPct: typeof analysis.exitLiquidity.ratioPct === 'number' ? analysis.exitLiquidity.ratioPct : 0,
+          }
+        : null,
       analyzedAt: analysis.analyzedAt,
       vaultNote: analysis.vaultNote,
     }

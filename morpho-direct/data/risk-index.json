@@ -34,7 +34,7 @@
     "exitLiquidity": {
       "morphoTvlUsd": 48349585,
       "dailyLiquidityUsd": 0,
-      "ratioPct": null,
+      "ratioPct": 0,
       "note": "Aucun marché secondaire DEX/CEX identifié ; sortie uniquement via fenêtres de rachat mensuelles IdleCDO (NAV). Usage émergent comme collatéral sur Term Finance (prêt à taux fixe) mais sans liquidité de sortie immédiate. Ratio non calculable — red flag structurel de liquidité déjà noté en v1."
     },
     "analyzedAt": "2026-07-12",
@@ -1889,7 +1889,7 @@
     "exitLiquidity": {
       "morphoTvlUsd": 5272405,
       "dailyLiquidityUsd": 0,
-      "ratioPct": null,
+      "ratioPct": 0,
       "note": "Aucun marché secondaire (DEX) pour v-wmtUSDC ; sortie uniquement via withdrawal batch Wildcat plafonnée par le reserve ratio fixé par l'emprunteur (Wintermute), paramètre exact non public (page DefiLlama Wildcat inaccessible, 403)"
     },
     "analyzedAt": "2026-07-12",
@@ -2158,7 +2158,7 @@
     "exitLiquidity": {
       "morphoTvlUsd": 7527177,
       "dailyLiquidityUsd": 0,
-      "ratioPct": null,
+      "ratioPct": 0,
       "note": "Aucune paire DEX identifiée (marché secondaire inexistant, 4 détenteurs/7 transferts au total) ; sortie réelle = burn vers AA_FalconXUSDC puis rachat sur fenêtres mensuelles du Credit Vault Pareto — non trouvé de liquidité 24h"
     },
     "analyzedAt": "2026-07-12",
