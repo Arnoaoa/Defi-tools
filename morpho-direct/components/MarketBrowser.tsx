@@ -45,10 +45,12 @@ function matchesUtil(utilization: number, filter: string): boolean {
   }
 }
 
+const LOAN_ASSETS = ['USDC', 'USDT', 'WETH', 'EURC', 'cbBTC', 'WBTC', 'EURCV']
+
 const MIN_APY_OPTIONS = [
   { value: 0, label: 'Any' },
-  { value: 0.02, label: '≥ 2%' },
   { value: 0.05, label: '≥ 5%' },
+  { value: 0.075, label: '≥ 7.5%' },
   { value: 0.1, label: '≥ 10%' },
 ]
 
@@ -118,16 +120,6 @@ export function MarketBrowser() {
       .finally(() => { if (!cancelled) setLoading(false) })
     return () => { cancelled = true }
   }, [selectedChains])
-
-  // Top loan assets across loaded markets, by total supplied USD
-  const loanAssets = useMemo(() => {
-    const totals = new Map<string, number>()
-    for (const m of markets) {
-      totals.set(m.loanAsset.symbol, (totals.get(m.loanAsset.symbol) ?? 0) + (m.state?.supplyAssetsUsd ?? 0))
-    }
-    const top = [...totals.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10)
-    return [{ value: 'all', label: 'All' }, ...top.map(([symbol]) => ({ value: symbol, label: symbol }))]
-  }, [markets])
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase()
@@ -203,10 +195,25 @@ export function MarketBrowser() {
         <FilterGroup label="Min TVL" options={MIN_TVL_OPTIONS} value={minTvl} onChange={setMinTvl} />
         <FilterGroup label="Utilization" options={UTIL_OPTIONS} value={utilFilter} onChange={setUtilFilter} />
         <FilterGroup label="Min APY" options={MIN_APY_OPTIONS} value={minApy} onChange={setMinApy} />
-      </div>
 
-      <div className="flex flex-wrap items-center gap-2 mb-3">
-        <FilterGroup label="Loan asset" options={loanAssets} value={loanAsset} onChange={setLoanAsset} />
+        <div className="flex items-center gap-2 ml-auto">
+          <span className="text-xs" style={{ color: 'var(--muted)' }}>Loan asset</span>
+          <select
+            value={loanAsset}
+            onChange={(e) => setLoanAsset(e.target.value)}
+            className="rounded-lg px-3 py-2 text-sm font-medium cursor-pointer outline-none"
+            style={{
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              color: loanAsset === 'all' ? 'var(--muted)' : 'var(--foreground)',
+            }}
+          >
+            <option value="all">All</option>
+            {LOAN_ASSETS.map((symbol) => (
+              <option key={symbol} value={symbol}>{symbol}</option>
+            ))}
+          </select>
+        </div>
       </div>
 
       <input
