@@ -61,7 +61,7 @@ function sortApy(market: ApiMarket, sortBy: SortBy): number {
   return market.state.supplyApy
 }
 
-function FilterGroup<T extends string | number>({
+export function FilterGroup<T extends string | number>({
   label,
   options,
   value,

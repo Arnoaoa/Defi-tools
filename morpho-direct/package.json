@@ -5,6 +5,7 @@
   "packageManager": "pnpm@10.28.1",
   "scripts": {
     "dev": "next dev",
+    "dev:win": "set NODE_OPTIONS=--use-system-ca&& next dev",
     "build": "next build",
     "start": "next start"
   },

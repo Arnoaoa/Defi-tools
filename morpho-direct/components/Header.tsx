@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useAccount, useConnect, useDisconnect, useChainId, useSwitchChain } from 'wagmi'
 import { mainnet, base } from 'wagmi/chains'
 
@@ -8,7 +10,13 @@ const CHAIN_LABELS: Record<number, string> = {
   [base.id]: 'Base',
 }
 
+const NAV_LINKS = [
+  { href: '/', label: 'Markets' },
+  { href: '/yields', label: 'Yields' },
+]
+
 export function Header() {
+  const pathname = usePathname()
   const { address, isConnected } = useAccount()
   const { connect, connectors } = useConnect()
   const { disconnect } = useDisconnect()
@@ -32,6 +40,22 @@ export function Header() {
         <span className="font-semibold text-lg" style={{ color: 'var(--foreground)' }}>
           Morpho Direct
         </span>
+        <nav className="flex items-center gap-1 ml-4">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm px-3 py-1.5 rounded-lg cursor-pointer transition-opacity hover:opacity-80"
+              style={
+                pathname === link.href
+                  ? { background: 'var(--border)', color: 'var(--foreground)' }
+                  : { color: 'var(--muted)' }
+              }
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
       </div>
 
       {isConnected ? (
