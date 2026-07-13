@@ -27,11 +27,23 @@ const MIN_TVL_OPTIONS = [
   { value: 10_000_000, label: '≥ $10M' },
 ]
 
-const MAX_UTIL_OPTIONS = [
-  { value: 1, label: 'Any' },
-  { value: 0.95, label: '≤ 95%' },
-  { value: 0.9, label: '≤ 90%' },
+const UTIL_OPTIONS = [
+  { value: 'all', label: 'Any' },
+  { value: 'lte95', label: '≤ 95%' },
+  { value: 'lte90', label: '≤ 90%' },
+  { value: 'gte90', label: '≥ 90%' },
+  { value: 'gte95', label: '≥ 95%' },
 ]
+
+function matchesUtil(utilization: number, filter: string): boolean {
+  switch (filter) {
+    case 'lte95': return utilization <= 0.95
+    case 'lte90': return utilization <= 0.9
+    case 'gte90': return utilization >= 0.9
+    case 'gte95': return utilization >= 0.95
+    default: return true
+  }
+}
 
 const MIN_APY_OPTIONS = [
   { value: 0, label: 'Any' },
@@ -91,8 +103,9 @@ export function MarketBrowser() {
   const [search, setSearch] = useState('')
   const [sortBy, setSortBy] = useState<SortBy>('liquidity')
   const [minTvl, setMinTvl] = useState(0)
-  const [maxUtil, setMaxUtil] = useState(1)
+  const [utilFilter, setUtilFilter] = useState('all')
   const [minApy, setMinApy] = useState(0)
+  const [loanAsset, setLoanAsset] = useState('all')
   const [selectedMarket, setSelectedMarket] = useState<ApiMarket | null>(null)
 
   useEffect(() => {
@@ -106,9 +119,20 @@ export function MarketBrowser() {
     return () => { cancelled = true }
   }, [selectedChains])
 
+  // Top loan assets across loaded markets, by total supplied USD
+  const loanAssets = useMemo(() => {
+    const totals = new Map<string, number>()
+    for (const m of markets) {
+      totals.set(m.loanAsset.symbol, (totals.get(m.loanAsset.symbol) ?? 0) + (m.state?.supplyAssetsUsd ?? 0))
+    }
+    const top = [...totals.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10)
+    return [{ value: 'all', label: 'All' }, ...top.map(([symbol]) => ({ value: symbol, label: symbol }))]
+  }, [markets])
+
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase()
     const result = markets.filter((m) => {
+      if (loanAsset !== 'all' && m.loanAsset.symbol !== loanAsset) return false
       if (q) {
         const matches =
           m.loanAsset.symbol.toLowerCase().includes(q) ||
@@ -118,13 +142,13 @@ export function MarketBrowser() {
         if (!matches) return false
       }
       if (minTvl > 0 && (m.state?.supplyAssetsUsd ?? 0) < minTvl) return false
-      if (maxUtil < 1 && (m.state?.utilization ?? 0) > maxUtil) return false
+      if (!matchesUtil(m.state?.utilization ?? 0, utilFilter)) return false
       if (minApy > 0 && sortApy(m, sortBy === 'liquidity' ? 'apy' : sortBy) < minApy) return false
       return true
     })
     if (sortBy === 'liquidity') return result // API order (TotalLiquidityUsd desc)
     return [...result].sort((a, b) => sortApy(b, sortBy) - sortApy(a, sortBy))
-  }, [markets, search, sortBy, minTvl, maxUtil, minApy])
+  }, [markets, search, sortBy, minTvl, utilFilter, minApy, loanAsset])
 
   function toggleChain(id: number) {
     setSelectedChains((prev) =>
@@ -177,8 +201,12 @@ export function MarketBrowser() {
 
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-3">
         <FilterGroup label="Min TVL" options={MIN_TVL_OPTIONS} value={minTvl} onChange={setMinTvl} />
-        <FilterGroup label="Max utilization" options={MAX_UTIL_OPTIONS} value={maxUtil} onChange={setMaxUtil} />
+        <FilterGroup label="Utilization" options={UTIL_OPTIONS} value={utilFilter} onChange={setUtilFilter} />
         <FilterGroup label="Min APY" options={MIN_APY_OPTIONS} value={minApy} onChange={setMinApy} />
+      </div>
+
+      <div className="flex flex-wrap items-center gap-2 mb-3">
+        <FilterGroup label="Loan asset" options={loanAssets} value={loanAsset} onChange={setLoanAsset} />
       </div>
 
       <input

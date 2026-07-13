@@ -1,0 +1,42 @@
+{
+  "symbol": "sUSN",
+  "name": "Staked USN",
+  "addresses": {
+    "1": "0xE24a3DC889621612422A64E6388927901608B91D"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "D",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Timelock d'upgrade (2 jours) dont l'owner est une seule EOA (0x1738...D699, Ownable2Step, pas de multisig) — équivalent au red flag absolu 'multisig 1/2' : une clé compromise = contrats upgradés après 48h",
+    "Liquidité primaire absente pour les non-whitelistés : mint/redeem 1:1 réservé aux contreparties KYC/AML — les liquidateurs Morpho dépendent entièrement de DEX très fins",
+    "Liquidité de sortie ~141K$/24h cumulée pour 1,77M$ de TVL Morpho (ratio ≈1252%, seuil red flag 30%)",
+    "Backing partiellement en crédit privé (Fasanara, liquidation T+3 mois) et CLOs (JAAA), sans répartition publiée ni preuve de réserve on-chain",
+    "Pas de bug bounty actif malgré 6 audits"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "sUSN est le vault de staking d'USN, stablecoin à rendement de Noon Capital (fondé 2024, self-funded, ~30M$ de TVL) — à ne pas confondre avec le USN défunt de NEAR Protocol, identité vérifiée via l'adresse du contrat. Forces : 6 audits (Quantstamp, Halborn, Hashlock), aucun hack ni controverse depuis la création, peg globalement tenu. Faiblesses : mint/redeem réservé aux whitelistés KYC, backing mêlant crédit privé (T+3 mois) et CLOs sans répartition publiée, liquidité DEX quasi inexistante, et surtout un timelock d'upgrade contrôlé par une seule EOA — équivalent d'un multisig 1/2. Verdict lender : collatéral D, à éviter ou limiter à une allocation symbolique tant que la gouvernance n'est pas sécurisée et la liquidité de sortie inexistante.",
+  "incidents": [
+    "2025-02-03: excursion de peg à 0,9881$ (-1,2%) une semaine après le lancement de la Public Beta, résorbée rapidement"
+  ],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Noon Capital (Arpan Gautam)",
+    "custodians": [],
+    "underlyings": ["USN", "USDT/USDC", "T-Bills", "CLOs JAAA (Janus Henderson)", "crédit privé Fasanara", "positions funding-rate delta-neutral", "PT Pendle/Spectra"],
+    "keyCounterparties": ["Fasanara (Fintech Tactical Credit Fund)", "Janus Henderson (JAAA)", "EOA unique admin du timelock d'upgrade", "rôles Minter/Redeemer/Blacklist/Rebase"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 1770843,
+    "dailyLiquidityUsd": 141423,
+    "ratioPct": 1252,
+    "note": "Volume 24h cumulé USN/USDC Ekubo (~99K$) + USN/USDT Uniswap V3 (~23K$) + USN/sUSN Uniswap V3 (~19K$, mesuré à 2$ à un autre moment) — source CoinGecko 2026-07-13 ; aucun pool Curve/Balancer, rachat 1:1 réservé aux whitelistés KYC"
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "susn.md"
+}

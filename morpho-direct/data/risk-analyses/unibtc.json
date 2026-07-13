@@ -1,0 +1,44 @@
+{
+  "symbol": "uniBTC",
+  "name": "Bedrock Universal BTC",
+  "addresses": { "8453": "0x93919784C523f39CACaa98Ee0a9d96c3F32b593e" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Hack confirmé de ~2M$ en septembre 2024 : faille réelle dans le contrat officiel uniBTC (bug de mint infini via dépôt ETH sans conversion de taux de change), pas un token contrefait",
+    "Confirmation publique de la clôture complète du remboursement aux utilisateurs finaux non trouvée (seul le remboursement de Fuzzland à Bedrock est confirmé)",
+    "Aucun dashboard de preuve de réserves (Proof-of-Reserve) public actualisé trouvé pour uniBTC malgré une annonce en ce sens après le hack",
+    "Gouvernance/structure multisig des contrats Bedrock non documentée publiquement (contrat upgradeable sans détail sur les droits admin)",
+    "Liquidité secondaire DEX très faible et fragmentée sur de nombreuses petites pools (~6 400$/24h pour ~187M$ de market cap)"
+  ],
+  "maxAllocation": "5-8%",
+  "summary": "uniBTC est un token de restaking liquide BTC émis par Bedrock, adossé au protocole Babylon, backé 1:1 par du BTC wrappé (WBTC, cbBTC, etc. selon la chaîne). Le fait central de ce dossier est le hack de septembre 2024 : une faille réelle dans la fonction mint() du contrat officiel a permis de dérober ~2M$ via un bug de conversion ETH→BTC, touchant 8 chaînes. Bedrock a réagi rapidement (pause, collaboration white hat), le protocole a été ré-audité (PeckShield, Blocksec) et l'auteur présumé (ex-employé de Fuzzland) a vu son ex-employeur rembourser intégralement Bedrock, mais la clôture complète du remboursement aux utilisateurs finaux n'est pas confirmée publiquement. Depuis, ~22 mois sans nouvel incident et une TVL protocole reconstruite (~458-535M$). Verdict lender : collatéral fonctionnel avec un historique de sécurité qui s'améliore, mais le précédent de hack réel sur le contrat + l'opacité sur la gouvernance et les réserves justifient une allocation prudente en bas de fourchette C.",
+  "incidents": [
+    "2024-09-27: hack de ~2M$ via une faille de mint infini (dépôt ETH mintant de l'uniBTC 1:1 sans conversion de taux de change), contrat vulnérable déployé sur 8 chaînes, exposition potentielle jusqu'à 75M$ ; Bedrock met en pause, collabore avec SEAL 911, attaque attribuée à un ex-employé de Fuzzland qui rembourse intégralement Bedrock",
+    "2024-10-01 et 2024-10-30: nouveaux audits post-hack (PeckShield puis Blocksec) sur le contrat uniBTC, en complément de l'audit Blocksec pré-hack de juin 2024"
+  ],
+  "controversies": [
+    "Aucune procédure judiciaire ou action SEC trouvée visant spécifiquement Bedrock ou uniBTC",
+    "Absence de confirmation publique de la clôture complète du remboursement aux utilisateurs finaux suite au hack de 2024 (point d'opacité, pas une controverse formelle)"
+  ],
+  "dependencies": {
+    "issuer": "Bedrock (protocole de restaking multi-actifs, lancé 2024-01-28)",
+    "custodians": ["dépendent du wrapper BTC déposé selon la chaîne : BitGo/BiT Global (WBTC), Coinbase (cbBTC), autres émetteurs de wrappers (FBTC, mBTC, BTCB) non détaillés publiquement"],
+    "underlyings": ["BTC wrappé (WBTC, cbBTC, FBTC, mBTC, BTCB selon la chaîne)", "restaking via le protocole Babylon"],
+    "keyCounterparties": ["Babylon (finality providers/validateurs, risque de slashing générique)", "Fuzzland (ex-employeur de l'auteur présumé du hack de 2024, a remboursé Bedrock)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 478190,
+    "dailyLiquidityUsd": 6387,
+    "ratioPct": 7486,
+    "note": "Volume 24h global CoinGecko (2026-07-13) ≈6 387$ pour une market cap ≈187M$ — liquidité très fragmentée sur de nombreuses petites pools multi-chaînes ; volume spécifique à la pool Base (Aerodrome uniBTC/cbBTC) non déterminé malgré recherche. Sortie réelle = burn vers le wrapper BTC déposé puis redemption de ce wrapper (couche d'indirection supplémentaire vs LBTC)."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "unibtc.md"
+}

@@ -1,0 +1,43 @@
+{
+  "symbol": "PT-USDG-24SEP2026",
+  "name": "PT Global Dollar 24SEP2026",
+  "addresses": {
+    "1": "0xc1906aeCf868749a2DeE203F59b904c0cf212140"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Marché PT très jeune (lancé le 01/07/2026, ~11 jours à la date d'analyse) : profondeur du pool AMM Pendle non confirmée — dernier chiffre daté ~99,7K$ (proposition Aave, 27/05/2026) vs 3,65M$ de TVL Morpho, soit un ratio pré-maturité potentiellement extrême jusqu'au 24/09/2026",
+    "Audit spécifique du SY-USDG introuvable : ChainSecurity exclut explicitement les implémentations SY dérivées du scope de l'audit Pendle V2 Core"
+  ],
+  "maxAllocation": "5-10%",
+  "summary": "PT-USDG-24SEP2026 est un Principal Token Pendle qui se rachète 1:1 contre USDG (Global Dollar) à maturité (24/09/2026). Le sous-jacent est solide : stablecoin fiat-backed de ~3,15 Md$ émis par Paxos Digital Singapore (régulé MAS) et Paxos Issuance Europe (MiCA/FIN-FSA), réserves conservatrices (cash + T-bills + repo) attestées mensuellement par KPMG, aucun dépeg ni hack depuis création, consortium de distribution de premier plan (Kraken, Robinhood, Galaxy, Anchorage). La faiblesse est conjoncturelle : le marché Pendle est extrêmement jeune (lancé 01/07/2026) avec une profondeur AMM non confirmée face à la TVL Morpho, et l'entité sœur Paxos Trust a écopé d'une amende NYDFS de 26,5M$ (08/2025, dossier BUSD) — risque réputationnel de groupe. Verdict lender : sous-jacent de qualité quasi tier-1, exposition acceptable en taille modérée avec vigilance sur la liquidité du pool Pendle jusqu'à maturité (~2,5 mois) ; après le 24/09/2026 la sortie via redeem 1:1 vers USDG est excellente.",
+  "incidents": [
+    "Aucun hack ni dépeg d'USDG, de Paxos Digital Singapore ou du Global Dollar Network depuis la création (11/2024) au 2026-07-12",
+    "2024-09: hack Penpie (~27M$), protocole tiers construit sur Pendle (pas Pendle core), antérieur à l'arrivée d'USDG sur Pendle — sans lien direct"
+  ],
+  "controversies": [
+    "2023-02: la NYDFS ordonne à Paxos Trust Company (entité sœur, charte NY) de cesser le mint de BUSD pour lacunes AML/KYC dans la relation Binance",
+    "2025-08: amende NYDFS de 26,5M$ contre Paxos Trust Company (défaillances systémiques de conformité liées à BUSD/Binance) + 22M$ de remédiation imposés 2025-2027 — entité légalement distincte de l'émetteur d'USDG (MAS Singapour/FIN-FSA), risque réputationnel de groupe uniquement"
+  ],
+  "dependencies": {
+    "issuer": "Pendle Finance (wrapper PT/YT/SY) sur USDG émis par Paxos Digital Singapore Pte. Ltd. (MAS) et Paxos Issuance Europe Oy (FIN-FSA/MiCA)",
+    "custodians": ["DBS Bank (Singapour)", "banques FDIC-insured (cash US)"],
+    "underlyings": ["USDG (Global Dollar)", "cash + T-bills US <90j + reverse repo overnight (réserves USDG)"],
+    "keyCounterparties": ["Consortium Global Dollar Network (Anchorage Digital, Bullish, Galaxy Digital, Kraken, Nuvei, Robinhood)", "KPMG LLP (attestations réserves)", "Pool AMM Pendle (sortie pré-maturité)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 3649075,
+    "dailyLiquidityUsd": 223500000,
+    "ratioPct": 1.6,
+    "note": "Canal post-maturité (redeem PT 1:1 permissionless -> USDG, volume 24h ~223,5M$, CoinGecko) : ratio ~1,6% OK. Avant maturité (jusqu'au 24/09/2026), seule l'AMM Pendle sert de sortie : dernier chiffre fiable ~99,7K$ (Aave proposal 27/05/2026, avant le lancement incitivé de juillet qui a porté la TVL USDG-Pendle à ~46M$ tous pools) — profondeur actuelle du pool non confirmée, vigilance"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "pt-usdg-24sep2026.md"
+}

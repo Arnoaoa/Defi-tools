@@ -1,0 +1,37 @@
+{
+  "symbol": "sUSDai",
+  "name": "Staked USDai (USD.AI)",
+  "addresses": {
+    "1": "0x0B2b2B2076d95dda7817e785989fE353fe955ef9"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "sUSDai est la version stakée de USDai (USD.AI, Permian Labs), un dollar synthétique dont le rendement provient de prêts garantis par du hardware GPU NVIDIA (~moitié des réserves) et de T-bills. Forces : équipe doxxée, VC réputés (Framework, Dragonfly, Coinbase Ventures), 7 audits + bug bounty Cantina, TVL ~658M$, aucun incident en 11 mois. Faiblesses rédhibitoires pour un lender : backing pour moitié en crédit privé off-chain valorisé par des experts tiers sans attestation indépendante ni preuve on-chain, unstake sUSDai en batch FIFO de 30 jours (paramètres modifiables par la gouvernance CHIP), liquidité DEX quasi nulle sur Ethereum (pools uniquement sur Arbitrum), protocole < 1 an jamais testé en stress. Verdict lender : collatéral expérimental — en cas de défauts sur les prêts GPU, aucune sortie rapide possible, bad debt quasi assurée en scénario de stress ; allocation minimale ou skip.",
+  "incidents": [],
+  "controversies": [
+    "2025-2026: aucun hack, dépeg, procès ou controverse publique documenté au 2026-07-13 — mais absence de signal reflétant surtout la jeunesse du protocole (11 mois) et sa faible couverture critique",
+    "2025-11: mise en garde structurelle d'analystes tiers (Stablewatch) : dépréciation GPU 15-20%/an, valorisation par experts non vérifiable on-chain, corrélation défauts emprunteurs / valeur de revente des GPU en cas de ralentissement du capex IA — risque reconnu, jamais testé"
+  ],
+  "dependencies": {
+    "issuer": "Permian Labs Inc. (USD.AI) — équipe doxxée : David Choi, Conor Moore, Ivan Sergeev",
+    "custodians": ["Data centers assurés hébergeant les GPU financés (contreparties physiques off-chain)", "Paxos (PYUSD pour la portion stable)"],
+    "underlyings": ["PYUSD, T-bills courts et équivalents cash (portion idle)", "Prêts collatéralisés par hardware GPU NVIDIA tokenisé en NFT (~moitié des réserves fin 2025)"],
+    "keyCounterparties": ["Curators (origination/gestion des prêts GPU, first-loss capital)", "Emprunteurs GPU (sociétés IA/compute)", "Experts tiers de valorisation du hardware (pas d'oracle on-chain)", "LayerZero (OFT cross-chain)", "Gouvernance CHIP (peut modifier les paramètres de redemption)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 699010,
+    "dailyLiquidityUsd": 1130000,
+    "ratioPct": 62,
+    "note": "Aucun pool DEX significatif trouvé sur Ethereum (chaîne du marché Morpho) — le volume 24h retenu (~1,13M$, pool Fluid sUSDai/USDC) est sur Arbitrum et suppose un bridge LayerZero préalable ; pool Curve Arbitrum ~3,76M$ de liquidité. Ratio 62% > seuil red flag 30% ; sur Ethereum seul, sortie quasi impossible. Marché primaire : redeem USDai instantané mais unstake sUSDai en batch FIFO de 1 à 30 jours."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "susdai.md"
+}

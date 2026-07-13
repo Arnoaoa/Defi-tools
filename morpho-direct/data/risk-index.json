@@ -538,6 +538,54 @@
     "analyzedAt": "2026-07-12",
     "vaultNote": "eutbl.md"
   },
+  "1-0x7743e50f534a7f9f1791dde7dcd89f7783eefc39": {
+    "symbol": "fxSAVE",
+    "grade": "C",
+    "gradeModifier": "-",
+    "components": {
+      "assetDesign": "C",
+      "issuer": "C",
+      "depegBacking": "B",
+      "counterparty": "C",
+      "recentSecurity": "C"
+    },
+    "redFlags": [],
+    "maxAllocation": "5-15%",
+    "summary": "fxSAVE est un vault ERC-4626 du f(x) Protocol (AladdinDAO) qui auto-compound les rendements de la Stability Pool fxUSD/USDC ; fxUSD est backé on-chain par des CDP wstETH/WBTC dont la stabilité dépend de la capacité du levier (xPOSITION jusqu'à 10x) à absorber la volatilité. Forces : backing transparent on-chain, 3 audits (Trail of Bits, OpenZeppelin, Secbit), pire dépeg limité à 2,91% toujours récupéré, aucun hack avec perte via exploit. Faiblesses : liquidité DEX quasi nulle (volume 24h ~1-8K$, ratio de sortie > 10 000%), multisig d'équipe sans timelock (protocole 'beta'), incident de liquidation 02/2025 avec pertes utilisateurs réelles (1 979 wstETH), anomalie de prix +331% en 02/2026 jamais expliquée, pas de bug bounty trouvé. Verdict lender : collatéral acceptable en petite taille uniquement, la sortie reposant entièrement sur la redemption primaire du protocole ; vérifier que l'oracle du marché price la NAV et non le spot DEX.",
+    "incidents": [
+      "2025-02: Liquidation Event — panne simultanée des 2 endpoints RPC pendant une chute de marché, 95 liquidations xPOSITION, 1 979 wstETH perdus par les utilisateurs (compensation partielle 1 000 FXN) ; fxUSD n'a pas dépeggé",
+      "2025-06: vulnérabilité Double Flash Loan découverte par ChainSecurity (divulgation responsable, aucun exploit réel ni perte), intégration flash loan Balancer V2 retirée",
+      "2026-02-21: anomalie de prix FXSAVE +331% en 24h (jusqu'à 4,68$) sur volume faible (1,94M$), sans explication officielle, corrigée depuis — symptôme de liquidité DEX très mince"
+    ],
+    "controversies": [
+      "2025-02: promesse marketing de 'levier non-liquidable' contredite par l'incident de liquidation (positions 5.5x liquidées alors que des 7x survivaient ailleurs), critique communautaire (TokenBrice)",
+      "Dépegs brefs récurrents de fxUSD (des dizaines d'épisodes, pire ~2,91%), toujours récupérés (Pharos Watch)",
+      "Aucun procès ni scandale légal documenté au 2026-07-13"
+    ],
+    "dependencies": {
+      "issuer": "f(x) Protocol (AladdinDAO)",
+      "custodians": [
+        "Aucun directement ; dépendance indirecte à BitGo/BiT Global via le WBTC majoritaire dans le collatéral de fxUSD"
+      ],
+      "underlyings": [
+        "fxUSD (backé par CDP wstETH + WBTC surcollatéralisés)",
+        "USDC (Stability Pool)"
+      ],
+      "keyCounterparties": [
+        "Détenteurs de xPOSITION (le levier absorbant la volatilité, clé de la stabilité de fxUSD)",
+        "Keepers/fournisseurs RPC du rebalancing (cause de l'incident 02/2025)",
+        "Multisig d'équipe AladdinDAO (accès permissionné, sans timelock, seuil non documenté)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 808206,
+      "dailyLiquidityUsd": 7720,
+      "ratioPct": 10470,
+      "note": "Volume 24h DEX dérisoire : ~1 172$ sur la paire principale FXSAVE/scrvUSD (Curve, CoinGecko), mesure haute 7 720$ — ratio > 10 000%, red flag massif sur la sortie secondaire. HHI 0,52 (un seul pool concentre la liquidité fxUSD, Pharos Watch). La sortie réaliste est la redemption on-chain permissionless (fxSAVE → fxUSD + USDC, avec frais ou cooldown), dernier recours : redemption fxUSD contre wstETH/WBTC au prix oracle."
+    },
+    "analyzedAt": "2026-07-13",
+    "vaultNote": "fxsave.md"
+  },
   "8453-0x97be14dd8f994a5364573bc035d85309e7cb34de": {
     "symbol": "JitoSOL",
     "grade": "D",
@@ -823,6 +871,57 @@
     },
     "analyzedAt": "2026-07-12",
     "vaultNote": "mhyper.md"
+  },
+  "1-0xc8495eaff71d3a563b906295fcf2f685b1783085": {
+    "symbol": "mHyperBTC",
+    "grade": "D",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "D",
+      "issuer": "B",
+      "depegBacking": "D",
+      "counterparty": "C",
+      "recentSecurity": "C"
+    },
+    "redFlags": [
+      "Stratégie active à effet de levier empilée (basis trading, carry trades, arbitrage de liquidation) sans méthodologie de vérification indépendante de la delta-neutralité",
+      "Actif très jeune (déployé 2025-10-14, < 1 an) avec seulement 92 détenteurs sur Ethereum et liquidité DEX quasi inexistante (~0,05% du market cap en 24h)",
+      "Contrat mHyperBTC lui-même non audité spécifiquement (Etherscan : 'No Contract Security Audit Submitted'), seule la plateforme Midas l'est",
+      "Dépendance à un gérant de stratégie (Hyperithm) et un custodian (Fordefi) uniques, droits admin actifs (proxy upgradeable)",
+      "Pause préventive réelle d'émission/rachat le 2026-04-21 lors de la contagion Kelp DAO/rsETH (~292M$), levée en ~48h après confirmation d'absence d'exposition"
+    ],
+    "maxAllocation": "1-5% ou à éviter",
+    "summary": "mHyperBTC est un certificat tokenisé Midas répliquant une stratégie BTC-denominated active à effet de levier gérée par Hyperithm (basis trading, carry trades, arbitrage de liquidation), variante BTC de la même famille que mHYPER. Contrairement à mHYPER, aucune preuve n'a été trouvée d'une exposition de mHyperBTC à Stream Finance lors de la contagion de novembre 2025 : le contrat existait déjà (déployé le 2025-10-14) mais son activité de marché semble avoir démarré bien plus tard (intégration Rootstock, février-mars 2026). La note D vient néanmoins de signaux structurels sérieux : stratégie active à effet de levier sans vérification indépendante de la delta-neutralité, actif très jeune avec seulement 92 détenteurs et liquidité DEX quasi nulle, contrat non audité spécifiquement, dépendance à un gérant et un custodian uniques, et une pause préventive réelle d'émission/rachat en avril 2026 lors de la contagion Kelp DAO/rsETH. Verdict : à éviter ou allocation résiduelle seulement, avec un profil de risque comparable à mHYPER sur le plan structurel mais sans incident de contagion réalisé à ce jour.",
+    "incidents": [
+      "2025-10-14: déploiement du contrat mHyperBTC sur Ethereum (proxy TransparentUpgradeableProxy), antérieur à toute activité de marché significative documentée",
+      "2026-04-19/21: exploit Kelp DAO/rsETH (~292M$) ; le 2026-04-21 Hyperithm confirme l'absence d'exposition rsETH pour mHYPER/mHyperBTC/mXRP et le rétablissement complet des fonctions d'émission/rachat, confirmant qu'une pause préventive avait eu lieu sur mHyperBTC ; aucune perte, résolution en ~48h",
+      "2026-04-23: mise à jour de NAV (Phemex) pour mHYPER/mXRP/mHyperBTC confirmant absence de drawdown et retrait des positions à effet de levier sur Aave, vérifiée par LlamaRisk — événement distinct et postérieur à la contagion Stream Finance de novembre 2025 (voir note vault pour l'écart factuel détaillé avec l'analyse mHYPER)"
+    ],
+    "controversies": [
+      "2025-12-17: Hyperithm accusé (NewsWay/CryptoRank) d'avoir lancé via Midas un produit de rendement Bitcoin et Ethereum sans soumettre l'évaluation de risque obligatoire aux régulateurs sud-coréens (obligation VASP) ; l'article ne nomme pas mHyperBTC explicitement mais la fenêtre de lancement correspond ; aucune sanction confirmée à ce jour",
+      "Aucune autre procédure judiciaire ou action SEC trouvée visant spécifiquement mHyperBTC ou Hyperithm"
+    ],
+    "dependencies": {
+      "issuer": "Midas Software GmbH (Allemagne, licence BaFin)",
+      "custodians": [
+        "Fordefi (custody MPC)"
+      ],
+      "underlyings": [
+        "positions de basis trading BTC (venues non divulguées)"
+      ],
+      "keyCounterparties": [
+        "Hyperithm (gérant de stratégie unique)",
+        "LlamaRisk (vérification indépendante de la NAV, annonce 2026-04)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 2721483,
+      "dailyLiquidityUsd": 19080,
+      "ratioPct": 14260,
+      "note": "Volume 24h agrégé toutes chaînes (CoinGecko, consulté 2026-07-13) instable entre ~19 080$ et ~23 964$ selon le relevé, dominé par la paire mHyperBTC/RBTC sur Oku Trade (Rootstock) ; trois ordres de grandeur meilleur que mHYPER (~72$/24h) mais très au-dessus du seuil red flag de 30%"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "mhyperbtc.md"
   },
   "1-0xcc5c22c7a6bcc25e66726aef011dde74289ed203": {
     "symbol": "mM1-USD",
@@ -1360,6 +1459,110 @@
     "analyzedAt": "2026-07-12",
     "vaultNote": "pt-reusd-10dec2026.md"
   },
+  "1-0x3eaa0f0f0a5d3d595ae4e4b0d27f439d01c3e7b2": {
+    "symbol": "PT-reUSD-25JUN2026",
+    "grade": "C",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "C",
+      "issuer": "B",
+      "depegBacking": "C",
+      "counterparty": "C",
+      "recentSecurity": "B"
+    },
+    "redFlags": [],
+    "maxAllocation": "5-10%",
+    "summary": "PT-reUSD-25JUN2026 est un Principal Token Pendle dont la maturité (25/06/2026) est déjà passée. Vérification critique par adresse via l'API Pendle : le sous-jacent est le reUSD de Re Protocol (re.xyz, réassurance, note C), et non son homonyme reUSD de Resupply Protocol (Convex/Yearn, note D) — piège de nommage explicitement évité. Le redeem PT→reUSD est permissionless et instantané post-maturité, donc la liquidabilité de ce collatéral se résume entièrement à celle de reUSD (re.xyz) : marché primaire permissionné (KYC/KYB) mais fonctionnel avec redemption instantanée tant que le buffer > 1% du supply, liquidité secondaire correcte mais insuffisante face à une liquidation massive, aucun hack confirmé, réassureur licencié. Verdict lender : collatéral correct pour une allocation modérée (5-10%, identique au sous-jacent), le statut post-maturité n'ajoutant pas de risque supplémentaire puisque la voie de sortie primaire de reUSD reste opérationnelle.",
+    "incidents": [
+      "2025 (date exacte non trouvée): reUSD (re.xyz) touche un plus bas historique de 0,8734$ (-24,7% vs prix actuel), cause publique non identifiée"
+    ],
+    "controversies": [
+      "Aucune controverse gouvernance/légale/réputationnelle trouvée pour Re Protocol au 2026-07-13",
+      "2026-07-09: Re Protocol ouvre sa première fenêtre de redemption trimestrielle pour reUSDe — mécanisme de liquidité récurrent, pas un incident"
+    ],
+    "dependencies": {
+      "issuer": "Pendle Finance (wrapper PT/YT) sur reUSD de Re Protocol (Resilience Foundation Cayman LLC + Cover Reinsurance SPC Ltd.) — maturité passée",
+      "custodians": [
+        "Fireblocks (garde on-chain)",
+        "Trust Regulation 114 (réserves off-chain)"
+      ],
+      "underlyings": [
+        "reUSD (Re Protocol / re.xyz)",
+        "contrats de réassurance (CoverRe)",
+        "sUSDe basis-trade (Ethena)"
+      ],
+      "keyCounterparties": [
+        "CoverRe.com (réassureur unique)",
+        "The Network Firm (attestations)",
+        "Chainlink (attestations)",
+        "Ethena"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 816630,
+      "dailyLiquidityUsd": 723278,
+      "ratioPct": 112.9,
+      "note": "Liquidité AMM Pendle propre à ce pool quasi nulle post-maturité (22 339$, marché 'Inactive' sur l'API Pendle) et non pertinente puisque le redeem PT→reUSD est permissionless ; proxy retenu = volume 24h de reUSD (re.xyz) sur Curve/Fluid (~723 278$, CoinGecko), atténué par la redemption primaire Re Protocol (buffer >1% du supply)"
+    },
+    "analyzedAt": "2026-07-13",
+    "vaultNote": "pt-reusd-25jun2026.md"
+  },
+  "1-0xc689f76f90fe1762fac55983ff25ae71033a84f7": {
+    "symbol": "PT-sUSDat-27AUG2026",
+    "grade": "D",
+    "gradeModifier": "-",
+    "components": {
+      "assetDesign": "D",
+      "issuer": "D",
+      "depegBacking": "D",
+      "counterparty": "D",
+      "recentSecurity": "D"
+    },
+    "redFlags": [
+      "Vulnérabilité critique SAT-001 divulguée le 14/04/2026, non corrigée à ce jour — peut geler les retraits jusqu'à 30 jours",
+      "Vulnérabilité haute SAT-002 non corrigée — le rôle unique PROCESSOR_ROLE peut théoriquement extraire jusqu'à ~33% de la valeur par cycle de conversion",
+      "Dépeg réel du sous-jacent STRC à -17% le 18/06/2026, encore ~12% sous pair au 07/07/2026",
+      "Liquidité de sortie du pool Pendle (~3,36M$) insuffisante face à la TVL Morpho de ce collatéral (ratio ≈47%, > seuil red flag 30%)",
+      "Backing entièrement off-chain (fonds BVI, custodian, administrateur), aucune vérification on-chain temps réel"
+    ],
+    "maxAllocation": "skip",
+    "summary": "PT-sUSDat-27AUG2026 est un Principal Token Pendle qui se rachète 1:1 contre sUSDat à maturité (27/08/2026, encore à venir) ; identité confirmée via l'API Pendle (adresse sous-jacente identique à sUSDat de Saturn Credit). Le mécanisme PT est sain mais hérite intégralement du risque déjà noté D sur sUSDat : deux vulnérabilités smart contract (critique + haute) divulguées en avril 2026 et toujours non corrigées, un dépeg réel du sous-jacent STRC (encore ~12% sous pair début juillet 2026), un backing entièrement off-chain (fonds BVI, custodian, administrateur), et une liquidité de sortie (pool Pendle + marché secondaire sUSDat) insuffisante face à la taille du collatéral sur Morpho. Verdict lender : collatéral à éviter (skip) tant que les vulnérabilités ne sont pas corrigées et que STRC n'a pas retrouvé une stabilité durable.",
+    "incidents": [
+      "2026-04-14: divulgation publique de SAT-001 (critique) et SAT-002 (haute) sur Saturn, non corrigées à ce jour",
+      "2026-06-18: dépeg du sous-jacent STRC à 82,50$ (-17% sous pair), rebond partiel à ~89$ en clôture",
+      "2026-07-07: STRC cote encore ~87,71$ (-12,3% sous pair), pas de normalisation complète"
+    ],
+    "controversies": [
+      "2026-06-24: Rosen Law Firm ouvre une enquête sur Strategy Inc./Michael Saylor (STRC), pas de plainte formelle à ce stade",
+      "2026-06-29: Strategy relève le dividende STRC à 12%/an, dividendes de juillet 2026 confirmés — pas de suspension identifiée"
+    ],
+    "dependencies": {
+      "issuer": "Pendle Finance (wrapper PT/YT/SY) sur Saturn Credit (Saturn Labs), émetteur de sUSDat",
+      "custodians": [
+        "Clear Street (custodian STRC)",
+        "Securitize (administrateur)",
+        "fonds professionnel BVI"
+      ],
+      "underlyings": [
+        "sUSDat (Saturn Credit)",
+        "STRC (Strategy Inc.)",
+        "USDat (couche de base avant staking)"
+      ],
+      "keyCounterparties": [
+        "Strategy Inc. / Michael Saylor",
+        "adresse unique PROCESSOR_ROLE",
+        "pool AMM Pendle (seule route de sortie avant maturité)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 1566807,
+      "dailyLiquidityUsd": 3363404,
+      "ratioPct": 46.6,
+      "note": "Liquidité du pool AMM Pendle (API Pendle, marché 0x91bc86899c8391b6caaf26535b9cd82efe49a189, consultée 2026-07-13) ; à maturité, sortie alternative via sUSDat direct (file de retrait 3-7j + vesting 30j, marché secondaire ~185K$/jour)"
+    },
+    "analyzedAt": "2026-07-13",
+    "vaultNote": "pt-susdat-27aug2026.md"
+  },
   "1-0xd341a146a4fd20ea89898e4d86ae1829bf3a1c23": {
     "symbol": "PT-sUSDD-27AUG2026",
     "grade": "D",
@@ -1541,6 +1744,56 @@
     },
     "analyzedAt": "2026-07-12",
     "vaultNote": "pt-usdat-27aug2026.md"
+  },
+  "1-0xc1906aecf868749a2dee203f59b904c0cf212140": {
+    "symbol": "PT-USDG-24SEP2026",
+    "grade": "C",
+    "gradeModifier": "+",
+    "components": {
+      "assetDesign": "C",
+      "issuer": "B",
+      "depegBacking": "B",
+      "counterparty": "B",
+      "recentSecurity": "B"
+    },
+    "redFlags": [
+      "Marché PT très jeune (lancé le 01/07/2026, ~11 jours à la date d'analyse) : profondeur du pool AMM Pendle non confirmée — dernier chiffre daté ~99,7K$ (proposition Aave, 27/05/2026) vs 3,65M$ de TVL Morpho, soit un ratio pré-maturité potentiellement extrême jusqu'au 24/09/2026",
+      "Audit spécifique du SY-USDG introuvable : ChainSecurity exclut explicitement les implémentations SY dérivées du scope de l'audit Pendle V2 Core"
+    ],
+    "maxAllocation": "5-10%",
+    "summary": "PT-USDG-24SEP2026 est un Principal Token Pendle qui se rachète 1:1 contre USDG (Global Dollar) à maturité (24/09/2026). Le sous-jacent est solide : stablecoin fiat-backed de ~3,15 Md$ émis par Paxos Digital Singapore (régulé MAS) et Paxos Issuance Europe (MiCA/FIN-FSA), réserves conservatrices (cash + T-bills + repo) attestées mensuellement par KPMG, aucun dépeg ni hack depuis création, consortium de distribution de premier plan (Kraken, Robinhood, Galaxy, Anchorage). La faiblesse est conjoncturelle : le marché Pendle est extrêmement jeune (lancé 01/07/2026) avec une profondeur AMM non confirmée face à la TVL Morpho, et l'entité sœur Paxos Trust a écopé d'une amende NYDFS de 26,5M$ (08/2025, dossier BUSD) — risque réputationnel de groupe. Verdict lender : sous-jacent de qualité quasi tier-1, exposition acceptable en taille modérée avec vigilance sur la liquidité du pool Pendle jusqu'à maturité (~2,5 mois) ; après le 24/09/2026 la sortie via redeem 1:1 vers USDG est excellente.",
+    "incidents": [
+      "Aucun hack ni dépeg d'USDG, de Paxos Digital Singapore ou du Global Dollar Network depuis la création (11/2024) au 2026-07-12",
+      "2024-09: hack Penpie (~27M$), protocole tiers construit sur Pendle (pas Pendle core), antérieur à l'arrivée d'USDG sur Pendle — sans lien direct"
+    ],
+    "controversies": [
+      "2023-02: la NYDFS ordonne à Paxos Trust Company (entité sœur, charte NY) de cesser le mint de BUSD pour lacunes AML/KYC dans la relation Binance",
+      "2025-08: amende NYDFS de 26,5M$ contre Paxos Trust Company (défaillances systémiques de conformité liées à BUSD/Binance) + 22M$ de remédiation imposés 2025-2027 — entité légalement distincte de l'émetteur d'USDG (MAS Singapour/FIN-FSA), risque réputationnel de groupe uniquement"
+    ],
+    "dependencies": {
+      "issuer": "Pendle Finance (wrapper PT/YT/SY) sur USDG émis par Paxos Digital Singapore Pte. Ltd. (MAS) et Paxos Issuance Europe Oy (FIN-FSA/MiCA)",
+      "custodians": [
+        "DBS Bank (Singapour)",
+        "banques FDIC-insured (cash US)"
+      ],
+      "underlyings": [
+        "USDG (Global Dollar)",
+        "cash + T-bills US <90j + reverse repo overnight (réserves USDG)"
+      ],
+      "keyCounterparties": [
+        "Consortium Global Dollar Network (Anchorage Digital, Bullish, Galaxy Digital, Kraken, Nuvei, Robinhood)",
+        "KPMG LLP (attestations réserves)",
+        "Pool AMM Pendle (sortie pré-maturité)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 3649075,
+      "dailyLiquidityUsd": 223500000,
+      "ratioPct": 1.6,
+      "note": "Canal post-maturité (redeem PT 1:1 permissionless -> USDG, volume 24h ~223,5M$, CoinGecko) : ratio ~1,6% OK. Avant maturité (jusqu'au 24/09/2026), seule l'AMM Pendle sert de sortie : dernier chiffre fiable ~99,7K$ (Aave proposal 27/05/2026, avant le lancement incitivé de juillet qui a porté la TVL USDG-Pendle à ~46M$ tous pools) — profondeur actuelle du pool non confirmée, vigilance"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "pt-usdg-24sep2026.md"
   },
   "1-0xae78736cd615f374d3085123a210448e74fc6393": {
     "symbol": "rETH",
@@ -1896,6 +2149,59 @@
     "analyzedAt": "2026-07-12",
     "vaultNote": "savusd.md"
   },
+  "1-0xb45ad160634c528cc3d2926d9807104fa3157305": {
+    "symbol": "sDOLA",
+    "grade": "C",
+    "gradeModifier": "-",
+    "components": {
+      "assetDesign": "C",
+      "issuer": "C",
+      "depegBacking": "C",
+      "counterparty": "C",
+      "recentSecurity": "C"
+    },
+    "redFlags": [
+      "Ratio TVL Morpho / liquidité de sortie 24h ~446% (950,7K$ vs ~213K$/24h sur Curve) — très au-dessus du seuil red flag de 30%, sortie simultanée impossible en cas de stress",
+      "Taux de change sDOLA (convertToAssets) manipulable atomiquement, démontré en conditions réelles le 02/03/2026 (exploit Curve LlamaLend, 240K$) — vecteur direct pour tout oracle qui price sDOLA sans protection anti-manipulation",
+      "Bad debt résiduelle (~3,4M$ après le remboursement de 07/2025) sur un stablecoin de petite taille (market cap DOLA 44-127M$ selon sources)",
+      "INV (token du protocole) accepté comme collatéral de DOLA sur FiRM — backing partiellement auto-référentiel, précédent direct du hack d'avril 2022"
+    ],
+    "maxAllocation": "5%",
+    "summary": "sDOLA est le wrapper ERC-4626 de staking du DOLA d'Inverse Finance : yield organique issu des frais DBR payés par les emprunteurs de FiRM, mint/redeem instantanés et permissionless, backing sur-collatéralisé transparent on-chain (>97% via FiRM). Le passif est lourd : deux hacks majeurs en 2022 (15,6M$ par manipulation d'oracle INV en avril, ~5,8M$ de perte protocole via Frontier en juin), plus de 24M$ de bad debt cumulée dont ~3,4M$ encore ouverts, un dépeg de DOLA à 0,7749$ en avril 2023, et un incident récent (03/2026) démontrant la manipulabilité atomique du taux sDOLA sur un marché tiers. Liquidité de sortie très fine (~213K$/24h) face à la TVL Morpho, ratio red flag ~446%. Verdict lender : protocole vétéran qui s'est assaini (FiRM post-hacks, jrDOLA first-loss depuis 02/2026) mais faiblesse généralisée sur toutes les composantes — allocation résiduelle uniquement.",
+    "incidents": [
+      "2022-04-02: hack d'Anchor par manipulation de l'oracle Keep3r TWAP sur INV (prix INV gonflé via SushiSwap, fonds Tornado Cash), butin ~15,6M$ (1588 ETH, 94 WBTC, 39 YFI, ~4M DOLA), bad debt DOLA permanente créée",
+      "2022-06-16: hack de Frontier par manipulation du prix du LP token yvcrv3crypto (flash loan 27000 wBTC via Aave sur tricrypto Curve), butin attaquant ~1,2-1,3M$, perte protocole ~5,8M$ en bad debt",
+      "2023-03-13: exposition indirecte au hack Euler (~197M$), le DOLA Fed sur Balancer DOLA-bb-e-USD perd ~860K$ (sources secondaires)",
+      "2023-04-12: dépeg de DOLA à 0,7749$ (ATL, >20%), contagion post-crise USDC et post-Euler",
+      "2026-03-02: exploit du marché sDOLA/crvUSD sur Curve LlamaLend (240 567$, 27 emprunteurs liquidés) via manipulation atomique de sDOLA.convertToAssets() utilisé comme feed spot — défaut de l'oracle Curve, Inverse/sDOLA non affectés techniquement mais manipulabilité du taux démontrée"
+    ],
+    "controversies": [
+      "2026-07 (recherche): aucune poursuite judiciaire ni enquête réglementaire (SEC ou autre) trouvée contre Inverse Finance ou INV ; controverse réputationnelle persistante liée aux deux exploits 2022 (cas d'école de risque oracle dans les post-mortems CertiK/Halborn)",
+      "2023 (LlamaRisk): pouvoirs admin historiquement problématiques — GovGuardian (EOA unique) capable d'annuler toute proposition, mint du Fed sans timelock ; situation 2026 non revérifiée publiquement"
+    ],
+    "dependencies": {
+      "issuer": "Inverse Finance DAO (gouvernance INV/xINV, timelock ~48h)",
+      "custodians": [],
+      "underlyings": [
+        "DOLA (stablecoin CDP)",
+        "collatéraux FiRM (WETH, wstETH, WBTC, sUSDe, PT-sUSDe, sFRAX, DAI, CRV, CVX, INV...)"
+      ],
+      "keyCounterparties": [
+        "Emprunteurs FiRM (source du backing et du yield DBR)",
+        "Liquidateurs tiers FiRM",
+        "Multisigs internes (Fed Chair 2-of-6, Pause Guardian 1-of-3, données 2023)",
+        "Pools Curve DOLA/sUSDS et sDOLA/alUSD (seule liquidité secondaire)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 950748,
+      "dailyLiquidityUsd": 213000,
+      "ratioPct": 446,
+      "note": "Volume 24h combiné Curve DOLA/sUSDS (~40,7K$) + sDOLA/alUSD (~172,4K$), GeckoTerminal/CoinGecko juil. 2026 ; atténuant : unstake sDOLA->DOLA instantané et profondeur nominale du pool DOLA/sUSDS (~5,5M$) supérieure à la TVL Morpho, mais volumes réels très fins"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "sdola.md"
+  },
   "1-0xdbdc1ef57537e34680b898e1febd3d68c7389bcb": {
     "symbol": "siUSD",
     "grade": "D",
@@ -1942,6 +2248,59 @@
     },
     "analyzedAt": "2026-07-12",
     "vaultNote": "siusd.md"
+  },
+  "1-0x08efcc2f3e61185d0ea7f8830b3fec9bfa2ee313": {
+    "symbol": "sNUSD",
+    "grade": "D",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "D",
+      "issuer": "C",
+      "depegBacking": "D",
+      "counterparty": "D",
+      "recentSecurity": "C"
+    },
+    "redFlags": [
+      "Liquidité secondaire sNUSD quasi inexistante (~8,7K$ de volume 24h, Uniswap V4) pour 1,68M$ de TVL Morpho — ratio ≈19232%, sortie de stress impossible hors cooldown de 10 jours",
+      "Backing en positions delta-neutral OTC off-exchange (altcoins à décote hedgés, locked tokens) sans preuve de réserve on-chain temps réel, partiellement corrélé à Ethena (USDe/USDS)",
+      "Gouvernance opaque : aucun multisig ni timelock documenté publiquement pour un protocole gérant ~100-200M$",
+      "Incident DNS hijack du frontend les 18-19/03/2026 (moins de 6 mois), pertes utilisateurs éventuelles non divulguées",
+      "Protocole < 1 an d'existence publique, sans historique de stress long"
+    ],
+    "maxAllocation": "1-5% ou skip",
+    "summary": "sNUSD est le vault de staking de NUSD, dollar synthétique market-neutral de Neutrl (seed 5M$ en 2025, lancement public fin 2025), dont le yield provient d'un desk de trading delta-neutral : achats OTC d'altcoins à décote hedgés par shorts perp, basis trades et rendement stablecoin. Forces : 3 revues de sécurité reconnues (Cantina, Spearbit, Sherlock), monitoring Hypernative avec pauser automatique, peg tenu jusqu'ici malgré une contraction de supply de 24% en un mois. Faiblesses : backing en positions OTC invérifiables on-chain et corrélé à Ethena, redemption KYC uniquement, cooldown de 10 jours, gouvernance non documentée, liquidité secondaire sNUSD quasi nulle et incident DNS récent (mars 2026). Verdict lender : collatéral D — la liquidation d'un tel collatéral sur Morpho est irréaliste en situation de stress, allocation symbolique ou skip.",
+    "incidents": [
+      "2026-03-18: DNS hijack du frontend (fournisseur DNS compromis, redirection vers site malveillant) — smart contracts non touchés, pause préventive, révocation Permit2 demandée, pertes utilisateurs non divulguées"
+    ],
+    "controversies": [],
+    "dependencies": {
+      "issuer": "Neutrl (Behrin Naidoo)",
+      "custodians": [
+        "wallet custodial isolé pour le settlement OTC (contrepartie non divulguée)"
+      ],
+      "underlyings": [
+        "NUSD",
+        "USDC",
+        "USDT",
+        "USDe/USDS (Ethena)",
+        "positions delta-neutral OTC (altcoins à décote + shorts perp)"
+      ],
+      "keyCounterparties": [
+        "desk de trading Neutrl (exécution OTC)",
+        "Ethena (corrélation backing)",
+        "Hypernative (rôle pauser)",
+        "contreparties OTC anonymes",
+        "admin unique SingleAdminAccessControl + denylist"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 1679196,
+      "dailyLiquidityUsd": 8731,
+      "ratioPct": 19232,
+      "note": "Volume 24h sNUSD/USDC Uniswap V4 (source CoinGecko 2026-07-13) ; route indirecte via unstaking (cooldown 10j) puis pool Curve NUSD/USDC (~4,8M$ de liquidité, ~1,9M$ de volume 24h) — inutilisable pour une liquidation immédiate"
+    },
+    "analyzedAt": "2026-07-13",
+    "vaultNote": "snusd.md"
   },
   "8453-0x311935cd80b76769bf2ecc9d8ab7635b2139cf82": {
     "symbol": "SOL",
@@ -1994,6 +2353,59 @@
     },
     "analyzedAt": "2026-07-12",
     "vaultNote": "sol.md"
+  },
+  "1-0x7a56e1c57c7475ccf742a1832b028f0456652f97": {
+    "symbol": "SolvBTC",
+    "grade": "C",
+    "gradeModifier": "-",
+    "components": {
+      "assetDesign": "C",
+      "issuer": "B",
+      "depegBacking": "C",
+      "counterparty": "C",
+      "recentSecurity": "C"
+    },
+    "redFlags": [
+      "Accusations publiques et non résolues de manipulation de TVL/double comptage (janvier 2025, Nubit/Hans vs Solv Protocol), toujours non tranchées à ce jour",
+      "Exploit confirmé le 2026-03-03 (~2,7M$) sur le vault BRO via une faille de reentrancy/double-mint, dans les 6 derniers mois avant l'analyse",
+      "Custody historiquement concentrée sur un acteur unique (Ceffu), migration vers un consortium multisig FROST trop récente (janv.-mars 2026) pour être éprouvée",
+      "Liquidité secondaire DEX extrêmement faible (~10k$/24h) face à une market cap de ~406M$ et une TVL protocole de ~2,15Md$"
+    ],
+    "maxAllocation": "5-10%",
+    "summary": "SolvBTC est un token BTC backé 1:1 émis par Solv Protocol, dont les réserves sont redéployées dans des stratégies de rendement (staking L2, restaking Babylon, prêt DeFi) plutôt que simplement détenues, avec une preuve de réserve Chainlink en temps réel depuis septembre 2025. Le protocole est audité par plusieurs firmes (OpenZeppelin, Quantstamp, Salus, Paladin) et affiche une TVL multi-chaînes de ~2,15 Md$, mais deux signaux sérieux pèsent sur la note : des accusations documentées et non résolues de manipulation de TVL par double comptage (janvier 2025), et un exploit réel de 2,7M$ en mars 2026 sur un vault dérivé. La custody reste concentrée sur un acteur unique (Ceffu) en transition vers un modèle multisig trop récent pour être éprouvé. Verdict lender : collatéral audité mais avec des zones d'ombre sur la fiabilité du backing affiché et un historique de sécurité récent imparfait — allocation prudente recommandée.",
+    "incidents": [
+      "2026-03-03: exploit du vault BRO (BitcoinReserveOffering), ~2,7M$ (38,0474 SolvBTC) via une faille de double-minting/reentrancy sur un dépôt NFT ERC-3525, répétée 22 fois par l'attaquant ; moins de 10 comptes affectés, Solv s'engage à indemniser intégralement et propose une prime white-hat de 10%, confirmation finale de récupération des fonds non trouvée"
+    ],
+    "controversies": [
+      "2025-01-03: Hanzhi Liu (co-fondateur Nubit) accuse publiquement Solv Protocol de manipuler son TVL par double comptage du même BTC sur plusieurs protocoles via des transactions pré-signées ; Solv dément fermement et évoque une campagne de dénigrement liée au lancement du token SOLV ; aucune résolution formelle trouvée à ce jour",
+      "2025-01: épisode connexe où une utilisatrice affirme avoir staké 1 800 BTC pour un rendement jugé décevant, Solv répond qu'elle avait choisi le produit au rendement le plus bas ; Nubit compare la transparence de Solv à FTX dans ce contexte — polémique de communication",
+      "Aucune procédure SEC ou contentieux réglementaire trouvé visant Solv Protocol"
+    ],
+    "dependencies": {
+      "issuer": "Solv Protocol / Solv Foundation (fondé 2020)",
+      "custodians": [
+        "Ceffu (MPC/Co-Sign Wallet)",
+        "réseau FROST (multisig institutionnel en cours de déploiement depuis 2026-01/03, composition détaillée non publiée)"
+      ],
+      "underlyings": [
+        "BTC natif (>60% des réserves)",
+        "WBTC",
+        "BTCB",
+        "cbBTC (réserves tiered)"
+      ],
+      "keyCounterparties": [
+        "Chainlink (Proof-of-Reserve depuis 2025-09)",
+        "protocoles de redéploiement du BTC (staking L2, restaking Babylon, prêt DeFi, LP — non détaillés publiquement)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 2194236,
+      "dailyLiquidityUsd": 10264,
+      "ratioPct": 21377,
+      "note": "Volume 24h DEX agrégé (CoinGecko, 2026-07-13) ≈10 264$ contre TVL Morpho 2,19M$ — ratio très au-dessus du seuil red flag (30%) ; sortie réelle probable via redemption 1:1 protocolaire (TVL globale ~2,15Md$, 19 456 BTC en réserve selon DefiLlama), à nuancer par la controverse de transparence TVL de janvier 2025"
+    },
+    "analyzedAt": "2026-07-13",
+    "vaultNote": "solvbtc.md"
   },
   "1-0xcd9f5907f92818bc06c9ad70217f089e190d2a32": {
     "symbol": "srRoyUSDC",
@@ -2273,6 +2685,133 @@
     "analyzedAt": "2026-07-12",
     "vaultNote": "stcusd.md"
   },
+  "1-0xbeef0c075da5d01112ae5cf34d257074fb5ddb2f": {
+    "symbol": "steakEURCV",
+    "grade": "C",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "C",
+      "issuer": "A",
+      "depegBacking": "A",
+      "counterparty": "C",
+      "recentSecurity": "C"
+    },
+    "redFlags": [],
+    "maxAllocation": "5-15%",
+    "summary": "steakEURCV est le token de part du vault 'Prime Instant' de Steakhouse Financial dénommé en EURCV (SG-Forge/Société Générale), prêtant l'EURCV déposé contre des marchés Morpho Blue blue-chip (WBTC, cbBTC, wstETH) et un marché RWA (EUTBL). Forces : EURCV est un e-money token régulé MiCA/ACPR avec réserves 100% cash/HQLA auditées mensuellement par PwC, Steakhouse est le plus gros curateur Morpho sans bad debt historique, infrastructure Morpho Blue/Vaults V2 lourdement auditée et formellement vérifiée, buffer idle du vault très élevé (~88%). Faiblesses : entité curatrice (Carniceria Tropical Inc.) incorporée offshore au Panama, incident de sécurité DNS récent (mars 2026, sans perte), controverse liée au rôle de risk manager de Steakhouse chez Resolv (exploit USR quelques jours après son rapport de risque), vault EURCV encore jeune sur Morpho (< 1 an), absence de liquidité secondaire DEX pour le token de part lui-même. Verdict lender : collatéral de qualité correcte porté par un émetteur sous-jacent tier-1 régulé, mais la récursivité vault-sur-Morpho et l'opacité de l'entité curatrice justifient une allocation modérée.",
+    "incidents": [
+      "2026-03-30: détournement DNS (domain hijacking) du site web Steakhouse Financial via ingénierie sociale sur OVH Cloud, site de phishing actif ~4h ; aucun vault, contrat ou fonds déposé affecté, DNS rétabli"
+    ],
+    "controversies": [
+      "2026-03-22: Steakhouse Financial était risk manager/consultant de Resolv lorsque son stablecoin USR a subi un exploit de 23-25M$ (clé privée unique compromise, absence de plafond de mint) ; Steakhouse avait publié un rapport de risque évoquant ce scénario quelques jours avant, sans être responsable technique du bug"
+    ],
+    "dependencies": {
+      "issuer": "SG-Forge (Société Générale) pour EURCV ; Steakhouse Financial (Carniceria Tropical Inc., Panama) pour le vault",
+      "custodians": [],
+      "underlyings": [
+        "EURCV (e-money token régulé ACPR/MiCA, réserves cash/HQLA ségréguées)"
+      ],
+      "keyCounterparties": [
+        "SG-Forge (émetteur unique EURCV)",
+        "Carniceria Tropical Inc. (curateur, entité offshore Panama)",
+        "Morpho Blue (infrastructure de prêt sous-jacente)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 1561195,
+      "dailyLiquidityUsd": 13105716,
+      "ratioPct": 11.9,
+      "note": "Ratio TVL Morpho / volume 24h EURCV (CoinGecko, CEX+DEX) ≈ 11.9% — zone de vigilance ; atténué par le buffer idle du vault steakEURCV (~88% de ~45.5M$ TVL vault totale) qui couvre largement le montant utilisé comme collatéral sur Morpho."
+    },
+    "analyzedAt": "2026-07-13",
+    "vaultNote": "steakeurcv.md"
+  },
+  "1-0xbeef088055857739c12cd3765f20b7679def0f51": {
+    "symbol": "steakUSDC",
+    "grade": "C",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "C",
+      "issuer": "A",
+      "depegBacking": "B",
+      "counterparty": "C",
+      "recentSecurity": "C"
+    },
+    "redFlags": [],
+    "maxAllocation": "5-15%",
+    "summary": "steakUSDC (Ethereum) est un Vault V2 'Prime Instant' de Steakhouse Financial qui déploie l'USDC déposé dans le vault V1 'Steakhouse USDC' via un adaptateur MetaMorpho, lequel prête contre des marchés Morpho Blue blue-chip (cbBTC, WBTC, wstETH) ; sur Base, le vault alloue directement. Forces : Steakhouse est le plus gros curateur Morpho sans bad debt historique, infrastructure Morpho Blue/Vaults V2 lourdement auditée et formellement vérifiée (bug bounty Immunefi actif), USDC émis par Circle (régulé, coté NYSE, backing cash/T-bills via BlackRock). Faiblesses : double couche de vault (V2 sur V1) ajoutant une dépendance structurelle, entité curatrice (Carniceria Tropical Inc.) offshore au Panama, incident de sécurité DNS récent (mars 2026, sans perte), dépeg historique avéré de l'USDC à 0,87$ en mars 2023 (SVB, résolu en quelques jours), absence de liquidité secondaire DEX pour le token de part. Verdict lender : collatéral solide sur le plan de l'émetteur sous-jacent et du curateur, mais la double récursivité de vault et l'opacité de l'entité curatrice justifient une allocation modérée.",
+    "incidents": [
+      "2023-03-11: USDC dépeg à 0,8726$ suite à l'annonce de 3,3Md$ d'exposition de Circle à Silicon Valley Bank (faillite bancaire) ; peg regagné en quelques jours (~0,99$ le 13 mars)",
+      "2026-03-30: détournement DNS (domain hijacking) du site web Steakhouse Financial via ingénierie sociale sur OVH Cloud, site de phishing actif ~4h ; aucun vault, contrat ou fonds déposé affecté"
+    ],
+    "controversies": [
+      "2026-03-22: Steakhouse Financial était risk manager/consultant de Resolv lorsque son stablecoin USR a subi un exploit de 23-25M$ (clé privée unique compromise, absence de plafond de mint) ; Steakhouse avait publié un rapport de risque évoquant ce scénario quelques jours avant, sans être responsable technique du bug"
+    ],
+    "dependencies": {
+      "issuer": "Circle pour USDC ; Steakhouse Financial (Carniceria Tropical Inc., Panama) pour le vault",
+      "custodians": [],
+      "underlyings": [
+        "USDC (Circle, réserves cash/T-bills courts via Circle Reserve Fund géré par BlackRock)"
+      ],
+      "keyCounterparties": [
+        "Circle (émetteur unique USDC)",
+        "Carniceria Tropical Inc. (curateur, entité offshore Panama)",
+        "Vault V1 'Steakhouse USDC' (dépendance structurelle via adaptateur MetaMorpho, Ethereum uniquement)",
+        "Morpho Blue (infrastructure de prêt sous-jacente)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 1068593,
+      "dailyLiquidityUsd": 11406119424,
+      "ratioPct": 0.009,
+      "note": "Ratio TVL Morpho / volume 24h USDC (CoinGecko) ≈ 0.009% — largement OK. La contrainte pratique n'est pas la liquidité de l'USDC lui-même mais la vitesse de rachat du vault steakUSDC (buffer idle V2 + disponibilité du V1 sous-jacent), non quantifiée précisément dans les sources consultées."
+    },
+    "analyzedAt": "2026-07-13",
+    "vaultNote": "steakusdc.md"
+  },
+  "8453-0xbeefe94c8ad530842bfe7d8b397938ffc1cb83b2": {
+    "symbol": "steakUSDC",
+    "grade": "C",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "C",
+      "issuer": "A",
+      "depegBacking": "B",
+      "counterparty": "C",
+      "recentSecurity": "C"
+    },
+    "redFlags": [],
+    "maxAllocation": "5-15%",
+    "summary": "steakUSDC (Ethereum) est un Vault V2 'Prime Instant' de Steakhouse Financial qui déploie l'USDC déposé dans le vault V1 'Steakhouse USDC' via un adaptateur MetaMorpho, lequel prête contre des marchés Morpho Blue blue-chip (cbBTC, WBTC, wstETH) ; sur Base, le vault alloue directement. Forces : Steakhouse est le plus gros curateur Morpho sans bad debt historique, infrastructure Morpho Blue/Vaults V2 lourdement auditée et formellement vérifiée (bug bounty Immunefi actif), USDC émis par Circle (régulé, coté NYSE, backing cash/T-bills via BlackRock). Faiblesses : double couche de vault (V2 sur V1) ajoutant une dépendance structurelle, entité curatrice (Carniceria Tropical Inc.) offshore au Panama, incident de sécurité DNS récent (mars 2026, sans perte), dépeg historique avéré de l'USDC à 0,87$ en mars 2023 (SVB, résolu en quelques jours), absence de liquidité secondaire DEX pour le token de part. Verdict lender : collatéral solide sur le plan de l'émetteur sous-jacent et du curateur, mais la double récursivité de vault et l'opacité de l'entité curatrice justifient une allocation modérée.",
+    "incidents": [
+      "2023-03-11: USDC dépeg à 0,8726$ suite à l'annonce de 3,3Md$ d'exposition de Circle à Silicon Valley Bank (faillite bancaire) ; peg regagné en quelques jours (~0,99$ le 13 mars)",
+      "2026-03-30: détournement DNS (domain hijacking) du site web Steakhouse Financial via ingénierie sociale sur OVH Cloud, site de phishing actif ~4h ; aucun vault, contrat ou fonds déposé affecté"
+    ],
+    "controversies": [
+      "2026-03-22: Steakhouse Financial était risk manager/consultant de Resolv lorsque son stablecoin USR a subi un exploit de 23-25M$ (clé privée unique compromise, absence de plafond de mint) ; Steakhouse avait publié un rapport de risque évoquant ce scénario quelques jours avant, sans être responsable technique du bug"
+    ],
+    "dependencies": {
+      "issuer": "Circle pour USDC ; Steakhouse Financial (Carniceria Tropical Inc., Panama) pour le vault",
+      "custodians": [],
+      "underlyings": [
+        "USDC (Circle, réserves cash/T-bills courts via Circle Reserve Fund géré par BlackRock)"
+      ],
+      "keyCounterparties": [
+        "Circle (émetteur unique USDC)",
+        "Carniceria Tropical Inc. (curateur, entité offshore Panama)",
+        "Vault V1 'Steakhouse USDC' (dépendance structurelle via adaptateur MetaMorpho, Ethereum uniquement)",
+        "Morpho Blue (infrastructure de prêt sous-jacente)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 1068593,
+      "dailyLiquidityUsd": 11406119424,
+      "ratioPct": 0.009,
+      "note": "Ratio TVL Morpho / volume 24h USDC (CoinGecko) ≈ 0.009% — largement OK. La contrainte pratique n'est pas la liquidité de l'USDC lui-même mais la vitesse de rachat du vault steakUSDC (buffer idle V2 + disponibilité du V1 sous-jacent), non quantifiée précisément dans les sources consultées."
+    },
+    "analyzedAt": "2026-07-13",
+    "vaultNote": "steakusdc.md"
+  },
   "1-0x99cd4ec3f88a45940936f469e4bb72a2a701eeb9": {
     "symbol": "stUSDS",
     "grade": "D",
@@ -2324,6 +2863,52 @@
     },
     "analyzedAt": "2026-07-12",
     "vaultNote": "stusds.md"
+  },
+  "1-0x0b2b2b2076d95dda7817e785989fe353fe955ef9": {
+    "symbol": "sUSDai",
+    "grade": "D",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "D",
+      "issuer": "C",
+      "depegBacking": "D",
+      "counterparty": "C",
+      "recentSecurity": "B"
+    },
+    "redFlags": [],
+    "maxAllocation": "1-5% ou skip",
+    "summary": "sUSDai est la version stakée de USDai (USD.AI, Permian Labs), un dollar synthétique dont le rendement provient de prêts garantis par du hardware GPU NVIDIA (~moitié des réserves) et de T-bills. Forces : équipe doxxée, VC réputés (Framework, Dragonfly, Coinbase Ventures), 7 audits + bug bounty Cantina, TVL ~658M$, aucun incident en 11 mois. Faiblesses rédhibitoires pour un lender : backing pour moitié en crédit privé off-chain valorisé par des experts tiers sans attestation indépendante ni preuve on-chain, unstake sUSDai en batch FIFO de 30 jours (paramètres modifiables par la gouvernance CHIP), liquidité DEX quasi nulle sur Ethereum (pools uniquement sur Arbitrum), protocole < 1 an jamais testé en stress. Verdict lender : collatéral expérimental — en cas de défauts sur les prêts GPU, aucune sortie rapide possible, bad debt quasi assurée en scénario de stress ; allocation minimale ou skip.",
+    "incidents": [],
+    "controversies": [
+      "2025-2026: aucun hack, dépeg, procès ou controverse publique documenté au 2026-07-13 — mais absence de signal reflétant surtout la jeunesse du protocole (11 mois) et sa faible couverture critique",
+      "2025-11: mise en garde structurelle d'analystes tiers (Stablewatch) : dépréciation GPU 15-20%/an, valorisation par experts non vérifiable on-chain, corrélation défauts emprunteurs / valeur de revente des GPU en cas de ralentissement du capex IA — risque reconnu, jamais testé"
+    ],
+    "dependencies": {
+      "issuer": "Permian Labs Inc. (USD.AI) — équipe doxxée : David Choi, Conor Moore, Ivan Sergeev",
+      "custodians": [
+        "Data centers assurés hébergeant les GPU financés (contreparties physiques off-chain)",
+        "Paxos (PYUSD pour la portion stable)"
+      ],
+      "underlyings": [
+        "PYUSD, T-bills courts et équivalents cash (portion idle)",
+        "Prêts collatéralisés par hardware GPU NVIDIA tokenisé en NFT (~moitié des réserves fin 2025)"
+      ],
+      "keyCounterparties": [
+        "Curators (origination/gestion des prêts GPU, first-loss capital)",
+        "Emprunteurs GPU (sociétés IA/compute)",
+        "Experts tiers de valorisation du hardware (pas d'oracle on-chain)",
+        "LayerZero (OFT cross-chain)",
+        "Gouvernance CHIP (peut modifier les paramètres de redemption)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 699010,
+      "dailyLiquidityUsd": 1130000,
+      "ratioPct": 62,
+      "note": "Aucun pool DEX significatif trouvé sur Ethereum (chaîne du marché Morpho) — le volume 24h retenu (~1,13M$, pool Fluid sUSDai/USDC) est sur Arbitrum et suppose un bridge LayerZero préalable ; pool Curve Arbitrum ~3,76M$ de liquidité. Ratio 62% > seuil red flag 30% ; sur Ethereum seul, sortie quasi impossible. Marché primaire : redeem USDai instantané mais unstake sUSDai en batch FIFO de 1 à 30 jours."
+    },
+    "analyzedAt": "2026-07-13",
+    "vaultNote": "susdai.md"
   },
   "1-0xd166337499e176bbc38a1fbd113ab144e5bd2df7": {
     "symbol": "sUSDat",
@@ -2547,6 +3132,58 @@
     "analyzedAt": "2026-07-12",
     "vaultNote": "susds.md"
   },
+  "1-0xe24a3dc889621612422a64e6388927901608b91d": {
+    "symbol": "sUSN",
+    "grade": "D",
+    "gradeModifier": "-",
+    "components": {
+      "assetDesign": "D",
+      "issuer": "D",
+      "depegBacking": "D",
+      "counterparty": "D",
+      "recentSecurity": "B"
+    },
+    "redFlags": [
+      "Timelock d'upgrade (2 jours) dont l'owner est une seule EOA (0x1738...D699, Ownable2Step, pas de multisig) — équivalent au red flag absolu 'multisig 1/2' : une clé compromise = contrats upgradés après 48h",
+      "Liquidité primaire absente pour les non-whitelistés : mint/redeem 1:1 réservé aux contreparties KYC/AML — les liquidateurs Morpho dépendent entièrement de DEX très fins",
+      "Liquidité de sortie ~141K$/24h cumulée pour 1,77M$ de TVL Morpho (ratio ≈1252%, seuil red flag 30%)",
+      "Backing partiellement en crédit privé (Fasanara, liquidation T+3 mois) et CLOs (JAAA), sans répartition publiée ni preuve de réserve on-chain",
+      "Pas de bug bounty actif malgré 6 audits"
+    ],
+    "maxAllocation": "1-5% ou skip",
+    "summary": "sUSN est le vault de staking d'USN, stablecoin à rendement de Noon Capital (fondé 2024, self-funded, ~30M$ de TVL) — à ne pas confondre avec le USN défunt de NEAR Protocol, identité vérifiée via l'adresse du contrat. Forces : 6 audits (Quantstamp, Halborn, Hashlock), aucun hack ni controverse depuis la création, peg globalement tenu. Faiblesses : mint/redeem réservé aux whitelistés KYC, backing mêlant crédit privé (T+3 mois) et CLOs sans répartition publiée, liquidité DEX quasi inexistante, et surtout un timelock d'upgrade contrôlé par une seule EOA — équivalent d'un multisig 1/2. Verdict lender : collatéral D, à éviter ou limiter à une allocation symbolique tant que la gouvernance n'est pas sécurisée et la liquidité de sortie inexistante.",
+    "incidents": [
+      "2025-02-03: excursion de peg à 0,9881$ (-1,2%) une semaine après le lancement de la Public Beta, résorbée rapidement"
+    ],
+    "controversies": [],
+    "dependencies": {
+      "issuer": "Noon Capital (Arpan Gautam)",
+      "custodians": [],
+      "underlyings": [
+        "USN",
+        "USDT/USDC",
+        "T-Bills",
+        "CLOs JAAA (Janus Henderson)",
+        "crédit privé Fasanara",
+        "positions funding-rate delta-neutral",
+        "PT Pendle/Spectra"
+      ],
+      "keyCounterparties": [
+        "Fasanara (Fintech Tactical Credit Fund)",
+        "Janus Henderson (JAAA)",
+        "EOA unique admin du timelock d'upgrade",
+        "rôles Minter/Redeemer/Blacklist/Rebase"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 1770843,
+      "dailyLiquidityUsd": 141423,
+      "ratioPct": 1252,
+      "note": "Volume 24h cumulé USN/USDC Ekubo (~99K$) + USN/USDT Uniswap V3 (~23K$) + USN/sUSN Uniswap V3 (~19K$, mesuré à 2$ à un autre moment) — source CoinGecko 2026-07-13 ; aucun pool Curve/Balancer, rachat 1:1 réservé aux whitelistés KYC"
+    },
+    "analyzedAt": "2026-07-13",
+    "vaultNote": "susn.md"
+  },
   "1-0x80ac24aa929eaf5013f6436cda2a7ba190f5cc0b": {
     "symbol": "syrupUSDC",
     "grade": "C",
@@ -2690,6 +3327,104 @@
     },
     "analyzedAt": "2026-07-12",
     "vaultNote": "syzusd.md"
+  },
+  "1-0x18084fba666a33d37592fa2633fd49a74dd93a88": {
+    "symbol": "tBTC",
+    "grade": "B",
+    "gradeModifier": "-",
+    "components": {
+      "assetDesign": "B",
+      "issuer": "B",
+      "depegBacking": "B",
+      "counterparty": "B",
+      "recentSecurity": "B"
+    },
+    "redFlags": [],
+    "maxAllocation": "15-25%",
+    "summary": "tBTC est un wrapped BTC émis par le Threshold Network (fusion Keep+NuCypher 2022), backé 1:1 par du BTC natif gardé par des wallets threshold ECDSA 51-of-100 sans custodian unique — le seul wrapped BTC majeur avec mint/redeem permissionless sans KYC (mint ~3-4h, redeem 3-5h). Trois audits (Least Authority, ChainSecurity, CertiK), bug bounty Immunefi 500K$, zéro perte de fonds en ~5-6 ans malgré plusieurs incidents résolus (kill switch v1 2021, double bug redemption 2023, vuln L2 via bounty). Faiblesses : set de signeurs encore permissionné et concentré (top 18 nœuds = 51,1% du stake), gouvernance concentrée (multisig Council 6-of-9, top 6 délégués > 50% des votes), liquidité DEX faible et en baisse. Verdict lender : collatéral BTC solide de tier intermédiaire, plus décentralisé que WBTC/cbBTC en structure, sortie assurée par la redemption primaire rapide plutôt que par les DEX.",
+    "incidents": [
+      "2021-05-18: tBTC v1 — kill switch activé ~48h après le lancement (faille de conception sur les redemptions), pas de perte de fonds, refonte vers v2",
+      "2023-08: vulnérabilité du schéma de signature GG18 remédiée avant divulgation publique, pas de perte",
+      "2023-09/10: 'A Tale of Two Bugs' — bug DoS bloquant les redemptions (dont ~76 BTC d'une adresse liée à FTX) + approver de redemption unique incapable d'approuver (compliance) ; aucune perte de fonds, patch + migration vers redemptions optimistes",
+      "2023-10: vulnérabilité L2WormholeGateway (mint indéfini de tBTC L2) trouvée via bug bounty et corrigée, aucune perte réelle"
+    ],
+    "controversies": [
+      "Nuance décentralisation : le Beta Staker set est permissionné (322 nœuds, top 18 = 51,1% du stake) et les 6 plus gros délégués contrôlent > 50% du pouvoir de vote — la décentralisation réelle est inférieure au narratif marketing (LlamaRisk)",
+      "Aucun procès, scandale légal ou de gouvernance documenté visant Threshold Network au 2026-07-13"
+    ],
+    "dependencies": {
+      "issuer": "Threshold Network DAO (fusion Keep Network + NuCypher, 2022)",
+      "custodians": [
+        "Aucun custodian unique — wallets Bitcoin tECDSA contrôlés par groupes de 100 nœuds signeurs (seuil 51-of-100), Beta Staker set permissionné (322 nœuds, top 18 = 51,1% du stake)"
+      ],
+      "underlyings": [
+        "BTC natif détenu sur la chaîne Bitcoin"
+      ],
+      "keyCounterparties": [
+        "Opérateurs de nœuds stakers du token T (majorité honnête requise)",
+        "Guardians (veto 1h sur l'optimistic minting)",
+        "Council Threshold (multisig Gnosis Safe 6-of-9 pendant le rollout)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 894560,
+      "dailyLiquidityUsd": 1718000,
+      "ratioPct": 52,
+      "note": "Volume 24h ~1,72M$ (CoinGecko 2026-07-13), ratio 52% > seuil red flag 30% sur le volume brut. Nuance : profondeur des pools Curve (~15M$ sur WBTC/tBTC + tBTC/cbBTC) très supérieure au TVL Morpho, et redemption primaire permissionless 1:1 vers BTC natif en 3-5h (unique parmi les wrapped BTC majeurs). Volume DEX en baisse -67% QoQ au Q1 2026."
+    },
+    "analyzedAt": "2026-07-13",
+    "vaultNote": "tbtc.md"
+  },
+  "8453-0x93919784c523f39cacaa98ee0a9d96c3f32b593e": {
+    "symbol": "uniBTC",
+    "grade": "C",
+    "gradeModifier": "-",
+    "components": {
+      "assetDesign": "C",
+      "issuer": "C",
+      "depegBacking": "C",
+      "counterparty": "C",
+      "recentSecurity": "C"
+    },
+    "redFlags": [
+      "Hack confirmé de ~2M$ en septembre 2024 : faille réelle dans le contrat officiel uniBTC (bug de mint infini via dépôt ETH sans conversion de taux de change), pas un token contrefait",
+      "Confirmation publique de la clôture complète du remboursement aux utilisateurs finaux non trouvée (seul le remboursement de Fuzzland à Bedrock est confirmé)",
+      "Aucun dashboard de preuve de réserves (Proof-of-Reserve) public actualisé trouvé pour uniBTC malgré une annonce en ce sens après le hack",
+      "Gouvernance/structure multisig des contrats Bedrock non documentée publiquement (contrat upgradeable sans détail sur les droits admin)",
+      "Liquidité secondaire DEX très faible et fragmentée sur de nombreuses petites pools (~6 400$/24h pour ~187M$ de market cap)"
+    ],
+    "maxAllocation": "5-8%",
+    "summary": "uniBTC est un token de restaking liquide BTC émis par Bedrock, adossé au protocole Babylon, backé 1:1 par du BTC wrappé (WBTC, cbBTC, etc. selon la chaîne). Le fait central de ce dossier est le hack de septembre 2024 : une faille réelle dans la fonction mint() du contrat officiel a permis de dérober ~2M$ via un bug de conversion ETH→BTC, touchant 8 chaînes. Bedrock a réagi rapidement (pause, collaboration white hat), le protocole a été ré-audité (PeckShield, Blocksec) et l'auteur présumé (ex-employé de Fuzzland) a vu son ex-employeur rembourser intégralement Bedrock, mais la clôture complète du remboursement aux utilisateurs finaux n'est pas confirmée publiquement. Depuis, ~22 mois sans nouvel incident et une TVL protocole reconstruite (~458-535M$). Verdict lender : collatéral fonctionnel avec un historique de sécurité qui s'améliore, mais le précédent de hack réel sur le contrat + l'opacité sur la gouvernance et les réserves justifient une allocation prudente en bas de fourchette C.",
+    "incidents": [
+      "2024-09-27: hack de ~2M$ via une faille de mint infini (dépôt ETH mintant de l'uniBTC 1:1 sans conversion de taux de change), contrat vulnérable déployé sur 8 chaînes, exposition potentielle jusqu'à 75M$ ; Bedrock met en pause, collabore avec SEAL 911, attaque attribuée à un ex-employé de Fuzzland qui rembourse intégralement Bedrock",
+      "2024-10-01 et 2024-10-30: nouveaux audits post-hack (PeckShield puis Blocksec) sur le contrat uniBTC, en complément de l'audit Blocksec pré-hack de juin 2024"
+    ],
+    "controversies": [
+      "Aucune procédure judiciaire ou action SEC trouvée visant spécifiquement Bedrock ou uniBTC",
+      "Absence de confirmation publique de la clôture complète du remboursement aux utilisateurs finaux suite au hack de 2024 (point d'opacité, pas une controverse formelle)"
+    ],
+    "dependencies": {
+      "issuer": "Bedrock (protocole de restaking multi-actifs, lancé 2024-01-28)",
+      "custodians": [
+        "dépendent du wrapper BTC déposé selon la chaîne : BitGo/BiT Global (WBTC), Coinbase (cbBTC), autres émetteurs de wrappers (FBTC, mBTC, BTCB) non détaillés publiquement"
+      ],
+      "underlyings": [
+        "BTC wrappé (WBTC, cbBTC, FBTC, mBTC, BTCB selon la chaîne)",
+        "restaking via le protocole Babylon"
+      ],
+      "keyCounterparties": [
+        "Babylon (finality providers/validateurs, risque de slashing générique)",
+        "Fuzzland (ex-employeur de l'auteur présumé du hack de 2024, a remboursé Bedrock)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 478190,
+      "dailyLiquidityUsd": 6387,
+      "ratioPct": 7486,
+      "note": "Volume 24h global CoinGecko (2026-07-13) ≈6 387$ pour une market cap ≈187M$ — liquidité très fragmentée sur de nombreuses petites pools multi-chaînes ; volume spécifique à la pool Base (Aerodrome uniBTC/cbBTC) non déterminé malgré recherche. Sortie réelle = burn vers le wrapper BTC déposé puis redemption de ce wrapper (couche d'indirection supplémentaire vs LBTC)."
+    },
+    "analyzedAt": "2026-07-13",
+    "vaultNote": "unibtc.md"
   },
   "1-0x80e1048ede66ec4c364b4f22c8768fc657ff6a42": {
     "symbol": "upUSDC",

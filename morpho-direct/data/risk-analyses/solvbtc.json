@@ -1,0 +1,43 @@
+{
+  "symbol": "SolvBTC",
+  "name": "Solv BTC",
+  "addresses": { "1": "0x7A56E1C57C7475CCf742a1832B028F0456652F97" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Accusations publiques et non résolues de manipulation de TVL/double comptage (janvier 2025, Nubit/Hans vs Solv Protocol), toujours non tranchées à ce jour",
+    "Exploit confirmé le 2026-03-03 (~2,7M$) sur le vault BRO via une faille de reentrancy/double-mint, dans les 6 derniers mois avant l'analyse",
+    "Custody historiquement concentrée sur un acteur unique (Ceffu), migration vers un consortium multisig FROST trop récente (janv.-mars 2026) pour être éprouvée",
+    "Liquidité secondaire DEX extrêmement faible (~10k$/24h) face à une market cap de ~406M$ et une TVL protocole de ~2,15Md$"
+  ],
+  "maxAllocation": "5-10%",
+  "summary": "SolvBTC est un token BTC backé 1:1 émis par Solv Protocol, dont les réserves sont redéployées dans des stratégies de rendement (staking L2, restaking Babylon, prêt DeFi) plutôt que simplement détenues, avec une preuve de réserve Chainlink en temps réel depuis septembre 2025. Le protocole est audité par plusieurs firmes (OpenZeppelin, Quantstamp, Salus, Paladin) et affiche une TVL multi-chaînes de ~2,15 Md$, mais deux signaux sérieux pèsent sur la note : des accusations documentées et non résolues de manipulation de TVL par double comptage (janvier 2025), et un exploit réel de 2,7M$ en mars 2026 sur un vault dérivé. La custody reste concentrée sur un acteur unique (Ceffu) en transition vers un modèle multisig trop récent pour être éprouvé. Verdict lender : collatéral audité mais avec des zones d'ombre sur la fiabilité du backing affiché et un historique de sécurité récent imparfait — allocation prudente recommandée.",
+  "incidents": [
+    "2026-03-03: exploit du vault BRO (BitcoinReserveOffering), ~2,7M$ (38,0474 SolvBTC) via une faille de double-minting/reentrancy sur un dépôt NFT ERC-3525, répétée 22 fois par l'attaquant ; moins de 10 comptes affectés, Solv s'engage à indemniser intégralement et propose une prime white-hat de 10%, confirmation finale de récupération des fonds non trouvée"
+  ],
+  "controversies": [
+    "2025-01-03: Hanzhi Liu (co-fondateur Nubit) accuse publiquement Solv Protocol de manipuler son TVL par double comptage du même BTC sur plusieurs protocoles via des transactions pré-signées ; Solv dément fermement et évoque une campagne de dénigrement liée au lancement du token SOLV ; aucune résolution formelle trouvée à ce jour",
+    "2025-01: épisode connexe où une utilisatrice affirme avoir staké 1 800 BTC pour un rendement jugé décevant, Solv répond qu'elle avait choisi le produit au rendement le plus bas ; Nubit compare la transparence de Solv à FTX dans ce contexte — polémique de communication",
+    "Aucune procédure SEC ou contentieux réglementaire trouvé visant Solv Protocol"
+  ],
+  "dependencies": {
+    "issuer": "Solv Protocol / Solv Foundation (fondé 2020)",
+    "custodians": ["Ceffu (MPC/Co-Sign Wallet)", "réseau FROST (multisig institutionnel en cours de déploiement depuis 2026-01/03, composition détaillée non publiée)"],
+    "underlyings": ["BTC natif (>60% des réserves)", "WBTC", "BTCB", "cbBTC (réserves tiered)"],
+    "keyCounterparties": ["Chainlink (Proof-of-Reserve depuis 2025-09)", "protocoles de redéploiement du BTC (staking L2, restaking Babylon, prêt DeFi, LP — non détaillés publiquement)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 2194236,
+    "dailyLiquidityUsd": 10264,
+    "ratioPct": 21377,
+    "note": "Volume 24h DEX agrégé (CoinGecko, 2026-07-13) ≈10 264$ contre TVL Morpho 2,19M$ — ratio très au-dessus du seuil red flag (30%) ; sortie réelle probable via redemption 1:1 protocolaire (TVL globale ~2,15Md$, 19 456 BTC en réserve selon DefiLlama), à nuancer par la controverse de transparence TVL de janvier 2025"
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "solvbtc.md"
+}

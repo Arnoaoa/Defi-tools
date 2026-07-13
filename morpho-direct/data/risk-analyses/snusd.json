@@ -1,0 +1,42 @@
+{
+  "symbol": "sNUSD",
+  "name": "Staked NUSD",
+  "addresses": {
+    "1": "0x08EFCC2F3e61185D0EA7F8830B3FEc9Bfa2EE313"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Liquidité secondaire sNUSD quasi inexistante (~8,7K$ de volume 24h, Uniswap V4) pour 1,68M$ de TVL Morpho — ratio ≈19232%, sortie de stress impossible hors cooldown de 10 jours",
+    "Backing en positions delta-neutral OTC off-exchange (altcoins à décote hedgés, locked tokens) sans preuve de réserve on-chain temps réel, partiellement corrélé à Ethena (USDe/USDS)",
+    "Gouvernance opaque : aucun multisig ni timelock documenté publiquement pour un protocole gérant ~100-200M$",
+    "Incident DNS hijack du frontend les 18-19/03/2026 (moins de 6 mois), pertes utilisateurs éventuelles non divulguées",
+    "Protocole < 1 an d'existence publique, sans historique de stress long"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "sNUSD est le vault de staking de NUSD, dollar synthétique market-neutral de Neutrl (seed 5M$ en 2025, lancement public fin 2025), dont le yield provient d'un desk de trading delta-neutral : achats OTC d'altcoins à décote hedgés par shorts perp, basis trades et rendement stablecoin. Forces : 3 revues de sécurité reconnues (Cantina, Spearbit, Sherlock), monitoring Hypernative avec pauser automatique, peg tenu jusqu'ici malgré une contraction de supply de 24% en un mois. Faiblesses : backing en positions OTC invérifiables on-chain et corrélé à Ethena, redemption KYC uniquement, cooldown de 10 jours, gouvernance non documentée, liquidité secondaire sNUSD quasi nulle et incident DNS récent (mars 2026). Verdict lender : collatéral D — la liquidation d'un tel collatéral sur Morpho est irréaliste en situation de stress, allocation symbolique ou skip.",
+  "incidents": [
+    "2026-03-18: DNS hijack du frontend (fournisseur DNS compromis, redirection vers site malveillant) — smart contracts non touchés, pause préventive, révocation Permit2 demandée, pertes utilisateurs non divulguées"
+  ],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Neutrl (Behrin Naidoo)",
+    "custodians": ["wallet custodial isolé pour le settlement OTC (contrepartie non divulguée)"],
+    "underlyings": ["NUSD", "USDC", "USDT", "USDe/USDS (Ethena)", "positions delta-neutral OTC (altcoins à décote + shorts perp)"],
+    "keyCounterparties": ["desk de trading Neutrl (exécution OTC)", "Ethena (corrélation backing)", "Hypernative (rôle pauser)", "contreparties OTC anonymes", "admin unique SingleAdminAccessControl + denylist"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 1679196,
+    "dailyLiquidityUsd": 8731,
+    "ratioPct": 19232,
+    "note": "Volume 24h sNUSD/USDC Uniswap V4 (source CoinGecko 2026-07-13) ; route indirecte via unstaking (cooldown 10j) puis pool Curve NUSD/USDC (~4,8M$ de liquidité, ~1,9M$ de volume 24h) — inutilisable pour une liquidation immédiate"
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "snusd.md"
+}

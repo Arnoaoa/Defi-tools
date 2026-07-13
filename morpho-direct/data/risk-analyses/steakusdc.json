@@ -1,0 +1,40 @@
+{
+  "symbol": "steakUSDC",
+  "name": "Steakhouse Prime USDC",
+  "addresses": {
+    "1": "0xbeef088055857739C12CD3765F20b7679Def0f51",
+    "8453": "0xBEEFE94c8aD530842bfE7d8B397938fFc1cb83b2"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "A",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "steakUSDC (Ethereum) est un Vault V2 'Prime Instant' de Steakhouse Financial qui déploie l'USDC déposé dans le vault V1 'Steakhouse USDC' via un adaptateur MetaMorpho, lequel prête contre des marchés Morpho Blue blue-chip (cbBTC, WBTC, wstETH) ; sur Base, le vault alloue directement. Forces : Steakhouse est le plus gros curateur Morpho sans bad debt historique, infrastructure Morpho Blue/Vaults V2 lourdement auditée et formellement vérifiée (bug bounty Immunefi actif), USDC émis par Circle (régulé, coté NYSE, backing cash/T-bills via BlackRock). Faiblesses : double couche de vault (V2 sur V1) ajoutant une dépendance structurelle, entité curatrice (Carniceria Tropical Inc.) offshore au Panama, incident de sécurité DNS récent (mars 2026, sans perte), dépeg historique avéré de l'USDC à 0,87$ en mars 2023 (SVB, résolu en quelques jours), absence de liquidité secondaire DEX pour le token de part. Verdict lender : collatéral solide sur le plan de l'émetteur sous-jacent et du curateur, mais la double récursivité de vault et l'opacité de l'entité curatrice justifient une allocation modérée.",
+  "incidents": [
+    "2023-03-11: USDC dépeg à 0,8726$ suite à l'annonce de 3,3Md$ d'exposition de Circle à Silicon Valley Bank (faillite bancaire) ; peg regagné en quelques jours (~0,99$ le 13 mars)",
+    "2026-03-30: détournement DNS (domain hijacking) du site web Steakhouse Financial via ingénierie sociale sur OVH Cloud, site de phishing actif ~4h ; aucun vault, contrat ou fonds déposé affecté"
+  ],
+  "controversies": [
+    "2026-03-22: Steakhouse Financial était risk manager/consultant de Resolv lorsque son stablecoin USR a subi un exploit de 23-25M$ (clé privée unique compromise, absence de plafond de mint) ; Steakhouse avait publié un rapport de risque évoquant ce scénario quelques jours avant, sans être responsable technique du bug"
+  ],
+  "dependencies": {
+    "issuer": "Circle pour USDC ; Steakhouse Financial (Carniceria Tropical Inc., Panama) pour le vault",
+    "custodians": [],
+    "underlyings": ["USDC (Circle, réserves cash/T-bills courts via Circle Reserve Fund géré par BlackRock)"],
+    "keyCounterparties": ["Circle (émetteur unique USDC)", "Carniceria Tropical Inc. (curateur, entité offshore Panama)", "Vault V1 'Steakhouse USDC' (dépendance structurelle via adaptateur MetaMorpho, Ethereum uniquement)", "Morpho Blue (infrastructure de prêt sous-jacente)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 1068593,
+    "dailyLiquidityUsd": 11406119424,
+    "ratioPct": 0.009,
+    "note": "Ratio TVL Morpho / volume 24h USDC (CoinGecko) ≈ 0.009% — largement OK. La contrainte pratique n'est pas la liquidité de l'USDC lui-même mais la vitesse de rachat du vault steakUSDC (buffer idle V2 + disponibilité du V1 sous-jacent), non quantifiée précisément dans les sources consultées."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "steakusdc.md"
+}

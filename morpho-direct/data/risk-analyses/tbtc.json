@@ -1,0 +1,42 @@
+{
+  "symbol": "tBTC",
+  "name": "tBTC (Threshold Network)",
+  "addresses": {
+    "1": "0x18084fbA666a33d37592fA2633fD49a74DD93a88"
+  },
+  "grade": "B",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "15-25%",
+  "summary": "tBTC est un wrapped BTC émis par le Threshold Network (fusion Keep+NuCypher 2022), backé 1:1 par du BTC natif gardé par des wallets threshold ECDSA 51-of-100 sans custodian unique — le seul wrapped BTC majeur avec mint/redeem permissionless sans KYC (mint ~3-4h, redeem 3-5h). Trois audits (Least Authority, ChainSecurity, CertiK), bug bounty Immunefi 500K$, zéro perte de fonds en ~5-6 ans malgré plusieurs incidents résolus (kill switch v1 2021, double bug redemption 2023, vuln L2 via bounty). Faiblesses : set de signeurs encore permissionné et concentré (top 18 nœuds = 51,1% du stake), gouvernance concentrée (multisig Council 6-of-9, top 6 délégués > 50% des votes), liquidité DEX faible et en baisse. Verdict lender : collatéral BTC solide de tier intermédiaire, plus décentralisé que WBTC/cbBTC en structure, sortie assurée par la redemption primaire rapide plutôt que par les DEX.",
+  "incidents": [
+    "2021-05-18: tBTC v1 — kill switch activé ~48h après le lancement (faille de conception sur les redemptions), pas de perte de fonds, refonte vers v2",
+    "2023-08: vulnérabilité du schéma de signature GG18 remédiée avant divulgation publique, pas de perte",
+    "2023-09/10: 'A Tale of Two Bugs' — bug DoS bloquant les redemptions (dont ~76 BTC d'une adresse liée à FTX) + approver de redemption unique incapable d'approuver (compliance) ; aucune perte de fonds, patch + migration vers redemptions optimistes",
+    "2023-10: vulnérabilité L2WormholeGateway (mint indéfini de tBTC L2) trouvée via bug bounty et corrigée, aucune perte réelle"
+  ],
+  "controversies": [
+    "Nuance décentralisation : le Beta Staker set est permissionné (322 nœuds, top 18 = 51,1% du stake) et les 6 plus gros délégués contrôlent > 50% du pouvoir de vote — la décentralisation réelle est inférieure au narratif marketing (LlamaRisk)",
+    "Aucun procès, scandale légal ou de gouvernance documenté visant Threshold Network au 2026-07-13"
+  ],
+  "dependencies": {
+    "issuer": "Threshold Network DAO (fusion Keep Network + NuCypher, 2022)",
+    "custodians": ["Aucun custodian unique — wallets Bitcoin tECDSA contrôlés par groupes de 100 nœuds signeurs (seuil 51-of-100), Beta Staker set permissionné (322 nœuds, top 18 = 51,1% du stake)"],
+    "underlyings": ["BTC natif détenu sur la chaîne Bitcoin"],
+    "keyCounterparties": ["Opérateurs de nœuds stakers du token T (majorité honnête requise)", "Guardians (veto 1h sur l'optimistic minting)", "Council Threshold (multisig Gnosis Safe 6-of-9 pendant le rollout)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 894560,
+    "dailyLiquidityUsd": 1718000,
+    "ratioPct": 52,
+    "note": "Volume 24h ~1,72M$ (CoinGecko 2026-07-13), ratio 52% > seuil red flag 30% sur le volume brut. Nuance : profondeur des pools Curve (~15M$ sur WBTC/tBTC + tBTC/cbBTC) très supérieure au TVL Morpho, et redemption primaire permissionless 1:1 vers BTC natif en 3-5h (unique parmi les wrapped BTC majeurs). Volume DEX en baisse -67% QoQ au Q1 2026."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "tbtc.md"
+}

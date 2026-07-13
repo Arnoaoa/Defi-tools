@@ -1,0 +1,47 @@
+{
+  "symbol": "PT-sUSDat-27AUG2026",
+  "name": "PT Staked USDat 27AUG2026",
+  "addresses": {
+    "1": "0xc689f76F90FE1762faC55983Ff25ae71033A84F7"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "D",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Vulnérabilité critique SAT-001 divulguée le 14/04/2026, non corrigée à ce jour — peut geler les retraits jusqu'à 30 jours",
+    "Vulnérabilité haute SAT-002 non corrigée — le rôle unique PROCESSOR_ROLE peut théoriquement extraire jusqu'à ~33% de la valeur par cycle de conversion",
+    "Dépeg réel du sous-jacent STRC à -17% le 18/06/2026, encore ~12% sous pair au 07/07/2026",
+    "Liquidité de sortie du pool Pendle (~3,36M$) insuffisante face à la TVL Morpho de ce collatéral (ratio ≈47%, > seuil red flag 30%)",
+    "Backing entièrement off-chain (fonds BVI, custodian, administrateur), aucune vérification on-chain temps réel"
+  ],
+  "maxAllocation": "skip",
+  "summary": "PT-sUSDat-27AUG2026 est un Principal Token Pendle qui se rachète 1:1 contre sUSDat à maturité (27/08/2026, encore à venir) ; identité confirmée via l'API Pendle (adresse sous-jacente identique à sUSDat de Saturn Credit). Le mécanisme PT est sain mais hérite intégralement du risque déjà noté D sur sUSDat : deux vulnérabilités smart contract (critique + haute) divulguées en avril 2026 et toujours non corrigées, un dépeg réel du sous-jacent STRC (encore ~12% sous pair début juillet 2026), un backing entièrement off-chain (fonds BVI, custodian, administrateur), et une liquidité de sortie (pool Pendle + marché secondaire sUSDat) insuffisante face à la taille du collatéral sur Morpho. Verdict lender : collatéral à éviter (skip) tant que les vulnérabilités ne sont pas corrigées et que STRC n'a pas retrouvé une stabilité durable.",
+  "incidents": [
+    "2026-04-14: divulgation publique de SAT-001 (critique) et SAT-002 (haute) sur Saturn, non corrigées à ce jour",
+    "2026-06-18: dépeg du sous-jacent STRC à 82,50$ (-17% sous pair), rebond partiel à ~89$ en clôture",
+    "2026-07-07: STRC cote encore ~87,71$ (-12,3% sous pair), pas de normalisation complète"
+  ],
+  "controversies": [
+    "2026-06-24: Rosen Law Firm ouvre une enquête sur Strategy Inc./Michael Saylor (STRC), pas de plainte formelle à ce stade",
+    "2026-06-29: Strategy relève le dividende STRC à 12%/an, dividendes de juillet 2026 confirmés — pas de suspension identifiée"
+  ],
+  "dependencies": {
+    "issuer": "Pendle Finance (wrapper PT/YT/SY) sur Saturn Credit (Saturn Labs), émetteur de sUSDat",
+    "custodians": ["Clear Street (custodian STRC)", "Securitize (administrateur)", "fonds professionnel BVI"],
+    "underlyings": ["sUSDat (Saturn Credit)", "STRC (Strategy Inc.)", "USDat (couche de base avant staking)"],
+    "keyCounterparties": ["Strategy Inc. / Michael Saylor", "adresse unique PROCESSOR_ROLE", "pool AMM Pendle (seule route de sortie avant maturité)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 1566807,
+    "dailyLiquidityUsd": 3363404,
+    "ratioPct": 46.6,
+    "note": "Liquidité du pool AMM Pendle (API Pendle, marché 0x91bc86899c8391b6caaf26535b9cd82efe49a189, consultée 2026-07-13) ; à maturité, sortie alternative via sUSDat direct (file de retrait 3-7j + vesting 30j, marché secondaire ~185K$/jour)"
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "pt-susdat-27aug2026.md"
+}

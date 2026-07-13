@@ -1,0 +1,36 @@
+{
+  "symbol": "steakEURCV",
+  "name": "Steakhouse Prime EURCV",
+  "addresses": { "1": "0xbeef0C075Da5D01112AE5cF34d257074fB5DDB2f" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "A",
+    "depegBacking": "A",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "steakEURCV est le token de part du vault 'Prime Instant' de Steakhouse Financial dénommé en EURCV (SG-Forge/Société Générale), prêtant l'EURCV déposé contre des marchés Morpho Blue blue-chip (WBTC, cbBTC, wstETH) et un marché RWA (EUTBL). Forces : EURCV est un e-money token régulé MiCA/ACPR avec réserves 100% cash/HQLA auditées mensuellement par PwC, Steakhouse est le plus gros curateur Morpho sans bad debt historique, infrastructure Morpho Blue/Vaults V2 lourdement auditée et formellement vérifiée, buffer idle du vault très élevé (~88%). Faiblesses : entité curatrice (Carniceria Tropical Inc.) incorporée offshore au Panama, incident de sécurité DNS récent (mars 2026, sans perte), controverse liée au rôle de risk manager de Steakhouse chez Resolv (exploit USR quelques jours après son rapport de risque), vault EURCV encore jeune sur Morpho (< 1 an), absence de liquidité secondaire DEX pour le token de part lui-même. Verdict lender : collatéral de qualité correcte porté par un émetteur sous-jacent tier-1 régulé, mais la récursivité vault-sur-Morpho et l'opacité de l'entité curatrice justifient une allocation modérée.",
+  "incidents": [
+    "2026-03-30: détournement DNS (domain hijacking) du site web Steakhouse Financial via ingénierie sociale sur OVH Cloud, site de phishing actif ~4h ; aucun vault, contrat ou fonds déposé affecté, DNS rétabli"
+  ],
+  "controversies": [
+    "2026-03-22: Steakhouse Financial était risk manager/consultant de Resolv lorsque son stablecoin USR a subi un exploit de 23-25M$ (clé privée unique compromise, absence de plafond de mint) ; Steakhouse avait publié un rapport de risque évoquant ce scénario quelques jours avant, sans être responsable technique du bug"
+  ],
+  "dependencies": {
+    "issuer": "SG-Forge (Société Générale) pour EURCV ; Steakhouse Financial (Carniceria Tropical Inc., Panama) pour le vault",
+    "custodians": [],
+    "underlyings": ["EURCV (e-money token régulé ACPR/MiCA, réserves cash/HQLA ségréguées)"],
+    "keyCounterparties": ["SG-Forge (émetteur unique EURCV)", "Carniceria Tropical Inc. (curateur, entité offshore Panama)", "Morpho Blue (infrastructure de prêt sous-jacente)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 1561195,
+    "dailyLiquidityUsd": 13105716,
+    "ratioPct": 11.9,
+    "note": "Ratio TVL Morpho / volume 24h EURCV (CoinGecko, CEX+DEX) ≈ 11.9% — zone de vigilance ; atténué par le buffer idle du vault steakEURCV (~88% de ~45.5M$ TVL vault totale) qui couvre largement le montant utilisé comme collatéral sur Morpho."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "steakeurcv.md"
+}

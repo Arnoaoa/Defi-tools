@@ -1,0 +1,48 @@
+{
+  "symbol": "sDOLA",
+  "name": "Staked Dola",
+  "addresses": {
+    "1": "0xb45ad160634c528Cc3D2926d9807104FA3157305"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Ratio TVL Morpho / liquidité de sortie 24h ~446% (950,7K$ vs ~213K$/24h sur Curve) — très au-dessus du seuil red flag de 30%, sortie simultanée impossible en cas de stress",
+    "Taux de change sDOLA (convertToAssets) manipulable atomiquement, démontré en conditions réelles le 02/03/2026 (exploit Curve LlamaLend, 240K$) — vecteur direct pour tout oracle qui price sDOLA sans protection anti-manipulation",
+    "Bad debt résiduelle (~3,4M$ après le remboursement de 07/2025) sur un stablecoin de petite taille (market cap DOLA 44-127M$ selon sources)",
+    "INV (token du protocole) accepté comme collatéral de DOLA sur FiRM — backing partiellement auto-référentiel, précédent direct du hack d'avril 2022"
+  ],
+  "maxAllocation": "5%",
+  "summary": "sDOLA est le wrapper ERC-4626 de staking du DOLA d'Inverse Finance : yield organique issu des frais DBR payés par les emprunteurs de FiRM, mint/redeem instantanés et permissionless, backing sur-collatéralisé transparent on-chain (>97% via FiRM). Le passif est lourd : deux hacks majeurs en 2022 (15,6M$ par manipulation d'oracle INV en avril, ~5,8M$ de perte protocole via Frontier en juin), plus de 24M$ de bad debt cumulée dont ~3,4M$ encore ouverts, un dépeg de DOLA à 0,7749$ en avril 2023, et un incident récent (03/2026) démontrant la manipulabilité atomique du taux sDOLA sur un marché tiers. Liquidité de sortie très fine (~213K$/24h) face à la TVL Morpho, ratio red flag ~446%. Verdict lender : protocole vétéran qui s'est assaini (FiRM post-hacks, jrDOLA first-loss depuis 02/2026) mais faiblesse généralisée sur toutes les composantes — allocation résiduelle uniquement.",
+  "incidents": [
+    "2022-04-02: hack d'Anchor par manipulation de l'oracle Keep3r TWAP sur INV (prix INV gonflé via SushiSwap, fonds Tornado Cash), butin ~15,6M$ (1588 ETH, 94 WBTC, 39 YFI, ~4M DOLA), bad debt DOLA permanente créée",
+    "2022-06-16: hack de Frontier par manipulation du prix du LP token yvcrv3crypto (flash loan 27000 wBTC via Aave sur tricrypto Curve), butin attaquant ~1,2-1,3M$, perte protocole ~5,8M$ en bad debt",
+    "2023-03-13: exposition indirecte au hack Euler (~197M$), le DOLA Fed sur Balancer DOLA-bb-e-USD perd ~860K$ (sources secondaires)",
+    "2023-04-12: dépeg de DOLA à 0,7749$ (ATL, >20%), contagion post-crise USDC et post-Euler",
+    "2026-03-02: exploit du marché sDOLA/crvUSD sur Curve LlamaLend (240 567$, 27 emprunteurs liquidés) via manipulation atomique de sDOLA.convertToAssets() utilisé comme feed spot — défaut de l'oracle Curve, Inverse/sDOLA non affectés techniquement mais manipulabilité du taux démontrée"
+  ],
+  "controversies": [
+    "2026-07 (recherche): aucune poursuite judiciaire ni enquête réglementaire (SEC ou autre) trouvée contre Inverse Finance ou INV ; controverse réputationnelle persistante liée aux deux exploits 2022 (cas d'école de risque oracle dans les post-mortems CertiK/Halborn)",
+    "2023 (LlamaRisk): pouvoirs admin historiquement problématiques — GovGuardian (EOA unique) capable d'annuler toute proposition, mint du Fed sans timelock ; situation 2026 non revérifiée publiquement"
+  ],
+  "dependencies": {
+    "issuer": "Inverse Finance DAO (gouvernance INV/xINV, timelock ~48h)",
+    "custodians": [],
+    "underlyings": ["DOLA (stablecoin CDP)", "collatéraux FiRM (WETH, wstETH, WBTC, sUSDe, PT-sUSDe, sFRAX, DAI, CRV, CVX, INV...)"],
+    "keyCounterparties": ["Emprunteurs FiRM (source du backing et du yield DBR)", "Liquidateurs tiers FiRM", "Multisigs internes (Fed Chair 2-of-6, Pause Guardian 1-of-3, données 2023)", "Pools Curve DOLA/sUSDS et sDOLA/alUSD (seule liquidité secondaire)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 950748,
+    "dailyLiquidityUsd": 213000,
+    "ratioPct": 446,
+    "note": "Volume 24h combiné Curve DOLA/sUSDS (~40,7K$) + sDOLA/alUSD (~172,4K$), GeckoTerminal/CoinGecko juil. 2026 ; atténuant : unstake sDOLA->DOLA instantané et profondeur nominale du pool DOLA/sUSDS (~5,5M$) supérieure à la TVL Morpho, mais volumes réels très fins"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "sdola.md"
+}

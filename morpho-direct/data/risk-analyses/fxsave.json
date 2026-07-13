@@ -1,0 +1,42 @@
+{
+  "symbol": "fxSAVE",
+  "name": "f(x) USD Saving",
+  "addresses": {
+    "1": "0x7743e50F534a7f9F1791DdE7dCD89F7783Eefc39"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "fxSAVE est un vault ERC-4626 du f(x) Protocol (AladdinDAO) qui auto-compound les rendements de la Stability Pool fxUSD/USDC ; fxUSD est backé on-chain par des CDP wstETH/WBTC dont la stabilité dépend de la capacité du levier (xPOSITION jusqu'à 10x) à absorber la volatilité. Forces : backing transparent on-chain, 3 audits (Trail of Bits, OpenZeppelin, Secbit), pire dépeg limité à 2,91% toujours récupéré, aucun hack avec perte via exploit. Faiblesses : liquidité DEX quasi nulle (volume 24h ~1-8K$, ratio de sortie > 10 000%), multisig d'équipe sans timelock (protocole 'beta'), incident de liquidation 02/2025 avec pertes utilisateurs réelles (1 979 wstETH), anomalie de prix +331% en 02/2026 jamais expliquée, pas de bug bounty trouvé. Verdict lender : collatéral acceptable en petite taille uniquement, la sortie reposant entièrement sur la redemption primaire du protocole ; vérifier que l'oracle du marché price la NAV et non le spot DEX.",
+  "incidents": [
+    "2025-02: Liquidation Event — panne simultanée des 2 endpoints RPC pendant une chute de marché, 95 liquidations xPOSITION, 1 979 wstETH perdus par les utilisateurs (compensation partielle 1 000 FXN) ; fxUSD n'a pas dépeggé",
+    "2025-06: vulnérabilité Double Flash Loan découverte par ChainSecurity (divulgation responsable, aucun exploit réel ni perte), intégration flash loan Balancer V2 retirée",
+    "2026-02-21: anomalie de prix FXSAVE +331% en 24h (jusqu'à 4,68$) sur volume faible (1,94M$), sans explication officielle, corrigée depuis — symptôme de liquidité DEX très mince"
+  ],
+  "controversies": [
+    "2025-02: promesse marketing de 'levier non-liquidable' contredite par l'incident de liquidation (positions 5.5x liquidées alors que des 7x survivaient ailleurs), critique communautaire (TokenBrice)",
+    "Dépegs brefs récurrents de fxUSD (des dizaines d'épisodes, pire ~2,91%), toujours récupérés (Pharos Watch)",
+    "Aucun procès ni scandale légal documenté au 2026-07-13"
+  ],
+  "dependencies": {
+    "issuer": "f(x) Protocol (AladdinDAO)",
+    "custodians": ["Aucun directement ; dépendance indirecte à BitGo/BiT Global via le WBTC majoritaire dans le collatéral de fxUSD"],
+    "underlyings": ["fxUSD (backé par CDP wstETH + WBTC surcollatéralisés)", "USDC (Stability Pool)"],
+    "keyCounterparties": ["Détenteurs de xPOSITION (le levier absorbant la volatilité, clé de la stabilité de fxUSD)", "Keepers/fournisseurs RPC du rebalancing (cause de l'incident 02/2025)", "Multisig d'équipe AladdinDAO (accès permissionné, sans timelock, seuil non documenté)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 808206,
+    "dailyLiquidityUsd": 7720,
+    "ratioPct": 10470,
+    "note": "Volume 24h DEX dérisoire : ~1 172$ sur la paire principale FXSAVE/scrvUSD (Curve, CoinGecko), mesure haute 7 720$ — ratio > 10 000%, red flag massif sur la sortie secondaire. HHI 0,52 (un seul pool concentre la liquidité fxUSD, Pharos Watch). La sortie réaliste est la redemption on-chain permissionless (fxSAVE → fxUSD + USDC, avec frais ou cooldown), dernier recours : redemption fxUSD contre wstETH/WBTC au prix oracle."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "fxsave.md"
+}

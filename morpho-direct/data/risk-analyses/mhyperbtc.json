@@ -1,0 +1,45 @@
+{
+  "symbol": "mHyperBTC",
+  "name": "Midas Hyperithm BTC",
+  "addresses": { "1": "0xC8495EAFf71D3A563b906295fCF2f685b1783085" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "B",
+    "depegBacking": "D",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Stratégie active à effet de levier empilée (basis trading, carry trades, arbitrage de liquidation) sans méthodologie de vérification indépendante de la delta-neutralité",
+    "Actif très jeune (déployé 2025-10-14, < 1 an) avec seulement 92 détenteurs sur Ethereum et liquidité DEX quasi inexistante (~0,05% du market cap en 24h)",
+    "Contrat mHyperBTC lui-même non audité spécifiquement (Etherscan : 'No Contract Security Audit Submitted'), seule la plateforme Midas l'est",
+    "Dépendance à un gérant de stratégie (Hyperithm) et un custodian (Fordefi) uniques, droits admin actifs (proxy upgradeable)",
+    "Pause préventive réelle d'émission/rachat le 2026-04-21 lors de la contagion Kelp DAO/rsETH (~292M$), levée en ~48h après confirmation d'absence d'exposition"
+  ],
+  "maxAllocation": "1-5% ou à éviter",
+  "summary": "mHyperBTC est un certificat tokenisé Midas répliquant une stratégie BTC-denominated active à effet de levier gérée par Hyperithm (basis trading, carry trades, arbitrage de liquidation), variante BTC de la même famille que mHYPER. Contrairement à mHYPER, aucune preuve n'a été trouvée d'une exposition de mHyperBTC à Stream Finance lors de la contagion de novembre 2025 : le contrat existait déjà (déployé le 2025-10-14) mais son activité de marché semble avoir démarré bien plus tard (intégration Rootstock, février-mars 2026). La note D vient néanmoins de signaux structurels sérieux : stratégie active à effet de levier sans vérification indépendante de la delta-neutralité, actif très jeune avec seulement 92 détenteurs et liquidité DEX quasi nulle, contrat non audité spécifiquement, dépendance à un gérant et un custodian uniques, et une pause préventive réelle d'émission/rachat en avril 2026 lors de la contagion Kelp DAO/rsETH. Verdict : à éviter ou allocation résiduelle seulement, avec un profil de risque comparable à mHYPER sur le plan structurel mais sans incident de contagion réalisé à ce jour.",
+  "incidents": [
+    "2025-10-14: déploiement du contrat mHyperBTC sur Ethereum (proxy TransparentUpgradeableProxy), antérieur à toute activité de marché significative documentée",
+    "2026-04-19/21: exploit Kelp DAO/rsETH (~292M$) ; le 2026-04-21 Hyperithm confirme l'absence d'exposition rsETH pour mHYPER/mHyperBTC/mXRP et le rétablissement complet des fonctions d'émission/rachat, confirmant qu'une pause préventive avait eu lieu sur mHyperBTC ; aucune perte, résolution en ~48h",
+    "2026-04-23: mise à jour de NAV (Phemex) pour mHYPER/mXRP/mHyperBTC confirmant absence de drawdown et retrait des positions à effet de levier sur Aave, vérifiée par LlamaRisk — événement distinct et postérieur à la contagion Stream Finance de novembre 2025 (voir note vault pour l'écart factuel détaillé avec l'analyse mHYPER)"
+  ],
+  "controversies": [
+    "2025-12-17: Hyperithm accusé (NewsWay/CryptoRank) d'avoir lancé via Midas un produit de rendement Bitcoin et Ethereum sans soumettre l'évaluation de risque obligatoire aux régulateurs sud-coréens (obligation VASP) ; l'article ne nomme pas mHyperBTC explicitement mais la fenêtre de lancement correspond ; aucune sanction confirmée à ce jour",
+    "Aucune autre procédure judiciaire ou action SEC trouvée visant spécifiquement mHyperBTC ou Hyperithm"
+  ],
+  "dependencies": {
+    "issuer": "Midas Software GmbH (Allemagne, licence BaFin)",
+    "custodians": ["Fordefi (custody MPC)"],
+    "underlyings": ["positions de basis trading BTC (venues non divulguées)"],
+    "keyCounterparties": ["Hyperithm (gérant de stratégie unique)", "LlamaRisk (vérification indépendante de la NAV, annonce 2026-04)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 2721483,
+    "dailyLiquidityUsd": 19080,
+    "ratioPct": 14260,
+    "note": "Volume 24h agrégé toutes chaînes (CoinGecko, consulté 2026-07-13) instable entre ~19 080$ et ~23 964$ selon le relevé, dominé par la paire mHyperBTC/RBTC sur Oku Trade (Rootstock) ; trois ordres de grandeur meilleur que mHYPER (~72$/24h) mais très au-dessus du seuil red flag de 30%"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "mhyperbtc.md"
+}

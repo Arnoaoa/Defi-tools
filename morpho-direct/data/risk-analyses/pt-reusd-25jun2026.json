@@ -1,0 +1,39 @@
+{
+  "symbol": "PT-reUSD-25JUN2026",
+  "name": "PT reUSD 25JUN2026",
+  "addresses": {
+    "1": "0x3EAA0F0f0A5d3D595ae4e4b0D27f439d01c3E7b2"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-10%",
+  "summary": "PT-reUSD-25JUN2026 est un Principal Token Pendle dont la maturité (25/06/2026) est déjà passée. Vérification critique par adresse via l'API Pendle : le sous-jacent est le reUSD de Re Protocol (re.xyz, réassurance, note C), et non son homonyme reUSD de Resupply Protocol (Convex/Yearn, note D) — piège de nommage explicitement évité. Le redeem PT→reUSD est permissionless et instantané post-maturité, donc la liquidabilité de ce collatéral se résume entièrement à celle de reUSD (re.xyz) : marché primaire permissionné (KYC/KYB) mais fonctionnel avec redemption instantanée tant que le buffer > 1% du supply, liquidité secondaire correcte mais insuffisante face à une liquidation massive, aucun hack confirmé, réassureur licencié. Verdict lender : collatéral correct pour une allocation modérée (5-10%, identique au sous-jacent), le statut post-maturité n'ajoutant pas de risque supplémentaire puisque la voie de sortie primaire de reUSD reste opérationnelle.",
+  "incidents": [
+    "2025 (date exacte non trouvée): reUSD (re.xyz) touche un plus bas historique de 0,8734$ (-24,7% vs prix actuel), cause publique non identifiée"
+  ],
+  "controversies": [
+    "Aucune controverse gouvernance/légale/réputationnelle trouvée pour Re Protocol au 2026-07-13",
+    "2026-07-09: Re Protocol ouvre sa première fenêtre de redemption trimestrielle pour reUSDe — mécanisme de liquidité récurrent, pas un incident"
+  ],
+  "dependencies": {
+    "issuer": "Pendle Finance (wrapper PT/YT) sur reUSD de Re Protocol (Resilience Foundation Cayman LLC + Cover Reinsurance SPC Ltd.) — maturité passée",
+    "custodians": ["Fireblocks (garde on-chain)", "Trust Regulation 114 (réserves off-chain)"],
+    "underlyings": ["reUSD (Re Protocol / re.xyz)", "contrats de réassurance (CoverRe)", "sUSDe basis-trade (Ethena)"],
+    "keyCounterparties": ["CoverRe.com (réassureur unique)", "The Network Firm (attestations)", "Chainlink (attestations)", "Ethena"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 816630,
+    "dailyLiquidityUsd": 723278,
+    "ratioPct": 112.9,
+    "note": "Liquidité AMM Pendle propre à ce pool quasi nulle post-maturité (22 339$, marché 'Inactive' sur l'API Pendle) et non pertinente puisque le redeem PT→reUSD est permissionless ; proxy retenu = volume 24h de reUSD (re.xyz) sur Curve/Fluid (~723 278$, CoinGecko), atténué par la redemption primaire Re Protocol (buffer >1% du supply)"
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "pt-reusd-25jun2026.md"
+}
