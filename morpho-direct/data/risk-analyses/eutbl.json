@@ -1,0 +1,36 @@
+{
+  "symbol": "EUTBL",
+  "name": "Spiko EU T-Bills Money Market Fund",
+  "addresses": {
+    "1": "0xa0769f7A8fC65e47dE93797b4e21C073c117Fc80"
+  },
+  "grade": "B",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "B",
+    "depegBacking": "A",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "15-25%",
+  "summary": "EUTBL représente des parts d'un fonds monétaire euro UCITS (Spiko Euro) investi à 100% en bons du Trésor d'États de la zone euro investment grade, émis par Spiko (société de gestion agréée MiFID, régulée ACPR/AMF France), avec CACEIS comme dépositaire et Chainlink comme oracle NAV quotidien. Forces : backing tier-1 souverain, régulation onshore forte (UCITS, l'une des plus strictes analysées), rachat primaire quasi-instantané (minutes/heures via Coinbase Payments) contrairement aux comparables RWA plus lents, smart contracts audités par Trail of Bits, aucun historique de dépeg depuis le lancement. Faiblesses : accès KYC obligatoire avec Permission Manager on-chain (pas permissionless), liquidité secondaire DEX quasi nulle (volume 24h proche de 0$), contrat upgradeable (UUPS), et une fuite de données KYC chez le prestataire tiers Onfido en 2025 (incident de conformité, pas financier). Verdict lender : le meilleur profil RWA analysé à ce jour sur ce protocole grâce à la qualité du backing souverain et à la rapidité du rachat primaire, malgré l'absence de marché secondaire on-chain.",
+  "incidents": [],
+  "controversies": [
+    "2025-08-26 à 2025-09-06 : cyberattaque chez Onfido (prestataire KYC tiers de Spiko) ayant exposé des pièces d'identité et selfies de clients Spiko -- incident fournisseur, pas un exploit des smart contracts ni une perte financière"
+  ],
+  "dependencies": {
+    "issuer": "Spiko (société de gestion MiFID agréée ACPR/AMF, France, fondée juin 2023)",
+    "custodians": ["CACEIS (banque dépositaire, groupe Crédit Agricole/Santander)"],
+    "underlyings": ["Bons du Trésor d'États de la zone euro investment grade", "Repos adossés à ces titres", "Cash"],
+    "keyCounterparties": ["Twenty First Capital (société de gestion du véhicule fonds)", "Chainlink (oracle NAV quotidien)", "Coinbase Payments (rails de règlement stablecoin)", "SG Forge (stablecoins EURCV/USDCV empruntés face à EUTBL sur Morpho)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 2908804,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": null,
+    "note": "Volume DEX/CEX 24h proche de 0$ (CoinGecko 2026-07-12, token non tradé activement) -> ratio non calculable par la methode standard. Rachat primaire via Spiko/CACEIS quasi-instantane (minutes/heures) adosse a un marche de T-bills zone euro tres profond, mitigeant fortement le risque malgre l'absence de marche secondaire on-chain"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "eutbl.md"
+}

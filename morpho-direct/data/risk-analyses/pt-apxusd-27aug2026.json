@@ -1,0 +1,49 @@
+{
+  "symbol": "PT-apxUSD-27AUG2026",
+  "name": "PT apxUSD 27AUG2026",
+  "addresses": {
+    "1": "0xd28B0D694b8E814FA905A8b480B30691e18396EB"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Sous-jacent apxUSD en dépeg actif et non résolu au 12/07/2026 (0,8695$, -13% sous le pair, ATL 0,7176$ le 26/06/2026)",
+    "Backing en preferred shares STRC/SATA fortement corrélé au Bitcoin et à la solvabilité de Strategy Inc. (dette convertible 6,7 Md$, enquête boursière Rosen Law Firm)",
+    "Design de mint 'unbacked' et attestation de réserves en retard d'environ 2 mois face à une multiplication par ~7,8x de l'offre",
+    "Rate Oracle modifiable sans délai d'exécution par l'Admin Safe (4-of-6) — risque identifié par le rapport de risque Yearn (29/05/2026, score 3,66/5, 'Elevated Risk')",
+    "Liquidité de sortie du pool Pendle inférieure au TVL Morpho déposé (ratio ~107%) — sortie complète structurellement impossible sans épuiser tout le pool"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "PT-apxUSD-27AUG2026 est un Principal Token Pendle qui se rachète 1:1 contre apxUSD à maturité (27/08/2026), sur le même sous-jacent et émetteur que [[pt-apxusd-5nov2026]] (apxUSD, stablecoin de base non rémunéré d'Apyx, distinct de son wrapper rémunéré apyUSD déjà noté D). Le mécanisme Pendle est solide, mais le PT hérite intégralement du risque du sous-jacent : apxUSD, backé par des preferred shares STRC (Strategy/ex-MicroStrategy) corrélées au Bitcoin, a subi deux dépegs sévères en juin 2026 et cote encore 0,8695$ (-13%) à la date de cette analyse. Ce marché présente en outre le profil de liquidité de sortie le plus dégradé des deux PT-apxUSD analysés : le TVL Morpho (1,07M$) dépasse la profondeur totale du pool Pendle (997K$). Verdict lender : collatéral à éviter en taille significative, risque de sortie en stress encore plus marqué que sur le pool 5NOV2026.",
+  "incidents": [
+    "2026-06-04: apxUSD dépeg à 0,93$ (-7%) suite à la chute du Bitcoin sous 64 000$, STRC tombant vers 90$",
+    "2026-06-05: pic de liquidations sur Morpho (>4M$ en une journée), sans bad debt",
+    "2026-06-25/26: second dépeg plus sévère, apxUSD à 0,7804$, ATL 0,7176$ (CoinGecko)",
+    "2026-07-12 (date de l'analyse): apxUSD cote toujours 0,8695$ (-13% sous le pair) — dépeg non résolu"
+  ],
+  "controversies": [
+    "2026-06: Rosen Law Firm ouvre une enquête boursière sur Strategy Inc./Michael Saylor concernant d'éventuelles déclarations trompeuses sur la stratégie de trésorerie Bitcoin",
+    "2026-07: STRC chute à 73,62$ (-26% sous le pair), Strategy suspend les ventes ATM de STRC ; dette convertible résiduelle de 6,7 Md$ identifiée comme risque de solvabilité",
+    "Rapport de risque Yearn (29/05/2026): gouvernance (Rate Oracle sans délai), absence de bug bounty, attestation de réserves en retard, custodian non divulgué"
+  ],
+  "dependencies": {
+    "issuer": "Pendle Finance (wrapper) sur Apyx (apyx.fi)",
+    "custodians": [],
+    "underlyings": ["apxUSD (Apyx, stablecoin de base)", "STRC/SATA (Strategy Inc. et autres DAT, backing sous-jacent)"],
+    "keyCounterparties": ["Strategy Inc. (MSTR) via STRC", "DFDV (premier investisseur institutionnel, tous les fondateurs Apyx en sont cadres)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 1071565,
+    "dailyLiquidityUsd": 996998,
+    "ratioPct": 107,
+    "note": "Liquidité = profondeur du pool Pendle 27AUG2026 (api-v2.pendle.finance, consultée 2026-07-12), pas un volume 24h ; le TVL Morpho dépasse la profondeur totale du pool, ratio très au-dessus du seuil red flag (30%) du framework"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "pt-apxusd-27aug2026.md"
+}

@@ -1,0 +1,47 @@
+{
+  "symbol": "PT-apyUSD-18JUN2026",
+  "name": "PT apyUSD 18JUN2026",
+  "addresses": {
+    "1": "0x3365554a61CeFF74A76528f9e86C1E87946d16a5"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Sous-jacent apyUSD déjà noté D (backing STRC corrélé Bitcoin, dépegs >20% juin 2026)",
+    "Maturité déjà passée (18/06/2026) : pool confirmé absent des marchés actifs de l'API Pendle, aucune liquidité AMM indépendante ne subsiste, tout liquidateur doit transiter par le goulot d'étranglement de liquidité déjà identifié sur apyUSD",
+    "Marché primaire d'apyUSD/apxUSD fermé au grand public (whitelist institutionnelle uniquement)",
+    "Maturité tombée en plein milieu des deux épisodes de dépeg de juin 2026, sans fenêtre de stabilité pour une sortie ordonnée avant expiry"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "PT-apyUSD-18JUN2026 est un Principal Token Pendle dont la maturité (18/06/2026) est déjà passée depuis 3-4 semaines au moment de l'analyse. Le PT est désormais pricé par l'oracle Morpho comme strictement équivalent à 1 apyUSD (convergence 1:1 achevée), et le pool Pendle correspondant est confirmé absent des marchés actifs de l'API publique : plus aucune liquidité AMM indépendante, la seule sortie possible passe par le rachat 1:1 puis par le goulot d'étranglement déjà documenté de la liquidité de sortie d'apyUSD (pool Curve étroit, majoritairement protocole-propriétaire). Le sous-jacent apyUSD est déjà noté D (backing en preferred shares STRC/Strategy corrélé au Bitcoin, deux dépegs >20% en juin 2026). Verdict lender : collatéral à éviter ou à cantonner à une allocation résiduelle ; profil de liquidité de sortie pire que les pools apyUSD encore actifs, la position ne bénéficiant plus d'aucun marché secondaire propre.",
+  "incidents": [
+    "2026-06-04: apxUSD (sous-jacent) dépeg à 0,93$ suite à la chute du Bitcoin sous 63 000$, STRC tombant à 90,38$",
+    "2026-06-05: pic de liquidations sur Morpho (>4M$ en une journée), sans bad debt",
+    "2026-06-18: maturité de ce pool PT, survenue entre les deux épisodes de dépeg de juin, sans fenêtre de stabilité",
+    "2026-06-25/26: second dépeg plus sévère, apxUSD à ~0,78-0,90$, ATL apyUSD à 0,9736$ (CoinGecko)"
+  ],
+  "controversies": [
+    "2026-06: Rosen Law Firm ouvre une enquête boursière sur Strategy Inc./Michael Saylor concernant la stratégie de trésorerie Bitcoin (backing indirect d'apyUSD)",
+    "2026-07: STRC chute à 73,62$ (-26% sous le pair), Strategy suspend son programme ATM, risque de 'death spiral' évoqué"
+  ],
+  "dependencies": {
+    "issuer": "Pendle Finance (wrapper) sur Apyx (apyx.fi) — maturité passée",
+    "custodians": [],
+    "underlyings": ["apyUSD/apxUSD (Apyx)", "STRC (Strategy/ex-MicroStrategy, backing sous-jacent)"],
+    "keyCounterparties": ["Strategy (MSTR) via STRC"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 3296477,
+    "dailyLiquidityUsd": 505440,
+    "ratioPct": 652.3,
+    "note": "Pool Pendle propre à cette maturité confirmé absent de l'API des marchés actifs (0$ de liquidité AMM indépendante) ; proxy de sortie = volume 24h du pool Curve apyUSD/apxUSD (505 440$, GeckoTerminal), lui-même déjà flaggé red dans l'analyse apyUSD (LP majoritairement protocole-propriétaire, retirable unilatéralement)"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "pt-apyusd-18jun2026.md"
+}

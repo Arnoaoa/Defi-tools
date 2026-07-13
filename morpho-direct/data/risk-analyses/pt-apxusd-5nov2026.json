@@ -1,0 +1,49 @@
+{
+  "symbol": "PT-apxUSD-5NOV2026",
+  "name": "PT apxUSD 5NOV2026",
+  "addresses": {
+    "1": "0xAF687B5EcB525Ccea96115088999B4eD80C388b6"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Sous-jacent apxUSD en dépeg actif et non résolu au 12/07/2026 (0,8695$, -13% sous le pair, ATL 0,7176$ le 26/06/2026)",
+    "Backing en preferred shares STRC/SATA fortement corrélé au Bitcoin et à la solvabilité de Strategy Inc. (dette convertible 6,7 Md$, enquête boursière Rosen Law Firm)",
+    "Design de mint 'unbacked' (pas de vérification on-chain du collatéral au mint) et attestation de réserves en retard d'environ 2 mois face à une multiplication par ~7,8x de l'offre",
+    "Rate Oracle modifiable sans délai d'exécution par l'Admin Safe (4-of-6) — risque identifié par le rapport de risque Yearn (29/05/2026, score 3,66/5, 'Elevated Risk')",
+    "Marché primaire d'apxUSD fermé au grand public (whitelist institutionnelle uniquement)"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "PT-apxUSD-5NOV2026 est un Principal Token Pendle qui se rachète 1:1 contre apxUSD à maturité (05/11/2026) ; identité confirmée via son contrat SY dédié (SY-apxUSD) référençant bien l'apxUSD d'Apyx, le stablecoin de base non rémunéré du protocole (distinct de son wrapper rémunéré apyUSD, déjà noté D). Le mécanisme Pendle est solide (audits ChainSecurity/Dedaub), mais le PT n'a aucune valeur plancher et hérite intégralement du risque du sous-jacent : apxUSD, backé par des preferred shares STRC (Strategy/ex-MicroStrategy) corrélées au Bitcoin, a subi deux dépegs sévères en juin 2026 et cote encore 0,8695$ (-13%) à la date de cette analyse, un dépeg non résolu. Un rapport de risque Yearn (score 3,66/5, 'Elevated Risk') signale en outre un design de mint non vérifié on-chain, une attestation de réserves très en retard et une gouvernance permettant de modifier le Rate Oracle sans délai. Verdict lender : collatéral à éviter en taille significative tant que le peg d'apxUSD n'est pas restauré et que la transparence du backing ne s'améliore pas.",
+  "incidents": [
+    "2026-06-04: apxUSD dépeg à 0,93$ (-7%) suite à la chute du Bitcoin sous 64 000$, STRC tombant vers 90$",
+    "2026-06-05: pic de liquidations sur Morpho (>4M$ en une journée), sans bad debt",
+    "2026-06-25/26: second dépeg plus sévère, apxUSD à 0,7804$, ATL 0,7176$ (CoinGecko)",
+    "2026-07-12 (date de l'analyse): apxUSD cote toujours 0,8695$ (-13% sous le pair) — dépeg non résolu"
+  ],
+  "controversies": [
+    "2026-06: Rosen Law Firm ouvre une enquête boursière sur Strategy Inc./Michael Saylor concernant d'éventuelles déclarations trompeuses sur la stratégie de trésorerie Bitcoin",
+    "2026-07: STRC chute à 73,62$ (-26% sous le pair), Strategy suspend les ventes ATM de STRC ; dette convertible résiduelle de 6,7 Md$ identifiée comme risque de solvabilité",
+    "Rapport de risque Yearn (29/05/2026): gouvernance (Rate Oracle sans délai), absence de bug bounty, attestation de réserves en retard, custodian non divulgué"
+  ],
+  "dependencies": {
+    "issuer": "Pendle Finance (wrapper) sur Apyx (apyx.fi)",
+    "custodians": [],
+    "underlyings": ["apxUSD (Apyx, stablecoin de base)", "STRC/SATA (Strategy Inc. et autres DAT, backing sous-jacent)"],
+    "keyCounterparties": ["Strategy Inc. (MSTR) via STRC", "DFDV (premier investisseur institutionnel, tous les fondateurs Apyx en sont cadres)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 2554653,
+    "dailyLiquidityUsd": 2634884,
+    "ratioPct": 97,
+    "note": "Liquidité = profondeur du pool Pendle 5NOV2026 (api-v2.pendle.finance, consultée 2026-07-12), pas un volume 24h ; ratio TVL Morpho / liquidité pool très au-dessus du seuil red flag (30%) du framework"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "pt-apxusd-5nov2026.md"
+}

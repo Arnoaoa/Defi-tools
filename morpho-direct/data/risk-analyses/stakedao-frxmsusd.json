@@ -1,0 +1,48 @@
+{
+  "symbol": "stakedao-FrxMsUSD",
+  "name": "Stake DAO frxUSD/msUSD",
+  "addresses": { "1": "0xA31b5941F2e74d89bDC66632959FE6A152692920" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "msUSD (Metronome Synth) n'a AUCUN marché primaire de rachat (pas de redemption, seulement remboursement de dette CDP) — red flag absolu du framework, dépeg possible sans filet",
+    "Caps de supply/bridge msUSD modifiables par le governor sans timelock, proxies upgradables sous Safe 3/5 — Stake DAO exige timelock + multisig 4/7 avant le 2026-08-31 sous peine de dé-allocation, remédiation non constatée au 2026-07-12",
+    "~18M$ de msUSD empruntés contre du siUSD (noté D : réserve fractionnaire infiniFi, illiquide) — défaillance infiniFi = liquidations bloquées et créance irrécouvrable chez Metronome",
+    "Part de la supply msUSD mintée par l'AMO non quantifiée publiquement ; volume 24h du pool ≈ TVL (12,4M$), signature de flux AMO/arbitrage plutôt que de liquidité organique",
+    "IMPORTANT — homonyme vérifié : ce msUSD est celui de Metronome Synth (0xab5eB14c09D416F0aC63661E57EDB7AEcDb9BEfA), PAS celui de Main Street Finance qui a dépeggé de -71 à -90% en juin 2026"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "Wrapper Morpho de Stake DAO sur un vault ERC-4626 détenant la LP Curve frxUSD/msUSD stakée. Vérification critique : le msUSD sous-jacent est celui de Metronome Synth (CDP surcollatéralisé, Bloq), pas le msUSD effondré de Main Street Finance — le scénario catastrophe redouté ne s'applique pas. Restent des faiblesses structurelles lourdes : msUSD n'a aucun mécanisme de redemption (peg dépendant du seul marché secondaire et d'un AMO non quantifié), gouvernance Metronome sans timelock avec proxies upgradables sous Safe 3/5, exposition de ~18M$ à du siUSD illiquide noté D, décote persistante ~1% et pool déséquilibré 64% msUSD ; Stake DAO lui-même n'a accordé qu'une approbation conditionnelle avec ultimatum au 31/08/2026. Verdict lender : trop de maillons faibles empilés pour un collatéral à 91,5% de LLTV — skip ou exposition minimale en attendant la remédiation de gouvernance Metronome.",
+  "incidents": [
+    "2026-05-27: exploit vsdCRV Stake DAO (clé déployeur compromise, ~91K$ extraits sur Arbitrum, mainnet non affecté, indemnisation SDGP-70)",
+    "2026-03-12: exploit Votemarket Stake DAO ~176K$ (oracle message spoofing) — module d'incitations, pas les vaults",
+    "2025-10: anomalies de prix msUSD sur agrégateurs (ATL 0,4279$ / ATH 3,43$ CoinGecko) — probables artefacts de pools illiquides, pas de dépeg généralisé confirmé",
+    "2023-07-30: pool Curve msETH-ETH de Metronome vidée lors de l'exploit Vyper (majorité des fonds récupérés par whitehat et redistribués) — msUSD et le CDP non affectés directement"
+  ],
+  "controversies": [
+    "2026-06-29: LMAP-3 Stake DAO — approbation seulement conditionnelle du marché frxUSD/msUSD, ultimatum de remédiation gouvernance Metronome (timelock + 4/7) au 2026-08-31 sous peine de dégradation et dé-allocation",
+    "2025-12: controverse Frax \"stealth patch\" frxETH (vulnérabilité niée puis corrigée discrètement, litige de bounty, aucune perte de fonds)",
+    "2019-03: Jeff Garzik (Bloq) assigné comme témoin dans le litige Kleiman vs. Craig Wright — témoin, pas accusé",
+    "2006: Matthew Roszak (président Bloq) transige avec la SEC pour délit d'initié (Blue Rhino, 240 740$ de pénalités, sans admission) — antérieur de 10 ans à Bloq"
+  ],
+  "dependencies": {
+    "issuer": "Stake DAO (wrapper + vault RewardVault v2)",
+    "custodians": ["Securitize/BlackRock (BUIDL)", "Superstate (USTB/USCC)", "Circle (USDC)", "FinresPBC / Frax Inc. (frxUSD)"],
+    "underlyings": ["LP Curve frxUSD/msUSD", "frxUSD", "msUSD (Metronome Synth)", "CRV (rewards)", "collatéraux CDP Metronome (ETH, USDC, vaTokens Vesper)", "siUSD/infiniFi (exposition indirecte ~18M$)"],
+    "keyCounterparties": ["Multisig Stake DAO 4/7", "Governor Safe Metronome 3/5 sans timelock (0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33)", "AMO minter Metronome (0x82Ed3Fc9D93112124B04B6C7B35394A5AbA8af39)", "Vesper Finance (Bloq)", "infiniFi (siUSD)", "Curve DAO", "Frax DAO", "bridge LayerZero OFT"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 2803613,
+    "dailyLiquidityUsd": 12373864,
+    "ratioPct": 22.7,
+    "note": "Pool Curve frxUSD/msUSD : TVL 12,44M$, volume 24h 12,37M$ (GeckoTerminal API 2026-07-12) — ratio 22,7% en zone vigilance ; mais le burn du LP rend ~64% de la valeur en msUSD SANS redemption native, sortie en stress dépendante du seul marché secondaire msUSD fragmenté (Curve msUSD/crvFRAX ~12M$, Base, Optimism)"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "stakedao-frxmsusd.md"
+}

@@ -1,0 +1,364 @@
+[
+  {
+    "symbol": "wJAAA",
+    "name": "Wrapped JAAA",
+    "addresses": {
+      "1": "0x86b495e4Cb00AB18Ad94BFD7920479cC79E8eBFE"
+    },
+    "markets": 1,
+    "totalTvlUsd": 4499434
+  },
+  {
+    "symbol": "rETH",
+    "name": "Rocket Pool ETH",
+    "addresses": {
+      "1": "0xae78736Cd615f374D3085123A210448E74Fc6393",
+      "8453": "0xB6fe221Fe9EeF5aBa221c348bA20A1Bf5e73624c"
+    },
+    "markets": 5,
+    "totalTvlUsd": 4328079
+  },
+  {
+    "symbol": "PT-USDG-24SEP2026",
+    "name": "PT Global Dollar 24SEP2026",
+    "addresses": {
+      "1": "0xc1906aeCf868749a2DeE203F59b904c0cf212140"
+    },
+    "markets": 3,
+    "totalTvlUsd": 3649075
+  },
+  {
+    "symbol": "SOL",
+    "name": "Solana",
+    "addresses": {
+      "8453": "0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82"
+    },
+    "markets": 1,
+    "totalTvlUsd": 3627894
+  },
+  {
+    "symbol": "upUSDC",
+    "name": "Upshift USDC",
+    "addresses": {
+      "1": "0x80E1048eDE66ec4c364b4F22C8768fc657FF6A42"
+    },
+    "markets": 1,
+    "totalTvlUsd": 3410110
+  },
+  {
+    "symbol": "wsuperOETHb",
+    "name": "Wrapped Super OETH",
+    "addresses": {
+      "8453": "0x7FcD174E80f264448ebeE8c88a7C4476AAF58Ea6"
+    },
+    "markets": 2,
+    "totalTvlUsd": 3306111
+  },
+  {
+    "symbol": "PT-apyUSD-18JUN2026",
+    "name": "PT apyUSD 18JUN2026",
+    "addresses": {
+      "1": "0x3365554a61CeFF74A76528f9e86C1E87946d16a5"
+    },
+    "markets": 2,
+    "totalTvlUsd": 3296477
+  },
+  {
+    "symbol": "savETH",
+    "name": "Staked avETH",
+    "addresses": {
+      "1": "0xDA06eE2dACF9245Aa80072a4407deBDea0D7e341"
+    },
+    "markets": 1,
+    "totalTvlUsd": 3154138
+  },
+  {
+    "symbol": "EUTBL",
+    "name": "Spiko EU T-Bills Money Market Fund",
+    "addresses": {
+      "1": "0xa0769f7A8fC65e47dE93797b4e21C073c117Fc80"
+    },
+    "markets": 1,
+    "totalTvlUsd": 2908804
+  },
+  {
+    "symbol": "stakedao-FrxMsUSD",
+    "name": "Stake DAO frxUSD/msUSD",
+    "addresses": {
+      "1": "0xA31b5941F2e74d89bDC66632959FE6A152692920"
+    },
+    "markets": 1,
+    "totalTvlUsd": 2803613
+  },
+  {
+    "symbol": "USP",
+    "name": "USP Yield Optimized Stablecoin",
+    "addresses": {
+      "1": "0x098697bA3Fee4eA76294C5d6A466a4e3b3E95FE6"
+    },
+    "markets": 2,
+    "totalTvlUsd": 2729873
+  },
+  {
+    "symbol": "mHyperBTC",
+    "name": "Midas Hyperithm BTC",
+    "addresses": {
+      "1": "0xC8495EAFf71D3A563b906295fCF2f685b1783085"
+    },
+    "markets": 2,
+    "totalTvlUsd": 2721483
+  },
+  {
+    "symbol": "wstLINK",
+    "name": "Wrapped stLINK",
+    "addresses": {
+      "1": "0x911D86C72155c33993d594B0Ec7E6206B4C803da"
+    },
+    "markets": 1,
+    "totalTvlUsd": 2658581
+  },
+  {
+    "symbol": "PT-apxUSD-5NOV2026",
+    "name": "PT apxUSD 5NOV2026",
+    "addresses": {
+      "1": "0xAF687B5EcB525Ccea96115088999B4eD80C388b6"
+    },
+    "markets": 2,
+    "totalTvlUsd": 2554653
+  },
+  {
+    "symbol": "cbADA",
+    "name": "Coinbase Wrapped ADA",
+    "addresses": {
+      "8453": "0xcbADA732173e39521CDBE8bf59a6Dc85A9fc7b8c"
+    },
+    "markets": 2,
+    "totalTvlUsd": 2522028
+  },
+  {
+    "symbol": "XAUt",
+    "name": "Tether Gold",
+    "addresses": {
+      "1": "0x68749665FF8D2d112Fa859AA293F07A622782F38"
+    },
+    "markets": 2,
+    "totalTvlUsd": 2415841
+  },
+  {
+    "symbol": "SolvBTC",
+    "name": "Solv BTC",
+    "addresses": {
+      "1": "0x7A56E1C57C7475CCf742a1832B028F0456652F97"
+    },
+    "markets": 1,
+    "totalTvlUsd": 2194236
+  },
+  {
+    "symbol": "cbDOGE",
+    "name": "Coinbase Wrapped DOGE",
+    "addresses": {
+      "8453": "0xcbD06E5A2B0C65597161de254AA074E489dEb510"
+    },
+    "markets": 1,
+    "totalTvlUsd": 2155143
+  },
+  {
+    "symbol": "sUSN",
+    "name": "Staked USN",
+    "addresses": {
+      "1": "0xE24a3DC889621612422A64E6388927901608B91D"
+    },
+    "markets": 1,
+    "totalTvlUsd": 1770843
+  },
+  {
+    "symbol": "sNUSD",
+    "name": "Staked NUSD",
+    "addresses": {
+      "1": "0x08EFCC2F3e61185D0EA7F8830B3FEc9Bfa2EE313"
+    },
+    "markets": 1,
+    "totalTvlUsd": 1679196
+  },
+  {
+    "symbol": "srRoyUSDC",
+    "name": "Senior Royco USDC",
+    "addresses": {
+      "1": "0xcD9f5907F92818bC06c9Ad70217f089E190d2a32"
+    },
+    "markets": 1,
+    "totalTvlUsd": 1608166
+  },
+  {
+    "symbol": "PT-sUSDat-27AUG2026",
+    "name": "PT Staked USDat 27AUG2026",
+    "addresses": {
+      "1": "0xc689f76F90FE1762faC55983Ff25ae71033A84F7"
+    },
+    "markets": 1,
+    "totalTvlUsd": 1566807
+  },
+  {
+    "symbol": "steakEURCV",
+    "name": "Steakhouse Prime EURCV",
+    "addresses": {
+      "1": "0xbeef0C075Da5D01112AE5cF34d257074fB5DDB2f"
+    },
+    "markets": 1,
+    "totalTvlUsd": 1561195
+  },
+  {
+    "symbol": "syzUSD",
+    "name": "Staked Yuzu USD",
+    "addresses": {
+      "1": "0x6DFF69eb720986E98Bb3E8b26cb9E02Ec1a35D12"
+    },
+    "markets": 1,
+    "totalTvlUsd": 1556775
+  },
+  {
+    "symbol": "wbravUSDC",
+    "name": "Wrapped Avant+ DeFi Yield",
+    "addresses": {
+      "1": "0x7309E1E2e74af170c69bdE8FCB30397f8697D5FF"
+    },
+    "markets": 1,
+    "totalTvlUsd": 1260666
+  },
+  {
+    "symbol": "PT-apyUSD-27AUG2026",
+    "name": "PT apyUSD 27AUG2026",
+    "addresses": {
+      "1": "0xEe5C7CdA577484b70b65C21235ECbd302bB290E2"
+    },
+    "markets": 1,
+    "totalTvlUsd": 1143770
+  },
+  {
+    "symbol": "rswETH",
+    "name": "rswETH",
+    "addresses": {
+      "1": "0xFAe103DC9cf190eD75350761e95403b7b8aFa6c0"
+    },
+    "markets": 2,
+    "totalTvlUsd": 1092224
+  },
+  {
+    "symbol": "PT-apxUSD-27AUG2026",
+    "name": "PT apxUSD 27AUG2026",
+    "addresses": {
+      "1": "0xd28B0D694b8E814FA905A8b480B30691e18396EB"
+    },
+    "markets": 1,
+    "totalTvlUsd": 1071565
+  },
+  {
+    "symbol": "steakUSDC",
+    "name": "Steakhouse Prime USDC",
+    "addresses": {
+      "1": "0xbeef088055857739C12CD3765F20b7679Def0f51",
+      "8453": "0xBEEFE94c8aD530842bfE7d8B397938fFc1cb83b2"
+    },
+    "markets": 4,
+    "totalTvlUsd": 1068593
+  },
+  {
+    "symbol": "sDOLA",
+    "name": "Staked Dola",
+    "addresses": {
+      "1": "0xb45ad160634c528Cc3D2926d9807104FA3157305"
+    },
+    "markets": 3,
+    "totalTvlUsd": 950748
+  },
+  {
+    "symbol": "tBTC",
+    "name": "tBTC",
+    "addresses": {
+      "1": "0x18084fbA666a33d37592fA2633fD49a74DD93a88"
+    },
+    "markets": 1,
+    "totalTvlUsd": 894560
+  },
+  {
+    "symbol": "PT-reUSD-25JUN2026",
+    "name": "PT reUSD 25JUN2026",
+    "addresses": {
+      "1": "0x3EAA0F0f0A5d3D595ae4e4b0D27f439d01c3E7b2"
+    },
+    "markets": 2,
+    "totalTvlUsd": 816630
+  },
+  {
+    "symbol": "fxSAVE",
+    "name": "f(x) USD Saving",
+    "addresses": {
+      "1": "0x7743e50F534a7f9F1791DdE7dCD89F7783Eefc39"
+    },
+    "markets": 1,
+    "totalTvlUsd": 808206
+  },
+  {
+    "symbol": "cbLTC",
+    "name": "Coinbase Wrapped LTC",
+    "addresses": {
+      "8453": "0xcb17C9Db87B595717C857a08468793f5bAb6445F"
+    },
+    "markets": 1,
+    "totalTvlUsd": 716640
+  },
+  {
+    "symbol": "sUSDai",
+    "name": "Staked USDai",
+    "addresses": {
+      "1": "0x0B2b2B2076d95dda7817e785989fE353fe955ef9"
+    },
+    "markets": 1,
+    "totalTvlUsd": 699010
+  },
+  {
+    "symbol": "ROY-ST-apyUSD",
+    "name": "Royco Senior Tranche apyUSD",
+    "addresses": {
+      "1": "0xBd373c9D3D8976a4FECC504a93c768BBE8C3227C"
+    },
+    "markets": 1,
+    "totalTvlUsd": 507256
+  },
+  {
+    "symbol": "uniBTC",
+    "name": "uniBTC",
+    "addresses": {
+      "8453": "0x93919784C523f39CACaa98Ee0a9d96c3F32b593e"
+    },
+    "markets": 1,
+    "totalTvlUsd": 478190
+  },
+  {
+    "symbol": "JitoSOL",
+    "name": "Jito Staked SOL",
+    "addresses": {
+      "8453": "0x97bE14Dd8f994A5364573BC035D85309E7CB34de"
+    },
+    "markets": 1,
+    "totalTvlUsd": 426215
+  },
+  {
+    "symbol": "stakedao-crvfrxUSD",
+    "name": "Stake DAO crvUSD/frxUSD",
+    "addresses": {
+      "1": "0xF7dAf52958690F1dc89CD377d638e9Fc94E76ACF"
+    },
+    "markets": 2,
+    "totalTvlUsd": 413467
+  },
+  {
+    "symbol": "stakedao-frxsUSDS",
+    "name": "Stake DAO frxUSD/sUSDS",
+    "addresses": {
+      "1": "0x62923a64D7940be920FD5cdc27873Ab8eEc59F9F"
+    },
+    "markets": 1,
+    "totalTvlUsd": 398762
+  }
+]

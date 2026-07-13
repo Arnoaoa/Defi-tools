@@ -1,0 +1,44 @@
+{
+  "symbol": "USP",
+  "name": "USP Yield Optimized Stablecoin",
+  "addresses": {
+    "1": "0x098697bA3Fee4eA76294C5d6A466a4e3b3E95FE6"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "50% du backing dépend d'une stratégie de trading FX propriétaire opaque (Turquie) et d'un opérateur unique non identifié",
+    "Liquidité secondaire quasi nulle (volume 24h ~4 500$ pour 14,6M$ de market cap)",
+    "Baisse inexpliquée de 52,75% de la valeur totale des actifs en 30 jours (RWA.xyz), cause non identifiée",
+    "Contrat upgradeable sans timelock documenté, gouvernance de façade (DAO/Snapshot exécuté via multisig d'équipe)"
+  ],
+  "maxAllocation": "1-2% (ou skip)",
+  "summary": "USP est le stablecoin à rendement de PikuDAO (Piku Finance Limited/Morini Limited, BVI), à ne pas confondre avec l'homonyme Pareto USP. Son backing hybride combine 50% de stablecoins/DeFi et 50% d'une stratégie propriétaire d'arbitrage FX turc opaque, sans attestation indépendante périodique des réserves. Le marché primaire est KYC-gated, la liquidité secondaire est quasi inexistante (volume 24h de quelques milliers de dollars pour 14,6M$ de market cap), et une baisse inexpliquée de 52,75% de la valeur des actifs en 30 jours reste non résolue. Verdict lender : collatéral expérimental à backing partiellement opaque et liquidité de sortie très faible, allocation minimale ou à éviter.",
+  "incidents": [
+    "2026 (juin-juillet, date exacte non déterminée): baisse de 52,75% de la Total Asset Value du protocole en 30 jours (RWA.xyz), cause non identifiée",
+    "Pour mémoire (token distinct, sans rapport): hack du token USPD en décembre 2025 (~1M$, mint frauduleux)"
+  ],
+  "controversies": [
+    "Aucune controverse légale/réglementaire trouvée au 2026-07-12 ; incohérence relevée sur l'identité légale de l'émetteur (Piku Finance Limited vs Morini Limited) et juridiction de litige fixée à Istanbul malgré domiciliation BVI"
+  ],
+  "dependencies": {
+    "issuer": "PikuDAO / Piku Finance Limited (BVI) — nommé aussi Morini Limited selon RWA.xyz",
+    "custodians": [],
+    "underlyings": ["USDC/USDT (backing initial)", "Stratégie propriétaire d'arbitrage FX turc (BMMF)", "Positions sur six protocoles DeFi dont Morpho Blue"],
+    "keyCounterparties": ["Opérateur de la stratégie FX turque (non identifié publiquement)", "Shufti (KYC)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 2729873,
+    "dailyLiquidityUsd": 7824,
+    "ratioPct": 34890,
+    "note": "Volume 24h ~4 471$ (Uniswap V4 USP/USDC, CoinGecko 2026-07-12) + ~3 353$ (Curve frxUSD/USP, pool incité >150% APR, depth totale ~137 600$) — ratio >> 30% : red flag majeur, sortie secondaire quasi impossible"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "usp.md"
+}

@@ -1,0 +1,34 @@
+{
+  "symbol": "wJAAA",
+  "name": "Wrapped JAAA",
+  "addresses": {
+    "1": "0x86b495e4Cb00AB18Ad94BFD7920479cC79E8eBFE"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "1-5%",
+  "summary": "wJAAA est un wrapper 1:1 (déployé avril 2026, ~3 mois) détenant des parts du fonds JAAA (Janus Henderson Anemoy AAA CLO Fund, véhicule BVI tokenisé via Centrifuge, sous-géré par Janus Henderson). Le sous-jacent (tranches AAA de CLO) a un historique de crédit exceptionnel (zéro défaut depuis 1994, 2008 et COVID inclus) et l'émetteur infrastructure (Centrifuge) est audité et établi depuis 2019 sans incident. Mais le wrapper collatéral lui-même est très jeune, n'a qu'un seul détenteur (aucun marché secondaire), et le fonds sous-jacent n'offre qu'un rachat lent et gated (T+3, KYC non-US professionnel, ticket ~500K$) sans architecture de liquidité multi-couches documentée. Verdict lender : qualité de crédit du sous-jacent excellente mais problème d'accès/liquidité sévère qui tire la note globale vers D par la règle du maillon faible — allocation minimale ou à éviter tant que la TVL et la liquidité secondaire ne se développent pas.",
+  "incidents": [],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Anemoy Capital SPC Limited (fonds professionnel régulé BVI), sous-géré par Janus Henderson, tokenisé par Centrifuge",
+    "custodians": ["Circle (custodian crypto)", "Trident Trust (administrateur du fonds)"],
+    "underlyings": ["Portefeuille de tranches AAA de CLO (Collateralized Loan Obligations, prêts syndiqués corporate/leveraged loans)"],
+    "keyCounterparties": ["Janus Henderson (sous-gérant de la stratégie de crédit)", "Centrifuge (infrastructure de tokenisation, protocole audité)", "Opérateur du wrapper wJAAA non identifié publiquement (distinct du wrapper deJAAA officiel de Centrifuge)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 4499434,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": null,
+    "note": "Wrapper à un seul détenteur (Etherscan, 2026-07-12), aucun pool DEX identifié -> liquidité secondaire quasi nulle, ratio non calculable. Rachat primaire du fonds JAAA sous-jacent possible mais lent (T+3) et gated KYC/ticket 500K$ -- pas un canal de sortie rapide pour un liquidateur Morpho"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "wjaaa.md"
+}

@@ -1,0 +1,40 @@
+{
+  "symbol": "cbLTC",
+  "name": "Coinbase Wrapped LTC",
+  "addresses": {
+    "8453": "0xcb17C9Db87B595717C857a08468793f5bAb6445F"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Liquidité de sortie quasi nulle : seul pool on-chain identifié (Uniswap V3 Base, cbLTC/USDC) affichait une profondeur ~0$ au moment de l'analyse, aucun pool Aerodrome trouvé (contrairement à cbADA/cbDOGE)",
+    "TVL Morpho (717K$) ~= 18-122x le volume 24h selon la mesure retenue (agrégé vs pool on-chain unique), sur un unique marché — le plus petit collatéral des 3 actifs de cette vague"
+  ],
+  "maxAllocation": "1-5% ou éviter",
+  "summary": "cbLTC est un wrapped LTC émis par Coinbase sur Base, même modèle de custody 1:1 et même famille de contrat que cbBTC/cbXRP, lancé fin juin 2025 aux côtés de cbADA. Forces : émetteur régulé et coté, aucun dépeg ou hack constaté, risque réglementaire LTC réduit depuis la classification SEC/CFTC 'digital commodity' de mars 2026. Faiblesses majeures : marché secondaire on-chain quasi inexistant (pool unique identifié à profondeur ~0$, aucune alternative Aerodrome), TVL Morpho la plus faible des 3 actifs analysés. Verdict lender : liquidité de sortie structurellement insuffisante, note dégradée à D sur la composante asset design malgré un émetteur et un backing solides — allocation à éviter ou marginale uniquement.",
+  "incidents": [],
+  "controversies": [
+    "2022-05-19: déploiement de MimbleWimble (MWEB) sur Litecoin entraînant le délistement par 5 exchanges sud-coréens (Upbit, Bithumb, Coinone, Korbit, Gopax) pour non-conformité AML/KYC ; Binance suspend les dépôts/retraits taggés MWEB — antérieur de 3 ans à cbLTC mais précédent de friction réglementaire sur le réseau LTC",
+    "2026-03-17: classification conjointe SEC/CFTC 'digital commodity' pour LTC, réduisant le risque réglementaire de type security"
+  ],
+  "dependencies": {
+    "issuer": "Coinbase",
+    "custodians": ["Coinbase (garde du LTC natif backant cbLTC)"],
+    "underlyings": ["LTC natif (Litecoin)"],
+    "keyCounterparties": ["Coinbase (droits blacklist/pause)", "Chainlink CCIP (bridge exclusif des wrapped assets Coinbase depuis déc. 2025)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 716640,
+    "dailyLiquidityUsd": 5863,
+    "ratioPct": 12220,
+    "note": "Volume 24h agrégé cbLTC ~34,7-42,7K$ (CoinGecko/CMC, variable) mais seul pool on-chain localisé (Uniswap V3 Base cbLTC/USDC) affiche ~5,9K$/24h et une profondeur de pool ~0$ au moment du snapshot ; ratio calculé ici sur ce pool (structurellement le plus pertinent en cas de stress). Sur la base du volume agrégé le ratio serait ~1852% ; dans les deux cas très au-dessus du seuil red flag de 30%."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "cbltc.md"
+}

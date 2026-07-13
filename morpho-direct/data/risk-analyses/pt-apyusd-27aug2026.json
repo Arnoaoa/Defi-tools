@@ -1,0 +1,47 @@
+{
+  "symbol": "PT-apyUSD-27AUG2026",
+  "name": "PT apyUSD 27AUG2026",
+  "addresses": {
+    "1": "0xEe5C7CdA577484b70b65C21235ECbd302bB290E2"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Sous-jacent apyUSD déjà noté D (backing corrélé au Bitcoin via STRC, deux dépegs >20% en juin 2026)",
+    "Marché ouvert/actif pendant la période de fragilité persistante du sous-jacent, verrouillant l'exposition jusqu'au 27/08/2026",
+    "Marché primaire d'apyUSD/apxUSD fermé au grand public (whitelist institutionnelle uniquement)",
+    "Écart de ~10-15% entre les chiffres de liquidité pool selon la source (8,04M$ API Pendle vs ~9,17M$ presse)"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "PT-apyUSD-27AUG2026 est un Principal Token Pendle qui se rachète 1:1 contre apyUSD à maturité (27/08/2026) ; identité confirmée via Etherscan (contrat PendlePrincipalToken avec SY dédié référençant l'apyUSD d'Apyx déjà analysé). Le mécanisme Pendle est solide (audits ChainSecurity/Dedaub, battle-tested) et la liquidité AMM du pool est correcte à l'échelle actuelle (~8-9M$), mais le PT n'a aucune valeur plancher indépendante et hérite intégralement du risque du sous-jacent, déjà noté D. apyUSD est backé par des actions préférentielles (STRC/Strategy) corrélées au Bitcoin et a subi deux dépegs sévères (>20%) en juin 2026, moins de 3 semaines avant cette analyse. Verdict lender : collatéral à éviter en taille significative ou à cantonner à une allocation résiduelle, avec surveillance rapprochée du peg apyUSD/apxUSD et de la santé de STRC/Strategy avant la maturité d'août 2026.",
+  "incidents": [
+    "2026-06-04: apxUSD (sous-jacent) dépeg à 0,93$ suite à la chute du Bitcoin sous 63 000$, STRC tombant à 90,38$",
+    "2026-06-05: pic de liquidations sur Morpho (>4M$ en une journée), sans bad debt",
+    "2026-06-08 (semaine du): post-mortem officiel Apyx identifiant un mismatch structurel de liquidité overnight comme cause racine du stress",
+    "2026-06-25/26: second dépeg plus sévère, apxUSD à ~0,78-0,90$, ATL apyUSD à 0,9736$ (CoinGecko)"
+  ],
+  "controversies": [
+    "2026-06: Rosen Law Firm ouvre une enquête boursière sur Strategy Inc./Michael Saylor concernant la stratégie de trésorerie Bitcoin",
+    "2026-07: STRC chute à 73,62$ (-26% sous le pair), Strategy suspend son programme ATM, risque de 'death spiral' évoqué"
+  ],
+  "dependencies": {
+    "issuer": "Pendle Finance (wrapper) sur Apyx (apyx.fi)",
+    "custodians": [],
+    "underlyings": ["apyUSD/apxUSD (Apyx)", "STRC (Strategy/ex-MicroStrategy, backing sous-jacent)"],
+    "keyCounterparties": ["Strategy (MSTR) via STRC"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 1143770,
+    "dailyLiquidityUsd": 8041640,
+    "ratioPct": 14.2,
+    "note": "Liquidité = profondeur du pool Pendle 27AOÛT2026 (api-v2.pendle.finance, consultée 2026-07-12) ; ratio en zone de vigilance (10-30%), meilleur des trois actifs apyUSD analysés dans cette vague, mais ne compense pas la note D du sous-jacent"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "pt-apyusd-27aug2026.md"
+}

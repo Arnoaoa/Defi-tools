@@ -1,0 +1,44 @@
+{
+  "symbol": "syzUSD",
+  "name": "Staked Yuzu USD",
+  "addresses": {
+    "1": "0x6DFF69eb720986E98Bb3E8b26cb9E02Ec1a35D12"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Gouvernance 100% centralisée (Yuzu Fintech LLC), aucun DAO ni timelock, pouvoirs de pause et modification de paramètres unilatéraux",
+    "Liquidité secondaire quasiment absente sur Ethereum mainnet (chaîne utilisée par Morpho) : 9 holders seulement, aucun pool DEX identifié",
+    "Deux incidents de contagion réels déjà survenus en ~1 an d'existence (Balancer V2 nov. 2025, Stream Finance xUSD nov. 2025), absorbés par un Reserve Fund de seulement 1M$",
+    "Marché primaire totalement fermé au retail (KYC/AML/KYB investisseurs éligibles uniquement)"
+  ],
+  "maxAllocation": "1% (ou skip)",
+  "summary": "syzUSD est le vault de staking du stablecoin à rendement yzUSD de Yuzu Money, à ne pas confondre avec l'homonyme Yuzu Finance (DEX sur Movement, projet distinct). Le rendement provient d'un panier composite de T-bills tokenisés, CLOs AAA, prêts surcollatéralisés et positions delta-neutral via des protocoles tiers (Maple, Ethena, Hyperliquid, Morpho, Euler, Pendle), avec une transparence des réserves supérieure à la moyenne (dashboard Accountable en temps réel). Mais la gouvernance est entièrement centralisée sans DAO ni timelock, le marché primaire est fermé au retail, et le protocole a déjà subi deux épisodes de contagion réels (Balancer, Stream Finance/xUSD) en un an d'existence, absorbés par un Reserve Fund jugé sous-dimensionné. Verdict lender : liquidité de sortie quasi nulle sur la chaîne utilisée par Morpho, allocation minimale ou à éviter.",
+  "incidents": [
+    "2025-11-03: exploit Balancer V2 (128M$ drainés), exposition de Yuzu via ses stratégies tierces mais retrait rapide via Sentinel, perte fortement limitée",
+    "2025-11 (date précise non déterminée): perte liée à l'exposition au stablecoin xUSD de Stream Finance (effondrement du xUSD), entièrement absorbée par le Reserve Fund de Yuzu (1M$), aucun impact déposants"
+  ],
+  "controversies": [
+    "Aucune controverse légale/réglementaire trouvée au 2026-07-12 concernant Yuzu Money/Yuzu Fintech LLC ; seul bruit identifié est un procès Nintendo contre l'émulateur homonyme 'Yuzu' (2024), sans rapport"
+  ],
+  "dependencies": {
+    "issuer": "Yuzu Money (Yuzu Fintech LLC) — entité non retrouvée dans les registres publics",
+    "custodians": ["Fordefi (MPC, SOC2 Type II, assuré Munich Re)", "Accountable (preuve de réserves zkTLS)"],
+    "underlyings": ["T-bills tokenisés (Superstate, Securitize, Centrifuge)", "CLOs AAA (JAAA, STAC)", "Prêts surcollatéralisés (Maple/Syrup)", "Positions Ethena/Hyperliquid", "Positions à levier Morpho/Euler/Pendle"],
+    "keyCounterparties": ["Maple Finance", "Ethena", "Hyperliquid", "Balancer (incident de contagion)", "Stream Finance (incident de contagion via xUSD)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 1556775,
+    "dailyLiquidityUsd": 15619,
+    "ratioPct": 9968,
+    "note": "Aucun pool DEX identifié sur Ethereum mainnet (9 holders seulement, chaîne utilisée par Morpho) ; liquidité réelle concentrée sur Plasma (Curve YZUSD/USDT0, depth ±2% ~15 619$, volume 24h incohérent selon la source : 1 093$ à 226 753$) — ratio calculé avec la profondeur la plus fiable, red flag critique quelle que soit l'hypothèse retenue"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "syzusd.md"
+}

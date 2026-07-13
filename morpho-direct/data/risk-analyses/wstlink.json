@@ -1,0 +1,38 @@
+{
+  "symbol": "wstLINK",
+  "name": "Wrapped stLINK",
+  "addresses": { "1": "0x911D86C72155c33993d594B0Ec7E6206B4C803da" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Liquidité DEX de sortie quasi nulle : pool Curve stLINK/LINK à 0 transaction sur 24h (239 360 $ de profondeur), wstLINK ~42 $ de volume 24h — ratio TVL Morpho / profondeur >1000%, très au-dessus du seuil red flag (30%). Non classé red flag absolu du framework car un canal de sortie primaire (unstaking protocolaire) existe, mais dépendance quasi totale à ce canal unique en cas de stress."
+  ],
+  "maxAllocation": "5-15%",
+  "summary": "wstLINK est le wrapper non-rebasing de stLINK, le liquid staking token de stake.link (ex-LinkPool, opérateur Chainlink depuis 2017) pour le LINK staké sur Chainlink Staking v0.2. Forces : mint/redeem permissionless sans KYC, gouvernance DAO documentée avec multisig et timelock, multiples audits (Cyfrin, Sigma Prime, Trust Security, Zellic, Code4rena sur Staking v0.2), aucun hack ni dépeg constaté depuis le lancement (déc. 2022). Faiblesses majeures : liquidité de sortie DEX quasiment inexistante (pool Curve stLINK/LINK à 0 transaction/24h), dépendance forte au canal d'unstaking natif (1-7 jours en temps normal, jusqu'à 35 jours en cas de forte demande), infrastructure Chainlink Staking v0.2 encore jeune (fin 2023), TVL protocole modeste (~60 M$). Verdict lender : collatéral de niche pour holders de LINK stakers, à traiter avec prudence et allocation basse vu l'absence quasi totale de marché secondaire — le maillon faible est clairement la liquidité, pas la sécurité ou la gouvernance.",
+  "incidents": [],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "stake.link (ex-LinkPool), gouvernance DAO via Council (2 core contributors, 2 élus communauté, 2 node operators SDL, 1 NAIL), multisig 5-8 signataires + timelock 24h",
+    "custodians": [],
+    "underlyings": ["LINK (staké sur Chainlink Staking v0.2)"],
+    "keyCounterparties": [
+      "Réseau de node operators Chainlink participant au protocole (01Node, ChainLayer, CryptoManufaktur, Framework Ventures, Stakin, stakefish, etc.)",
+      "Chainlink Labs / smart contracts Staking v0.2 (audité Code4rena août 2023, timelock on-chain)",
+      "Curve (pool stLINK/LINK, principal lieu d'échange secondaire)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 2658581,
+    "dailyLiquidityUsd": 239360,
+    "ratioPct": 1111,
+    "note": "Volume 24h réel quasi nul (wstLINK ~42$, pool Curve stLINK/LINK 0 transaction sur 24h le 2026-07-12 selon GeckoTerminal) ; ratio calculé sur la profondeur du pool (239 360$) faute de volume exploitable, très au-dessus du seuil red flag de 30%."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "wstlink.md"
+}

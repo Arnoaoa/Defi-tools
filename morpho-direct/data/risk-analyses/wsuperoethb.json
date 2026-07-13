@@ -1,0 +1,34 @@
+{
+  "symbol": "wsuperOETHb",
+  "name": "Wrapped Super OETH",
+  "addresses": { "8453": "0x7FcD174E80f264448ebeE8c88a7C4476AAF58Ea6" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "wsuperOETHb est le wrapper ERC-4626 de superOETHb, la version Base du LST OETH d'Origin Protocol, dont le rendement combine staking Beacon Chain (via wOETH bridgé) et une position de liquidité protocole-owned (AMO) sur Aerodrome. Forces : héritage du historique d'audits et de gouvernance d'Origin Protocol (cf. OETH), aucun dépeg ni incident connu depuis le lancement sur Base, peg activement défendu par l'AMO. Faiblesses : empilement de dépendances propre aux déploiements L2 (staking + wrap + bridge Chainlink CCIP + AMO Aerodrome), sortie en 3 paliers pouvant prendre jusqu'à 10 jours pour les gros montants, multisig Guardian avec pouvoir de retrait sur la position AMO, et liquidité secondaire sur Base très inférieure à la TVL déposée sur Morpho (ratio ~35% sur la profondeur du pool le plus liquide, ~2099% sur le volume 24h). Verdict lender : collatéral correct sur le plan de l'émetteur mais dégradé en C par l'empilement de couches de risque et la liquidité de sortie limitée propres au déploiement Base — allocation à limiter.",
+  "incidents": [],
+  "controversies": [
+    "2025-11-21: Aerodrome durcit ses règles d'incitation AMO (connector token requis), réduisant l'APY de Super OETH — dépendance externe à la gouvernance d'un partenaire tiers, pas un incident de sécurité"
+  ],
+  "dependencies": {
+    "issuer": "Origin Protocol",
+    "custodians": [],
+    "underlyings": ["wOETH (OETH wrappé, staké nativement sur Ethereum mainnet)"],
+    "keyCounterparties": ["Chainlink CCIP (bridge unique pour le rapatriement de rendement/collatéral vers Base)", "Aerodrome (DEX hébergeant la position AMO protocole-owned)", "Multisig Guardian (droit de retrait de la position AMO, jusqu'à 10 jours)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 3306111,
+    "dailyLiquidityUsd": 157520,
+    "ratioPct": 2099,
+    "note": "Ratio calculé sur le pool OETHb/WETH Curve (Base), le plus profond (~9,37M$, source GeckoTerminal/BaseScan, 2026-07) ; en utilisant la profondeur du pool plutôt que le volume 24h, le ratio tombe à ~35% (toujours au-dessus du seuil red flag de 30%) ; pool Aerodrome Slipstream WETH/OETHb plus petit (~3,74M$ profondeur, ~3 497$ volume 24h)"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "wsuperoethb.md"
+}

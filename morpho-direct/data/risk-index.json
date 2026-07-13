@@ -137,6 +137,50 @@
     "analyzedAt": "2026-07-12",
     "vaultNote": "aznd.md"
   },
+  "8453-0xcbada732173e39521cdbe8bf59a6dc85a9fc7b8c": {
+    "symbol": "cbADA",
+    "grade": "C",
+    "gradeModifier": "+",
+    "components": {
+      "assetDesign": "C",
+      "issuer": "B",
+      "depegBacking": "B",
+      "counterparty": "B",
+      "recentSecurity": "B"
+    },
+    "redFlags": [
+      "Liquidité de sortie mince : TVL Morpho (2,52 M$) ~= 15x le volume 24h agrégé cbADA (~167 K$), soit ~1500% du seuil red flag de 30%"
+    ],
+    "maxAllocation": "5-15%",
+    "summary": "cbADA est un wrapped ADA émis par Coinbase sur Base, même modèle de custody 1:1 et même famille de contrat (héritée de cbETH/OpenZeppelin) que cbBTC/cbXRP, lancé le 26 juin 2025. Forces : émetteur régulé et coté, aucun dépeg ou hack constaté, risque réglementaire ADA levé depuis la classification SEC/CFTC 'digital commodity' de mars 2026. Faiblesses : wrapper récent (13 mois), liquidité secondaire mince (volume 24h ~167 K$ pour ~8,3 M$ de market cap), sous-jacent ADA en chute prolongée (-60% sur 2025, plus bas pluriannuel mi-2026). Verdict lender : collatéral acceptable mais peu mature, allocation à limiter tant que la liquidité secondaire ne s'est pas approfondie.",
+    "incidents": [
+      "2022-08: hack du bridge Nomad (~190 M$) affectant indirectement Milkomeda C1 (sidechain Cardano) — sans lien avec cbADA, lancé 3 ans plus tard"
+    ],
+    "controversies": [
+      "2023 à 2026-03: ADA cité comme security non enregistrée dans SEC v. Coinbase et SEC v. Binance ; poursuite Coinbase abandonnée fev. 2025 ; classification conjointe SEC/CFTC 'digital commodity' le 17/03/2026 pour ADA (parmi 16 cryptoactifs) — risque réglementaire structurel sur le sous-jacent désormais résolu"
+    ],
+    "dependencies": {
+      "issuer": "Coinbase",
+      "custodians": [
+        "Coinbase (garde de l'ADA natif backant cbADA)"
+      ],
+      "underlyings": [
+        "ADA natif (Cardano)"
+      ],
+      "keyCounterparties": [
+        "Coinbase (droits blacklist/pause)",
+        "Chainlink CCIP (bridge exclusif des wrapped assets Coinbase depuis déc. 2025)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 2522028,
+      "dailyLiquidityUsd": 166722,
+      "ratioPct": 1513,
+      "note": "Volume cbADA 24h agrégé (CoinGecko, 2026-07-12), quasi intégralement Aerodrome Slipstream CBADA/CBBTC (~98,5K$) + CBADA/WETH (~67,6K$). CoinMarketCap indique un chiffre divergent (~102K$), écart de source non résolu. Ratio très largement au-dessus du seuil red flag de 30%."
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "cbada.md"
+  },
   "1-0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf": {
     "symbol": "cbBTC",
     "grade": "B",
@@ -225,6 +269,52 @@
     "analyzedAt": "2026-07-12",
     "vaultNote": "cbbtc.md"
   },
+  "8453-0xcbd06e5a2b0c65597161de254aa074e489deb510": {
+    "symbol": "cbDOGE",
+    "grade": "C",
+    "gradeModifier": "+",
+    "components": {
+      "assetDesign": "C",
+      "issuer": "B",
+      "depegBacking": "B",
+      "counterparty": "B",
+      "recentSecurity": "B"
+    },
+    "redFlags": [
+      "Liquidité de sortie extrêmement mince : TVL Morpho (2,16 M$) ~= 112x le volume 24h agrégé cbDOGE (~19 K$), soit ~11 250% du seuil red flag de 30% — le ratio le plus dégradé des 3 actifs analysés",
+      "Sous-jacent memecoin (DOGE) à volatilité de sentiment, sensible aux réseaux sociaux (posts Musk)"
+    ],
+    "maxAllocation": "5-15%",
+    "summary": "cbDOGE est un wrapped DOGE émis par Coinbase sur Base, même modèle de custody 1:1 et même famille de contrat que cbBTC/cbXRP, lancé le 4 juin 2025 aux côtés de cbXRP. Forces : émetteur régulé et coté, aucun dépeg ou hack constaté, risque réglementaire DOGE réduit depuis la classification SEC/CFTC 'digital commodity' de mars 2026. Faiblesses : liquidité secondaire extrêmement mince (volume 24h ~19 K$ pour ~7,2 M$ de market cap, ratio TVL Morpho/volume le pire des 3 actifs de la vague), wrapper récent (13 mois), sous-jacent memecoin à volatilité de sentiment élevée. Verdict lender : collatéral le plus fragile en liquidité de sortie de cette vague ; allocation à positionner en bas de fourchette C.",
+    "incidents": [
+      "2024-12-12: exploit réseau 'DogeReaper' (segfault) crashant 69% des noeuds Dogecoin actifs, correctif disponible depuis v1.14.9 mais 87% des noeuds non patchés — antérieur au lancement de cbDOGE, sans lien avec Coinbase"
+    ],
+    "controversies": [
+      "2024-2026: volatilité de sentiment récurrente liée aux publications d'Elon Musk (mouvements intrajournaliers de 10-40%, rallyes ponctuels >100%), influence en recul progressif courant 2026",
+      "2026-03-17: classification conjointe SEC/CFTC 'digital commodity' pour DOGE (parmi 16 cryptoactifs), ouvrant la voie à des ETF spot (21Shares TDOG, janvier 2026)"
+    ],
+    "dependencies": {
+      "issuer": "Coinbase",
+      "custodians": [
+        "Coinbase (garde du DOGE natif backant cbDOGE)"
+      ],
+      "underlyings": [
+        "DOGE natif (Dogecoin)"
+      ],
+      "keyCounterparties": [
+        "Coinbase (droits blacklist/pause)",
+        "Chainlink CCIP (bridge exclusif des wrapped assets Coinbase depuis déc. 2025)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 2155143,
+      "dailyLiquidityUsd": 19156,
+      "ratioPct": 11254,
+      "note": "Volume cbDOGE 24h agrégé (CoinGecko, 2026-07-12), Aerodrome Slipstream CBDOGE/CBBTC (~9,0K$) + CBDOGE/WETH (~5,2K$) + Uniswap V4 CBDOGE/CBBTC (~4,0K$). CoinMarketCap indique un chiffre divergent (~49K$) à un snapshot différent, écart non résolu. Ratio de très loin le plus dégradé des 3 actifs de cette vague."
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "cbdoge.md"
+  },
   "8453-0x2ae3f1ec7f1f5012cfeab0185bfc7aa3cf0dec22": {
     "symbol": "cbETH",
     "grade": "C",
@@ -271,6 +361,50 @@
     },
     "analyzedAt": "2026-07-12",
     "vaultNote": "cbeth.md"
+  },
+  "8453-0xcb17c9db87b595717c857a08468793f5bab6445f": {
+    "symbol": "cbLTC",
+    "grade": "D",
+    "gradeModifier": "+",
+    "components": {
+      "assetDesign": "D",
+      "issuer": "B",
+      "depegBacking": "B",
+      "counterparty": "B",
+      "recentSecurity": "B"
+    },
+    "redFlags": [
+      "Liquidité de sortie quasi nulle : seul pool on-chain identifié (Uniswap V3 Base, cbLTC/USDC) affichait une profondeur ~0$ au moment de l'analyse, aucun pool Aerodrome trouvé (contrairement à cbADA/cbDOGE)",
+      "TVL Morpho (717K$) ~= 18-122x le volume 24h selon la mesure retenue (agrégé vs pool on-chain unique), sur un unique marché — le plus petit collatéral des 3 actifs de cette vague"
+    ],
+    "maxAllocation": "1-5% ou éviter",
+    "summary": "cbLTC est un wrapped LTC émis par Coinbase sur Base, même modèle de custody 1:1 et même famille de contrat que cbBTC/cbXRP, lancé fin juin 2025 aux côtés de cbADA. Forces : émetteur régulé et coté, aucun dépeg ou hack constaté, risque réglementaire LTC réduit depuis la classification SEC/CFTC 'digital commodity' de mars 2026. Faiblesses majeures : marché secondaire on-chain quasi inexistant (pool unique identifié à profondeur ~0$, aucune alternative Aerodrome), TVL Morpho la plus faible des 3 actifs analysés. Verdict lender : liquidité de sortie structurellement insuffisante, note dégradée à D sur la composante asset design malgré un émetteur et un backing solides — allocation à éviter ou marginale uniquement.",
+    "incidents": [],
+    "controversies": [
+      "2022-05-19: déploiement de MimbleWimble (MWEB) sur Litecoin entraînant le délistement par 5 exchanges sud-coréens (Upbit, Bithumb, Coinone, Korbit, Gopax) pour non-conformité AML/KYC ; Binance suspend les dépôts/retraits taggés MWEB — antérieur de 3 ans à cbLTC mais précédent de friction réglementaire sur le réseau LTC",
+      "2026-03-17: classification conjointe SEC/CFTC 'digital commodity' pour LTC, réduisant le risque réglementaire de type security"
+    ],
+    "dependencies": {
+      "issuer": "Coinbase",
+      "custodians": [
+        "Coinbase (garde du LTC natif backant cbLTC)"
+      ],
+      "underlyings": [
+        "LTC natif (Litecoin)"
+      ],
+      "keyCounterparties": [
+        "Coinbase (droits blacklist/pause)",
+        "Chainlink CCIP (bridge exclusif des wrapped assets Coinbase depuis déc. 2025)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 716640,
+      "dailyLiquidityUsd": 5863,
+      "ratioPct": 12220,
+      "note": "Volume 24h agrégé cbLTC ~34,7-42,7K$ (CoinGecko/CMC, variable) mais seul pool on-chain localisé (Uniswap V3 Base cbLTC/USDC) affiche ~5,9K$/24h et une profondeur de pool ~0$ au moment du snapshot ; ratio calculé ici sur ce pool (structurellement le plus pertinent en cas de stress). Sur la base du volume agrégé le ratio serait ~1852% ; dans les deux cas très au-dessus du seuil red flag de 30%."
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "cbltc.md"
   },
   "8453-0xcb585250f852c6c6bf90434ab21a00f02833a4af": {
     "symbol": "cbXRP",
@@ -359,6 +493,99 @@
     },
     "analyzedAt": "2026-07-12",
     "vaultNote": "dcomp.md"
+  },
+  "1-0xa0769f7a8fc65e47de93797b4e21c073c117fc80": {
+    "symbol": "EUTBL",
+    "grade": "B",
+    "gradeModifier": "-",
+    "components": {
+      "assetDesign": "B",
+      "issuer": "B",
+      "depegBacking": "A",
+      "counterparty": "B",
+      "recentSecurity": "B"
+    },
+    "redFlags": [],
+    "maxAllocation": "15-25%",
+    "summary": "EUTBL représente des parts d'un fonds monétaire euro UCITS (Spiko Euro) investi à 100% en bons du Trésor d'États de la zone euro investment grade, émis par Spiko (société de gestion agréée MiFID, régulée ACPR/AMF France), avec CACEIS comme dépositaire et Chainlink comme oracle NAV quotidien. Forces : backing tier-1 souverain, régulation onshore forte (UCITS, l'une des plus strictes analysées), rachat primaire quasi-instantané (minutes/heures via Coinbase Payments) contrairement aux comparables RWA plus lents, smart contracts audités par Trail of Bits, aucun historique de dépeg depuis le lancement. Faiblesses : accès KYC obligatoire avec Permission Manager on-chain (pas permissionless), liquidité secondaire DEX quasi nulle (volume 24h proche de 0$), contrat upgradeable (UUPS), et une fuite de données KYC chez le prestataire tiers Onfido en 2025 (incident de conformité, pas financier). Verdict lender : le meilleur profil RWA analysé à ce jour sur ce protocole grâce à la qualité du backing souverain et à la rapidité du rachat primaire, malgré l'absence de marché secondaire on-chain.",
+    "incidents": [],
+    "controversies": [
+      "2025-08-26 à 2025-09-06 : cyberattaque chez Onfido (prestataire KYC tiers de Spiko) ayant exposé des pièces d'identité et selfies de clients Spiko -- incident fournisseur, pas un exploit des smart contracts ni une perte financière"
+    ],
+    "dependencies": {
+      "issuer": "Spiko (société de gestion MiFID agréée ACPR/AMF, France, fondée juin 2023)",
+      "custodians": [
+        "CACEIS (banque dépositaire, groupe Crédit Agricole/Santander)"
+      ],
+      "underlyings": [
+        "Bons du Trésor d'États de la zone euro investment grade",
+        "Repos adossés à ces titres",
+        "Cash"
+      ],
+      "keyCounterparties": [
+        "Twenty First Capital (société de gestion du véhicule fonds)",
+        "Chainlink (oracle NAV quotidien)",
+        "Coinbase Payments (rails de règlement stablecoin)",
+        "SG Forge (stablecoins EURCV/USDCV empruntés face à EUTBL sur Morpho)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 2908804,
+      "dailyLiquidityUsd": 0,
+      "ratioPct": 0,
+      "note": "Volume DEX/CEX 24h proche de 0$ (CoinGecko 2026-07-12, token non tradé activement) -> ratio non calculable par la methode standard. Rachat primaire via Spiko/CACEIS quasi-instantane (minutes/heures) adosse a un marche de T-bills zone euro tres profond, mitigeant fortement le risque malgre l'absence de marche secondaire on-chain"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "eutbl.md"
+  },
+  "8453-0x97be14dd8f994a5364573bc035d85309e7cb34de": {
+    "symbol": "JitoSOL",
+    "grade": "D",
+    "gradeModifier": "+",
+    "components": {
+      "assetDesign": "C",
+      "issuer": "B",
+      "depegBacking": "B",
+      "counterparty": "D",
+      "recentSecurity": "C"
+    },
+    "redFlags": [
+      "Bridge validator-based (Wormhole Guardian Network, seuil 13-sur-19) pour un LST cross-chain majeur -- red flag absolu du framework Pascal Tallarida (§6, 'Bridge validator-based pour asset cross-chain majeur')",
+      "Autorite de mint/burn/pause/upgrade du contrat NttManager sur Base concentree entre les mains de la seule Jito Foundation ; custody exacte de cette cle (EOA vs multisig, seuil) non trouvee",
+      "Liquidite de sortie Base tres insuffisante face a la TVL Morpho : ratio ≈ 51,6%, tres au-dessus du seuil red flag de 30%"
+    ],
+    "maxAllocation": "1-5%",
+    "summary": "JitoSOL est le liquid staking token dominant de Solana (Jito Foundation, lance nov. 2022, TVL ≈1,4-2 Md$, audite OtterSec/Neodyme, bug bounty actif), mais le token a l'adresse 0x97bE14Dd...cb34de sur Base est sa version cross-chain emise via le framework Wormhole NTT (burn-and-mint), pas le token natif Solana. Forces : LST sous-jacent mature et transparent (taux de change verifiable on-chain, aucun depeg constate), framework NTT audite (OtterSec, Neodyme, Cyfrin, Cantina). Faiblesses redhibitoires : bridge validator-based (19 Guardians Wormhole, seuil 13-sur-19) pour un actif cross-chain majeur -- exactement le red flag absolu du framework -- avec autorite d'administration du NttManager concentree chez la seule Jito Foundation et custody de cette cle non divulguee ; liquidite de sortie sur Base tres etroite (≈825K$/24h) face a la TVL Morpho (426K$, ratio ≈52%) ; ecosysteme Wormhole marque par le hack historique de 326 M$ (fevrier 2022, bridge different mais memes Guardians) et Jito Labs recemment cite (puis retire) dans une plainte RICO liee a Pump.fun. Verdict lender : collateral a traiter comme experimental sur ce deploiement Base specifique, allocation tres limitee malgre la solidite du protocole Jito lui-meme sur Solana.",
+    "incidents": [
+      "2022-02-02: hack du Wormhole Token Bridge (Portal), ~326 M$ (120 000 wETH) via bypass de verification de signature ; fonds integralement restitues par Jump Crypto. Concerne l'ancien bridge lock-and-mint (pas le framework NTT utilise par JitoSOL), mais meme reseau de Guardians pour l'attestation des messages.",
+      "2024-03: Jito Labs suspend temporairement son mempool public pour lutter contre les sandwich bots -- decision controversee sur la centralisation de fait du flux transactionnel.",
+      "2025: etude academique (ACM IMC 2025) recense >500 000 instances de sandwich attacks via l'infrastructure Jito (>7,7 M$ de pertes) ; Jito bannit 15 validateurs supplementaires apres un rapport on-chain sur des sandwich attacks generalisees."
+    ],
+    "controversies": [
+      "2023-12: attaques Sybil detectees et neutralisees lors de l'airdrop JTO (avec Allium Labs) -- gere correctement mais revelateur des limites des airdrops par points.",
+      "2025-07 a 2025-10: Jito Labs et son CEO Lucas Bruder nommes dans une extension de la plainte RICO Burwick Law/Wolf Popper contre Pump.fun (fraude alleguee de 1,5 Md$ facilitee par l'infrastructure MEV de Jito) ; retires de la plainte 'sans prejudice' en octobre 2025 apres accord avec les plaignants -- termes non publics, plainte potentiellement reformulable.",
+      "Controverse structurelle continue : l'auction de bundles Jito est neutre vis-a-vis du type de MEV (alloue le blockspace au plus offrant, sandwich attacks inclus), critiquee comme favorisant l'extraction de valeur au detriment des utilisateurs retail."
+    ],
+    "dependencies": {
+      "issuer": "Jito Foundation (emetteur du LST sur Solana ET administrateur du contrat NttManager/bridge sur Base)",
+      "custodians": [],
+      "underlyings": [
+        "SOL natif stake sur Solana (stake accounts du stake pool Jito, SPL Stake Pool Program)"
+      ],
+      "keyCounterparties": [
+        "Reseau de 19 Guardians Wormhole (Jump Crypto, Certus One, Figment, Chorus One, P2P Validator, Forbole, etc.), seuil de signature 13-sur-19 pour toute attestation cross-chain",
+        "Oracle jitosol-wormhole-updater (Wormhole Queries) pour la synchronisation du taux de change JitoSOL/SOL sur les chaines EVM",
+        "Gouvernance Jito Foundation : DAO + token JTO, administration deleguee a Webslinger, Fondation dirigee par 2 Directeurs independants + 1 Superviseur independant (FFP Corporate Services)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 426215,
+      "dailyLiquidityUsd": 825213,
+      "ratioPct": 51.6,
+      "note": "Volume 24h agrege des pools JitoSOL sur Base (DexScreener/GeckoTerminal, 2026-07-12) : Uniswap JitoSOL/cbBTC (≈414 749$) + PancakeSwap JitoSOL/SOL (≈410 463$) + 2 pools PancakeSwap quasi inactifs (<10$ cumules). Ratio tres au-dessus du seuil red flag de 30% ; le sous-jacent JitoSOL est tres liquide sur Solana (~750M$) mais y acceder depuis Base suppose un aller-retour non instantane via le bridge Wormhole NTT."
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "jitosol.md"
   },
   "1-0x73e0c0d45e048d25fc26fa3159b0aa04bfa4db98": {
     "symbol": "kBTC",
@@ -834,6 +1061,208 @@
     "analyzedAt": "2026-07-12",
     "vaultNote": "pst.md"
   },
+  "1-0xd28b0d694b8e814fa905a8b480b30691e18396eb": {
+    "symbol": "PT-apxUSD-27AUG2026",
+    "grade": "D",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "C",
+      "issuer": "C",
+      "depegBacking": "D",
+      "counterparty": "D",
+      "recentSecurity": "D"
+    },
+    "redFlags": [
+      "Sous-jacent apxUSD en dépeg actif et non résolu au 12/07/2026 (0,8695$, -13% sous le pair, ATL 0,7176$ le 26/06/2026)",
+      "Backing en preferred shares STRC/SATA fortement corrélé au Bitcoin et à la solvabilité de Strategy Inc. (dette convertible 6,7 Md$, enquête boursière Rosen Law Firm)",
+      "Design de mint 'unbacked' et attestation de réserves en retard d'environ 2 mois face à une multiplication par ~7,8x de l'offre",
+      "Rate Oracle modifiable sans délai d'exécution par l'Admin Safe (4-of-6) — risque identifié par le rapport de risque Yearn (29/05/2026, score 3,66/5, 'Elevated Risk')",
+      "Liquidité de sortie du pool Pendle inférieure au TVL Morpho déposé (ratio ~107%) — sortie complète structurellement impossible sans épuiser tout le pool"
+    ],
+    "maxAllocation": "1-5% ou skip",
+    "summary": "PT-apxUSD-27AUG2026 est un Principal Token Pendle qui se rachète 1:1 contre apxUSD à maturité (27/08/2026), sur le même sous-jacent et émetteur que [[pt-apxusd-5nov2026]] (apxUSD, stablecoin de base non rémunéré d'Apyx, distinct de son wrapper rémunéré apyUSD déjà noté D). Le mécanisme Pendle est solide, mais le PT hérite intégralement du risque du sous-jacent : apxUSD, backé par des preferred shares STRC (Strategy/ex-MicroStrategy) corrélées au Bitcoin, a subi deux dépegs sévères en juin 2026 et cote encore 0,8695$ (-13%) à la date de cette analyse. Ce marché présente en outre le profil de liquidité de sortie le plus dégradé des deux PT-apxUSD analysés : le TVL Morpho (1,07M$) dépasse la profondeur totale du pool Pendle (997K$). Verdict lender : collatéral à éviter en taille significative, risque de sortie en stress encore plus marqué que sur le pool 5NOV2026.",
+    "incidents": [
+      "2026-06-04: apxUSD dépeg à 0,93$ (-7%) suite à la chute du Bitcoin sous 64 000$, STRC tombant vers 90$",
+      "2026-06-05: pic de liquidations sur Morpho (>4M$ en une journée), sans bad debt",
+      "2026-06-25/26: second dépeg plus sévère, apxUSD à 0,7804$, ATL 0,7176$ (CoinGecko)",
+      "2026-07-12 (date de l'analyse): apxUSD cote toujours 0,8695$ (-13% sous le pair) — dépeg non résolu"
+    ],
+    "controversies": [
+      "2026-06: Rosen Law Firm ouvre une enquête boursière sur Strategy Inc./Michael Saylor concernant d'éventuelles déclarations trompeuses sur la stratégie de trésorerie Bitcoin",
+      "2026-07: STRC chute à 73,62$ (-26% sous le pair), Strategy suspend les ventes ATM de STRC ; dette convertible résiduelle de 6,7 Md$ identifiée comme risque de solvabilité",
+      "Rapport de risque Yearn (29/05/2026): gouvernance (Rate Oracle sans délai), absence de bug bounty, attestation de réserves en retard, custodian non divulgué"
+    ],
+    "dependencies": {
+      "issuer": "Pendle Finance (wrapper) sur Apyx (apyx.fi)",
+      "custodians": [],
+      "underlyings": [
+        "apxUSD (Apyx, stablecoin de base)",
+        "STRC/SATA (Strategy Inc. et autres DAT, backing sous-jacent)"
+      ],
+      "keyCounterparties": [
+        "Strategy Inc. (MSTR) via STRC",
+        "DFDV (premier investisseur institutionnel, tous les fondateurs Apyx en sont cadres)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 1071565,
+      "dailyLiquidityUsd": 996998,
+      "ratioPct": 107,
+      "note": "Liquidité = profondeur du pool Pendle 27AUG2026 (api-v2.pendle.finance, consultée 2026-07-12), pas un volume 24h ; le TVL Morpho dépasse la profondeur totale du pool, ratio très au-dessus du seuil red flag (30%) du framework"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "pt-apxusd-27aug2026.md"
+  },
+  "1-0xaf687b5ecb525ccea96115088999b4ed80c388b6": {
+    "symbol": "PT-apxUSD-5NOV2026",
+    "grade": "D",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "C",
+      "issuer": "C",
+      "depegBacking": "D",
+      "counterparty": "D",
+      "recentSecurity": "D"
+    },
+    "redFlags": [
+      "Sous-jacent apxUSD en dépeg actif et non résolu au 12/07/2026 (0,8695$, -13% sous le pair, ATL 0,7176$ le 26/06/2026)",
+      "Backing en preferred shares STRC/SATA fortement corrélé au Bitcoin et à la solvabilité de Strategy Inc. (dette convertible 6,7 Md$, enquête boursière Rosen Law Firm)",
+      "Design de mint 'unbacked' (pas de vérification on-chain du collatéral au mint) et attestation de réserves en retard d'environ 2 mois face à une multiplication par ~7,8x de l'offre",
+      "Rate Oracle modifiable sans délai d'exécution par l'Admin Safe (4-of-6) — risque identifié par le rapport de risque Yearn (29/05/2026, score 3,66/5, 'Elevated Risk')",
+      "Marché primaire d'apxUSD fermé au grand public (whitelist institutionnelle uniquement)"
+    ],
+    "maxAllocation": "1-5% ou skip",
+    "summary": "PT-apxUSD-5NOV2026 est un Principal Token Pendle qui se rachète 1:1 contre apxUSD à maturité (05/11/2026) ; identité confirmée via son contrat SY dédié (SY-apxUSD) référençant bien l'apxUSD d'Apyx, le stablecoin de base non rémunéré du protocole (distinct de son wrapper rémunéré apyUSD, déjà noté D). Le mécanisme Pendle est solide (audits ChainSecurity/Dedaub), mais le PT n'a aucune valeur plancher et hérite intégralement du risque du sous-jacent : apxUSD, backé par des preferred shares STRC (Strategy/ex-MicroStrategy) corrélées au Bitcoin, a subi deux dépegs sévères en juin 2026 et cote encore 0,8695$ (-13%) à la date de cette analyse, un dépeg non résolu. Un rapport de risque Yearn (score 3,66/5, 'Elevated Risk') signale en outre un design de mint non vérifié on-chain, une attestation de réserves très en retard et une gouvernance permettant de modifier le Rate Oracle sans délai. Verdict lender : collatéral à éviter en taille significative tant que le peg d'apxUSD n'est pas restauré et que la transparence du backing ne s'améliore pas.",
+    "incidents": [
+      "2026-06-04: apxUSD dépeg à 0,93$ (-7%) suite à la chute du Bitcoin sous 64 000$, STRC tombant vers 90$",
+      "2026-06-05: pic de liquidations sur Morpho (>4M$ en une journée), sans bad debt",
+      "2026-06-25/26: second dépeg plus sévère, apxUSD à 0,7804$, ATL 0,7176$ (CoinGecko)",
+      "2026-07-12 (date de l'analyse): apxUSD cote toujours 0,8695$ (-13% sous le pair) — dépeg non résolu"
+    ],
+    "controversies": [
+      "2026-06: Rosen Law Firm ouvre une enquête boursière sur Strategy Inc./Michael Saylor concernant d'éventuelles déclarations trompeuses sur la stratégie de trésorerie Bitcoin",
+      "2026-07: STRC chute à 73,62$ (-26% sous le pair), Strategy suspend les ventes ATM de STRC ; dette convertible résiduelle de 6,7 Md$ identifiée comme risque de solvabilité",
+      "Rapport de risque Yearn (29/05/2026): gouvernance (Rate Oracle sans délai), absence de bug bounty, attestation de réserves en retard, custodian non divulgué"
+    ],
+    "dependencies": {
+      "issuer": "Pendle Finance (wrapper) sur Apyx (apyx.fi)",
+      "custodians": [],
+      "underlyings": [
+        "apxUSD (Apyx, stablecoin de base)",
+        "STRC/SATA (Strategy Inc. et autres DAT, backing sous-jacent)"
+      ],
+      "keyCounterparties": [
+        "Strategy Inc. (MSTR) via STRC",
+        "DFDV (premier investisseur institutionnel, tous les fondateurs Apyx en sont cadres)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 2554653,
+      "dailyLiquidityUsd": 2634884,
+      "ratioPct": 97,
+      "note": "Liquidité = profondeur du pool Pendle 5NOV2026 (api-v2.pendle.finance, consultée 2026-07-12), pas un volume 24h ; ratio TVL Morpho / liquidité pool très au-dessus du seuil red flag (30%) du framework"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "pt-apxusd-5nov2026.md"
+  },
+  "1-0x3365554a61ceff74a76528f9e86c1e87946d16a5": {
+    "symbol": "PT-apyUSD-18JUN2026",
+    "grade": "D",
+    "gradeModifier": "-",
+    "components": {
+      "assetDesign": "D",
+      "issuer": "C",
+      "depegBacking": "D",
+      "counterparty": "D",
+      "recentSecurity": "D"
+    },
+    "redFlags": [
+      "Sous-jacent apyUSD déjà noté D (backing STRC corrélé Bitcoin, dépegs >20% juin 2026)",
+      "Maturité déjà passée (18/06/2026) : pool confirmé absent des marchés actifs de l'API Pendle, aucune liquidité AMM indépendante ne subsiste, tout liquidateur doit transiter par le goulot d'étranglement de liquidité déjà identifié sur apyUSD",
+      "Marché primaire d'apyUSD/apxUSD fermé au grand public (whitelist institutionnelle uniquement)",
+      "Maturité tombée en plein milieu des deux épisodes de dépeg de juin 2026, sans fenêtre de stabilité pour une sortie ordonnée avant expiry"
+    ],
+    "maxAllocation": "1-5% ou skip",
+    "summary": "PT-apyUSD-18JUN2026 est un Principal Token Pendle dont la maturité (18/06/2026) est déjà passée depuis 3-4 semaines au moment de l'analyse. Le PT est désormais pricé par l'oracle Morpho comme strictement équivalent à 1 apyUSD (convergence 1:1 achevée), et le pool Pendle correspondant est confirmé absent des marchés actifs de l'API publique : plus aucune liquidité AMM indépendante, la seule sortie possible passe par le rachat 1:1 puis par le goulot d'étranglement déjà documenté de la liquidité de sortie d'apyUSD (pool Curve étroit, majoritairement protocole-propriétaire). Le sous-jacent apyUSD est déjà noté D (backing en preferred shares STRC/Strategy corrélé au Bitcoin, deux dépegs >20% en juin 2026). Verdict lender : collatéral à éviter ou à cantonner à une allocation résiduelle ; profil de liquidité de sortie pire que les pools apyUSD encore actifs, la position ne bénéficiant plus d'aucun marché secondaire propre.",
+    "incidents": [
+      "2026-06-04: apxUSD (sous-jacent) dépeg à 0,93$ suite à la chute du Bitcoin sous 63 000$, STRC tombant à 90,38$",
+      "2026-06-05: pic de liquidations sur Morpho (>4M$ en une journée), sans bad debt",
+      "2026-06-18: maturité de ce pool PT, survenue entre les deux épisodes de dépeg de juin, sans fenêtre de stabilité",
+      "2026-06-25/26: second dépeg plus sévère, apxUSD à ~0,78-0,90$, ATL apyUSD à 0,9736$ (CoinGecko)"
+    ],
+    "controversies": [
+      "2026-06: Rosen Law Firm ouvre une enquête boursière sur Strategy Inc./Michael Saylor concernant la stratégie de trésorerie Bitcoin (backing indirect d'apyUSD)",
+      "2026-07: STRC chute à 73,62$ (-26% sous le pair), Strategy suspend son programme ATM, risque de 'death spiral' évoqué"
+    ],
+    "dependencies": {
+      "issuer": "Pendle Finance (wrapper) sur Apyx (apyx.fi) — maturité passée",
+      "custodians": [],
+      "underlyings": [
+        "apyUSD/apxUSD (Apyx)",
+        "STRC (Strategy/ex-MicroStrategy, backing sous-jacent)"
+      ],
+      "keyCounterparties": [
+        "Strategy (MSTR) via STRC"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 3296477,
+      "dailyLiquidityUsd": 505440,
+      "ratioPct": 652.3,
+      "note": "Pool Pendle propre à cette maturité confirmé absent de l'API des marchés actifs (0$ de liquidité AMM indépendante) ; proxy de sortie = volume 24h du pool Curve apyUSD/apxUSD (505 440$, GeckoTerminal), lui-même déjà flaggé red dans l'analyse apyUSD (LP majoritairement protocole-propriétaire, retirable unilatéralement)"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "pt-apyusd-18jun2026.md"
+  },
+  "1-0xee5c7cda577484b70b65c21235ecbd302bb290e2": {
+    "symbol": "PT-apyUSD-27AUG2026",
+    "grade": "D",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "C",
+      "issuer": "C",
+      "depegBacking": "D",
+      "counterparty": "D",
+      "recentSecurity": "D"
+    },
+    "redFlags": [
+      "Sous-jacent apyUSD déjà noté D (backing corrélé au Bitcoin via STRC, deux dépegs >20% en juin 2026)",
+      "Marché ouvert/actif pendant la période de fragilité persistante du sous-jacent, verrouillant l'exposition jusqu'au 27/08/2026",
+      "Marché primaire d'apyUSD/apxUSD fermé au grand public (whitelist institutionnelle uniquement)",
+      "Écart de ~10-15% entre les chiffres de liquidité pool selon la source (8,04M$ API Pendle vs ~9,17M$ presse)"
+    ],
+    "maxAllocation": "1-5% ou skip",
+    "summary": "PT-apyUSD-27AUG2026 est un Principal Token Pendle qui se rachète 1:1 contre apyUSD à maturité (27/08/2026) ; identité confirmée via Etherscan (contrat PendlePrincipalToken avec SY dédié référençant l'apyUSD d'Apyx déjà analysé). Le mécanisme Pendle est solide (audits ChainSecurity/Dedaub, battle-tested) et la liquidité AMM du pool est correcte à l'échelle actuelle (~8-9M$), mais le PT n'a aucune valeur plancher indépendante et hérite intégralement du risque du sous-jacent, déjà noté D. apyUSD est backé par des actions préférentielles (STRC/Strategy) corrélées au Bitcoin et a subi deux dépegs sévères (>20%) en juin 2026, moins de 3 semaines avant cette analyse. Verdict lender : collatéral à éviter en taille significative ou à cantonner à une allocation résiduelle, avec surveillance rapprochée du peg apyUSD/apxUSD et de la santé de STRC/Strategy avant la maturité d'août 2026.",
+    "incidents": [
+      "2026-06-04: apxUSD (sous-jacent) dépeg à 0,93$ suite à la chute du Bitcoin sous 63 000$, STRC tombant à 90,38$",
+      "2026-06-05: pic de liquidations sur Morpho (>4M$ en une journée), sans bad debt",
+      "2026-06-08 (semaine du): post-mortem officiel Apyx identifiant un mismatch structurel de liquidité overnight comme cause racine du stress",
+      "2026-06-25/26: second dépeg plus sévère, apxUSD à ~0,78-0,90$, ATL apyUSD à 0,9736$ (CoinGecko)"
+    ],
+    "controversies": [
+      "2026-06: Rosen Law Firm ouvre une enquête boursière sur Strategy Inc./Michael Saylor concernant la stratégie de trésorerie Bitcoin",
+      "2026-07: STRC chute à 73,62$ (-26% sous le pair), Strategy suspend son programme ATM, risque de 'death spiral' évoqué"
+    ],
+    "dependencies": {
+      "issuer": "Pendle Finance (wrapper) sur Apyx (apyx.fi)",
+      "custodians": [],
+      "underlyings": [
+        "apyUSD/apxUSD (Apyx)",
+        "STRC (Strategy/ex-MicroStrategy, backing sous-jacent)"
+      ],
+      "keyCounterparties": [
+        "Strategy (MSTR) via STRC"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 1143770,
+      "dailyLiquidityUsd": 8041640,
+      "ratioPct": 14.2,
+      "note": "Liquidité = profondeur du pool Pendle 27AOÛT2026 (api-v2.pendle.finance, consultée 2026-07-12) ; ratio en zone de vigilance (10-30%), meilleur des trois actifs apyUSD analysés dans cette vague, mais ne compense pas la note D du sous-jacent"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "pt-apyusd-27aug2026.md"
+  },
   "1-0xb5be35d8ff83d431899b95851cb17a2b4bcef150": {
     "symbol": "PT-apyUSD-5NOV2026",
     "grade": "D",
@@ -1113,6 +1542,92 @@
     "analyzedAt": "2026-07-12",
     "vaultNote": "pt-usdat-27aug2026.md"
   },
+  "1-0xae78736cd615f374d3085123a210448e74fc6393": {
+    "symbol": "rETH",
+    "grade": "B",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "B",
+      "issuer": "A",
+      "depegBacking": "B",
+      "counterparty": "A",
+      "recentSecurity": "B"
+    },
+    "redFlags": [],
+    "maxAllocation": "15-25%",
+    "summary": "rETH est le liquid staking token de Rocket Pool, le protocole de staking Ethereum décentralisé le plus ancien (nov. 2021) et le plus décentralisé côté node operators (>3 200 opérateurs indépendants, accès permissionless dès 8 ETH). Forces : double audit (Sigma Prime, ConsenSys Diligence), TVL ~1,1 Md$ sans bad debt, gouvernance pDAO/oDAO documentée, aucun dépeg en 4+ ans y compris pendant les crises 2022, buffer pool Saturn (Aave, ~24h) améliorant la liquidité de sortie depuis 2026. Faiblesses : liquidité DEX secondaire structurellement fine relativement au market cap, reporting du taux de change dépendant d'un comité oDAO restreint sur invitation, épisodes de phishing ciblant la marque en 2024. Verdict lender : collatéral solide, comparable à wstETH en profil de risque, bon candidat pour une allocation standard 15-25%.",
+    "incidents": [
+      "2022-05-26: compromission de deux nodes Oracle DAO (workstation piraté), vol de ~28 000 $ en ETH/RPL, aucune perte pour les détenteurs de rETH",
+      "2024-01: compte X officiel de Rocket Pool piraté, phishing redirigeant vers un faux site (compromission de communication, pas du protocole)",
+      "2024-03: whale phishé via approbation malveillante \"Increase Allowance\", perte de 4 851 rETH et 9 579 stETH (incident wallet utilisateur, pas faille du contrat)"
+    ],
+    "controversies": [
+      "2023-06: SEC accuse Consensys (MetaMask Staking) de vente de securities non enregistrées pour les programmes de staking Lido et Rocket Pool, RPL -10% sur l'annonce, aucune action directe contre Rocket Pool DAO à ce jour"
+    ],
+    "dependencies": {
+      "issuer": "Rocket Pool DAO (pDAO + oDAO)",
+      "custodians": [],
+      "underlyings": [
+        "ETH"
+      ],
+      "keyCounterparties": [
+        ">3 200 node operators indépendants (permissionless dès 8 ETH + bond RPL)",
+        "Comité oDAO (reporting soldes minipools et ratio RPL:ETH, invitation only)",
+        "Aave (buffer pool Saturn depuis fév. 2026, ~20% de la TVL protocole pour redemptions rapides)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 4328079,
+      "dailyLiquidityUsd": 459795,
+      "ratioPct": 941,
+      "note": "Volume 24h rETH tous exchanges (CoinGecko, juil. 2026), dominé par Curve OSETH/RETH et Uniswap V3. Ratio très au-dessus du seuil red flag (30%) mais atténué par le buffer pool Saturn (redemption native ~24h via Aave, capacité ~20% de la TVL protocole)."
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "reth.md"
+  },
+  "8453-0xb6fe221fe9eef5aba221c348ba20a1bf5e73624c": {
+    "symbol": "rETH",
+    "grade": "B",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "B",
+      "issuer": "A",
+      "depegBacking": "B",
+      "counterparty": "A",
+      "recentSecurity": "B"
+    },
+    "redFlags": [],
+    "maxAllocation": "15-25%",
+    "summary": "rETH est le liquid staking token de Rocket Pool, le protocole de staking Ethereum décentralisé le plus ancien (nov. 2021) et le plus décentralisé côté node operators (>3 200 opérateurs indépendants, accès permissionless dès 8 ETH). Forces : double audit (Sigma Prime, ConsenSys Diligence), TVL ~1,1 Md$ sans bad debt, gouvernance pDAO/oDAO documentée, aucun dépeg en 4+ ans y compris pendant les crises 2022, buffer pool Saturn (Aave, ~24h) améliorant la liquidité de sortie depuis 2026. Faiblesses : liquidité DEX secondaire structurellement fine relativement au market cap, reporting du taux de change dépendant d'un comité oDAO restreint sur invitation, épisodes de phishing ciblant la marque en 2024. Verdict lender : collatéral solide, comparable à wstETH en profil de risque, bon candidat pour une allocation standard 15-25%.",
+    "incidents": [
+      "2022-05-26: compromission de deux nodes Oracle DAO (workstation piraté), vol de ~28 000 $ en ETH/RPL, aucune perte pour les détenteurs de rETH",
+      "2024-01: compte X officiel de Rocket Pool piraté, phishing redirigeant vers un faux site (compromission de communication, pas du protocole)",
+      "2024-03: whale phishé via approbation malveillante \"Increase Allowance\", perte de 4 851 rETH et 9 579 stETH (incident wallet utilisateur, pas faille du contrat)"
+    ],
+    "controversies": [
+      "2023-06: SEC accuse Consensys (MetaMask Staking) de vente de securities non enregistrées pour les programmes de staking Lido et Rocket Pool, RPL -10% sur l'annonce, aucune action directe contre Rocket Pool DAO à ce jour"
+    ],
+    "dependencies": {
+      "issuer": "Rocket Pool DAO (pDAO + oDAO)",
+      "custodians": [],
+      "underlyings": [
+        "ETH"
+      ],
+      "keyCounterparties": [
+        ">3 200 node operators indépendants (permissionless dès 8 ETH + bond RPL)",
+        "Comité oDAO (reporting soldes minipools et ratio RPL:ETH, invitation only)",
+        "Aave (buffer pool Saturn depuis fév. 2026, ~20% de la TVL protocole pour redemptions rapides)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 4328079,
+      "dailyLiquidityUsd": 459795,
+      "ratioPct": 941,
+      "note": "Volume 24h rETH tous exchanges (CoinGecko, juil. 2026), dominé par Curve OSETH/RETH et Uniswap V3. Ratio très au-dessus du seuil red flag (30%) mais atténué par le buffer pool Saturn (redemption native ~24h via Aave, capacité ~20% de la TVL protocole)."
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "reth.md"
+  },
   "1-0x5086bf358635b81d8c47c66d1c8b9e567db70c72": {
     "symbol": "reUSD",
     "grade": "C",
@@ -1205,6 +1720,140 @@
     "analyzedAt": "2026-07-12",
     "vaultNote": "reusd.md"
   },
+  "1-0xbd373c9d3d8976a4fecc504a93c768bbe8c3227c": {
+    "symbol": "ROY-ST-apyUSD",
+    "grade": "D",
+    "gradeModifier": "-",
+    "components": {
+      "assetDesign": "D",
+      "issuer": "C",
+      "depegBacking": "D",
+      "counterparty": "D",
+      "recentSecurity": "D"
+    },
+    "redFlags": [
+      "Sous-jacent apyUSD déjà noté D (backing STRC corrélé Bitcoin, dépegs >20% juin 2026)",
+      "Coussin de protection Junior déjà tendu au ras de son plancher réglementaire (couverture 15,68% vs plancher 15%) au moment de l'analyse, très inférieur à l'ampleur des dépegs déjà constatés sur apyUSD",
+      "Retraits Senior suspendus pendant la fenêtre d'observation de 30 jours déclenchée par un drawdown du sous-jacent — précisément le moment où un lender voudrait sortir",
+      "Risques de gouvernance/custody documentés par l'audit de risque tiers Yearn sur le marché structurellement identique srRoyUSDC : Treasury multisig à custody totale, comptabilité auto-déclarée, proxy upgradeable sans timelock",
+      "Aucune liquidité secondaire dédiée identifiée pour ce marché spécifique (contrairement au marché frère srRoyUSDC qui dispose d'un pool Curve ~490K$)"
+    ],
+    "maxAllocation": "1-5% ou skip",
+    "summary": "ROY-ST-apyUSD est la tranche Senior du protocole de risk-tranching Royco (Royco Dawn) appliqué à l'apyUSD d'Apyx, déjà noté D. Le mécanisme protège en théorie Senior via un coussin de première perte Junior, mais ce coussin est déjà tendu à 15,68% de couverture (quasi au plancher réglementaire de 15%) au moment de l'analyse — très insuffisant face aux dépegs >20% déjà constatés sur apyUSD en juin 2026. En cas de nouveau stress, les retraits Senior sont suspendus pendant une fenêtre d'observation de 30 jours, exactement quand un lender voudrait sortir. Royco lui-même est multi-audité (Hexens, Certora, WatchPug, Cantina, Nethermind) sans hack documenté, mais un audit de risque tiers (Yearn) sur un marché structurellement identique (srRoyUSDC) révèle un Treasury multisig à custody totale et un contrat proxy upgradeable sans timelock. Verdict lender : collatéral à éviter en taille significative, l'empilement de complexité (apxUSD/apyUSD + tranching Royco) et l'absence de liquidité secondaire dédiée aggravant le profil de risque déjà D du sous-jacent.",
+    "incidents": [
+      "2026-06-04: apxUSD (sous-jacent) dépeg à 0,93$ suite à la chute du Bitcoin sous 63 000$, STRC tombant à 90,38$",
+      "2026-06-05: pic de liquidations sur Morpho exposé au sous-jacent (>4M$ en une journée), sans bad debt",
+      "2026-06-25/26: second dépeg plus sévère du sous-jacent, apxUSD à ~0,78-0,90$"
+    ],
+    "controversies": [
+      "Aucune controverse de gouvernance/légale distincte trouvée visant spécifiquement Royco Protocol au 2026-07-12",
+      "Point de vigilance architectural documenté par l'audit de risque tiers Yearn sur le marché frère srRoyUSDC (architecture partagée) : Treasury multisig à custody totale, comptabilité auto-déclarée via adjustTotalAssets(), proxy MultisigStrategy upgradeable sans timelock, concentration élevée des détenteurs"
+    ],
+    "dependencies": {
+      "issuer": "Royco Protocol / Royco Dawn (risk-tranching) sur Apyx (apyx.fi)",
+      "custodians": [],
+      "underlyings": [
+        "apyUSD/apxUSD (Apyx)",
+        "STRC (Strategy/ex-MicroStrategy, backing sous-jacent)"
+      ],
+      "keyCounterparties": [
+        "Strategy (MSTR) via STRC",
+        "Treasury multisig Royco (custody totale, documenté sur marché frère srRoyUSDC)",
+        "Curator / Dialectic Allocation Policy (gestion allocation tranches)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 507256,
+      "dailyLiquidityUsd": 0,
+      "ratioPct": 0,
+      "note": "Non trouvé : aucun pool DEX secondaire dédié identifié pour ce marché apyUSD (contrairement au marché frère srRoyUSDC qui a un pool Curve ~490K$). Sortie primaire = retrait natif Royco, structurellement limité par le plancher de couverture Junior (déjà à 15,68%, proche du seuil 15%) et suspendable pendant les fenêtres d'observation de 30 jours en cas de drawdown — traité comme red flag d'opacité/liquidité selon la règle du framework."
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "roy-st-apyusd.md"
+  },
+  "1-0xfae103dc9cf190ed75350761e95403b7b8afa6c0": {
+    "symbol": "rswETH",
+    "grade": "C",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "C",
+      "issuer": "C",
+      "depegBacking": "B",
+      "counterparty": "C",
+      "recentSecurity": "B"
+    },
+    "redFlags": [],
+    "maxAllocation": "5-15%",
+    "summary": "rswETH est le liquid restaking token de Swell Network (janv. 2024) : ETH staké puis restaké via EigenLayer. Forces : multi-audits (Sigma Prime, Cyfrin, Nethermind), Chainlink Proof of Reserve intégré pour la transparence des réserves, aucun hack direct du contrat depuis le lancement. Faiblesses majeures : liquidité de sortie DEX quasi morte (pools sous 7 000 $), market cap tombé à ~19 M$ après l'arrêt de Swellchain et le pivot stratégique de Swell vers un produit IA (Faro) hors restaking, dépendance à une organisation unique sans gouvernance décentralisée documentée équivalente à Rocket Pool. Verdict lender : collatéral plus fragile que ses pairs LST/LRT établis (wstETH, weETH, rETH), à allouer prudemment (5-15%) compte tenu du risque de liquidité de sortie et de l'incertitude organisationnelle post-pivot.",
+    "incidents": [
+      "2024-09: exploit Penpie (27 M$) — protocole tiers sur Pendle drainé via faille de contrôle d'accès propre à Penpie ; rswETH détenu en collatéral, contrat Swell non compromis"
+    ],
+    "controversies": [
+      "2026-05/06: arrêt définitif de Swellchain (L2 propriétaire de Swell) dans le cadre d'un pivot stratégique vers Faro (plateforme IA sur Hyperliquid) ; rswETH/swETH sur Ethereum mainnet dits non affectés techniquement, mais market cap rswETH tombé à ~19 M$ contre un pic d'écosystème Swell >1 Md$ TVL, signe de fuite de capitaux et de priorité organisationnelle décroissante pour le restaking"
+    ],
+    "dependencies": {
+      "issuer": "Swell Network",
+      "custodians": [],
+      "underlyings": [
+        "ETH"
+      ],
+      "keyCounterparties": [
+        "EigenLayer (couche de restaking, risque de slashing AVS)",
+        "Opérateurs AVS EigenLayer",
+        "Chainlink (oracle Proof of Reserve)",
+        "Équipe/fondation Swell Network (dépendance à un acteur unique, accentuée par le pivot Faro)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 1092224,
+      "dailyLiquidityUsd": 19000,
+      "ratioPct": 6068,
+      "note": "Volume 24h rswETH tous exchanges (CoinGecko/CoinMarketCap, juil. 2026) ; pools dédiés Curve (~6 900 $) et Uniswap V3 (~83 $) quasi morts, pas de buffer de redemption instantané comme rETH — ratio parmi les plus dégradés observés."
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "rsweth.md"
+  },
+  "1-0xda06ee2dacf9245aa80072a4407debdea0d7e341": {
+    "symbol": "savETH",
+    "grade": "D",
+    "gradeModifier": "+",
+    "components": {
+      "assetDesign": "C",
+      "issuer": "C",
+      "depegBacking": "C",
+      "counterparty": "D",
+      "recentSecurity": "B"
+    },
+    "redFlags": [
+      "Gouvernance (multisig, timelock) non documentée publiquement : opacité totale sur le contrôle du protocole, identique à savUSD",
+      "Proof of Reserve annoncée par Avant Protocol mais non encore en production (backing non vérifiable on-chain en temps réel)",
+      "Aucune liquidité secondaire (DEX) identifiée pour savETH/avETH sur Ethereum après recherche exhaustive — situation plus défavorable que savUSD (qui a au moins un pool sur Avalanche natif)"
+    ],
+    "maxAllocation": "1-5% ou skip",
+    "summary": "savETH est le token de staking d'avETH, la déclinaison ETH d'Avant Protocol (même émetteur que savUSD/avUSD), avec Ethereum comme chaîne native pour ce produit (contrairement à savUSD qui y est pontée via CCIP). Forces : mint/redeem natif sans dépendance de pont pour cette instance, audits par Omniscia et Dedaub, structure de tranches (Reserve Fund dédié puis avETHx Junior Tranche) censée absorber les pertes avant les holders de savETH, aucun incident connu à ce jour. Faiblesses : gouvernance et structure de multisig totalement opaques (recherche ciblée sans résultat), Proof of Reserve pas encore live, protocole jeune (2 ans), et surtout aucune liquidité secondaire identifiée pour ce collatéral sur Ethereum — pire situation que savUSD sur ce point précis. Verdict lender : collatéral à éviter ou à allocation résiduelle seulement ; l'opacité de gouvernance et l'absence totale de marché secondaire identifiable constituent le maillon faible qui tire la note globale vers D, malgré l'absence de risque de pont pour cette instance spécifique.",
+    "incidents": [],
+    "controversies": [],
+    "dependencies": {
+      "issuer": "Avant Protocol",
+      "custodians": [],
+      "underlyings": [
+        "avETH (backé 1:1 par ETH/WETH déposé nativement sur Ethereum)",
+        "avETHx (Junior Tranche, absorbe les pertes avant savETH)"
+      ],
+      "keyCounterparties": [
+        "Gestionnaire(s) non nommé(s) publiquement des \"stratégies Ethereum\" générant le rendement de savETH",
+        "Chainlink (Data Feeds pour l'exchange rate savETH/avETH)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 3154138,
+      "dailyLiquidityUsd": 0,
+      "ratioPct": 0,
+      "note": "Non trouvé : aucun pool DEX identifié pour savETH ou avETH sur Ethereum après recherche exhaustive (Uniswap, Curve, GeckoTerminal, DexScreener) ; traité comme facteur aggravant (opacité = risque) plutôt que ratio chiffré — situation plus défavorable que savUSD qui bénéficie d'un pool natif sur Avalanche"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "saveth.md"
+  },
   "1-0xb8d89678e75a973e74698c976716308abb8a46a4": {
     "symbol": "savUSD",
     "grade": "D",
@@ -1293,6 +1942,293 @@
     },
     "analyzedAt": "2026-07-12",
     "vaultNote": "siusd.md"
+  },
+  "8453-0x311935cd80b76769bf2ecc9d8ab7635b2139cf82": {
+    "symbol": "SOL",
+    "grade": "D",
+    "gradeModifier": "+",
+    "components": {
+      "assetDesign": "B",
+      "issuer": "B",
+      "depegBacking": "B",
+      "counterparty": "D",
+      "recentSecurity": "B"
+    },
+    "redFlags": [
+      "Bridge validator-based (double attestation Coinbase + Chainlink DON, seuil 3-of-5 actuel, 9-of-16 annoncé) pour un actif cross-chain majeur (SOL) — pattern explicitement identifié comme red flag par le framework §6, historiquement à l'origine des plus gros hacks de bridges (Wormhole 325M$ en 2022, Ronin 625M$, Harmony 100M$), y compris via des opérateurs réputés (Kelp DAO/LayerZero, 292M$, avril 2026)",
+      "Bridge en production depuis seulement ~7 mois (lancé le 4 décembre 2025) — aucun historique de stress-test long terme",
+      "Ratio TVL Morpho / liquidité de sortie 24h sur Base ≈ 46,3% (3 627 894$ / ≈7 842 956$), au-dessus du seuil red flag de 30% — mitigé par la possibilité de unwrap permissionless vers Solana natif (marché >500 Md$) mais ce chemin n'est pas instantané"
+    ],
+    "maxAllocation": "1-5% (ou skip)",
+    "summary": "Ce token SOL sur Base est du SOL natif bridgé via le Base-Solana Bridge officiel (lancé le 4 décembre 2025), co-opéré par Coinbase/Base et Chainlink CCIP — à ne pas confondre avec Wormhole/Portal, Allbridge, ou avec l'homonyme uSOL (Universal Solana, contrat différent). Forces : mint/redeem permissionless sans KYC, backing 1:1 vérifiable on-chain (vault Solana), liquidité secondaire correcte (~50% du market cap on-chain en volume 24h), audité par Cantina et Trail of Bits, aucun incident constaté à date. Faiblesse déterminante : le mécanisme repose structurellement sur un bridge validator-based (double signature Coinbase + Chainlink, seuil 3-of-5) pour un actif cross-chain majeur — exactement le pattern historiquement responsable des plus gros hacks de bridges (Wormhole, Ronin, Harmony, et plus récemment Kelp DAO/LayerZero en avril 2026), combiné à un track record de seulement 7 mois et un ratio TVL Morpho/liquidité de sortie au-dessus du seuil de vigilance. Verdict lender : collatéral à traiter comme expérimental malgré la qualité des opérateurs — allocation minimale ou à éviter tant que le bridge n'a pas fait ses preuves sur une période plus longue.",
+    "incidents": [
+      "Aucun incident, hack ou dépeg connu sur le Base-Solana Bridge ou ce token SOL depuis son lancement (2025-12-04) au 2026-07-12",
+      "2022-02: hack du bridge Wormhole/Portal (~325M$) — bridge différent, non lié au Base-Solana Bridge, cité comme précédent historique de la catégorie de risque",
+      "2026-04-01: exploit Drift Protocol (~285-286M$) sur Solana, via abus de la fonctionnalité 'durable nonces' — protocole DeFi Solana, sans lien avec le bridge Base-Solana ou le token SOL",
+      "2026-04-18/19: exploit du bridge LayerZero utilisé par Kelp DAO (~292M$ en rsETH) — bridge validator-based différent, précédent analogue de risque cité pour contexte"
+    ],
+    "controversies": [
+      "2023-06: la SEC désigne SOL comme security non enregistrée dans ses plaintes contre Binance et Coinbase (aux côtés de BNB, MATIC, ALGO, ATOM); la Solana Foundation conteste",
+      "2023-2024: la SEC met en pause puis retire progressivement ses allégations visant SOL dans le dossier Binance",
+      "2025-10-28: lancement des premiers ETF spot SOL aux Etats-Unis (Bitwise, Grayscale, Fidelity, Franklin Templeton, 21Shares, VanEck, Canary Capital) avec staking intégré — clarification réglementaire significative"
+    ],
+    "dependencies": {
+      "issuer": "Base (Coinbase) et Chainlink Labs, co-opérateurs du Base-Solana Bridge officiel",
+      "custodians": [
+        "Aucun custodian centralisé de type Coinbase Custody — SOL natif verrouillé dans un vault on-chain (Solana Bridge Program)"
+      ],
+      "underlyings": [
+        "SOL natif (Solana L1)"
+      ],
+      "keyCounterparties": [
+        "Coinbase (opérateur oracle + multisig configuration/upgrade du contrat Bridge sur Base)",
+        "Chainlink CCIP/DON (co-signataire oracle, seuil 3-of-5 actuel)",
+        "Base L2 (séquenceur et infrastructure)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 3627894,
+      "dailyLiquidityUsd": 7842956,
+      "ratioPct": 46.26,
+      "note": "Volume 24h agrégé sur ~14 paires DEX Base pour ce contrat précis (DEX Screener, 2026-07-12), principalement Aerodrome et PancakeSwap. Ratio au-dessus du seuil red flag de 30%, mais très en-deçà du cas cbXRP (~2671%). Unwrap permissionless vers Solana natif possible (marché >500Md$) mais non instantané."
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "sol.md"
+  },
+  "1-0xcd9f5907f92818bc06c9ad70217f089e190d2a32": {
+    "symbol": "srRoyUSDC",
+    "grade": "D",
+    "gradeModifier": "+",
+    "components": {
+      "assetDesign": "C",
+      "issuer": "C",
+      "depegBacking": "C",
+      "counterparty": "D",
+      "recentSecurity": "C"
+    },
+    "redFlags": [
+      "Gouvernance concentrée : signataires identiques entre les multisigs Owner (3-of-5), Treasury (3-of-5) et VAULT_MANAGER (3-of-4), aucune séparation des pouvoirs (audit de risque tiers Yearn)",
+      "Contrat MultisigStrategy (proxy upgradeable) sans timelock — identifié par Yearn comme le vecteur de risque le plus direct pour un détournement des fonds déployés",
+      "Comptabilité du vault 100% auto-déclarée par le Treasury multisig via adjustTotalAssets(), sans vérification cryptographique indépendante des positions sous-jacentes réelles",
+      "Concentration extrême des détenteurs : ~69% de la supply sur une seule adresse au moment du rapport Yearn (mars 2026)",
+      "80% du backing déployé dans des protocoles tiers décrits par Yearn comme relativement peu connus et à l'historique limité (Neutrl sNUSD, Tokemak autoUSD, Avant savUSD)",
+      "Ratio TVL Morpho / liquidité de sortie (pool Curve) ≈ 287%, très supérieur au seuil red flag de 30% du framework"
+    ],
+    "maxAllocation": "1-5% ou skip",
+    "summary": "srRoyUSDC est la tranche Senior du Dawn Senior Vault de Royco, qui redéploie l'USDC déposé sur un panier diversifié de quatre stratégies externes (Aave v3, Neutrl sNUSD, Tokemak autoUSD, Avant savUSD). Contrairement au marché frère ROY-ST-apyUSD, il dispose d'une liquidité secondaire réelle et croissante (pool Curve srRoyUSDC/frxUSD, ~560K$ à date) et n'a subi aucun dépeg documenté. Mais un audit de risque tiers indépendant (Yearn) révèle une gouvernance structurellement opaque et concentrée, partagée avec l'architecture Royco Dawn : multisigs Owner/Treasury/VAULT_MANAGER aux signataires identiques sans séparation des pouvoirs, un contrat MultisigStrategy upgradeable sans timelock qui contrôle 100% des fonds déployés, et une comptabilité entièrement auto-déclarée. Verdict lender : la qualité relative de l'asset design et du backing ne compense pas une gouvernance à risque documentée par un tiers indépendant, plus une liquidité de sortie très insuffisante face à la TVL Morpho — collatéral à éviter en taille significative.",
+    "incidents": [
+      "2026-03-18: piratage DNS/frontend de Neutrl (stratégie sous-jacente ~29% de l'allocation srRoyUSDC) — aucun fonds smart-contract perdu, migration de domaine et reprise des opérations en ~48h, aucun impact rapporté sur srRoyUSDC"
+    ],
+    "controversies": [],
+    "dependencies": {
+      "issuer": "Royco Protocol / Royco Dawn (Dawn Senior Vault), curateur Dialectic",
+      "custodians": [
+        "Treasury multisig 3-of-5 Gnosis Safe (0x170ff06326eBb64BF609a848Fc143143994AF6c8) — custody totale, comptabilité auto-déclarée"
+      ],
+      "underlyings": [
+        "Aave v3 USDC (~20%)",
+        "Neutrl sNUSD (~29%)",
+        "Tokemak autoUSD (~11%)",
+        "Avant savUSD, Avalanche (~40%, au plafond de concentration)"
+      ],
+      "keyCounterparties": [
+        "Dialectic (curateur)",
+        "Owner multisig 3-of-5 (signataires partagés avec Treasury/VAULT_MANAGER)",
+        "VAULT_MANAGER multisig 3-of-4"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 1608166,
+      "dailyLiquidityUsd": 560000,
+      "ratioPct": 287,
+      "note": "Aucun volume 24h confirmé trouvé ; profondeur du pool Curve srRoyUSDC/frxUSD utilisée comme proxy (~560K$ côté srRoyUSDC / ~867K$ total, DexScreener 12/07/2026), en hausse depuis ~489K$ rapportés par l'audit Yearn (26/03/2026) et ~600$ au lancement (06/01/2026). Ratio résultant très supérieur au seuil red flag de 30%."
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "srroyusdc.md"
+  },
+  "1-0xf7daf52958690f1dc89cd377d638e9fc94e76acf": {
+    "symbol": "stakedao-crvfrxUSD",
+    "grade": "C",
+    "gradeModifier": "-",
+    "components": {
+      "assetDesign": "C",
+      "issuer": "C",
+      "depegBacking": "B",
+      "counterparty": "C",
+      "recentSecurity": "C"
+    },
+    "redFlags": [],
+    "maxAllocation": "5-15%",
+    "summary": "Wrapper Morpho de Stake DAO (MorphoStrategyWrapper) sur un vault ERC-4626 détenant la LP Curve crvUSD/frxUSD stakée — trois couches de wrapping avec rewards CRV. Forces : sous-jacents solides (crvUSD surcollatéralisé sans dépeg depuis 2023, frxUSD backé T-bills tokenisés tier-1 à 103,7%), architecture auditée par 5 cabinets dont un audit dédié au support Morpho (Pashov, août 2025), sortie permissionless via unwrap avec ratios de liquidité confortables (<10%). Faiblesses : Stake DAO a subi deux exploits en 2026 (Votemarket ~176K$, vsdCRV via clé déployeur compromise sans multisig/timelock) révélant des angles morts opérationnels, contrats frxUSD sans audit externe identifié, wrapper très récent. Verdict lender : collatéral correct mais jeune et posé sur un protocole à l'hygiène de clés récemment prise en défaut — allocation modérée.",
+    "incidents": [
+      "2026-05-27: exploit vsdCRV Stake DAO (clé déployeur compromise, reconfiguration LayerZero OFT, ~91K$ extraits sur Arbitrum, mainnet non affecté, indemnisation intégrale votée SDGP-70)",
+      "2026-03-12: exploit Votemarket Stake DAO ~176K$ (oracle message spoofing via pont LaPoste) — module d'incitations, pas les vaults",
+      "2024-06: liquidation ~140M$ des positions CRV de Michael Egorov, ~10M$ de bad debt remboursée en quelques jours (sous-jacent crvUSD indirect)",
+      "2023-08-03: dépeg mineur crvUSD -0,35% par contagion post-exploit Vyper, résorbé en heures",
+      "2023-07-30: exploit Vyper Curve ~70M$ — crvUSD et ses pools explicitement non affectés"
+    ],
+    "controversies": [
+      "2025-12: controverse Frax \"stealth patch\" — vulnérabilité DoS sur FraxEtherRedemptionQueueV2 (frxETH) d'abord niée puis corrigée discrètement, litige d'attribution de bounty sur gov.frax.finance (aucune perte de fonds)",
+      "2024-2026: levier personnel récurrent de Michael Egorov sur CRV (liquidations massives 06/2024, avoirs tombés à ~34M$ en 02/2026) — risque de concentration documenté sur l'écosystème Curve",
+      "Aucune controverse propre à Stake DAO trouvée (ne pas confondre avec Stake.US, plateforme de gambling poursuivie en 2025, sans lien)"
+    ],
+    "dependencies": {
+      "issuer": "Stake DAO (wrapper + vault RewardVault v2)",
+      "custodians": [
+        "Securitize/BlackRock (BUIDL)",
+        "Superstate (USTB/USCC)",
+        "Circle (USDC)",
+        "FinresPBC / Frax Inc. (gestion collatéral frxUSD)"
+      ],
+      "underlyings": [
+        "LP Curve crvUSD/frxUSD",
+        "crvUSD",
+        "frxUSD",
+        "CRV (rewards)"
+      ],
+      "keyCounterparties": [
+        "Multisig Stake DAO 4/7 (admin vaults)",
+        "Curve DAO (pool, gauge, PegKeeper)",
+        "Frax DAO / frxGov",
+        "Michael Egorov (concentration CRV)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 413467,
+      "dailyLiquidityUsd": 5281319,
+      "ratioPct": 7.8,
+      "note": "Sortie via unwrap permissionless puis retrait proportionnel du pool Curve (TVL 11,95M$, volume 24h 5,28M$, GeckoTerminal 2026-07-12) ; ratio vs TVL pool ≈ 3,5%, vs volume 24h ≈ 7,8% — sous le seuil OK"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "stakedao-crvfrxusd.md"
+  },
+  "1-0xa31b5941f2e74d89bdc66632959fe6a152692920": {
+    "symbol": "stakedao-FrxMsUSD",
+    "grade": "D",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "D",
+      "issuer": "C",
+      "depegBacking": "D",
+      "counterparty": "D",
+      "recentSecurity": "C"
+    },
+    "redFlags": [
+      "msUSD (Metronome Synth) n'a AUCUN marché primaire de rachat (pas de redemption, seulement remboursement de dette CDP) — red flag absolu du framework, dépeg possible sans filet",
+      "Caps de supply/bridge msUSD modifiables par le governor sans timelock, proxies upgradables sous Safe 3/5 — Stake DAO exige timelock + multisig 4/7 avant le 2026-08-31 sous peine de dé-allocation, remédiation non constatée au 2026-07-12",
+      "~18M$ de msUSD empruntés contre du siUSD (noté D : réserve fractionnaire infiniFi, illiquide) — défaillance infiniFi = liquidations bloquées et créance irrécouvrable chez Metronome",
+      "Part de la supply msUSD mintée par l'AMO non quantifiée publiquement ; volume 24h du pool ≈ TVL (12,4M$), signature de flux AMO/arbitrage plutôt que de liquidité organique",
+      "IMPORTANT — homonyme vérifié : ce msUSD est celui de Metronome Synth (0xab5eB14c09D416F0aC63661E57EDB7AEcDb9BEfA), PAS celui de Main Street Finance qui a dépeggé de -71 à -90% en juin 2026"
+    ],
+    "maxAllocation": "1-5% ou skip",
+    "summary": "Wrapper Morpho de Stake DAO sur un vault ERC-4626 détenant la LP Curve frxUSD/msUSD stakée. Vérification critique : le msUSD sous-jacent est celui de Metronome Synth (CDP surcollatéralisé, Bloq), pas le msUSD effondré de Main Street Finance — le scénario catastrophe redouté ne s'applique pas. Restent des faiblesses structurelles lourdes : msUSD n'a aucun mécanisme de redemption (peg dépendant du seul marché secondaire et d'un AMO non quantifié), gouvernance Metronome sans timelock avec proxies upgradables sous Safe 3/5, exposition de ~18M$ à du siUSD illiquide noté D, décote persistante ~1% et pool déséquilibré 64% msUSD ; Stake DAO lui-même n'a accordé qu'une approbation conditionnelle avec ultimatum au 31/08/2026. Verdict lender : trop de maillons faibles empilés pour un collatéral à 91,5% de LLTV — skip ou exposition minimale en attendant la remédiation de gouvernance Metronome.",
+    "incidents": [
+      "2026-05-27: exploit vsdCRV Stake DAO (clé déployeur compromise, ~91K$ extraits sur Arbitrum, mainnet non affecté, indemnisation SDGP-70)",
+      "2026-03-12: exploit Votemarket Stake DAO ~176K$ (oracle message spoofing) — module d'incitations, pas les vaults",
+      "2025-10: anomalies de prix msUSD sur agrégateurs (ATL 0,4279$ / ATH 3,43$ CoinGecko) — probables artefacts de pools illiquides, pas de dépeg généralisé confirmé",
+      "2023-07-30: pool Curve msETH-ETH de Metronome vidée lors de l'exploit Vyper (majorité des fonds récupérés par whitehat et redistribués) — msUSD et le CDP non affectés directement"
+    ],
+    "controversies": [
+      "2026-06-29: LMAP-3 Stake DAO — approbation seulement conditionnelle du marché frxUSD/msUSD, ultimatum de remédiation gouvernance Metronome (timelock + 4/7) au 2026-08-31 sous peine de dégradation et dé-allocation",
+      "2025-12: controverse Frax \"stealth patch\" frxETH (vulnérabilité niée puis corrigée discrètement, litige de bounty, aucune perte de fonds)",
+      "2019-03: Jeff Garzik (Bloq) assigné comme témoin dans le litige Kleiman vs. Craig Wright — témoin, pas accusé",
+      "2006: Matthew Roszak (président Bloq) transige avec la SEC pour délit d'initié (Blue Rhino, 240 740$ de pénalités, sans admission) — antérieur de 10 ans à Bloq"
+    ],
+    "dependencies": {
+      "issuer": "Stake DAO (wrapper + vault RewardVault v2)",
+      "custodians": [
+        "Securitize/BlackRock (BUIDL)",
+        "Superstate (USTB/USCC)",
+        "Circle (USDC)",
+        "FinresPBC / Frax Inc. (frxUSD)"
+      ],
+      "underlyings": [
+        "LP Curve frxUSD/msUSD",
+        "frxUSD",
+        "msUSD (Metronome Synth)",
+        "CRV (rewards)",
+        "collatéraux CDP Metronome (ETH, USDC, vaTokens Vesper)",
+        "siUSD/infiniFi (exposition indirecte ~18M$)"
+      ],
+      "keyCounterparties": [
+        "Multisig Stake DAO 4/7",
+        "Governor Safe Metronome 3/5 sans timelock (0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33)",
+        "AMO minter Metronome (0x82Ed3Fc9D93112124B04B6C7B35394A5AbA8af39)",
+        "Vesper Finance (Bloq)",
+        "infiniFi (siUSD)",
+        "Curve DAO",
+        "Frax DAO",
+        "bridge LayerZero OFT"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 2803613,
+      "dailyLiquidityUsd": 12373864,
+      "ratioPct": 22.7,
+      "note": "Pool Curve frxUSD/msUSD : TVL 12,44M$, volume 24h 12,37M$ (GeckoTerminal API 2026-07-12) — ratio 22,7% en zone vigilance ; mais le burn du LP rend ~64% de la valeur en msUSD SANS redemption native, sortie en stress dépendante du seul marché secondaire msUSD fragmenté (Curve msUSD/crvFRAX ~12M$, Base, Optimism)"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "stakedao-frxmsusd.md"
+  },
+  "1-0x62923a64d7940be920fd5cdc27873ab8eec59f9f": {
+    "symbol": "stakedao-frxsUSDS",
+    "grade": "C",
+    "gradeModifier": "-",
+    "components": {
+      "assetDesign": "C",
+      "issuer": "C",
+      "depegBacking": "B",
+      "counterparty": "C",
+      "recentSecurity": "C"
+    },
+    "redFlags": [
+      "Ratio TVL Morpho / volume 24h du pool ≈ 258% (>30% = zone rouge) — atténué par le canal de sortie réel (burn proportionnel du LP puis redemption native sUSDS via PSM Sky et frxUSD via custodians/pools), ratio vs TVL du pool 24%, mais la TVL du pool a fondu de ~52M$ à 1,64M$ : liquidité fragile"
+    ],
+    "maxAllocation": "5-10%",
+    "summary": "Wrapper Morpho de Stake DAO sur un vault ERC-4626 détenant la LP Curve frxUSD/sUSDS stakée (LMAP-1, mai 2026, LLTV 94,5%). Forces : deux jambes de qualité correcte (sUSDS de Sky avec redemption native profonde via PSM, frxUSD backé T-bills tokenisés tier-1 à 103,7%), pool équilibré 51/49, architecture auditée dont audit dédié Morpho (Pashov 08/2025). Faiblesses : pool devenu très fin (TVL 1,64M$ contre ~52M$ auparavant, ~10 transactions/24h), Stake DAO a subi deux exploits en 2026 révélant des lacunes de gestion de clés, contrats frxUSD sans audit externe, fonction freeze USDS côté Sky. Verdict lender : sous-jacents sains mais liquidité du pool fragile — allocation limitée et surveillance de la TVL du pool obligatoire avant tout renforcement.",
+    "incidents": [
+      "2026-05-27: exploit vsdCRV Stake DAO (clé déployeur compromise, ~91K$ extraits sur Arbitrum, mainnet non affecté, indemnisation SDGP-70)",
+      "2026-03-12: exploit Votemarket Stake DAO ~176K$ (oracle message spoofing) — module d'incitations, pas les vaults",
+      "2026: fonte de la TVL du pool Curve frxUSD/sUSDS de ~52M$ à ~1,64M$ (retrait massif de LP, pas un exploit)",
+      "2020-03-12: Black Thursday MakerDAO, ~5,67M DAI de bad debt non compensée (sous-jacent sUSDS indirect)"
+    ],
+    "controversies": [
+      "2024-09: rebranding MakerDAO -> Sky, introduction de la fonction freeze/upgradabilité sur USDS (régression de centralisation vs DAI)",
+      "2025-02: proposition d'urgence de Rune Christensen sur les paramètres MKR votée sans débat (controverse gouvernance Sky)",
+      "2025-12: controverse Frax \"stealth patch\" frxETH (vulnérabilité niée puis corrigée discrètement, litige de bounty, aucune perte de fonds)",
+      "Aucune controverse propre à Stake DAO trouvée (ne pas confondre avec Stake.US, gambling, sans lien)"
+    ],
+    "dependencies": {
+      "issuer": "Stake DAO (wrapper + vault RewardVault v2)",
+      "custodians": [
+        "Securitize/BlackRock (BUIDL)",
+        "Superstate (USTB/USCC)",
+        "Circle (USDC, PSM Sky)",
+        "FinresPBC / Frax Inc.",
+        "BlockTower/Monetalis/Centrifuge (RWA Sky)"
+      ],
+      "underlyings": [
+        "LP Curve frxUSD/sUSDS",
+        "frxUSD",
+        "sUSDS (USDS)",
+        "CRV (rewards)"
+      ],
+      "keyCounterparties": [
+        "Multisig Stake DAO 4/7 (admin vaults)",
+        "Curve DAO (pool, gauge)",
+        "Frax DAO / frxGov",
+        "Gouvernance Sky (freeze USDS)",
+        "Oracle Chainlink Sky Savings Rate (CAPO)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 398762,
+      "dailyLiquidityUsd": 154761,
+      "ratioPct": 258,
+      "note": "Volume 24h du pool Curve 154,8K$ pour 1,64M$ de TVL (~10 tx, GeckoTerminal API 2026-07-12) ; sortie réelle = burn proportionnel du LP (ratio vs TVL pool 24,4%) puis redemption native sUSDS (PSM Sky ~4Md$) et frxUSD (pool crvUSD/frxUSD 12M$ + custodians) — praticable à la taille actuelle mais pool fragile"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "stakedao-frxsusds.md"
   },
   "1-0x88887be419578051ff9f4eb6c858a951921d8888": {
     "symbol": "stcUSD",
@@ -1699,6 +2635,110 @@
     "analyzedAt": "2026-07-12",
     "vaultNote": "syrupusdc.md"
   },
+  "1-0x6dff69eb720986e98bb3e8b26cb9e02ec1a35d12": {
+    "symbol": "syzUSD",
+    "grade": "D",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "D",
+      "issuer": "C",
+      "depegBacking": "C",
+      "counterparty": "D",
+      "recentSecurity": "C"
+    },
+    "redFlags": [
+      "Gouvernance 100% centralisée (Yuzu Fintech LLC), aucun DAO ni timelock, pouvoirs de pause et modification de paramètres unilatéraux",
+      "Liquidité secondaire quasiment absente sur Ethereum mainnet (chaîne utilisée par Morpho) : 9 holders seulement, aucun pool DEX identifié",
+      "Deux incidents de contagion réels déjà survenus en ~1 an d'existence (Balancer V2 nov. 2025, Stream Finance xUSD nov. 2025), absorbés par un Reserve Fund de seulement 1M$",
+      "Marché primaire totalement fermé au retail (KYC/AML/KYB investisseurs éligibles uniquement)"
+    ],
+    "maxAllocation": "1% (ou skip)",
+    "summary": "syzUSD est le vault de staking du stablecoin à rendement yzUSD de Yuzu Money, à ne pas confondre avec l'homonyme Yuzu Finance (DEX sur Movement, projet distinct). Le rendement provient d'un panier composite de T-bills tokenisés, CLOs AAA, prêts surcollatéralisés et positions delta-neutral via des protocoles tiers (Maple, Ethena, Hyperliquid, Morpho, Euler, Pendle), avec une transparence des réserves supérieure à la moyenne (dashboard Accountable en temps réel). Mais la gouvernance est entièrement centralisée sans DAO ni timelock, le marché primaire est fermé au retail, et le protocole a déjà subi deux épisodes de contagion réels (Balancer, Stream Finance/xUSD) en un an d'existence, absorbés par un Reserve Fund jugé sous-dimensionné. Verdict lender : liquidité de sortie quasi nulle sur la chaîne utilisée par Morpho, allocation minimale ou à éviter.",
+    "incidents": [
+      "2025-11-03: exploit Balancer V2 (128M$ drainés), exposition de Yuzu via ses stratégies tierces mais retrait rapide via Sentinel, perte fortement limitée",
+      "2025-11 (date précise non déterminée): perte liée à l'exposition au stablecoin xUSD de Stream Finance (effondrement du xUSD), entièrement absorbée par le Reserve Fund de Yuzu (1M$), aucun impact déposants"
+    ],
+    "controversies": [
+      "Aucune controverse légale/réglementaire trouvée au 2026-07-12 concernant Yuzu Money/Yuzu Fintech LLC ; seul bruit identifié est un procès Nintendo contre l'émulateur homonyme 'Yuzu' (2024), sans rapport"
+    ],
+    "dependencies": {
+      "issuer": "Yuzu Money (Yuzu Fintech LLC) — entité non retrouvée dans les registres publics",
+      "custodians": [
+        "Fordefi (MPC, SOC2 Type II, assuré Munich Re)",
+        "Accountable (preuve de réserves zkTLS)"
+      ],
+      "underlyings": [
+        "T-bills tokenisés (Superstate, Securitize, Centrifuge)",
+        "CLOs AAA (JAAA, STAC)",
+        "Prêts surcollatéralisés (Maple/Syrup)",
+        "Positions Ethena/Hyperliquid",
+        "Positions à levier Morpho/Euler/Pendle"
+      ],
+      "keyCounterparties": [
+        "Maple Finance",
+        "Ethena",
+        "Hyperliquid",
+        "Balancer (incident de contagion)",
+        "Stream Finance (incident de contagion via xUSD)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 1556775,
+      "dailyLiquidityUsd": 15619,
+      "ratioPct": 9968,
+      "note": "Aucun pool DEX identifié sur Ethereum mainnet (9 holders seulement, chaîne utilisée par Morpho) ; liquidité réelle concentrée sur Plasma (Curve YZUSD/USDT0, depth ±2% ~15 619$, volume 24h incohérent selon la source : 1 093$ à 226 753$) — ratio calculé avec la profondeur la plus fiable, red flag critique quelle que soit l'hypothèse retenue"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "syzusd.md"
+  },
+  "1-0x80e1048ede66ec4c364b4f22c8768fc657ff6a42": {
+    "symbol": "upUSDC",
+    "grade": "D",
+    "gradeModifier": "+",
+    "components": {
+      "assetDesign": "C",
+      "issuer": "C",
+      "depegBacking": "C",
+      "counterparty": "D",
+      "recentSecurity": "B"
+    },
+    "redFlags": [
+      "Contrat upgradeable (TransparentUpgradeableProxy EIP-1967), pas de sécurité par immuabilité",
+      "Dépendance structurelle totale à August (infrastructure backend KYC/prime brokerage) : mêmes fondateurs qu'Upshift, séparation d'équipe encore en cours au moment de l'analyse",
+      "Curateur et emprunteurs institutionnels du vault upUSDC non identifiés publiquement",
+      "Mécanisme de retrait normal (hors stress) non confirmé publiquement : risque de gating par subaccount selon la documentation générale du protocole",
+      "Aucun marché secondaire (DEX) identifié pour upUSDC ; seule alternative = marché Pendle PT-upUSDC, profondeur non vérifiable",
+      "Absence de programme de bug bounty actif malgré un volume d'audits important"
+    ],
+    "maxAllocation": "1-5% ou à éviter",
+    "summary": "upUSDC est le token de part du vault de prêt institutionnel phare d'Upshift Finance (proxy upgradeable vérifié sur Etherscan, 6 décimales), qui prête l'USDC déposé à des emprunteurs institutionnels KYC/KYB via l'infrastructure de prime brokerage August. Forces : de nombreux audits par des auditeurs reconnus (ChainSecurity, Sigma Prime, Hacken, OtterSec, Halborn), aucun hack direct connu, dépôt primaire apparemment ouvert. Faiblesses majeures : dépendance structurelle à August (mêmes fondateurs, séparation d'équipe en cours), curateur et emprunteurs de ce vault précis non identifiés publiquement, contrat upgradeable, mécanisme de retrait normal non confirmé, absence totale de liquidité secondaire identifiée et de bug bounty. Verdict lender : collatéral opaque sur ses contreparties clés et sa liquidité de sortie, allocation minimale recommandée voire à éviter tant que ces zones d'ombre ne sont pas clarifiées.",
+    "incidents": [
+      "2026-04 (~19 avril): exploit Kelp DAO (rsETH) de 292M$ via le bridge LayerZero — Upshift a activé des restrictions d'urgence sur son exposition rsETH dans d'autres vaults du protocole (pas upUSDC directement), aucune perte documentée pour Upshift"
+    ],
+    "controversies": [
+      "2026: revue tierce indépendante (Blind Dev) note seulement 5/12 membres d'équipe vérifiables sur LinkedIn, absence de bug bounty, base de code fermée malgré contrats vérifiés, protocole qualifié de 'hybride' plutôt que réellement décentralisé (multisig + KYC/KYB off-chain)",
+      "Divergence non résolue entre sources sur l'audit ChainSecurity : une revue tierce évoque une vulnérabilité high-severity liée aux retraits acceptée comme risque géré, alors que le résumé officiel indique aucun problème high/medium non corrigé"
+    ],
+    "dependencies": {
+      "issuer": "Upshift Finance (protocole lancé en 2024)",
+      "custodians": [],
+      "underlyings": [
+        "Prêts overcollatéralisés à des emprunteurs institutionnels KYC/KYB non nommés publiquement"
+      ],
+      "keyCounterparties": [
+        "August (infrastructure backend KYC/prime brokerage, mêmes fondateurs qu'Upshift)",
+        "Curateur du vault upUSDC (non identifié publiquement)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 3410110,
+      "dailyLiquidityUsd": 0,
+      "ratioPct": 0,
+      "note": "Aucun pool DEX (Curve/Uniswap) identifié pour upUSDC ; marché Pendle PT-upUSDC existant mais profondeur non vérifiable (page DefiLlama bloquée 403) et non équivalente à une liquidité de sortie spot directe. Ratio non calculable — traité comme red flag."
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "upusdc.md"
+  },
   "1-0x0d86883faf4ffd7aeb116390af37746f45b6f378": {
     "symbol": "USD3",
     "grade": "C",
@@ -1848,6 +2888,54 @@
     "analyzedAt": "2026-07-12",
     "vaultNote": "usde.md"
   },
+  "1-0x098697ba3fee4ea76294c5d6a466a4e3b3e95fe6": {
+    "symbol": "USP",
+    "grade": "D",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "D",
+      "issuer": "C",
+      "depegBacking": "D",
+      "counterparty": "D",
+      "recentSecurity": "C"
+    },
+    "redFlags": [
+      "50% du backing dépend d'une stratégie de trading FX propriétaire opaque (Turquie) et d'un opérateur unique non identifié",
+      "Liquidité secondaire quasi nulle (volume 24h ~4 500$ pour 14,6M$ de market cap)",
+      "Baisse inexpliquée de 52,75% de la valeur totale des actifs en 30 jours (RWA.xyz), cause non identifiée",
+      "Contrat upgradeable sans timelock documenté, gouvernance de façade (DAO/Snapshot exécuté via multisig d'équipe)"
+    ],
+    "maxAllocation": "1-2% (ou skip)",
+    "summary": "USP est le stablecoin à rendement de PikuDAO (Piku Finance Limited/Morini Limited, BVI), à ne pas confondre avec l'homonyme Pareto USP. Son backing hybride combine 50% de stablecoins/DeFi et 50% d'une stratégie propriétaire d'arbitrage FX turc opaque, sans attestation indépendante périodique des réserves. Le marché primaire est KYC-gated, la liquidité secondaire est quasi inexistante (volume 24h de quelques milliers de dollars pour 14,6M$ de market cap), et une baisse inexpliquée de 52,75% de la valeur des actifs en 30 jours reste non résolue. Verdict lender : collatéral expérimental à backing partiellement opaque et liquidité de sortie très faible, allocation minimale ou à éviter.",
+    "incidents": [
+      "2026 (juin-juillet, date exacte non déterminée): baisse de 52,75% de la Total Asset Value du protocole en 30 jours (RWA.xyz), cause non identifiée",
+      "Pour mémoire (token distinct, sans rapport): hack du token USPD en décembre 2025 (~1M$, mint frauduleux)"
+    ],
+    "controversies": [
+      "Aucune controverse légale/réglementaire trouvée au 2026-07-12 ; incohérence relevée sur l'identité légale de l'émetteur (Piku Finance Limited vs Morini Limited) et juridiction de litige fixée à Istanbul malgré domiciliation BVI"
+    ],
+    "dependencies": {
+      "issuer": "PikuDAO / Piku Finance Limited (BVI) — nommé aussi Morini Limited selon RWA.xyz",
+      "custodians": [],
+      "underlyings": [
+        "USDC/USDT (backing initial)",
+        "Stratégie propriétaire d'arbitrage FX turc (BMMF)",
+        "Positions sur six protocoles DeFi dont Morpho Blue"
+      ],
+      "keyCounterparties": [
+        "Opérateur de la stratégie FX turque (non identifié publiquement)",
+        "Shufti (KYC)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 2729873,
+      "dailyLiquidityUsd": 7824,
+      "ratioPct": 34890,
+      "note": "Volume 24h ~4 471$ (Uniswap V4 USP/USDC, CoinGecko 2026-07-12) + ~3 353$ (Curve frxUSD/USP, pool incité >150% APR, depth totale ~137 600$) — ratio >> 30% : red flag majeur, sortie secondaire quasi impossible"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "usp.md"
+  },
   "1-0xf65460b84c13eeb911303336ab0f9d63cc79839f": {
     "symbol": "v-wmtUSDC",
     "grade": "D",
@@ -1894,6 +2982,54 @@
     },
     "analyzedAt": "2026-07-12",
     "vaultNote": "v-wmtusdc.md"
+  },
+  "1-0x7309e1e2e74af170c69bde8fcb30397f8697d5ff": {
+    "symbol": "wbravUSDC",
+    "grade": "D",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "D",
+      "issuer": "C",
+      "depegBacking": "D",
+      "counterparty": "D",
+      "recentSecurity": "B"
+    },
+    "redFlags": [
+      "Accès non permissionless (KYC/KYB, allowlist possible) combiné à une absence totale de marché secondaire (10 holders, 0 transfert 24h) : seule sortie possible = fenêtre de rachat T+1 dépendante de la liquidité disponible chez Bracket/Avant",
+      "\"Layered leveraged exposure\" assumée par l'émetteur lui-même, composition exacte des positions non vérifiable en temps réel on-chain",
+      "Gouvernance opaque : aucun détail public sur signataires multisig, timelock ou DAO ; contrat wrapper upgradeable (beacon proxy) contrôlé par Bracket",
+      "Double dépendance en cascade à un acteur unique (Bracket puis Avant Protocol), sans régulation identifiée pour aucun des deux",
+      "TVL globale de Bracket introuvable publiquement ; TVL Morpho de ce collatéral très faible (1,26 M$)",
+      "Actif très récent (wrapper déployé ~10 mois avant l'analyse), aucun historique de stress traversé"
+    ],
+    "maxAllocation": "1-5% ou à éviter",
+    "summary": "wbravUSDC est le wrapper non-rebasant (contrat vérifié BracketWrappedVault derrière un beacon proxy) d'une part de vault Bracket (bracket.fi) qui déploie de l'USDC avec un effet de levier superposé dans l'écosystème d'Avant Protocol (savUSD principalement, plus LP incitées et arbitrage emprunt-prêt), à ~15% APR affiché. Forces : Bracket a fait auditer son vault et son mécanisme de wrapping par Guardian à trois reprises en 2025, aucun hack connu sur le wrapper ni sur Avant Protocol, protocole Avant audité (Omniscia, Dedaub, Trail of Bits OPSEC) et revendiquant zéro perte lors de plusieurs stress tests du marché en 2025. Faiblesses majeures : accès non permissionless (KYC/allowlist), fenêtres de rachat quotidiennes T+1 sans marché secondaire (10 holders, 0 transfert 24h), levier explicitement assumé sur une composition non vérifiable en temps réel, gouvernance opaque (pas de détail multisig/timelock/DAO), contrat upgradeable, et double dépendance en cascade à Bracket puis Avant Protocol. Verdict lender : collatéral expérimental et jeune (~10 mois), à éviter ou allocation résiduelle seulement.",
+    "incidents": [
+      "2024-04-16/18: audit Zellic sur le contrat d'escrow LST de Bracket (produit distinct du wrapper wbravUSDC) révèle une vulnérabilité critique de réentrance dans les retraits, corrigée avant exploitation, aucune perte de fonds"
+    ],
+    "controversies": [],
+    "dependencies": {
+      "issuer": "Bracket (bracket.fi, opéré par Bracket Labs Group SA)",
+      "custodians": [],
+      "underlyings": [
+        "savUSD (Avant Protocol)",
+        "pools de liquidité incitées Avant",
+        "positions d'arbitrage emprunt/prêt Avant",
+        "vaults à revenu fixe Avant"
+      ],
+      "keyCounterparties": [
+        "Avant Protocol (sous-jacent stratégique, single point of failure du rendement)",
+        "Bracket (gérant du vault et émetteur du wrapper, contrat upgradeable)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 1260666,
+      "dailyLiquidityUsd": 0,
+      "ratioPct": 0,
+      "note": "Aucun marché secondaire (DEX/CEX) identifié pour wbravUSDC/bravUSDC (10 holders, 0 transfert 24h sur Etherscan) ; seule sortie = fenêtre de rachat quotidienne Bracket (T+1 jour + ~2h)"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "wbravusdc.md"
   },
   "1-0x2260fac5e5542a773aa44fbcfedf7c193bc2c599": {
     "symbol": "WBTC",
@@ -2164,6 +3300,46 @@
     "analyzedAt": "2026-07-12",
     "vaultNote": "wfalconx.md"
   },
+  "1-0x86b495e4cb00ab18ad94bfd7920479cc79e8ebfe": {
+    "symbol": "wJAAA",
+    "grade": "D",
+    "gradeModifier": "+",
+    "components": {
+      "assetDesign": "D",
+      "issuer": "B",
+      "depegBacking": "B",
+      "counterparty": "C",
+      "recentSecurity": "B"
+    },
+    "redFlags": [],
+    "maxAllocation": "1-5%",
+    "summary": "wJAAA est un wrapper 1:1 (déployé avril 2026, ~3 mois) détenant des parts du fonds JAAA (Janus Henderson Anemoy AAA CLO Fund, véhicule BVI tokenisé via Centrifuge, sous-géré par Janus Henderson). Le sous-jacent (tranches AAA de CLO) a un historique de crédit exceptionnel (zéro défaut depuis 1994, 2008 et COVID inclus) et l'émetteur infrastructure (Centrifuge) est audité et établi depuis 2019 sans incident. Mais le wrapper collatéral lui-même est très jeune, n'a qu'un seul détenteur (aucun marché secondaire), et le fonds sous-jacent n'offre qu'un rachat lent et gated (T+3, KYC non-US professionnel, ticket ~500K$) sans architecture de liquidité multi-couches documentée. Verdict lender : qualité de crédit du sous-jacent excellente mais problème d'accès/liquidité sévère qui tire la note globale vers D par la règle du maillon faible — allocation minimale ou à éviter tant que la TVL et la liquidité secondaire ne se développent pas.",
+    "incidents": [],
+    "controversies": [],
+    "dependencies": {
+      "issuer": "Anemoy Capital SPC Limited (fonds professionnel régulé BVI), sous-géré par Janus Henderson, tokenisé par Centrifuge",
+      "custodians": [
+        "Circle (custodian crypto)",
+        "Trident Trust (administrateur du fonds)"
+      ],
+      "underlyings": [
+        "Portefeuille de tranches AAA de CLO (Collateralized Loan Obligations, prêts syndiqués corporate/leveraged loans)"
+      ],
+      "keyCounterparties": [
+        "Janus Henderson (sous-gérant de la stratégie de crédit)",
+        "Centrifuge (infrastructure de tokenisation, protocole audité)",
+        "Opérateur du wrapper wJAAA non identifié publiquement (distinct du wrapper deJAAA officiel de Centrifuge)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 4499434,
+      "dailyLiquidityUsd": 0,
+      "ratioPct": 0,
+      "note": "Wrapper à un seul détenteur (Etherscan, 2026-07-12), aucun pool DEX identifié -> liquidité secondaire quasi nulle, ratio non calculable. Rachat primaire du fonds JAAA sous-jacent possible mais lent (T+3) et gated KYC/ticket 500K$ -- pas un canal de sortie rapide pour un liquidateur Morpho"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "wjaaa.md"
+  },
   "1-0xd3fd63209fa2d55b07a0f6db36c2f43900be3094": {
     "symbol": "wsrUSD",
     "grade": "C",
@@ -2343,6 +3519,133 @@
     },
     "analyzedAt": "2026-07-12",
     "vaultNote": "wsteth.md"
+  },
+  "1-0x911d86c72155c33993d594b0ec7e6206b4c803da": {
+    "symbol": "wstLINK",
+    "grade": "C",
+    "gradeModifier": "+",
+    "components": {
+      "assetDesign": "C",
+      "issuer": "B",
+      "depegBacking": "B",
+      "counterparty": "B",
+      "recentSecurity": "B"
+    },
+    "redFlags": [
+      "Liquidité DEX de sortie quasi nulle : pool Curve stLINK/LINK à 0 transaction sur 24h (239 360 $ de profondeur), wstLINK ~42 $ de volume 24h — ratio TVL Morpho / profondeur >1000%, très au-dessus du seuil red flag (30%). Non classé red flag absolu du framework car un canal de sortie primaire (unstaking protocolaire) existe, mais dépendance quasi totale à ce canal unique en cas de stress."
+    ],
+    "maxAllocation": "5-15%",
+    "summary": "wstLINK est le wrapper non-rebasing de stLINK, le liquid staking token de stake.link (ex-LinkPool, opérateur Chainlink depuis 2017) pour le LINK staké sur Chainlink Staking v0.2. Forces : mint/redeem permissionless sans KYC, gouvernance DAO documentée avec multisig et timelock, multiples audits (Cyfrin, Sigma Prime, Trust Security, Zellic, Code4rena sur Staking v0.2), aucun hack ni dépeg constaté depuis le lancement (déc. 2022). Faiblesses majeures : liquidité de sortie DEX quasiment inexistante (pool Curve stLINK/LINK à 0 transaction/24h), dépendance forte au canal d'unstaking natif (1-7 jours en temps normal, jusqu'à 35 jours en cas de forte demande), infrastructure Chainlink Staking v0.2 encore jeune (fin 2023), TVL protocole modeste (~60 M$). Verdict lender : collatéral de niche pour holders de LINK stakers, à traiter avec prudence et allocation basse vu l'absence quasi totale de marché secondaire — le maillon faible est clairement la liquidité, pas la sécurité ou la gouvernance.",
+    "incidents": [],
+    "controversies": [],
+    "dependencies": {
+      "issuer": "stake.link (ex-LinkPool), gouvernance DAO via Council (2 core contributors, 2 élus communauté, 2 node operators SDL, 1 NAIL), multisig 5-8 signataires + timelock 24h",
+      "custodians": [],
+      "underlyings": [
+        "LINK (staké sur Chainlink Staking v0.2)"
+      ],
+      "keyCounterparties": [
+        "Réseau de node operators Chainlink participant au protocole (01Node, ChainLayer, CryptoManufaktur, Framework Ventures, Stakin, stakefish, etc.)",
+        "Chainlink Labs / smart contracts Staking v0.2 (audité Code4rena août 2023, timelock on-chain)",
+        "Curve (pool stLINK/LINK, principal lieu d'échange secondaire)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 2658581,
+      "dailyLiquidityUsd": 239360,
+      "ratioPct": 1111,
+      "note": "Volume 24h réel quasi nul (wstLINK ~42$, pool Curve stLINK/LINK 0 transaction sur 24h le 2026-07-12 selon GeckoTerminal) ; ratio calculé sur la profondeur du pool (239 360$) faute de volume exploitable, très au-dessus du seuil red flag de 30%."
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "wstlink.md"
+  },
+  "8453-0x7fcd174e80f264448ebee8c88a7c4476aaf58ea6": {
+    "symbol": "wsuperOETHb",
+    "grade": "C",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "C",
+      "issuer": "B",
+      "depegBacking": "B",
+      "counterparty": "C",
+      "recentSecurity": "B"
+    },
+    "redFlags": [],
+    "maxAllocation": "5-15%",
+    "summary": "wsuperOETHb est le wrapper ERC-4626 de superOETHb, la version Base du LST OETH d'Origin Protocol, dont le rendement combine staking Beacon Chain (via wOETH bridgé) et une position de liquidité protocole-owned (AMO) sur Aerodrome. Forces : héritage du historique d'audits et de gouvernance d'Origin Protocol (cf. OETH), aucun dépeg ni incident connu depuis le lancement sur Base, peg activement défendu par l'AMO. Faiblesses : empilement de dépendances propre aux déploiements L2 (staking + wrap + bridge Chainlink CCIP + AMO Aerodrome), sortie en 3 paliers pouvant prendre jusqu'à 10 jours pour les gros montants, multisig Guardian avec pouvoir de retrait sur la position AMO, et liquidité secondaire sur Base très inférieure à la TVL déposée sur Morpho (ratio ~35% sur la profondeur du pool le plus liquide, ~2099% sur le volume 24h). Verdict lender : collatéral correct sur le plan de l'émetteur mais dégradé en C par l'empilement de couches de risque et la liquidité de sortie limitée propres au déploiement Base — allocation à limiter.",
+    "incidents": [],
+    "controversies": [
+      "2025-11-21: Aerodrome durcit ses règles d'incitation AMO (connector token requis), réduisant l'APY de Super OETH — dépendance externe à la gouvernance d'un partenaire tiers, pas un incident de sécurité"
+    ],
+    "dependencies": {
+      "issuer": "Origin Protocol",
+      "custodians": [],
+      "underlyings": [
+        "wOETH (OETH wrappé, staké nativement sur Ethereum mainnet)"
+      ],
+      "keyCounterparties": [
+        "Chainlink CCIP (bridge unique pour le rapatriement de rendement/collatéral vers Base)",
+        "Aerodrome (DEX hébergeant la position AMO protocole-owned)",
+        "Multisig Guardian (droit de retrait de la position AMO, jusqu'à 10 jours)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 3306111,
+      "dailyLiquidityUsd": 157520,
+      "ratioPct": 2099,
+      "note": "Ratio calculé sur le pool OETHb/WETH Curve (Base), le plus profond (~9,37M$, source GeckoTerminal/BaseScan, 2026-07) ; en utilisant la profondeur du pool plutôt que le volume 24h, le ratio tombe à ~35% (toujours au-dessus du seuil red flag de 30%) ; pool Aerodrome Slipstream WETH/OETHb plus petit (~3,74M$ profondeur, ~3 497$ volume 24h)"
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "wsuperoethb.md"
+  },
+  "1-0x68749665ff8d2d112fa859aa293f07a622782f38": {
+    "symbol": "XAUt",
+    "grade": "C",
+    "gradeModifier": null,
+    "components": {
+      "assetDesign": "B",
+      "issuer": "C",
+      "depegBacking": "B",
+      "counterparty": "C",
+      "recentSecurity": "C"
+    },
+    "redFlags": [
+      "Émetteur unique centralisé (Tether/TG Commodities) avec droits actifs de freeze/blacklist/upgrade sur le contrat, custodian(s) suisses non nommés publiquement.",
+      "Absence d'audit de sécurité de code par un auditeur reconnu de premier rang (uniquement attestations de réserves BDO Italia + bug bounty Tether).",
+      "Exclusion réglementaire du marché européen depuis le 1er juillet 2026 (Tether n'a pas demandé l'agrément MiCA)."
+    ],
+    "maxAllocation": "5-15%",
+    "summary": "XAUt est le token d'or physique de Tether (via TG Commodities, El Salvador), backé 1:1 par des lingots LBMA Good Delivery individualisés stockés en Suisse, avec attestations trimestrielles BDO Italia depuis 2022. Forces : backing tier-1 traçable par numéro de série, aucun dépeg >5% en 6 ans, liquidité secondaire correcte (~55 M$/24h sur plusieurs CEX majeurs, ratio TVL Morpho/liquidité ~4,4%). Faiblesses : émetteur entièrement centralisé avec droits de freeze/blacklist actifs, pas d'audit de code par un auditeur de premier rang, vulnérabilité transferFrom réelle découverte en 2023 (corrigée), controverses historiques de l'émetteur (règlements NYAG/CFTC 2021 sur USDT) et exclusion du marché européen depuis juillet 2026 (MiCA). Verdict lender : collatéral avec un backing physique solide et une bonne liquidité de sortie, mais la gouvernance 100% centralisée et l'historique de transparence discutable de l'émetteur justifient une allocation prudente, pas un statut tier-1.",
+    "incidents": [
+      "2023-04-05: vulnérabilité transferFrom découverte par BlockSec dans le contrat Tether Gold, corrigée par Tether, aucune perte de fonds confirmée"
+    ],
+    "controversies": [
+      "2021-02: règlement NYAG 18,5 M$ — Tether/Bitfinex reconnaissent avoir déformé la réalité des réserves adossant USDT",
+      "2021-10: règlement CFTC 42,5 M$ — USDT intégralement backé seulement 27,6% du temps sur 26 mois (2016-2018), fonds de réserve mélangés aux fonds corporate",
+      "2026-07: entrée en vigueur de MiCA en UE, Tether n'a pas demandé l'agrément — XAUT/USDT exclus de facto des marchés européens réglementés depuis le 1er juillet 2026"
+    ],
+    "dependencies": {
+      "issuer": "TG Commodities, S.A. de C.V. (El Salvador, licence DASP), Alpha Group Commodities Limited S.A. de C.V. (achat de l'or, filiale Tether Holdings)",
+      "custodians": [
+        "Coffres-forts suisses non nommés publiquement"
+      ],
+      "underlyings": [
+        "Or physique LBMA Good Delivery"
+      ],
+      "keyCounterparties": [
+        "Tether Holdings (contrôle total du contrat : mint/burn, freeze, blacklist, upgrade)",
+        "BDO Italia (attestations trimestrielles des réserves depuis 2022)",
+        "Ledn (partenariat prêts collatéralisés XAUT depuis juin 2026, non disponible UE/Canada)"
+      ]
+    },
+    "exitLiquidity": {
+      "morphoTvlUsd": 2415841,
+      "dailyLiquidityUsd": 55464143,
+      "ratioPct": 4.4,
+      "note": "Volume 24h tous exchanges confondus (CoinGecko, 2026-07-12), dominé par la paire XAUT/USDT sur Binance (~3 M$/24h). Ratio confortablement sous le seuil OK (10%)."
+    },
+    "analyzedAt": "2026-07-12",
+    "vaultNote": "xaut.md"
   },
   "1-0x657d9aba1dbb59e53f9f3ecaa878447dcfc96dcb": {
     "symbol": "ynETHx",

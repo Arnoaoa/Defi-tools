@@ -1,0 +1,50 @@
+{
+  "symbol": "JitoSOL",
+  "name": "Jito Staked SOL",
+  "addresses": {
+    "8453": "0x97bE14Dd8f994A5364573BC035D85309E7CB34de"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Bridge validator-based (Wormhole Guardian Network, seuil 13-sur-19) pour un LST cross-chain majeur -- red flag absolu du framework Pascal Tallarida (§6, 'Bridge validator-based pour asset cross-chain majeur')",
+    "Autorite de mint/burn/pause/upgrade du contrat NttManager sur Base concentree entre les mains de la seule Jito Foundation ; custody exacte de cette cle (EOA vs multisig, seuil) non trouvee",
+    "Liquidite de sortie Base tres insuffisante face a la TVL Morpho : ratio ≈ 51,6%, tres au-dessus du seuil red flag de 30%"
+  ],
+  "maxAllocation": "1-5%",
+  "summary": "JitoSOL est le liquid staking token dominant de Solana (Jito Foundation, lance nov. 2022, TVL ≈1,4-2 Md$, audite OtterSec/Neodyme, bug bounty actif), mais le token a l'adresse 0x97bE14Dd...cb34de sur Base est sa version cross-chain emise via le framework Wormhole NTT (burn-and-mint), pas le token natif Solana. Forces : LST sous-jacent mature et transparent (taux de change verifiable on-chain, aucun depeg constate), framework NTT audite (OtterSec, Neodyme, Cyfrin, Cantina). Faiblesses redhibitoires : bridge validator-based (19 Guardians Wormhole, seuil 13-sur-19) pour un actif cross-chain majeur -- exactement le red flag absolu du framework -- avec autorite d'administration du NttManager concentree chez la seule Jito Foundation et custody de cette cle non divulguee ; liquidite de sortie sur Base tres etroite (≈825K$/24h) face a la TVL Morpho (426K$, ratio ≈52%) ; ecosysteme Wormhole marque par le hack historique de 326 M$ (fevrier 2022, bridge different mais memes Guardians) et Jito Labs recemment cite (puis retire) dans une plainte RICO liee a Pump.fun. Verdict lender : collateral a traiter comme experimental sur ce deploiement Base specifique, allocation tres limitee malgre la solidite du protocole Jito lui-meme sur Solana.",
+  "incidents": [
+    "2022-02-02: hack du Wormhole Token Bridge (Portal), ~326 M$ (120 000 wETH) via bypass de verification de signature ; fonds integralement restitues par Jump Crypto. Concerne l'ancien bridge lock-and-mint (pas le framework NTT utilise par JitoSOL), mais meme reseau de Guardians pour l'attestation des messages.",
+    "2024-03: Jito Labs suspend temporairement son mempool public pour lutter contre les sandwich bots -- decision controversee sur la centralisation de fait du flux transactionnel.",
+    "2025: etude academique (ACM IMC 2025) recense >500 000 instances de sandwich attacks via l'infrastructure Jito (>7,7 M$ de pertes) ; Jito bannit 15 validateurs supplementaires apres un rapport on-chain sur des sandwich attacks generalisees."
+  ],
+  "controversies": [
+    "2023-12: attaques Sybil detectees et neutralisees lors de l'airdrop JTO (avec Allium Labs) -- gere correctement mais revelateur des limites des airdrops par points.",
+    "2025-07 a 2025-10: Jito Labs et son CEO Lucas Bruder nommes dans une extension de la plainte RICO Burwick Law/Wolf Popper contre Pump.fun (fraude alleguee de 1,5 Md$ facilitee par l'infrastructure MEV de Jito) ; retires de la plainte 'sans prejudice' en octobre 2025 apres accord avec les plaignants -- termes non publics, plainte potentiellement reformulable.",
+    "Controverse structurelle continue : l'auction de bundles Jito est neutre vis-a-vis du type de MEV (alloue le blockspace au plus offrant, sandwich attacks inclus), critiquee comme favorisant l'extraction de valeur au detriment des utilisateurs retail."
+  ],
+  "dependencies": {
+    "issuer": "Jito Foundation (emetteur du LST sur Solana ET administrateur du contrat NttManager/bridge sur Base)",
+    "custodians": [],
+    "underlyings": ["SOL natif stake sur Solana (stake accounts du stake pool Jito, SPL Stake Pool Program)"],
+    "keyCounterparties": [
+      "Reseau de 19 Guardians Wormhole (Jump Crypto, Certus One, Figment, Chorus One, P2P Validator, Forbole, etc.), seuil de signature 13-sur-19 pour toute attestation cross-chain",
+      "Oracle jitosol-wormhole-updater (Wormhole Queries) pour la synchronisation du taux de change JitoSOL/SOL sur les chaines EVM",
+      "Gouvernance Jito Foundation : DAO + token JTO, administration deleguee a Webslinger, Fondation dirigee par 2 Directeurs independants + 1 Superviseur independant (FFP Corporate Services)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 426215,
+    "dailyLiquidityUsd": 825213,
+    "ratioPct": 51.6,
+    "note": "Volume 24h agrege des pools JitoSOL sur Base (DexScreener/GeckoTerminal, 2026-07-12) : Uniswap JitoSOL/cbBTC (≈414 749$) + PancakeSwap JitoSOL/SOL (≈410 463$) + 2 pools PancakeSwap quasi inactifs (<10$ cumules). Ratio tres au-dessus du seuil red flag de 30% ; le sous-jacent JitoSOL est tres liquide sur Solana (~750M$) mais y acceder depuis Base suppose un aller-retour non instantane via le bridge Wormhole NTT."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "jitosol.md"
+}

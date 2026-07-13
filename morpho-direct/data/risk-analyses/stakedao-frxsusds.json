@@ -1,0 +1,44 @@
+{
+  "symbol": "stakedao-frxsUSDS",
+  "name": "Stake DAO frxUSD/sUSDS",
+  "addresses": { "1": "0x62923a64D7940be920FD5cdc27873Ab8eEc59F9F" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Ratio TVL Morpho / volume 24h du pool ≈ 258% (>30% = zone rouge) — atténué par le canal de sortie réel (burn proportionnel du LP puis redemption native sUSDS via PSM Sky et frxUSD via custodians/pools), ratio vs TVL du pool 24%, mais la TVL du pool a fondu de ~52M$ à 1,64M$ : liquidité fragile"
+  ],
+  "maxAllocation": "5-10%",
+  "summary": "Wrapper Morpho de Stake DAO sur un vault ERC-4626 détenant la LP Curve frxUSD/sUSDS stakée (LMAP-1, mai 2026, LLTV 94,5%). Forces : deux jambes de qualité correcte (sUSDS de Sky avec redemption native profonde via PSM, frxUSD backé T-bills tokenisés tier-1 à 103,7%), pool équilibré 51/49, architecture auditée dont audit dédié Morpho (Pashov 08/2025). Faiblesses : pool devenu très fin (TVL 1,64M$ contre ~52M$ auparavant, ~10 transactions/24h), Stake DAO a subi deux exploits en 2026 révélant des lacunes de gestion de clés, contrats frxUSD sans audit externe, fonction freeze USDS côté Sky. Verdict lender : sous-jacents sains mais liquidité du pool fragile — allocation limitée et surveillance de la TVL du pool obligatoire avant tout renforcement.",
+  "incidents": [
+    "2026-05-27: exploit vsdCRV Stake DAO (clé déployeur compromise, ~91K$ extraits sur Arbitrum, mainnet non affecté, indemnisation SDGP-70)",
+    "2026-03-12: exploit Votemarket Stake DAO ~176K$ (oracle message spoofing) — module d'incitations, pas les vaults",
+    "2026: fonte de la TVL du pool Curve frxUSD/sUSDS de ~52M$ à ~1,64M$ (retrait massif de LP, pas un exploit)",
+    "2020-03-12: Black Thursday MakerDAO, ~5,67M DAI de bad debt non compensée (sous-jacent sUSDS indirect)"
+  ],
+  "controversies": [
+    "2024-09: rebranding MakerDAO -> Sky, introduction de la fonction freeze/upgradabilité sur USDS (régression de centralisation vs DAI)",
+    "2025-02: proposition d'urgence de Rune Christensen sur les paramètres MKR votée sans débat (controverse gouvernance Sky)",
+    "2025-12: controverse Frax \"stealth patch\" frxETH (vulnérabilité niée puis corrigée discrètement, litige de bounty, aucune perte de fonds)",
+    "Aucune controverse propre à Stake DAO trouvée (ne pas confondre avec Stake.US, gambling, sans lien)"
+  ],
+  "dependencies": {
+    "issuer": "Stake DAO (wrapper + vault RewardVault v2)",
+    "custodians": ["Securitize/BlackRock (BUIDL)", "Superstate (USTB/USCC)", "Circle (USDC, PSM Sky)", "FinresPBC / Frax Inc.", "BlockTower/Monetalis/Centrifuge (RWA Sky)"],
+    "underlyings": ["LP Curve frxUSD/sUSDS", "frxUSD", "sUSDS (USDS)", "CRV (rewards)"],
+    "keyCounterparties": ["Multisig Stake DAO 4/7 (admin vaults)", "Curve DAO (pool, gauge)", "Frax DAO / frxGov", "Gouvernance Sky (freeze USDS)", "Oracle Chainlink Sky Savings Rate (CAPO)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 398762,
+    "dailyLiquidityUsd": 154761,
+    "ratioPct": 258,
+    "note": "Volume 24h du pool Curve 154,8K$ pour 1,64M$ de TVL (~10 tx, GeckoTerminal API 2026-07-12) ; sortie réelle = burn proportionnel du LP (ratio vs TVL pool 24,4%) puis redemption native sUSDS (PSM Sky ~4Md$) et frxUSD (pool crvUSD/frxUSD 12M$ + custodians) — praticable à la taille actuelle mais pool fragile"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "stakedao-frxsusds.md"
+}

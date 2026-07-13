@@ -1,0 +1,41 @@
+{
+  "symbol": "wbravUSDC",
+  "name": "Wrapped Avant+ DeFi Yield",
+  "addresses": { "1": "0x7309E1E2e74af170c69bdE8FCB30397f8697D5FF" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Accès non permissionless (KYC/KYB, allowlist possible) combiné à une absence totale de marché secondaire (10 holders, 0 transfert 24h) : seule sortie possible = fenêtre de rachat T+1 dépendante de la liquidité disponible chez Bracket/Avant",
+    "\"Layered leveraged exposure\" assumée par l'émetteur lui-même, composition exacte des positions non vérifiable en temps réel on-chain",
+    "Gouvernance opaque : aucun détail public sur signataires multisig, timelock ou DAO ; contrat wrapper upgradeable (beacon proxy) contrôlé par Bracket",
+    "Double dépendance en cascade à un acteur unique (Bracket puis Avant Protocol), sans régulation identifiée pour aucun des deux",
+    "TVL globale de Bracket introuvable publiquement ; TVL Morpho de ce collatéral très faible (1,26 M$)",
+    "Actif très récent (wrapper déployé ~10 mois avant l'analyse), aucun historique de stress traversé"
+  ],
+  "maxAllocation": "1-5% ou à éviter",
+  "summary": "wbravUSDC est le wrapper non-rebasant (contrat vérifié BracketWrappedVault derrière un beacon proxy) d'une part de vault Bracket (bracket.fi) qui déploie de l'USDC avec un effet de levier superposé dans l'écosystème d'Avant Protocol (savUSD principalement, plus LP incitées et arbitrage emprunt-prêt), à ~15% APR affiché. Forces : Bracket a fait auditer son vault et son mécanisme de wrapping par Guardian à trois reprises en 2025, aucun hack connu sur le wrapper ni sur Avant Protocol, protocole Avant audité (Omniscia, Dedaub, Trail of Bits OPSEC) et revendiquant zéro perte lors de plusieurs stress tests du marché en 2025. Faiblesses majeures : accès non permissionless (KYC/allowlist), fenêtres de rachat quotidiennes T+1 sans marché secondaire (10 holders, 0 transfert 24h), levier explicitement assumé sur une composition non vérifiable en temps réel, gouvernance opaque (pas de détail multisig/timelock/DAO), contrat upgradeable, et double dépendance en cascade à Bracket puis Avant Protocol. Verdict lender : collatéral expérimental et jeune (~10 mois), à éviter ou allocation résiduelle seulement.",
+  "incidents": [
+    "2024-04-16/18: audit Zellic sur le contrat d'escrow LST de Bracket (produit distinct du wrapper wbravUSDC) révèle une vulnérabilité critique de réentrance dans les retraits, corrigée avant exploitation, aucune perte de fonds"
+  ],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Bracket (bracket.fi, opéré par Bracket Labs Group SA)",
+    "custodians": [],
+    "underlyings": ["savUSD (Avant Protocol)", "pools de liquidité incitées Avant", "positions d'arbitrage emprunt/prêt Avant", "vaults à revenu fixe Avant"],
+    "keyCounterparties": ["Avant Protocol (sous-jacent stratégique, single point of failure du rendement)", "Bracket (gérant du vault et émetteur du wrapper, contrat upgradeable)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 1260666,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": null,
+    "note": "Aucun marché secondaire (DEX/CEX) identifié pour wbravUSDC/bravUSDC (10 holders, 0 transfert 24h sur Etherscan) ; seule sortie = fenêtre de rachat quotidienne Bracket (T+1 jour + ~2h)"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "wbravusdc.md"
+}

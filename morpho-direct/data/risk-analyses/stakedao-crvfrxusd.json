@@ -1,0 +1,42 @@
+{
+  "symbol": "stakedao-crvfrxUSD",
+  "name": "Stake DAO crvUSD/frxUSD",
+  "addresses": { "1": "0xF7dAf52958690F1dc89CD377d638e9Fc94E76ACF" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "Wrapper Morpho de Stake DAO (MorphoStrategyWrapper) sur un vault ERC-4626 détenant la LP Curve crvUSD/frxUSD stakée — trois couches de wrapping avec rewards CRV. Forces : sous-jacents solides (crvUSD surcollatéralisé sans dépeg depuis 2023, frxUSD backé T-bills tokenisés tier-1 à 103,7%), architecture auditée par 5 cabinets dont un audit dédié au support Morpho (Pashov, août 2025), sortie permissionless via unwrap avec ratios de liquidité confortables (<10%). Faiblesses : Stake DAO a subi deux exploits en 2026 (Votemarket ~176K$, vsdCRV via clé déployeur compromise sans multisig/timelock) révélant des angles morts opérationnels, contrats frxUSD sans audit externe identifié, wrapper très récent. Verdict lender : collatéral correct mais jeune et posé sur un protocole à l'hygiène de clés récemment prise en défaut — allocation modérée.",
+  "incidents": [
+    "2026-05-27: exploit vsdCRV Stake DAO (clé déployeur compromise, reconfiguration LayerZero OFT, ~91K$ extraits sur Arbitrum, mainnet non affecté, indemnisation intégrale votée SDGP-70)",
+    "2026-03-12: exploit Votemarket Stake DAO ~176K$ (oracle message spoofing via pont LaPoste) — module d'incitations, pas les vaults",
+    "2024-06: liquidation ~140M$ des positions CRV de Michael Egorov, ~10M$ de bad debt remboursée en quelques jours (sous-jacent crvUSD indirect)",
+    "2023-08-03: dépeg mineur crvUSD -0,35% par contagion post-exploit Vyper, résorbé en heures",
+    "2023-07-30: exploit Vyper Curve ~70M$ — crvUSD et ses pools explicitement non affectés"
+  ],
+  "controversies": [
+    "2025-12: controverse Frax \"stealth patch\" — vulnérabilité DoS sur FraxEtherRedemptionQueueV2 (frxETH) d'abord niée puis corrigée discrètement, litige d'attribution de bounty sur gov.frax.finance (aucune perte de fonds)",
+    "2024-2026: levier personnel récurrent de Michael Egorov sur CRV (liquidations massives 06/2024, avoirs tombés à ~34M$ en 02/2026) — risque de concentration documenté sur l'écosystème Curve",
+    "Aucune controverse propre à Stake DAO trouvée (ne pas confondre avec Stake.US, plateforme de gambling poursuivie en 2025, sans lien)"
+  ],
+  "dependencies": {
+    "issuer": "Stake DAO (wrapper + vault RewardVault v2)",
+    "custodians": ["Securitize/BlackRock (BUIDL)", "Superstate (USTB/USCC)", "Circle (USDC)", "FinresPBC / Frax Inc. (gestion collatéral frxUSD)"],
+    "underlyings": ["LP Curve crvUSD/frxUSD", "crvUSD", "frxUSD", "CRV (rewards)"],
+    "keyCounterparties": ["Multisig Stake DAO 4/7 (admin vaults)", "Curve DAO (pool, gauge, PegKeeper)", "Frax DAO / frxGov", "Michael Egorov (concentration CRV)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 413467,
+    "dailyLiquidityUsd": 5281319,
+    "ratioPct": 7.8,
+    "note": "Sortie via unwrap permissionless puis retrait proportionnel du pool Curve (TVL 11,95M$, volume 24h 5,28M$, GeckoTerminal 2026-07-12) ; ratio vs TVL pool ≈ 3,5%, vs volume 24h ≈ 7,8% — sous le seuil OK"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "stakedao-crvfrxusd.md"
+}

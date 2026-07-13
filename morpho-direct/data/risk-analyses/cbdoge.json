@@ -1,0 +1,42 @@
+{
+  "symbol": "cbDOGE",
+  "name": "Coinbase Wrapped DOGE",
+  "addresses": {
+    "8453": "0xcbD06E5A2B0C65597161de254AA074E489dEb510"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Liquidité de sortie extrêmement mince : TVL Morpho (2,16 M$) ~= 112x le volume 24h agrégé cbDOGE (~19 K$), soit ~11 250% du seuil red flag de 30% — le ratio le plus dégradé des 3 actifs analysés",
+    "Sous-jacent memecoin (DOGE) à volatilité de sentiment, sensible aux réseaux sociaux (posts Musk)"
+  ],
+  "maxAllocation": "5-15%",
+  "summary": "cbDOGE est un wrapped DOGE émis par Coinbase sur Base, même modèle de custody 1:1 et même famille de contrat que cbBTC/cbXRP, lancé le 4 juin 2025 aux côtés de cbXRP. Forces : émetteur régulé et coté, aucun dépeg ou hack constaté, risque réglementaire DOGE réduit depuis la classification SEC/CFTC 'digital commodity' de mars 2026. Faiblesses : liquidité secondaire extrêmement mince (volume 24h ~19 K$ pour ~7,2 M$ de market cap, ratio TVL Morpho/volume le pire des 3 actifs de la vague), wrapper récent (13 mois), sous-jacent memecoin à volatilité de sentiment élevée. Verdict lender : collatéral le plus fragile en liquidité de sortie de cette vague ; allocation à positionner en bas de fourchette C.",
+  "incidents": [
+    "2024-12-12: exploit réseau 'DogeReaper' (segfault) crashant 69% des noeuds Dogecoin actifs, correctif disponible depuis v1.14.9 mais 87% des noeuds non patchés — antérieur au lancement de cbDOGE, sans lien avec Coinbase"
+  ],
+  "controversies": [
+    "2024-2026: volatilité de sentiment récurrente liée aux publications d'Elon Musk (mouvements intrajournaliers de 10-40%, rallyes ponctuels >100%), influence en recul progressif courant 2026",
+    "2026-03-17: classification conjointe SEC/CFTC 'digital commodity' pour DOGE (parmi 16 cryptoactifs), ouvrant la voie à des ETF spot (21Shares TDOG, janvier 2026)"
+  ],
+  "dependencies": {
+    "issuer": "Coinbase",
+    "custodians": ["Coinbase (garde du DOGE natif backant cbDOGE)"],
+    "underlyings": ["DOGE natif (Dogecoin)"],
+    "keyCounterparties": ["Coinbase (droits blacklist/pause)", "Chainlink CCIP (bridge exclusif des wrapped assets Coinbase depuis déc. 2025)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 2155143,
+    "dailyLiquidityUsd": 19156,
+    "ratioPct": 11254,
+    "note": "Volume cbDOGE 24h agrégé (CoinGecko, 2026-07-12), Aerodrome Slipstream CBDOGE/CBBTC (~9,0K$) + CBDOGE/WETH (~5,2K$) + Uniswap V4 CBDOGE/CBBTC (~4,0K$). CoinMarketCap indique un chiffre divergent (~49K$) à un snapshot différent, écart non résolu. Ratio de très loin le plus dégradé des 3 actifs de cette vague."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "cbdoge.md"
+}

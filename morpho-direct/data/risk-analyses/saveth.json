@@ -1,0 +1,36 @@
+{
+  "symbol": "savETH",
+  "name": "Staked avETH",
+  "addresses": { "1": "0xDA06eE2dACF9245Aa80072a4407deBDea0D7e341" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "D",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Gouvernance (multisig, timelock) non documentée publiquement : opacité totale sur le contrôle du protocole, identique à savUSD",
+    "Proof of Reserve annoncée par Avant Protocol mais non encore en production (backing non vérifiable on-chain en temps réel)",
+    "Aucune liquidité secondaire (DEX) identifiée pour savETH/avETH sur Ethereum après recherche exhaustive — situation plus défavorable que savUSD (qui a au moins un pool sur Avalanche natif)"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "savETH est le token de staking d'avETH, la déclinaison ETH d'Avant Protocol (même émetteur que savUSD/avUSD), avec Ethereum comme chaîne native pour ce produit (contrairement à savUSD qui y est pontée via CCIP). Forces : mint/redeem natif sans dépendance de pont pour cette instance, audits par Omniscia et Dedaub, structure de tranches (Reserve Fund dédié puis avETHx Junior Tranche) censée absorber les pertes avant les holders de savETH, aucun incident connu à ce jour. Faiblesses : gouvernance et structure de multisig totalement opaques (recherche ciblée sans résultat), Proof of Reserve pas encore live, protocole jeune (2 ans), et surtout aucune liquidité secondaire identifiée pour ce collatéral sur Ethereum — pire situation que savUSD sur ce point précis. Verdict lender : collatéral à éviter ou à allocation résiduelle seulement ; l'opacité de gouvernance et l'absence totale de marché secondaire identifiable constituent le maillon faible qui tire la note globale vers D, malgré l'absence de risque de pont pour cette instance spécifique.",
+  "incidents": [],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Avant Protocol",
+    "custodians": [],
+    "underlyings": ["avETH (backé 1:1 par ETH/WETH déposé nativement sur Ethereum)", "avETHx (Junior Tranche, absorbe les pertes avant savETH)"],
+    "keyCounterparties": ["Gestionnaire(s) non nommé(s) publiquement des \"stratégies Ethereum\" générant le rendement de savETH", "Chainlink (Data Feeds pour l'exchange rate savETH/avETH)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 3154138,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": 0,
+    "note": "Non trouvé : aucun pool DEX identifié pour savETH ou avETH sur Ethereum après recherche exhaustive (Uniswap, Curve, GeckoTerminal, DexScreener) ; traité comme facteur aggravant (opacité = risque) plutôt que ratio chiffré — situation plus défavorable que savUSD qui bénéficie d'un pool natif sur Avalanche"
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "saveth.md"
+}

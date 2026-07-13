@@ -1,0 +1,47 @@
+{
+  "symbol": "SOL",
+  "name": "Solana (bridgé via Base-Solana Bridge officiel — Coinbase + Chainlink CCIP)",
+  "addresses": {
+    "8453": "0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "D",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Bridge validator-based (double attestation Coinbase + Chainlink DON, seuil 3-of-5 actuel, 9-of-16 annoncé) pour un actif cross-chain majeur (SOL) — pattern explicitement identifié comme red flag par le framework §6, historiquement à l'origine des plus gros hacks de bridges (Wormhole 325M$ en 2022, Ronin 625M$, Harmony 100M$), y compris via des opérateurs réputés (Kelp DAO/LayerZero, 292M$, avril 2026)",
+    "Bridge en production depuis seulement ~7 mois (lancé le 4 décembre 2025) — aucun historique de stress-test long terme",
+    "Ratio TVL Morpho / liquidité de sortie 24h sur Base ≈ 46,3% (3 627 894$ / ≈7 842 956$), au-dessus du seuil red flag de 30% — mitigé par la possibilité de unwrap permissionless vers Solana natif (marché >500 Md$) mais ce chemin n'est pas instantané"
+  ],
+  "maxAllocation": "1-5% (ou skip)",
+  "summary": "Ce token SOL sur Base est du SOL natif bridgé via le Base-Solana Bridge officiel (lancé le 4 décembre 2025), co-opéré par Coinbase/Base et Chainlink CCIP — à ne pas confondre avec Wormhole/Portal, Allbridge, ou avec l'homonyme uSOL (Universal Solana, contrat différent). Forces : mint/redeem permissionless sans KYC, backing 1:1 vérifiable on-chain (vault Solana), liquidité secondaire correcte (~50% du market cap on-chain en volume 24h), audité par Cantina et Trail of Bits, aucun incident constaté à date. Faiblesse déterminante : le mécanisme repose structurellement sur un bridge validator-based (double signature Coinbase + Chainlink, seuil 3-of-5) pour un actif cross-chain majeur — exactement le pattern historiquement responsable des plus gros hacks de bridges (Wormhole, Ronin, Harmony, et plus récemment Kelp DAO/LayerZero en avril 2026), combiné à un track record de seulement 7 mois et un ratio TVL Morpho/liquidité de sortie au-dessus du seuil de vigilance. Verdict lender : collatéral à traiter comme expérimental malgré la qualité des opérateurs — allocation minimale ou à éviter tant que le bridge n'a pas fait ses preuves sur une période plus longue.",
+  "incidents": [
+    "Aucun incident, hack ou dépeg connu sur le Base-Solana Bridge ou ce token SOL depuis son lancement (2025-12-04) au 2026-07-12",
+    "2022-02: hack du bridge Wormhole/Portal (~325M$) — bridge différent, non lié au Base-Solana Bridge, cité comme précédent historique de la catégorie de risque",
+    "2026-04-01: exploit Drift Protocol (~285-286M$) sur Solana, via abus de la fonctionnalité 'durable nonces' — protocole DeFi Solana, sans lien avec le bridge Base-Solana ou le token SOL",
+    "2026-04-18/19: exploit du bridge LayerZero utilisé par Kelp DAO (~292M$ en rsETH) — bridge validator-based différent, précédent analogue de risque cité pour contexte"
+  ],
+  "controversies": [
+    "2023-06: la SEC désigne SOL comme security non enregistrée dans ses plaintes contre Binance et Coinbase (aux côtés de BNB, MATIC, ALGO, ATOM); la Solana Foundation conteste",
+    "2023-2024: la SEC met en pause puis retire progressivement ses allégations visant SOL dans le dossier Binance",
+    "2025-10-28: lancement des premiers ETF spot SOL aux Etats-Unis (Bitwise, Grayscale, Fidelity, Franklin Templeton, 21Shares, VanEck, Canary Capital) avec staking intégré — clarification réglementaire significative"
+  ],
+  "dependencies": {
+    "issuer": "Base (Coinbase) et Chainlink Labs, co-opérateurs du Base-Solana Bridge officiel",
+    "custodians": ["Aucun custodian centralisé de type Coinbase Custody — SOL natif verrouillé dans un vault on-chain (Solana Bridge Program)"],
+    "underlyings": ["SOL natif (Solana L1)"],
+    "keyCounterparties": ["Coinbase (opérateur oracle + multisig configuration/upgrade du contrat Bridge sur Base)", "Chainlink CCIP/DON (co-signataire oracle, seuil 3-of-5 actuel)", "Base L2 (séquenceur et infrastructure)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 3627894,
+    "dailyLiquidityUsd": 7842956,
+    "ratioPct": 46.26,
+    "note": "Volume 24h agrégé sur ~14 paires DEX Base pour ce contrat précis (DEX Screener, 2026-07-12), principalement Aerodrome et PancakeSwap. Ratio au-dessus du seuil red flag de 30%, mais très en-deçà du cas cbXRP (~2671%). Unwrap permissionless vers Solana natif possible (marché >500Md$) mais non instantané."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "sol.md"
+}

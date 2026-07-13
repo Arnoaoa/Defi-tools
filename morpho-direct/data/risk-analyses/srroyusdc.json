@@ -1,0 +1,43 @@
+{
+  "symbol": "srRoyUSDC",
+  "name": "Senior Royco USDC",
+  "addresses": {
+    "1": "0xcD9f5907F92818bC06c9Ad70217f089E190d2a32"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Gouvernance concentrée : signataires identiques entre les multisigs Owner (3-of-5), Treasury (3-of-5) et VAULT_MANAGER (3-of-4), aucune séparation des pouvoirs (audit de risque tiers Yearn)",
+    "Contrat MultisigStrategy (proxy upgradeable) sans timelock — identifié par Yearn comme le vecteur de risque le plus direct pour un détournement des fonds déployés",
+    "Comptabilité du vault 100% auto-déclarée par le Treasury multisig via adjustTotalAssets(), sans vérification cryptographique indépendante des positions sous-jacentes réelles",
+    "Concentration extrême des détenteurs : ~69% de la supply sur une seule adresse au moment du rapport Yearn (mars 2026)",
+    "80% du backing déployé dans des protocoles tiers décrits par Yearn comme relativement peu connus et à l'historique limité (Neutrl sNUSD, Tokemak autoUSD, Avant savUSD)",
+    "Ratio TVL Morpho / liquidité de sortie (pool Curve) ≈ 287%, très supérieur au seuil red flag de 30% du framework"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "srRoyUSDC est la tranche Senior du Dawn Senior Vault de Royco, qui redéploie l'USDC déposé sur un panier diversifié de quatre stratégies externes (Aave v3, Neutrl sNUSD, Tokemak autoUSD, Avant savUSD). Contrairement au marché frère ROY-ST-apyUSD, il dispose d'une liquidité secondaire réelle et croissante (pool Curve srRoyUSDC/frxUSD, ~560K$ à date) et n'a subi aucun dépeg documenté. Mais un audit de risque tiers indépendant (Yearn) révèle une gouvernance structurellement opaque et concentrée, partagée avec l'architecture Royco Dawn : multisigs Owner/Treasury/VAULT_MANAGER aux signataires identiques sans séparation des pouvoirs, un contrat MultisigStrategy upgradeable sans timelock qui contrôle 100% des fonds déployés, et une comptabilité entièrement auto-déclarée. Verdict lender : la qualité relative de l'asset design et du backing ne compense pas une gouvernance à risque documentée par un tiers indépendant, plus une liquidité de sortie très insuffisante face à la TVL Morpho — collatéral à éviter en taille significative.",
+  "incidents": [
+    "2026-03-18: piratage DNS/frontend de Neutrl (stratégie sous-jacente ~29% de l'allocation srRoyUSDC) — aucun fonds smart-contract perdu, migration de domaine et reprise des opérations en ~48h, aucun impact rapporté sur srRoyUSDC"
+  ],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Royco Protocol / Royco Dawn (Dawn Senior Vault), curateur Dialectic",
+    "custodians": ["Treasury multisig 3-of-5 Gnosis Safe (0x170ff06326eBb64BF609a848Fc143143994AF6c8) — custody totale, comptabilité auto-déclarée"],
+    "underlyings": ["Aave v3 USDC (~20%)", "Neutrl sNUSD (~29%)", "Tokemak autoUSD (~11%)", "Avant savUSD, Avalanche (~40%, au plafond de concentration)"],
+    "keyCounterparties": ["Dialectic (curateur)", "Owner multisig 3-of-5 (signataires partagés avec Treasury/VAULT_MANAGER)", "VAULT_MANAGER multisig 3-of-4"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 1608166,
+    "dailyLiquidityUsd": 560000,
+    "ratioPct": 287,
+    "note": "Aucun volume 24h confirmé trouvé ; profondeur du pool Curve srRoyUSDC/frxUSD utilisée comme proxy (~560K$ côté srRoyUSDC / ~867K$ total, DexScreener 12/07/2026), en hausse depuis ~489K$ rapportés par l'audit Yearn (26/03/2026) et ~600$ au lancement (06/01/2026). Ratio résultant très supérieur au seuil red flag de 30%."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "srroyusdc.md"
+}

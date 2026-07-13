@@ -1,0 +1,45 @@
+{
+  "symbol": "rETH",
+  "name": "Rocket Pool ETH",
+  "addresses": {
+    "1": "0xae78736Cd615f374D3085123A210448E74Fc6393",
+    "8453": "0xB6fe221Fe9EeF5aBa221c348bA20A1Bf5e73624c"
+  },
+  "grade": "B",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "A",
+    "depegBacking": "B",
+    "counterparty": "A",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "15-25%",
+  "summary": "rETH est le liquid staking token de Rocket Pool, le protocole de staking Ethereum décentralisé le plus ancien (nov. 2021) et le plus décentralisé côté node operators (>3 200 opérateurs indépendants, accès permissionless dès 8 ETH). Forces : double audit (Sigma Prime, ConsenSys Diligence), TVL ~1,1 Md$ sans bad debt, gouvernance pDAO/oDAO documentée, aucun dépeg en 4+ ans y compris pendant les crises 2022, buffer pool Saturn (Aave, ~24h) améliorant la liquidité de sortie depuis 2026. Faiblesses : liquidité DEX secondaire structurellement fine relativement au market cap, reporting du taux de change dépendant d'un comité oDAO restreint sur invitation, épisodes de phishing ciblant la marque en 2024. Verdict lender : collatéral solide, comparable à wstETH en profil de risque, bon candidat pour une allocation standard 15-25%.",
+  "incidents": [
+    "2022-05-26: compromission de deux nodes Oracle DAO (workstation piraté), vol de ~28 000 $ en ETH/RPL, aucune perte pour les détenteurs de rETH",
+    "2024-01: compte X officiel de Rocket Pool piraté, phishing redirigeant vers un faux site (compromission de communication, pas du protocole)",
+    "2024-03: whale phishé via approbation malveillante \"Increase Allowance\", perte de 4 851 rETH et 9 579 stETH (incident wallet utilisateur, pas faille du contrat)"
+  ],
+  "controversies": [
+    "2023-06: SEC accuse Consensys (MetaMask Staking) de vente de securities non enregistrées pour les programmes de staking Lido et Rocket Pool, RPL -10% sur l'annonce, aucune action directe contre Rocket Pool DAO à ce jour"
+  ],
+  "dependencies": {
+    "issuer": "Rocket Pool DAO (pDAO + oDAO)",
+    "custodians": [],
+    "underlyings": ["ETH"],
+    "keyCounterparties": [
+      ">3 200 node operators indépendants (permissionless dès 8 ETH + bond RPL)",
+      "Comité oDAO (reporting soldes minipools et ratio RPL:ETH, invitation only)",
+      "Aave (buffer pool Saturn depuis fév. 2026, ~20% de la TVL protocole pour redemptions rapides)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 4328079,
+    "dailyLiquidityUsd": 459795,
+    "ratioPct": 941,
+    "note": "Volume 24h rETH tous exchanges (CoinGecko, juil. 2026), dominé par Curve OSETH/RETH et Uniswap V3. Ratio très au-dessus du seuil red flag (30%) mais atténué par le buffer pool Saturn (redemption native ~24h via Aave, capacité ~20% de la TVL protocole)."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "reth.md"
+}

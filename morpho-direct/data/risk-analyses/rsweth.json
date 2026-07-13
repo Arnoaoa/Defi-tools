@@ -1,0 +1,43 @@
+{
+  "symbol": "rswETH",
+  "name": "rswETH",
+  "addresses": {
+    "1": "0xFAe103DC9cf190eD75350761e95403b7b8aFa6c0"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "rswETH est le liquid restaking token de Swell Network (janv. 2024) : ETH staké puis restaké via EigenLayer. Forces : multi-audits (Sigma Prime, Cyfrin, Nethermind), Chainlink Proof of Reserve intégré pour la transparence des réserves, aucun hack direct du contrat depuis le lancement. Faiblesses majeures : liquidité de sortie DEX quasi morte (pools sous 7 000 $), market cap tombé à ~19 M$ après l'arrêt de Swellchain et le pivot stratégique de Swell vers un produit IA (Faro) hors restaking, dépendance à une organisation unique sans gouvernance décentralisée documentée équivalente à Rocket Pool. Verdict lender : collatéral plus fragile que ses pairs LST/LRT établis (wstETH, weETH, rETH), à allouer prudemment (5-15%) compte tenu du risque de liquidité de sortie et de l'incertitude organisationnelle post-pivot.",
+  "incidents": [
+    "2024-09: exploit Penpie (27 M$) — protocole tiers sur Pendle drainé via faille de contrôle d'accès propre à Penpie ; rswETH détenu en collatéral, contrat Swell non compromis"
+  ],
+  "controversies": [
+    "2026-05/06: arrêt définitif de Swellchain (L2 propriétaire de Swell) dans le cadre d'un pivot stratégique vers Faro (plateforme IA sur Hyperliquid) ; rswETH/swETH sur Ethereum mainnet dits non affectés techniquement, mais market cap rswETH tombé à ~19 M$ contre un pic d'écosystème Swell >1 Md$ TVL, signe de fuite de capitaux et de priorité organisationnelle décroissante pour le restaking"
+  ],
+  "dependencies": {
+    "issuer": "Swell Network",
+    "custodians": [],
+    "underlyings": ["ETH"],
+    "keyCounterparties": [
+      "EigenLayer (couche de restaking, risque de slashing AVS)",
+      "Opérateurs AVS EigenLayer",
+      "Chainlink (oracle Proof of Reserve)",
+      "Équipe/fondation Swell Network (dépendance à un acteur unique, accentuée par le pivot Faro)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 1092224,
+    "dailyLiquidityUsd": 19000,
+    "ratioPct": 6068,
+    "note": "Volume 24h rswETH tous exchanges (CoinGecko/CoinMarketCap, juil. 2026) ; pools dédiés Curve (~6 900 $) et Uniswap V3 (~83 $) quasi morts, pas de buffer de redemption instantané comme rETH — ratio parmi les plus dégradés observés."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "rsweth.md"
+}

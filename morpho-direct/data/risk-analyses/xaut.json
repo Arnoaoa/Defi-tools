@@ -1,0 +1,46 @@
+{
+  "symbol": "XAUt",
+  "name": "Tether Gold",
+  "addresses": { "1": "0x68749665FF8D2d112Fa859AA293F07A622782F38" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "C",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Émetteur unique centralisé (Tether/TG Commodities) avec droits actifs de freeze/blacklist/upgrade sur le contrat, custodian(s) suisses non nommés publiquement.",
+    "Absence d'audit de sécurité de code par un auditeur reconnu de premier rang (uniquement attestations de réserves BDO Italia + bug bounty Tether).",
+    "Exclusion réglementaire du marché européen depuis le 1er juillet 2026 (Tether n'a pas demandé l'agrément MiCA)."
+  ],
+  "maxAllocation": "5-15%",
+  "summary": "XAUt est le token d'or physique de Tether (via TG Commodities, El Salvador), backé 1:1 par des lingots LBMA Good Delivery individualisés stockés en Suisse, avec attestations trimestrielles BDO Italia depuis 2022. Forces : backing tier-1 traçable par numéro de série, aucun dépeg >5% en 6 ans, liquidité secondaire correcte (~55 M$/24h sur plusieurs CEX majeurs, ratio TVL Morpho/liquidité ~4,4%). Faiblesses : émetteur entièrement centralisé avec droits de freeze/blacklist actifs, pas d'audit de code par un auditeur de premier rang, vulnérabilité transferFrom réelle découverte en 2023 (corrigée), controverses historiques de l'émetteur (règlements NYAG/CFTC 2021 sur USDT) et exclusion du marché européen depuis juillet 2026 (MiCA). Verdict lender : collatéral avec un backing physique solide et une bonne liquidité de sortie, mais la gouvernance 100% centralisée et l'historique de transparence discutable de l'émetteur justifient une allocation prudente, pas un statut tier-1.",
+  "incidents": [
+    "2023-04-05: vulnérabilité transferFrom découverte par BlockSec dans le contrat Tether Gold, corrigée par Tether, aucune perte de fonds confirmée"
+  ],
+  "controversies": [
+    "2021-02: règlement NYAG 18,5 M$ — Tether/Bitfinex reconnaissent avoir déformé la réalité des réserves adossant USDT",
+    "2021-10: règlement CFTC 42,5 M$ — USDT intégralement backé seulement 27,6% du temps sur 26 mois (2016-2018), fonds de réserve mélangés aux fonds corporate",
+    "2026-07: entrée en vigueur de MiCA en UE, Tether n'a pas demandé l'agrément — XAUT/USDT exclus de facto des marchés européens réglementés depuis le 1er juillet 2026"
+  ],
+  "dependencies": {
+    "issuer": "TG Commodities, S.A. de C.V. (El Salvador, licence DASP), Alpha Group Commodities Limited S.A. de C.V. (achat de l'or, filiale Tether Holdings)",
+    "custodians": ["Coffres-forts suisses non nommés publiquement"],
+    "underlyings": ["Or physique LBMA Good Delivery"],
+    "keyCounterparties": [
+      "Tether Holdings (contrôle total du contrat : mint/burn, freeze, blacklist, upgrade)",
+      "BDO Italia (attestations trimestrielles des réserves depuis 2022)",
+      "Ledn (partenariat prêts collatéralisés XAUT depuis juin 2026, non disponible UE/Canada)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 2415841,
+    "dailyLiquidityUsd": 55464143,
+    "ratioPct": 4.4,
+    "note": "Volume 24h tous exchanges confondus (CoinGecko, 2026-07-12), dominé par la paire XAUT/USDT sur Binance (~3 M$/24h). Ratio confortablement sous le seuil OK (10%)."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "xaut.md"
+}

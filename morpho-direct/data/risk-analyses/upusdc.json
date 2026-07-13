@@ -1,0 +1,44 @@
+{
+  "symbol": "upUSDC",
+  "name": "Upshift USDC",
+  "addresses": { "1": "0x80E1048eDE66ec4c364b4F22C8768fc657FF6A42" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "D",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Contrat upgradeable (TransparentUpgradeableProxy EIP-1967), pas de sécurité par immuabilité",
+    "Dépendance structurelle totale à August (infrastructure backend KYC/prime brokerage) : mêmes fondateurs qu'Upshift, séparation d'équipe encore en cours au moment de l'analyse",
+    "Curateur et emprunteurs institutionnels du vault upUSDC non identifiés publiquement",
+    "Mécanisme de retrait normal (hors stress) non confirmé publiquement : risque de gating par subaccount selon la documentation générale du protocole",
+    "Aucun marché secondaire (DEX) identifié pour upUSDC ; seule alternative = marché Pendle PT-upUSDC, profondeur non vérifiable",
+    "Absence de programme de bug bounty actif malgré un volume d'audits important"
+  ],
+  "maxAllocation": "1-5% ou à éviter",
+  "summary": "upUSDC est le token de part du vault de prêt institutionnel phare d'Upshift Finance (proxy upgradeable vérifié sur Etherscan, 6 décimales), qui prête l'USDC déposé à des emprunteurs institutionnels KYC/KYB via l'infrastructure de prime brokerage August. Forces : de nombreux audits par des auditeurs reconnus (ChainSecurity, Sigma Prime, Hacken, OtterSec, Halborn), aucun hack direct connu, dépôt primaire apparemment ouvert. Faiblesses majeures : dépendance structurelle à August (mêmes fondateurs, séparation d'équipe en cours), curateur et emprunteurs de ce vault précis non identifiés publiquement, contrat upgradeable, mécanisme de retrait normal non confirmé, absence totale de liquidité secondaire identifiée et de bug bounty. Verdict lender : collatéral opaque sur ses contreparties clés et sa liquidité de sortie, allocation minimale recommandée voire à éviter tant que ces zones d'ombre ne sont pas clarifiées.",
+  "incidents": [
+    "2026-04 (~19 avril): exploit Kelp DAO (rsETH) de 292M$ via le bridge LayerZero — Upshift a activé des restrictions d'urgence sur son exposition rsETH dans d'autres vaults du protocole (pas upUSDC directement), aucune perte documentée pour Upshift"
+  ],
+  "controversies": [
+    "2026: revue tierce indépendante (Blind Dev) note seulement 5/12 membres d'équipe vérifiables sur LinkedIn, absence de bug bounty, base de code fermée malgré contrats vérifiés, protocole qualifié de 'hybride' plutôt que réellement décentralisé (multisig + KYC/KYB off-chain)",
+    "Divergence non résolue entre sources sur l'audit ChainSecurity : une revue tierce évoque une vulnérabilité high-severity liée aux retraits acceptée comme risque géré, alors que le résumé officiel indique aucun problème high/medium non corrigé"
+  ],
+  "dependencies": {
+    "issuer": "Upshift Finance (protocole lancé en 2024)",
+    "custodians": [],
+    "underlyings": ["Prêts overcollatéralisés à des emprunteurs institutionnels KYC/KYB non nommés publiquement"],
+    "keyCounterparties": ["August (infrastructure backend KYC/prime brokerage, mêmes fondateurs qu'Upshift)", "Curateur du vault upUSDC (non identifié publiquement)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 3410110,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": null,
+    "note": "Aucun pool DEX (Curve/Uniswap) identifié pour upUSDC ; marché Pendle PT-upUSDC existant mais profondeur non vérifiable (page DefiLlama bloquée 403) et non équivalente à une liquidité de sortie spot directe. Ratio non calculable — traité comme red flag."
+  },
+  "analyzedAt": "2026-07-12",
+  "vaultNote": "upusdc.md"
+}
