@@ -64,9 +64,13 @@ export function getMarketRisk(market: ApiMarket, collateral: RiskAnalysis): Mark
   const reasons: string[] = []
 
   const oracleType = market.oracle?.type
-  if (oracleType === 'CustomOracle' || oracleType === 'Unknown') {
+  if (oracleType === 'CustomOracle') {
     grade = downgrade(grade, 1)
-    reasons.push(`oracle ${oracleType === 'Unknown' ? 'non identifié' : 'custom'} (non-Chainlink)`)
+    reasons.push('oracle custom (non-Chainlink)')
+  } else if (oracleType === 'Unknown') {
+    // API couldn't classify the oracle wrapper — informational, not penalized
+    // (many legitimate markets use wrappers outside Morpho's recognized factories)
+    reasons.push('oracle non classifié par l\'API — vérifier avant gros dépôt')
   }
 
   const utilization = market.state?.utilization ?? 0

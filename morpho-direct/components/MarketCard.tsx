@@ -93,7 +93,7 @@ export function MarketCard({ market, sortBy, onClick }: MarketCardProps) {
                   stale ? `⚠ Analyse du ${risk.analyzedAt} — re-check recommandé` : '',
                 ].filter(Boolean).join('\n')}
               >
-                {marketRisk.grade}
+                {marketRisk.grade !== risk.grade ? `${risk.grade}→${marketRisk.grade}` : marketRisk.grade}
               </span>
             )}
           </div>
