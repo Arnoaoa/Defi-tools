@@ -1,0 +1,43 @@
+{
+  "symbol": "AERO",
+  "name": "Aerodrome Finance",
+  "addresses": { "8453": "0x940181a94A35A4569E4529A3CDfB74e38FD98631" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "AERO est le token de gouvernance et de capture de valeur du DEX dominant de Base (modèle ve(3,3), fork de Velodrome/Solidly), qui redistribue réellement 100% des frais de trading aux détenteurs de veAERO — contrairement à des tokens purement narratifs comme MORPHO. Mais son émission est inflationniste et non plafonnée, son prix a déjà subi un drawdown de -78% depuis son ATH (déc. 2024), sa gouvernance reste sous contrôle d'un multisig 3-of-7 sans timelock documenté sur les upgrades, et le protocole a subi deux compromissions frontend/DNS distinctes (nov. 2023 et nov. 2025, ~250k$ et ~700k$-1M$). Point de vigilance daté majeur : une fusion structurelle avec Velodrome (nouveau token/DEX unifié \"Aero\") est en cours de déploiement précisément au moment de cette analyse (juillet 2026), créant une discontinuité pour le collatéral. Verdict lender : actif liquide (ratio TVL Morpho/volume 24h ~1,1%), protocole audité et TVL significative, mais volatilité de collatéral déjà matérialisée et transition structurelle en cours — allocation prudente, à réévaluer après stabilisation post-migration Aero.",
+  "incidents": [
+    "2022-08: vol de 350k$ sur un wallet opérationnel de Velodrome par un membre de l'équipe, fonds récupérés",
+    "2023-11-29: double compromission DNS/frontend Velodrome + Aerodrome en 3 jours, ~250k$ volés, contrats on-chain non affectés",
+    "2025-11-22: attaque DNS hijacking via faille insider chez le registrar NameSilo, domaines aerodrome.finance/.box compromis, ~700k$ (jusqu'à >1M$ cumulé avec Velodrome), contrats on-chain non affectés"
+  ],
+  "controversies": [
+    "Historique généalogique: le modèle ve(3,3) est hérité de Solidly (Andre Cronje), abandonné par son créateur 3 semaines après lancement en 2022 (TVL de 2,3Md$ à <20M$) — non imputable directement à Aerodrome mais héritage réputationnel du design",
+    "2026-07 (en cours): fusion structurelle Aerodrome + Velodrome en \"Aero\" (Dromos Labs), migration de token et des pools de liquidité, discontinuité pour le collatéral existant"
+  ],
+  "dependencies": {
+    "issuer": "Aerodrome Finance / Dromos Labs (équipe restée anonyme jusqu'en novembre 2025, puis dévoilée volontairement)",
+    "custodians": [],
+    "underlyings": [],
+    "keyCounterparties": [
+      "Multisig de gouvernance 3-of-7 + emergency council, sans timelock documenté sur les upgrades (PERMISSIONS.md officiel)",
+      "Dromos Labs, entité pilotant la fusion Aero avec Velodrome (lancement prévu juillet 2026)",
+      "Ecosystème Base (dépendance de séquenceur L2, hors périmètre strict de l'analyse collatéral)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 152568,
+    "dailyLiquidityUsd": 13500000,
+    "ratioPct": 1.13,
+    "note": "Volume 24h CoinGecko (2026-07-13) ≈13,5M$ pour un market cap ≈480-500M$. Ratio TVL Morpho/volume 24h ≈1,1%, bien en dessous du seuil de vigilance (10%)."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "aero.md"
+}

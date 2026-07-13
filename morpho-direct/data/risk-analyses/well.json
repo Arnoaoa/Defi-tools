@@ -1,0 +1,46 @@
+{
+  "symbol": "WELL",
+  "name": "WELL (Moonwell)",
+  "addresses": { "8453": "0xA88594D404727625A9437C3f886C7643872296AE" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "B",
+    "recentSecurity": "D"
+  },
+  "redFlags": [],
+  "maxAllocation": "1-3%",
+  "summary": "WELL est le token de gouvernance du protocole de lending Moonwell (fork Compound v2, actif sur Base/Optimism/Moonbeam/Moonriver depuis 2022), sans capture de valeur directe et déjà en baisse de 98,8% depuis son ATH. Le protocole est correctement audité (15+ audits Halborn, bug bounty Code4rena 250k$) et a une gouvernance documentée (Temporal Governor, Break Glass Guardian), mais a connu une accélération marquée des incidents de sécurité : 5 événements en 15 mois (déc. 2024 à mars 2026) cumulant plus de 4,8M$ de pertes/bad debt, dont un incident récent (fév. 2026, ~1,78M$) lié à du code d'oracle partiellement généré par IA sans revue suffisante, et une tentative de prise de contrôle par gouvernance en mars 2026. Verdict lender : le maillon faible est la sécurité récente, qui domine la note globale malgré une base d'audit solide — allocation très prudente recommandée compte tenu du rythme des incidents.",
+  "incidents": [
+    "2022-08-01: hack du bridge Nomad (Moonbeam) — impact indirect, dépeg d'actifs bridgés, Moonwell suspend dépôts/emprunts",
+    "2022-08-14: divulgation Risk DAO d'une faille sur cTokens décotés post-dépeg, jamais exploitée, bounty 10k$",
+    "2024-12: exploit flash loan/mToken malveillant sur le déploiement Optimism, ~320k$",
+    "2025-10-10: bad debt ~1,7M$ pendant un crash de marché (écart oracle/DEX)",
+    "2025-11-04: exploit oracle wrstETH ~1M$ (feed Chainlink mal configuré, 295 ETH de profit attaquant)",
+    "2026-02-15/18: mauvaise configuration oracle cbETH (~1,78M$ de bad debt), code partiellement généré par IA (Claude Opus 4.6) sans revue suffisante"
+  ],
+  "controversies": [
+    "2026-03: attaque de gouvernance sur le déploiement Moonriver — 1 800$ dépensés pour menacer 1,08M$ d'actifs via une proposition malveillante, contrée par contre-vote communautaire",
+    "2024-11/2025-01: migration du bug bounty d'Immunefi vers Code4rena, question sur la continuité de couverture pendant la transition"
+  ],
+  "dependencies": {
+    "issuer": "Moonwell (protocole de lending, fork Compound v2), gouverné par la Moonwell DAO via Temporal Governor (Safe 3/5 + timelock 24h) et Break Glass Guardian (2/3 multisig d'urgence)",
+    "custodians": [],
+    "underlyings": [],
+    "keyCounterparties": [
+      "Anthias Labs (risk manager du protocole)",
+      "Bridges cross-chain Wormhole et Axelar (circulation xERC20)",
+      "Chainlink (oracle primaire, historique de mauvaises configurations applicatives autour de ces flux)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 35223,
+    "dailyLiquidityUsd": 343142,
+    "ratioPct": 10.3,
+    "note": "Volume 24h CoinGecko (2026-07-13) ≈343 142$ pour un market cap ≈16,3M$. Ratio TVL Morpho/volume 24h ≈10,3%, juste au-dessus du seuil de vigilance (10%) — dû à la faiblesse absolue de la liquidité de WELL plutôt qu'à une TVL Morpho élevée."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "well.md"
+}

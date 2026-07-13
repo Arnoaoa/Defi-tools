@@ -1,0 +1,51 @@
+{
+  "symbol": "deSPXA",
+  "name": "DeFi Janus Henderson Anemoy S&P500® Fund Token",
+  "addresses": { "8453": "0x9c5C365e764829876243d0b289733B9D2b729685" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Ratio liquidité de sortie ≈ 148% (TVL Morpho 26 158$ / liquidité 24h ~17 697$) — très au-dessus du seuil red flag (30%), sortie impossible sans slippage massif sur l'unique pool Uniswap V3 Base",
+    "Marché primaire gated KYC (investisseurs non-US accrédités uniquement) — pas d'arbitrage NAV/prix accessible en cas de décrochage du prix secondaire",
+    "Oracle/NAV basé sur une empreinte S&P DJI quotidienne calée sur la clôture du marché actions US — structurellement figé le week-end et jours fériés US alors que le token est collatéral Morpho 24/7",
+    "Contrat ShareToken (l'actif exact utilisé comme collatéral) sans audit de sécurité dédié trouvé (Basescan: 'No security audit submitted')",
+    "Fonds très jeune (lancé 2026-03-10, ~4 mois d'historique) et minuscule (~3,2M$ d'AUM total tous investisseurs confondus)"
+  ],
+  "maxAllocation": "5-15%",
+  "summary": "deSPXA est le wrapper DeFi librement transférable du fonds tokenisé SPXA, premier fonds indiciel S&P 500 on-chain, émis légalement par Anemoy Capital SPC Limited (BVI, licence Professional Fund BVIFSC) avec Janus Henderson Investors UK comme sous-gestionnaire et infrastructure Centrifuge (Proof-of-Index avec S&P Dow Jones Indices). Forces : backing par des actions réelles en garde réglementée (Pershing LLC), mécanisme de vérification d'indice cryptographique plutôt qu'une simple attestation, aucun hack connu de Centrifuge depuis 2019. Faiblesses : fonds tout juste lancé (4 mois) et minuscule, marché primaire fermé aux non-accrédités/US, contrat ShareToken non audité spécifiquement, ward-system admin actif sans timelock documenté, émetteur légal offshore (Janus Henderson n'est que sous-gestionnaire), et surtout une liquidité secondaire quasi inexistante (un seul pool Uniswap V3 de ~18K$ de profondeur, déjà inférieur à la TVL Morpho). Verdict lender : collatéral C, structure institutionnelle crédible sur le papier mais totalement non éprouvée et pratiquement illiquide — allocation limitée et à réévaluer après plusieurs mois d'historique et une croissance réelle de la liquidité secondaire.",
+  "incidents": [
+    "2026-07-13: chute de prix de -16,98% en 24h sur le pool deSPXA/USDC (Base), attribuable à l'illiquidité du pool (~18K$ de profondeur) et non à un mouvement réel du S&P 500 — démonstration concrète du risque de liquidité, pas un incident de backing"
+  ],
+  "controversies": [
+    "Signal automatisé 'rugpull detected' affiché par le scanner DexTools sur l'historique du pool deSPXA/USDC — non corroboré par une actualité ou une perte de fonds documentée, probablement lié aux droits de mint/burn du ward-system et à l'absence de lock de liquidité, à vérifier avant tout dépôt significatif",
+    "2026-04-29: Janus Henderson Group (maison-mère du sous-gestionnaire, pas l'émetteur du token) règle 6,5M$ dans le procès ERISA Schissler v. Janus Henderson US (Holdings) Inc. portant sur la gestion de son propre plan 401(k) interne — sans lien direct avec SPXA/deSPXA",
+    "2026 (en cours): Janus Henderson Group perd une manche procédurale dans un litige de financement de contentieux (Calumet Capital Partners LLC v. Victory Park Capital Advisers, Delaware Chancery Court) — sans lien direct avec le fonds SPXA"
+  ],
+  "dependencies": {
+    "issuer": "Anemoy Capital SPC Limited (Segregated Portfolio Company, British Virgin Islands, licence Professional Fund BVI Financial Services Commission)",
+    "custodians": ["Pershing LLC (garde des actions sous-jacentes, filiale BNY)", "Circle (custodian de la jambe crypto/stablecoin)"],
+    "underlyings": ["Actions du S&P 500® répliquées, indice licencié S&P Dow Jones Indices, vérifié via infrastructure Proof-of-Index de Centrifuge"],
+    "keyCounterparties": [
+      "Anemoy Asset Management Limited (gérant d'investissement)",
+      "Janus Henderson Investors UK (sous-gestionnaire, PAS l'émetteur légal)",
+      "Trident Trust (fund administrator)",
+      "MHA Cayman (auditeur comptable du fonds)",
+      "Centrifuge (infrastructure technique ward-based, bug bounty Cantina 250 000$)",
+      "S&P Dow Jones Indices (fournisseur d'indice et empreinte quotidienne)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 26158,
+    "dailyLiquidityUsd": 17697,
+    "ratioPct": 147.8,
+    "note": "Pool Uniswap V3 deSPXA/USDC sur Base : profondeur ~18 032$, volume 24h ~17 697$ (DexTools, 2026-07-13). Ratio très supérieur au seuil red flag (30%) — le pool est déjà plus petit que la position Morpho existante."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "despxa.md"
+}

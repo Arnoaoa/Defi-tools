@@ -1,0 +1,38 @@
+{
+  "symbol": "yoUSD",
+  "name": "yoVaultUSD",
+  "addresses": {
+    "8453": "0x0000000f2eB9f69274678c76222B35eEc7588a65"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-10%",
+  "summary": "yoUSD est un token de vault ERC-4626 émis par YO Protocol (YO Labs, San Francisco), un yield optimizer multi-chaîne qui rebalance quotidiennement le dépôt entre 18+ protocoles DeFi de rendement stablecoin. Forces : cadence d'audits élevée (8 audits, 6 auditeurs distincts dont Spearbit), aucune bad debt socialisée sur les déposants, redemption native (buffer instant + queue 24h). Faiblesses : design complexe (agrégateur multi-stratégies), aucun marché secondaire DEX identifié, gouvernance encore 100% team-controlled (pas de DAO active), et un incident opérationnel réel le 12/01/2026 (perte de 3,7 M$ sur une position stkGHO, ~15% de la TVL du vault, pause sur Base et Ethereum) intégralement compensé par la trésorerie mais dans la fenêtre des 6 derniers mois. Verdict lender : collatéral C — bien audité mais architecturalement complexe et centralisé, avec un historique de sécurité récent qui doit peser sur le sizing.",
+  "incidents": [
+    "2026-01-12: perte opérationnelle de 3,7 M$ sur la position stkGHO du vault yoUSD (swap ODOS mal configuré par le système de harvest automatisé), pause du vault sur Base et Ethereum, shortfall intégralement comblé par la trésorerie du protocole le jour même, aucune perte utilisateur"
+  ],
+  "controversies": [
+    "2026: analyse tierce indépendante (paragraph.com) critiquant le dimensionnement du bug bounty Immunefi (plafond 10 000$) jugé disproportionné face à une TVL protocole de ~80 M$, et relevant plusieurs vecteurs de risque documentés par les audits eux-mêmes (pouvoirs étendus de l'opérateur, MEV sur mises à jour quotidiennes, non-conformité EIP-4626 partielle)"
+  ],
+  "dependencies": {
+    "issuer": "YO Protocol / YO Labs Inc. (San Francisco) — cofondé par Mehdi Lebbar (CIO) et Driss Benamour, ex-Uber, cofondateurs d'Exponential.fi",
+    "custodians": [],
+    "underlyings": ["Positions diversifiées sur lending markets/pools de rendement stablecoin (Aave, Morpho, Fluid entre autres, allocation quotidienne variable)", "stkGHO (GHO staké, Aave Safety Module)"],
+    "keyCounterparties": ["YO Admin Multisig (Safe, seuil de signataires non public)", "YO Operator Multisig (rebalancing restreint à une liste blanche)", "YO Timelock 48h", "ODOS (agrégateur de swap du harvester automatisé)", "Foundation Capital, Coinbase Ventures, Paradigm (investisseurs)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 365083,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": 1.46,
+    "note": "Aucun pool DEX secondaire significatif identifié (recherche GeckoTerminal/Aerodrome/Uniswap Base infructueuse) ; ratio calculé ici contre la TVL totale du vault (~25 M$, source app.yo.xyz/DL News) plutôt que contre un volume DEX 24h introuvable. Route réelle de sortie = redemption native (buffer idle instantané + queue jusqu'à 24h, taille du buffer non publiée), qui a déjà été suspendue une fois (12/01/2026, plusieurs heures)."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "yousd.md"
+}

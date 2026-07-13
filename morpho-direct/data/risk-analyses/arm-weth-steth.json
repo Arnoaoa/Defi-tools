@@ -1,0 +1,38 @@
+{
+  "symbol": "ARM-WETH-stETH",
+  "name": "Lido ARM",
+  "addresses": {
+    "1": "0x85B78AcA6Deae198fBF201c82DAF6Ca21942acc6"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "ARM-WETH-stETH est la part d'un vault d'arbitrage d'Origin Protocol : il achète du stETH décoté sur le marché et le rachète 1:1 via la withdrawal queue de Lido, le surplus de liquidité étant prêté sur Morpho. Forces : émetteur établi (Origin Protocol depuis 2020, audits continus OpenZeppelin/yAudit), ~21 mois d'historique depuis l'ouverture aux LP externes (oct. 2024), aucune bad debt. Faiblesses : retrait asynchrone non plafonné en cas de stress, aucun marché secondaire pour la part elle-même, contrat upgradeable, exposition structurelle voulue à la volatilité du peg stETH, et une faille réelle de comptabilité de la queue de retrait (slashing non pris en compte) détectée par yAudit en nov. 2025 et corrigée en deux temps. Verdict lender : collatéral C, produit expérimental mais audité et avec un historique correct — allocation modérée, à surveiller de près vu la nouveauté du mécanisme.",
+  "incidents": [
+    "2025-11: yAudit détecte une faille de comptabilité dans la queue de retrait des LP (taux de conversion ne tenant pas compte d'un slashing de validateur pendant le portage)",
+    "2025-12: publication du rapport yAudit; correctif partiel (PR #165) jugé insuffisant par les auditeurs",
+    "2026 (date précise non trouvée): correctif complet (PR #223) refondant la comptabilité de queue en parts séquestrées; aucune perte de fonds rapportée"
+  ],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Origin Protocol",
+    "custodians": [],
+    "underlyings": ["stETH (Lido)"],
+    "keyCounterparties": ["Lido (withdrawal queue native)", "Morpho (marchés WETH/wstETH/weETH, boucle de dépendance)", "1inch/CoWSwap (agrégateurs DEX)", "Opérateur Origin (pricing manuel de l'arbitrage)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 27725,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": 0,
+    "note": "Aucun marché secondaire (Curve/Uniswap) identifié pour la part ARM-WETH-stETH (intégration Pendle existe mais n'est pas une profondeur de marché indépendante). Ratio non calculable ; seule route de sortie = redemption native asynchrone du vault (10 min à 24h, non plafonnée en cas de stress simultané Lido/Morpho). TVL du vault hors Morpho ≈7-8 M$ début 2026 (non confirmé pour juillet 2026)."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "arm-weth-steth.md"
+}

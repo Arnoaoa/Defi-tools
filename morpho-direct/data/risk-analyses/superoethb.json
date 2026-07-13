@@ -1,0 +1,35 @@
+{
+  "symbol": "superOETHb",
+  "name": "Super OETH",
+  "addresses": { "8453": "0xDBFeFD2e8460a6Ee4955A68582F85708BAEA60A3" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "superOETHb est la version native, rebasing, de Super OETH d'Origin Protocol sur Base, dont wsuperOETHb (deja note C) est le wrapper ERC-4626. Le risque central propre a cette version est l'accounting du rebasing dans un contrat de lending : par defaut les smart contracts ne rebasent pas automatiquement chez Origin, et pour le seul marche Morpho utilisant ce token (superOETHb/USDC), Origin a deploye un mecanisme bespoke documente (Yield Forwarding / Borrow Booster, lance 2025-09, curate par Yearn) qui capte le rebase et le redirige vers Merkl pour subventionner les emprunteurs USDC plutot que de le crediter aux deposants de collateral. Ce n'est pas un accounting casse, mais cela ajoute une couche de dependance (Merkl, curateur Yearn, decision DAO d'activer le forwarding) par rapport au wrapper simple, sur un marche encore jeune (~10 mois) et de petite taille (~592K$ de collateral). Verdict lender : meme socle de risque emetteur/backing que wsuperOETHb, degrade par l'empilement de couches specifique a ce marche et par une liquidite secondaire (volume) thin par rapport au market cap -> note globale C, pas inferieure a la version wrappee comme attendu.",
+  "incidents": [],
+  "controversies": [
+    "2025-09: lancement du programme Borrow Booster sur le marche superOETHb/USDC de Morpho (curate par Yearn) - evenement de conception de produit, pas un incident, mais marche jeune et de petite taille",
+    "2026-07: une controverse \"OUSD Stablecoin Consortium\" (Samsung, Dunamu, Shinhan, K-Bank) a circule debut juillet 2026 mais concerne le projet distinct \"Open Standard\", sans lien avec Origin Protocol - mentionne uniquement pour ecarter toute confusion d'homonyme"
+  ],
+  "dependencies": {
+    "issuer": "Origin Protocol",
+    "custodians": [],
+    "underlyings": ["wOETH (OETH wrappe, stake nativement sur Ethereum mainnet)"],
+    "keyCounterparties": ["Chainlink CCIP (bridge unique pour le rapatriement de rendement/collateral vers Base)", "Aerodrome et Curve (positions AMO protocole-owned defendant le peg)", "Multisig Guardian (droit de retrait de la position AMO, jusqu'a 10 jours)", "Merkl (distribution du rendement forwarde aux emprunteurs USDC, specifique au marche Borrow Booster)", "Yearn (curateur du marche superOETHb/USDC sur Morpho)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 591878,
+    "dailyLiquidityUsd": 208850,
+    "ratioPct": 283,
+    "note": "TVL = valeur du collateral superOETHb sur le marche superOETHb/USDC (source Morpho Blue API, 2026-07-13; le chiffre 342290$ de collateral-targets-wave3.json correspond au cote USDC fourni par les lenders, pas au collateral). Volume 24h sur le pool Curve OETHb/WETH le plus profond (GeckoTerminal, 2026-07-13, profondeur ~9.24M$, ratio TVL/profondeur ~6.4% - sous le seuil OK de 10%). Le ratio sur volume (283%) est defavorable mais la vraie soupape de securite est la profondeur du pool AMO protocole-owned, largement suffisante pour ce marche de petite taille."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "superoethb.md"
+}

@@ -1,0 +1,83 @@
+[
+  {
+    "symbol": "pufETH",
+    "name": "pufETH",
+    "addresses": {
+      "1": "0xD9A442856C234a39a81a089C06451EBAa4306a72"
+    },
+    "markets": 1,
+    "totalTvlUsd": 1708
+  },
+  {
+    "symbol": "hgETH",
+    "name": "High Growth ETH",
+    "addresses": {
+      "1": "0xc824A08dB624942c5E5F330d56530cD1598859fD"
+    },
+    "markets": 1,
+    "totalTvlUsd": 108
+  },
+  {
+    "symbol": "agETH",
+    "name": "Kelp Gain",
+    "addresses": {
+      "1": "0xe1B4d34E8754600962Cd944B535180Bd758E6c2e"
+    },
+    "markets": 1,
+    "totalTvlUsd": 100
+  },
+  {
+    "symbol": "sNUSD",
+    "name": "Staked NUSD",
+    "addresses": {
+      "1": "0x08EFCC2F3e61185D0EA7F8830B3FEc9Bfa2EE313"
+    },
+    "markets": 1,
+    "totalTvlUsd": 1679283
+  },
+  {
+    "symbol": "PT-srUSDat-27AUG2026",
+    "name": "PT Strata Senior USDat 27AUG2026",
+    "addresses": {
+      "1": "0x2D433b943FB8c015AE409444B7F960ED288082b4"
+    },
+    "markets": 1,
+    "totalTvlUsd": 360859
+  },
+  {
+    "symbol": "PT-srUSDe-15JAN2026",
+    "name": "PT Strata Senior USDe 15JAN2026",
+    "addresses": {
+      "1": "0x1Fb3C5c35D95F48e48FFC8e36bCCe5CB5f29F57c"
+    },
+    "markets": 1,
+    "totalTvlUsd": 42810
+  },
+  {
+    "symbol": "jrUSDe",
+    "name": "Strata Junior USDe",
+    "addresses": {
+      "1": "0xC58D044404d8B14e953C115E67823784dEA53d8F"
+    },
+    "markets": 2,
+    "totalTvlUsd": 32691
+  },
+  {
+    "symbol": "srNUSD",
+    "name": "Strata Senior NUSD",
+    "addresses": {
+      "1": "0x65a44528e8868166401eA08b549E19552af589dB"
+    },
+    "markets": 1,
+    "totalTvlUsd": 4613
+  },
+  {
+    "symbol": "srmHYPER",
+    "name": "Strata Senior mHYPER",
+    "addresses": {
+      "1": "0x627EA69929212916Ec57B1b26d2E1a19F6129B53"
+    },
+    "markets": 1,
+    "totalTvlUsd": 1006
+  }
+]

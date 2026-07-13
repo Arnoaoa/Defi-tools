@@ -1,0 +1,41 @@
+{
+  "symbol": "LsETH",
+  "name": "Liquid Staked ETH",
+  "addresses": { "1": "0x8c1BEd5b9a0928467c9B1341Da1D7BD5e10b6549" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Ratio TVL Morpho / liquidité de sortie 24h ~87% (>> seuil 30%) : la TVL Morpho représente à elle seule la quasi-totalité du volume d'échange mondial quotidien de LsETH",
+    "Mint/redeem primaire gated par KYC/Allowlist (Platforms agréées) — pas de marché primaire permissionless contrairement à wstETH/rETH",
+    "Gouvernance par multisig administratif dont composition et seuil de signature ne sont pas publiés"
+  ],
+  "maxAllocation": "5-15%",
+  "summary": "LsETH est le LST institutionnel de Liquid Collective (consortium Alluvial/Coinbase/Figment/Kraken), un cToken à taux de change croissant backé par de l'ETH staké, lancé en mars 2023, audité 9 fois par 4 auditeurs reconnus, sans hack ni dépeg documenté à ce jour. Ses faiblesses structurelles sont sévères pour un collatéral Morpho : marché primaire gated par KYC (contrairement à ses comparables wstETH/rETH), set restreint de 5 Node Operators agréés, gouvernance par multisig admin opaque, et surtout une liquidité secondaire extrêmement fine (~0,05% du market cap en volume 24h) qui porte le ratio TVL Morpho/liquidité de sortie à ~87%. Verdict lender : actif au backing solide mais dont la sortie d'urgence en cas de liquidation massive est très incertaine — allocation prudente uniquement.",
+  "incidents": [],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Liquid Collective (protocole), développé par Alluvial",
+    "custodians": [],
+    "underlyings": ["ETH staké sur validateurs Ethereum"],
+    "keyCounterparties": [
+      "Node Operators agréés : Coinbase Cloud, Figment, Blockdaemon, Staked, Galaxy",
+      "Nexus Mutual (couverture slashing jusqu'à 5M$)",
+      "Multisig administratif (contrôle des contrats upgradeables, composition non publique)",
+      "Membres consortium : Alluvial, Coinbase, Kraken, Bitcoin Suisse, BitGo, Anchorage Digital, The Liquid Foundation"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 244215,
+    "dailyLiquidityUsd": 280000,
+    "ratioPct": 87,
+    "note": "Volume 24h ~277K-290K$ selon CoinGecko/CoinMarketCap (2026-07-13), dominé par Coinbase Exchange et un pool Uniswap V3 très fin (~40-50K$ de TVL) ; aucun pool Curve/Balancer profond identifié."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "lseth.md"
+}

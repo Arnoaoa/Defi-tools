@@ -1,0 +1,47 @@
+{
+  "symbol": "stakedao-frxUsDOLA",
+  "name": "Stake DAO frxUSD/sDOLA",
+  "addresses": { "1": "0x12D706F0aDFF3BE5d9Fa119424A85388FeCD6960" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Pool Curve frxUSD/sDOLA très jeune (~4-5 mois) et concentré : 82% de la TVL détenue par 5 LPs, dont 31% par un seul acteur hors POL",
+    "TVL Morpho (249 155$) quasi au plafond du marché (250 000$ fixé par LMAP #2) — pas de marge de croissance, validation de marché limitée",
+    "Taux de change sDOLA (convertToAssets) démontré manipulable atomiquement (exploit Curve LlamaLend, 240 567$, 02/03/2026) — vecteur pertinent pour ce marché qui utilise un oracle Curve LP natif (0 hops)",
+    "Volume 24h du pool non trouvé (opacité) — ratio de liquidité de sortie calculé sur la TVL du pool comme proxy prudent faute de mieux"
+  ],
+  "maxAllocation": "1-5%",
+  "summary": "Wrapper Morpho de Stake DAO (MorphoStrategyWrapper) sur un vault ERC-4626 détenant la LP Curve frxUSD/sDOLA stakée — même architecture à trois couches que stakedao-crvfrxusd, mais jumelée à sDOLA (Inverse Finance) plutôt qu'à crvUSD. Faiblesses cumulées : pool très jeune et concentré (82% sur 5 LPs), sDOLA porte un historique de dépeg sévère (DOLA à -20% en 2023) et un taux de change démontré manipulable atomiquement en 03/2026, Stake DAO a subi deux exploits en 2026 (Votemarket, vsdCRV), et le marché Morpho tourne quasiment au plafond fixé (250K$) sans validation à plus grande échelle. Verdict lender : collatéral expérimental posé sur un pool jeune et illiquide avec un sous-jacent (sDOLA) déjà fragile — allocation résiduelle uniquement.",
+  "incidents": [
+    "2026-03-02: exploit du marché sDOLA/crvUSD sur Curve LlamaLend (240 567$) via manipulation atomique de sDOLA.convertToAssets() utilisé comme feed spot — Inverse/sDOLA non affectés techniquement, manipulabilité du taux démontrée",
+    "2026-03-12: exploit Votemarket Stake DAO ~176K$ (oracle message spoofing via pont LaPoste) — module d'incitations, pas les vaults",
+    "2026-05-27: exploit vsdCRV Stake DAO (clé déployeur compromise, ~91K$ extraits sur Arbitrum, mainnet non affecté, indemnisation intégrale votée SDGP-70)",
+    "2023-04-12: dépeg de DOLA à 0,7749$ (ATL, >20%), sous-jacent sDOLA indirect",
+    "2022-06-16: hack de Frontier, ~5,8M$ de perte protocole en bad debt (sous-jacent DOLA/sDOLA indirect)",
+    "2022-04-02: hack d'Anchor par manipulation d'oracle sur INV, ~15,6M$, bad debt DOLA permanente créée (sous-jacent indirect)"
+  ],
+  "controversies": [
+    "2025-12: controverse Frax \"stealth patch\" sur FraxEtherRedemptionQueueV2 (frxETH, pas frxUSD directement) — vulnérabilité DoS d'abord niée puis corrigée discrètement, litige d'attribution de bounty ouvert, aucune perte de fonds",
+    "2026-06: révision des paramètres LMAP #2 (LLTV relevée de 86% à 91,5%) un mois après la proposition initiale — calibrage encore en rodage sur un marché jeune"
+  ],
+  "dependencies": {
+    "issuer": "Stake DAO (wrapper + vault frxUSD v2, LMAP #2)",
+    "custodians": ["Securitize/BlackRock (BUIDL)", "Superstate (USTB/USCC)", "Circle (USDC)", "FinresPBC / Frax Inc. (gestion collatéral frxUSD)"],
+    "underlyings": ["LP Curve frxUSD/sDOLA", "frxUSD", "sDOLA (Inverse Finance)", "DOLA"],
+    "keyCounterparties": ["Multisig Stake DAO 4/7 (admin vaults)", "Frax DAO / frxGov", "Inverse Finance DAO (GovGuardian EOA)", "Emprunteurs FiRM (source du backing DOLA)", "Curve DAO (pool, gauge)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 249155,
+    "dailyLiquidityUsd": 1100000,
+    "ratioPct": 22.6,
+    "note": "Volume 24h réel du pool non trouvé (pool jeune, peu suivi par les agrégateurs) ; TVL du pool (~1,1M$ au 03/06/2026, proposition LMAP #2, gov.stakedao.org) utilisée comme proxy prudent — ratio réel probablement supérieur vu la concentration des LPs (82% sur 5 adresses)"
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "stakedao-frxusdola.md"
+}

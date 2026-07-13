@@ -1,0 +1,54 @@
+{
+  "symbol": "hgETH",
+  "name": "High Growth ETH (Kelp DAO)",
+  "addresses": {
+    "1": "0xc824A08dB624942c5E5F330d56530cD1598859fD"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "D",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Hack de l'émetteur Kelp DAO il y a moins de 3 mois (292 M$, avril 2026, bridge LayerZero, attribution Lazarus)",
+    "Perte de valeur de part de -4,1 % (mars→juin 2026) non expliquée publiquement — anormal pour un vault ERC-4626",
+    "Buffer de redemption quasi nul (~0,007 % des actifs) et aucune liquidité DEX trouvée : sortie uniquement via redemption primaire 15-18 jours",
+    "Bug bounty Immunefi de Kelp excluant explicitement les contrats hgETH/Gain vault",
+    "Multisig 3/5 (4 signataires anonymes) contrôlant vault owner ET ProxyAdmin, sans timelock on-chain confirmé"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "hgETH est le token receipt du High Growth Vault de Kelp DAO (nov. 2024) : empilement à trois couches (ETH → rsETH restaké EigenLayer → stratégie à levier/looping gérée par UltraYield sur 12+ protocoles). L'émetteur Kelp a subi le plus gros hack DeFi de 2026 (292 M$ via le pont LayerZero, avril 2026) ; hgETH n'a pas été hacké directement mais est backé par rsETH et a perdu -4,1 % de valeur de part sans explication publique, avec un buffer de sortie tombé à ~0,007 % des actifs et une TVL divisée par deux (~19 M$). Aucune liquidité DEX identifiée, retrait primaire en 15-18 jours, gouvernance du vault faible (multisig 3/5 sans timelock, un seul audit, bug bounty excluant le produit). Verdict lender : D — collatéral à éviter, cumul de red flags structurels et d'un incident majeur très récent chez l'émetteur.",
+  "incidents": [
+    "2024-07: DNS hijack de Kelp DAO (résolu en quelques heures, sans perte de fonds)",
+    "2025-04: bug de mint de frais Kelp (corrigé en 24 h, aucune perte utilisateur)",
+    "2026-04-18: hack Kelp DAO 292 M$ — 116 500 rsETH volés via bridge LayerZero (config 1-of-1 verifier), ~200 M$ de bad debt Aave, gels de marchés rsETH, recovery complétée le 25 mai 2026 via la coalition DeFi United",
+    "2026-03/06: perte de valeur de part hgETH de -4,1 % (ratio rsETH/part 1,0368 → 0,9941, ~763 K$) non documentée publiquement, buffer de sortie réduit à 0,745 rsETH"
+  ],
+  "controversies": [
+    "2026-05: dispute publique de responsabilité Kelp DAO vs LayerZero sur la config du bridge (LayerZero reconnaît une erreur) ; alerte d'un outil IA open-source 12 jours avant le hack restée sans suite",
+    "2026-05: ordonnance du tribunal SDNY bloquant Arbitrum DAO sur 30 766 ETH (~71 M$) gelés post-hack, réclamés par des créanciers de jugements contre la Corée du Nord — litige en cours"
+  ],
+  "dependencies": {
+    "issuer": "Kelp DAO / KernelDAO (Gain division, infra Upshift/August Digital)",
+    "custodians": [],
+    "underlyings": ["rsETH (Kelp LRT)", "ETH", "ETHx", "wstETH"],
+    "keyCounterparties": [
+      "UltraYield (curateur unique de la stratégie à levier)",
+      "Upshift Finance / August Digital (infrastructure du vault)",
+      "EigenLayer (restaking, risque de slashing AVS)",
+      "12+ protocoles DeFi de déploiement (Aave, Compound, Pendle, Morpho, Euler…)",
+      "Nexus Mutual (assurance 30 M$+ excluant levier et défaillances de pont)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 108,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": 0,
+    "note": "Aucun pool DEX ni volume 24h trouvé pour hgETH — absence de marché secondaire liquide (red flag en soi). Sortie uniquement via redemption primaire (15-18 j) avec buffer quasi nul. TVL Morpho négligeable (108 $)."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "hgeth.md"
+}

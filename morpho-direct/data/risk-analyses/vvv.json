@@ -1,0 +1,48 @@
+{
+  "symbol": "VVV",
+  "name": "Venice Token",
+  "addresses": { "8453": "0xacfE6019Ed1A7Dc6f7B508C02d1b04ec88cC21bf" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "D",
+    "depegBacking": "C",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Aucun audit indépendant du smart contract identifié (CertiK Skynet: 'Not Audited By CertiK', aucun rapport Spearbit/OpenZeppelin/Trail of Bits/Hacken trouvé) — red flag absolu framework §6 'protocole sans audit'",
+    "Fonction de mint illimité active côté owner, statut de renonciation de propriété non confirmé — risque de dilution/centralisation",
+    "Concentration extrême des holdings (~64% détenus par les top holders)"
+  ],
+  "maxAllocation": "1-3% (voire à éviter)",
+  "summary": "VVV est le token utilitaire de Venice AI, plateforme d'IA générative privée/non censurée fondée par Erik Voorhees (ShapeShift), donnant via staking un droit d'accès proportionnel à l'inférence de la plateforme, sans backing ni droit sur les cash-flows de l'entreprise. Aucun audit indépendant du smart contract n'a été identifié malgré des recherches ciblées (CertiK confirme l'absence d'audit), et le contrat dispose d'une fonction de mint illimité côté owner non confirmée comme renoncée — un red flag absolu du framework. Le token affiche par ailleurs une volatilité extrême (drawdown d'environ -96% entre janvier et décembre 2025) et une controverse active sur la répartition equity/token de son Series A de 65M$ (juillet 2026), en plus d'un litige fédéral non résolu sur sa marque. Verdict lender : actif jeune, opaque sur le plan de la sécurité smart contract et fortement centralisé — allocation à éviter ou strictement marginale malgré une liquidité de sortie mécaniquement suffisante pour la taille actuelle du marché Morpho.",
+  "incidents": [
+    "2025-01-27: lancement du token, volatilité immédiate extrême, ATH 22,58$ atteint rapidement",
+    "2025-12-01: ATL 0,92$, drawdown d'environ -96% depuis l'ATH (crash de marché, pas un hack)",
+    "2026-06-06: audit tiers identifie une fonction de mint illimité côté owner comme risque de centralisation, aucune exploitation connue"
+  ],
+  "controversies": [
+    "2025-02-03: plainte fédérale 'Uncensored AI, Inc. v. Venice AI, Inc. et al.' (D. Neb., 8:25-cv-00040), litige de marque, statut/issue non confirmé",
+    "Continu: positionnement 'uncensored' cité par des chercheurs en cybersécurité (Cybernews, GBHackers) comme facilitant la génération de phishing/malware/ransomware",
+    "2026-07-01: Series A 65M$ (Dragonfly, valorisation 1Md$) — controverse communautaire sur la répartition equity/token jugée défavorable aux détenteurs de VVV (critique notable de Dankrad Feist), défendue publiquement par Erik Voorhees"
+  ],
+  "dependencies": {
+    "issuer": "Venice AI, Inc. (société privée US, fondée par Erik Voorhees)",
+    "custodians": [],
+    "underlyings": [],
+    "keyCounterparties": [
+      "Venice AI, Inc. (contrôle unilatéral du contrat token, du programme de burn et des conditions de staking)",
+      "Investisseurs Series A: Dragonfly, Coinbase Ventures, Morgan Creek Digital (allocation equity + tokens vestés/warrants)",
+      "Aerodrome (Base) comme principale venue de liquidité secondaire on-chain"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 96268,
+    "dailyLiquidityUsd": 18275000,
+    "ratioPct": 0.53,
+    "note": "Volume 24h CoinGecko (2026-07-13) ≈18,3M$, cohérent avec les pools VVV/WETH Aerodrome sur Base (DexScreener/GeckoTerminal, ~18,5M$ cumulés). Ratio TVL Morpho/volume 24h ≈0,53%, mécaniquement sous le seuil de 10% mais uniquement du fait de la taille dérisoire du marché Morpho (96k$)."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "vvv.md"
+}

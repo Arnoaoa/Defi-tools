@@ -1,0 +1,41 @@
+{
+  "symbol": "srmHYPER",
+  "name": "Strata Senior mHYPER",
+  "addresses": { "1": "0x627EA69929212916Ec57B1b26d2E1a19F6129B53" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Tranche senior sur un sous-jacent déjà D (mHYPER/Midas-Hyperithm) dont l'exposition à la contagion Stream Finance est documentée et matérialisée",
+    "Protection senior non garantie en capital en cas d'épuisement du junior",
+    "Liquidité secondaire totalement nulle actuellement (0$ de volume 24h, arrêt de négociation sur toutes les places de marché listées par CoinGecko)",
+    "Signal non confirmé mais non expliqué d'une chute de prix d'environ 90% le 17/04/2026 (ATL 0,1002$ vs ATH 1,02$)",
+    "Marché le plus jeune des trois analysés (< 4 mois, lancé 30/03/2026), sans historique de stress propre"
+  ],
+  "maxAllocation": "1-3% ou skip",
+  "summary": "srmHYPER est la tranche senior du marché mHYPER de Strata (Frontera Labs), qui tranche mHYPER (Midas/Hyperithm) en visant un rendement plancher protégé en priorité par la tranche junior. Le sous-jacent mHYPER est déjà noté D : NAV hebdomadaire seulement, statut de créancier subordonné, > 12M$ d'avoirs CEX non vérifiables, et exposition documentée à la contagion Stream Finance de novembre 2025 (~75M$ de position à effet de levier dénouée en urgence, TVL contractée d'environ 82%). Le marché Strata lui-même est très récent (30/03/2026, ~3,5 mois) et n'a donc pas été directement exposé à cet épisode. Point le plus critique : liquidité secondaire actuellement nulle (CoinGecko confirme un arrêt de négociation sur toutes les places de marché) et un signal non confirmé de chute de prix de ~90% en avril 2026 sans explication publique retrouvée. Verdict lender : note D, allocation résiduelle ou skip -- absence totale de sortie de marché secondaire en cas de stress.",
+  "incidents": [
+    "2026-04-17 (non confirmé): plus bas historique CoinGecko à 0,1002$ (vs ATH 1,02$, ~-90%), sans couverture presse ni annonce Strata retrouvée -- probable print isolé sur pool à liquidité quasi nulle, non vérifié positivement",
+    "2025-11-04/06 (antérieur au lancement de ce marché Strata, hérité du sous-jacent mHYPER): contagion Stream Finance/xUSD -- Stream Finance détenait ~75M$ de position à effet de levier en mHYPER, dénouée par Hyperithm/Midas, >150M$ de rachats traités en 48h, aucune perte confirmée pour les détenteurs mHYPER mais TVL contractée d'environ 82% depuis. Le marché srmHYPER n'existait pas encore à cette date."
+  ],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Strata / Frontera Labs (Londres) ; sous-jacent émis par Midas Software GmbH (Allemagne, licence BaFin), stratégie gérée par Hyperithm",
+    "custodians": ["Fordefi (custody MPC, côté Midas)"],
+    "underlyings": ["mHYPER", "USDe (levier via Aave)", "Hyperliquid (funding-rate arbitrage)", "Pendle (farming)"],
+    "keyCounterparties": ["Hyperithm (gérant de stratégie mHYPER)", "Stream Finance (contrepartie devenue insolvable, ex-~75M$ de position à effet de levier en mHYPER)", "Venues centralisées non divulguées (>12M$ selon Serenity Research)", "Admin multisig 3/4 et Guardian de Strata"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 1006,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": null,
+    "note": "Aucune liquidité secondaire : CoinGecko indique 0$ de volume 24h et confirme un arrêt de négociation sur toutes les places de marché listées (2026-07-13). Market cap proxy ~670 506$. Ratio non calculable (division par zéro), pire cas de figure du framework."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "srmhyper.md"
+}

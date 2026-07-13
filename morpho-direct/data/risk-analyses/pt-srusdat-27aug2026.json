@@ -1,0 +1,46 @@
+{
+  "symbol": "PT-srUSDat-27AUG2026",
+  "name": "PT Strata Senior USDat 27AUG2026",
+  "addresses": {
+    "1": "0x2D433b943FB8c015AE409444B7F960ED288082b4"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "D",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Aucun audit public trouvé pour Strata/Frontera Labs, émetteur de srUSDat — red flag absolu du framework (protocole sans audit)",
+    "Sous-jacent ultime sUSDat/STRC (Saturn Credit) déjà noté D : vulnérabilités SAT-001/SAT-002 non corrigées, dépeg STRC -17% le 18/06/2026",
+    "Protection de la tranche senior non absolue : perte de principal possible si le coverage ratio junior/senior passe sous 107.5%",
+    "Gouvernance Strata non documentée (pas de DAO/multisig/timelock connu), token STRATA pas encore lancé",
+    "Liquidité du pool Pendle non quantifiable (données API/app indisponibles), protocole Strata jeune (~9 mois)"
+  ],
+  "maxAllocation": "skip",
+  "summary": "PT-srUSDat-27AUG2026 est un Principal Token Pendle sur srUSDat, la tranche senior du protocole de yield-tranching Strata (Frontera Labs) appliquée à sUSDat de Saturn Credit. Piège d'homonyme écarté : srUSDat (Strata) est bien distinct de sUSDat (Saturn), mais en dérive directement via un mécanisme de tranching senior/junior où le junior absorbe les pertes en premier jusqu'à un coverage ratio minimum de 107.5%, en dessous duquel le senior peut lui-même perdre du principal. Faiblesse rédhibitoire : Strata n'a aucun audit public trouvé, ce qui constitue un red flag absolu, et hérite en plus intégralement du risque déjà noté D sur sUSDat/STRC (vulnérabilités non corrigées, dépeg récent). Verdict lender : à éviter (skip), l'empilement de couches non éprouvées (tranching non audité sur staking à risque) aggrave un profil déjà défavorable.",
+  "incidents": [
+    "Aucun incident spécifique à Strata/Frontera Labs trouvé au 2026-07-13",
+    "Hérité du sous-jacent : 2026-04-14 divulgation SAT-001/SAT-002 (Saturn, non corrigées) ; 2026-06-18 dépeg STRC à -17%"
+  ],
+  "controversies": [
+    "Aucune controverse spécifique à Strata trouvée au 2026-07-13",
+    "Hérité du sous-jacent : 2026-06-24 enquête Rosen Law Firm sur Strategy Inc./Michael Saylor ; 2026-07-03 alerte JPMorgan sur la soutenabilité des dividendes Digital Credit"
+  ],
+  "dependencies": {
+    "issuer": "Strata / Frontera Labs (tranching) sur Saturn Credit (staking sUSDat)",
+    "custodians": ["Clear Street (custodian STRC)", "Securitize (administrateur)", "fonds professionnel BVI"],
+    "underlyings": ["srUSDat (Strata, senior)", "jrUSDat (Strata, junior)", "sUSDat (Saturn Credit)", "STRC (Strategy Inc.)", "USDat"],
+    "keyCounterparties": ["Strata/Frontera Labs (protocole non audité)", "Strategy Inc. / Michael Saylor", "adresse unique PROCESSOR_ROLE (Saturn)", "pool AMM Pendle (seule route de sortie avant maturité)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 360846,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": 0,
+    "note": "Non trouvé : endpoint API Pendle en erreur et app inaccessible au moment de la recherche (2026-07-13) ; seule donnée confirmée = APY fixe PT ~11,59% avec multiplicateur de points 15x. Opacité pénalisante en soi."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "pt-srusdat-27aug2026.md"
+}

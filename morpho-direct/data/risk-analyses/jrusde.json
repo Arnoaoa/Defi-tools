@@ -1,0 +1,37 @@
+{
+  "symbol": "jrUSDe",
+  "name": "Strata Junior USDe",
+  "addresses": { "1": "0xC58D044404d8B14e953C115E67823784dEA53d8F" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Tranche junior = levier de pertes non quantifié publiquement sur un sous-jacent déjà noté C (sUSDe/USDe)",
+    "Cooldown de rachat de 7 jours + pause si coverage ratio du senior < 105% : sortie bloquée précisément en période de stress",
+    "Protocole Strata < 1 an d'existence, gouvernance non décentralisée (multisig 3/4, signataires anonymes, contrats upgradeable)",
+    "Absence de bug bounty public malgré un TVL de plusieurs dizaines de millions de dollars"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "jrUSDe est la tranche junior (first-loss) du marché USDe de Strata (Frontera Labs), qui absorbe 100% des pertes du sous-jacent sUSDe en premier en échange d'un rendement à effet de levier. Empilement à 3 couches (USDe synthétique -> sUSDe staking -> tranche junior), formule de levier de pertes non publiée par Strata. Forces : Strata est auditée par 3 cabinets reconnus (Quantstamp, Cyfrin, Guardian). Faiblesses : junior sans plancher de protection, cooldown de rachat 7 jours combiné a une pause automatique sous 105% de coverage ratio, protocole jeune (< 1 an) avec gouvernance multisig non decentralisee, aucun bug bounty public, et liquidite secondaire deja thin (ratio TVL Morpho / volume 24h ~103%). Verdict lender : une tranche junior est structurellement plus risquee que son sous-jacent (deja C) -> note D, allocation residuelle ou skip.",
+  "incidents": [],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Strata / Frontera Labs (Londres) ; sous-jacent emis par Ethena Labs",
+    "custodians": ["Copper", "Ceffu", "Fireblocks", "Kraken Custody (herites du sous-jacent USDe)"],
+    "underlyings": ["sUSDe", "USDe (position delta-neutre ETH/BTC staké + short perpétuel CEX)"],
+    "keyCounterparties": ["Desks dérivés CEX d'Ethena (Binance, Bybit, OKX, Deribit)", "Admin multisig 3/4 de Strata", "Guardian de Strata (Patrick Collins, co-fondateur Cyfrin)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 32691,
+    "dailyLiquidityUsd": 31776,
+    "ratioPct": 103,
+    "note": "jrUSDe se négocie sur Fluid (Ethereum), paire USDE/JRUSDE, volume 24h ~31 776$ (CoinGecko, 2026-07-13), market cap ~54,01M$. Rachat natif Strata soumis à cooldown 7 jours + pause si coverage ratio senior < 105%."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "jrusde.md"
+}

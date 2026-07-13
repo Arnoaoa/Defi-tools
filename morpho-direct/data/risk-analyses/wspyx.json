@@ -1,0 +1,48 @@
+{
+  "symbol": "wSPYx",
+  "name": "Wrapped SP500 xStock",
+  "addresses": { "1": "0xc88FcD8B874fDb3256E8B55b3decB8c24EAb4c02" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "D",
+    "depegBacking": "C",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Red flag absolu (framework §6) 'protocole sans audit' : aucun audit de sécurité publié pour les smart contracts xStocks/Backed Finance malgré des milliards de dollars de volume cumulé (enquête BlockEden, oct. 2025) — déclenche à lui seul la note D globale",
+    "Liquidité de sortie Ethereum quasi inexistante : ratio TVL Morpho / volume 24h ≈ 80x (~7990%), très au-dessus du seuil red flag (>30%)",
+    "Rachat primaire fermé au lender/liquidateur DeFi type : réservé aux investisseurs qualifiés KYC de Backed (min. 5000$), dépendance totale à un marché secondaire lui-même illiquide sur Ethereum",
+    "Oracle Morpho non-Chainlink sur ce marché : contrat MorphoPythOracle (Pyth Data Association), alors que Chainlink est présenté comme 'oracle officiel' des xStocks — divergence entre narratif marketing et oracle réellement utilisé",
+    "Risque de staleness oracle le week-end : marché actions US (SPY) fermé le week-end/jours fériés, wSPYx trade 24/7 on-chain, comportement exact du feed Pyth SPY/USD hors heures de marché non confirmé publiquement (non trouvé)"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "wSPYx est la version Ethereum d'un xStock (SPYx) émis par Backed Assets (JE) Limited, une SPV Jersey utilisant la brique de tokenisation suisse de Backed Finance AG (racheté par Kraken en déc. 2025), sous forme de tracker certificate (dette au porteur suisse) répliquant l'ETF SPY, backé par des dépositaires nommés (InCore Bank, Maerki Baumann, Alpaca Securities) avec Security Agent tripartite. Forces : structure légale de recours documentée en cas de défaut de l'émetteur, oracle Pyth dédié aux marchés actions. Faiblesses décisives : aucun audit de sécurité publié pour les contrats xStocks/Backed (red flag absolu), rachat primaire fermé aux lenders/liquidateurs DeFi (KYC institutionnel uniquement), liquidité secondaire sur Ethereum quasi nulle (ratio TVL Morpho/volume 24h ~80x), oracle Morpho non-Chainlink (Pyth) avec risque de staleness le week-end sur un sous-jacent dont le marché ferme. Verdict lender : collatéral D, à éviter ou allocation résiduelle seulement — actif trop jeune, trop opaque sur l'audit, et beaucoup trop illiquide sur Ethereum pour absorber une liquidation.",
+  "incidents": [],
+  "controversies": [
+    "2022: les trois co-fondateurs de Backed Finance (Adam Levi, Yehonatan Goldman, Roberto Klein) dirigeaient auparavant DAOstack, projet DAO fermé fin 2022 après épuisement des fonds ; certains observateurs qualifient l'arrêt de 'soft rug pull' (absence de stabilisation du token GEN) — non confirmé judiciairement",
+    "2025-10: enquête BlockEden ('58% Market Share, Zero Audits') documente l'absence totale d'audit de sécurité publié pour les smart contracts xStocks/Backed Finance et l'absence de bug bounty public",
+    "2025-12: Kraken annonce puis finalise l'acquisition de Backed Finance AG, émetteur des xStocks, en amont de son IPO 2026 — changement de contrôle majeur concentrant émission, trading et règlement sous un seul acteur",
+    "2026: la SEC clarifie le cadre réglementaire fédéral des titres tokenisés aux États-Unis ; aucune action d'application connue spécifiquement contre Backed Finance à ce jour ; xStocks reste interdit aux personnes US/UK/canadiennes/australiennes"
+  ],
+  "dependencies": {
+    "issuer": "Backed Assets (JE) Limited (SPV Jersey, JFSC) ; stack et marque Backed Finance AG (Suisse, DLT Act) ; propriété Kraken depuis déc. 2025",
+    "custodians": ["InCore Bank (Suisse)", "Maerki Baumann (Suisse)", "Alpaca Securities (broker-dealer US)"],
+    "underlyings": ["Parts de l'ETF SPDR S&P 500 Trust (SPY)"],
+    "keyCounterparties": [
+      "Backed/Kraken (émetteur, droits d'upgrade du proxy WrappedBackedTokenProxy)",
+      "Security Agent indépendant (Account Control Agreement tripartite, identité non trouvée)",
+      "Pyth Data Association (oracle MorphoPythOracle utilisé sur ce marché Morpho)",
+      "Marché Morpho unique : loan asset AUSD (Agora), LLTV 86%"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 148985,
+    "dailyLiquidityUsd": 1864,
+    "ratioPct": 7990,
+    "note": "Volume 24h ~1864$ sur l'unique pool identifié (Uniswap V3 wSPYx/USDC 0,05%, TVL pool ~318288$, GeckoTerminal 13/07/2026). Seulement 1311,616 wSPYx en circulation sur Ethereum (131 holders, Etherscan) ; la vraie liquidité de SPYx (~33,6M$ market cap) est presque entièrement sur Solana/CEX (Kraken, Bybit), inaccessible aux liquidateurs du marché Morpho Ethereum."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "wspyx.md"
+}

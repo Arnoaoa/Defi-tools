@@ -1,0 +1,48 @@
+{
+  "symbol": "YFI",
+  "name": "Yearn Finance",
+  "addresses": {
+    "1": "0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e",
+    "8453": "0x9EaF8C1E34F05a589EDa6BAfdF391Cf6Ad3CB239"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "B",
+    "recentSecurity": "D"
+  },
+  "redFlags": [],
+  "maxAllocation": "1-5%",
+  "summary": "YFI est l'un des plus anciens tokens de gouvernance DeFi (fair launch 2020) mais aussi l'un de ceux avec l'historique de sécurité le plus chargé : cinq incidents distincts depuis 2021 (dont deux en nov. et déc. 2025, à peine ~7-8 mois avant cette analyse), pour plus de 30M$ de pertes cumulées, majoritairement dus à des vaults legacy jamais pleinement décommissionnés. La TVL du protocole s'est effondrée de ~97% depuis son pic de 2021 (~6Md$ à ~150-175M$), et le prix du token a suivi (-97,7% depuis l'ATH), sans capture de valeur organique fiable en contrepartie. Verdict lender : malgré l'ancienneté et le fair launch emblématique, le pattern récurrent d'exploits sur du code jamais retiré, la baisse structurelle du protocole et la faible liquidité justifient une note D et une allocation très prudente.",
+  "incidents": [
+    "2021-02-04: exploit vault DAI v1 (~11M$), remboursement intégral des victimes via mint DAI de trésorerie",
+    "2021-11-17: manipulation présumée du marché des perpétuels YFI sur dYdX, fonds d'assurance dYdX -9M$",
+    "2023-03: exposition indirecte à la contagion du hack Euler Finance (~1,4M$)",
+    "2023-04-13: exploit vault legacy yUSDT/iearn (~11-11,6M$), remboursement des victimes non confirmé",
+    "2023: erreur de script trésorerie sur CowSwap (~1,4M$ de slippage, fonds protocole pas utilisateurs)",
+    "2025-11-30: exploit pool yETH weighted stableswap (~9M$), remboursement partiel voté (3,2M$ sur trésorerie DAO)",
+    "2025-12-16: exploit vault legacy iearn-TUSD v1 (~300k$)"
+  ],
+  "controversies": [
+    "2022-03: départ du co-fondateur Andre Cronje, invoquant une enquête SEC prolongée depuis 2021 ciblant les vaults de yield comme potentiels véhicules d'investissement non enregistrés ; pas de lawsuit formel confirmé mais deux ans de demandes d'information"
+  ],
+  "dependencies": {
+    "issuer": "Yearn Finance DAO",
+    "custodians": [],
+    "underlyings": [],
+    "keyCounterparties": [
+      "Multisig élu de 9 membres (6-of-9, exécution des votes Snapshot/veYFI)",
+      "Andre Cronje (co-fondateur historique, parti en 2022, protocole resté opérationnel car déjà DAO-géré)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 237605,
+    "dailyLiquidityUsd": 6265497,
+    "ratioPct": 3.8,
+    "note": "Volume 24h CoinGecko (2026-07-13) ≈6,27M$ pour un market cap ≈74,1M$. Ratio TVL Morpho/volume 24h ≈3,8%, sous le seuil de vigilance (10%), mais profondeur réelle des carnets d'ordres non confirmée (non trouvé)."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "yfi.md"
+}

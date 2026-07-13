@@ -1,0 +1,43 @@
+{
+  "symbol": "MORPHO",
+  "name": "Morpho Token",
+  "addresses": { "1": "0x58D97B57BB95320F9a05dC918Aef65434969c2B2" },
+  "grade": "C",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "A",
+    "depegBacking": "C",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "MORPHO est le token de gouvernance du protocole de lending Morpho, sans capture de valeur actuelle (fee switch jamais activé malgré ~256M$ de frais générés) et sans backing économique réel, ce qui en fait un actif purement spéculatif malgré la solidité et la maturité du protocole sous-jacent (27-34 audits, TVL protocole ~6,8-11,8Md$, aucun hack du cœur immuable). Le point spécifique à surveiller est la réflexivité : depuis janvier 2026, MORPHO est utilisé comme collatéral sur un marché Morpho Blue (MORPHO/USDC, déployé par un curator tiers, non par la DAO) — actuellement négligeable en taille (~329k$ de collatéral) et cantonné par l'architecture de marchés isolés, mais un facteur structurel à surveiller si ce marché grossit. Verdict lender : actif liquide et bien audité au niveau protocolaire, mais volatil, jeune en tant que token transférable (depuis nov. 2024) et sans fondamentaux de valorisation actés — allocation prudente.",
+  "incidents": [
+    "2024-10-13: exploit oracle sur marché isolé PAXG/USDC (~230k$, non lié à MORPHO collatéral), majoritairement récupéré",
+    "2025-04-10/11: vulnérabilité frontend app Morpho (~2,6M$ à risque), interceptée par white-hat, 0 perte réelle",
+    "2025: exposition mineure indirecte à la contagion du dépeg USR via événement lié à KelpDAO, contenue par l'isolation des marchés"
+  ],
+  "controversies": [
+    "2025-06: le fondateur Paul Frambot confirme que le fee switch restera désactivé, privilégiant la croissance à la distribution de valeur aux détenteurs de MORPHO",
+    "2026-04: restructuration corporate (Morpho Labs SAS filiale de l'Association) présentée comme résolvant un conflit d'intérêt perçu, implicitement reconnu comme ayant existé"
+  ],
+  "dependencies": {
+    "issuer": "Morpho Association (association loi 1901, France), avec Morpho Labs SAS comme filiale à 100% depuis avril 2026",
+    "custodians": [],
+    "underlyings": [],
+    "keyCounterparties": [
+      "Multisig de gouvernance 5-of-9 avec timelock 24h",
+      "Api3 (curator ayant déployé le marché MORPHO/USDC et fournisseur de l'oracle OEV de ce marché)",
+      "Utilisateurs institutionnels majeurs du protocole (Coinbase, Société Générale, Bitwise) soutenant indirectement la valorisation"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 329224,
+    "dailyLiquidityUsd": 20233330,
+    "ratioPct": 1.6,
+    "note": "Volume 24h CoinGecko (2026-07-13) ≈20,2M$ pour un market cap ≈1,28Md$. Ratio TVL Morpho/volume 24h ≈1,6%, bien en dessous du seuil de vigilance (10%)."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "morpho.md"
+}

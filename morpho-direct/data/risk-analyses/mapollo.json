@@ -1,0 +1,38 @@
+{
+  "symbol": "mAPOLLO",
+  "name": "Midas Apollo Crypto",
+  "addresses": {
+    "1": "0x7CF9DEC92ca9FD46f8d86e7798B72624Bc116C05"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "B",
+    "depegBacking": "D",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "1-3%",
+  "summary": "mAPOLLO est un certificat tokenisé émis par Midas (licence BaFin) qui réplique une stratégie crypto market-neutral multi-chaînes (basis trading, LP, yield farming) gérée par Apollo Crypto Management Pty Ltd (Australie, licence AFSL, sans lien avec Apollo Global Management). Points forts relatifs : gérant identifié et régulé (contrairement à mBASIS), plateforme Midas auditée sans bad debt historique. Points faibles majeurs : liquidité secondaire quasi inexistante (trading arrêté sur toutes les venues CoinGecko), aucune méthodologie NAV/oracle documentée pour ce marché, et exposition matérialisée à la contagion Resolv Labs/USR de mars 2026 (position USR rachetée en urgence après un dépeg de 97%). Verdict lender : collatéral opaque et récent, exposé à un risque de corrélation DeFi déjà avéré, allocation minimale ou à éviter.",
+  "incidents": [
+    "2026-03-22: Contagion Resolv Labs/USR — un attaquant a frappé 80M de tokens USR non garantis via une clé SERVICE_ROLE compromise (attaque de chaîne d'approvisionnement sur des credentials GitHub tiers), provoquant un dépeg de USR de 97% (1,00$ à 0,025$). mAPOLLO détenait une position USR et l'a rachetée intégralement suite à l'incident (perte éventuelle pour les détenteurs non confirmée)."
+  ],
+  "controversies": [
+    "Aucune controverse trouvée pour Midas ni pour Apollo Crypto Management au 2026-07-13. Homonyme exclu : Apollo Global Management (amende SEC de 57,7M$ en 2016, entité distincte). Homonyme exclu : Midas Capital (protocole lending BSC piraté en 2023, entité distincte de Midas l'émetteur RWA)."
+  ],
+  "dependencies": {
+    "issuer": "Midas (Midas Software GmbH, Berlin, licence BaFin) — multisig et seuil de signataires non publiés",
+    "custodians": ["Midas (mint/redeem/pause du token)"],
+    "underlyings": ["Stratégies basis trading, LP et yield farming multi-protocoles/multi-chaînes", "Exposition ponctuelle confirmée à USR (Resolv Labs), rachetée en mars 2026"],
+    "keyCounterparties": ["Apollo Crypto Management Pty Ltd (Melbourne, AFSL 525760, fondateur Henrik Andersson) — gérant unique de la stratégie", "Protocoles DeFi tiers non tous divulgués (allocation dynamique)", "Resolv Labs (contrepartie ayant matérialisé un risque de contagion)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 351762,
+    "dailyLiquidityUsd": 1,
+    "ratioPct": 35176200,
+    "note": "Volume 24h CoinGecko ≈1$ — le token a cessé de trader sur toutes les venues listées ; ratio hors barème, seule voie de sortie réaliste = rachat KYC via Midas (1-7 jours ouvrés)"
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "mapollo.md"
+}

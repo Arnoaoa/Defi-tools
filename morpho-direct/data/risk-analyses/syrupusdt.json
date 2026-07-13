@@ -1,0 +1,42 @@
+{
+  "symbol": "syrupUSDT",
+  "name": "Syrup USDT",
+  "addresses": {
+    "1": "0x356B8d89c1e1239Cbbb9dE4815c39A1474d5BA7D"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-10%",
+  "summary": "syrupUSDT est le frère jumeau de syrupUSDC (Maple Finance) : même protocole, mêmes audits (Trail of Bits, Spearbit, Three Sigma, Peckshield), même historique de bad debt 2022, mais côté USDT et sur un seul marché Morpho, bien plus petit (66,6K$ vs 131M$+ de TVL). Différence clé : selon TID Research, syrupUSDT partage pool delegate et emprunteurs avec syrupUSDC, donc détenir les deux ne diversifie pas le risque de crédit institutionnel sous-jacent. Aucun incident ou controverse spécifique à syrupUSDT distinct de ceux de syrupUSDC; redemptions honorées en totalité lors du stress test rsETH d'avril 2026 (syrupUSDT inclus). Verdict lender : même profil de risque que syrupUSDC, à traiter comme une exposition de crédit institutionnel unique si les deux sont détenus simultanément.",
+  "incidents": [
+    "2022-12: défaut Orthogonal Trading / M11 Credit sur 36 M$ de prêts, ~80% de haircut sur le pool concerné (protocole Maple partagé avec syrupUSDC)",
+    "2022-11: défaut Auros Global sur 3-7,5 M$, restructuré ensuite",
+    "2022-07: défaut Babel Finance sur 10 M$, ~7,9 M$ de perte sur le pool concerné",
+    "2026-04-18: exploit rsETH Kelp DAO, exposition indirecte de Maple dénouée sous 24h sans perte, redemptions syrupUSDC ET syrupUSDT honorées en totalité (800 M$+ en 72h)"
+  ],
+  "controversies": [
+    "2022-12: Orthogonal Trading placé en liquidation provisoire par la Cour des BVI après son défaut; Maple/M11 Credit annoncent des poursuites légales pour recouvrement, issue finale non documentée",
+    "2025-11: Core Foundation obtient une injonction de la Cour des Îles Caïmans contre Maple Finance (violation alléguée de confidentialité/exclusivité sur le partenariat lstBTC), bloquant le lancement de syrupBTC; Maple conteste, arbitrage en cours"
+  ],
+  "dependencies": {
+    "issuer": "Maple Finance",
+    "custodians": [],
+    "underlyings": ["prêts USDT surcollatéralisés BTC/ETH/SOL/XRP"],
+    "keyCounterparties": ["pool delegates partagés en grande partie avec syrupUSDC (M11 Credit, Maven11, Icebreaker Capital)", "emprunteurs institutionnels partagés avec syrupUSDC"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 66603,
+    "dailyLiquidityUsd": 420306,
+    "ratioPct": 16,
+    "note": "Volume DEX 24h Uniswap v4 (paire SYRUPUSDT/USDT, ~420K$); ratio en zone de vigilance sur ce seul indicateur mais non pertinent: le canal réel de sortie est le buffer de liquidité Maple, qui a honoré syrupUSDT explicitement lors du stress test rsETH d'avril 2026 (800M$+ en 72h, très supérieur aux 66,6K$ déposés sur Morpho)"
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "syrupusdt.md"
+}

@@ -1,0 +1,39 @@
+{
+  "symbol": "WOUSD",
+  "name": "Wrapped OUSD",
+  "addresses": {
+    "1": "0xD2af830E8CBdFed6CC11Bab697bB25496ed6FA62"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "B",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "WOUSD est le wrapper ERC-4626 non-rebasing d'OUSD (Origin Dollar), stablecoin yield-bearing d'Origin Protocol backé actuellement à 100% par de l'USDC déployé sur Morpho et Curve (identité confirmée sur Etherscan, à ne pas confondre avec le nouveau projet 'Open USD' du consortium Visa/Stripe/BlackRock lancé en juin 2026, sans lien). Forces : audits continus (OpenZeppelin, Trail of Bits, Sigma Prime), bug bounty Immunefi jusqu'à 1M$, redemption native fonctionnelle sans KYC, gouvernance DAO veOGV documentée dans OETH. Faiblesses : victime directe (pas seulement prédécesseur) d'un hack majeur en 2020 (7,7M$, reentrancy sur VaultCore) qui a provoqué une perte de peg, compensation nominale à 100% mais partiellement en token natif OGN bloqué pour les gros déposants, concentration du backing sur un seul stablecoin (USDC), et surtout une liquidité secondaire quasi inexistante (pool Curve ≈28K$ de profondeur, ≈594$ de volume 24h). Verdict lender : collatéral C, plus risqué qu'OETH sur ce même émetteur — l'actif sous-jacent (OUSD) reste très petit (6-13M$ de market cap) et la seule vraie soupape de sortie est la redemption native (jusqu'à 24h, 0,5% de frais), pas le marché secondaire ; allocation à limiter en conséquence.",
+  "incidents": [
+    "2020-11-17: hack d'OUSD (reentrancy + validation manquante sur VaultCore.mint/mintMultiple, ~7,7M$ volés via flashloans dYdX), victime directe, peg perdu temporairement, compensation 100% nominale (OUSD intégral pour petits déposants, 25% OUSD + 75% OGN bloqué 1 an pour les gros), audits renforcés depuis (OpenZeppelin continu, bug bounty Immunefi 1M$)"
+  ],
+  "controversies": [
+    "2020-11 (suites hack): bounty de 1M$ non abouti, fonds blanchis via Tornado Cash/renBTC, aucune poursuite judiciaire engagée",
+    "2023-03: gouvernance OGN staking (partagée avec la DAO Origin Protocol, cf. oeth.md) — adresses liées à des employés représentant >50% du pouvoir de vote sur une proposition de subvention"
+  ],
+  "dependencies": {
+    "issuer": "Origin Protocol",
+    "custodians": [],
+    "underlyings": ["OUSD (rebasing)", "USDC (100% du backing actuel revendiqué)"],
+    "keyCounterparties": ["Circle (émetteur USDC, seul actif de backing)", "Morpho (marchés Ethereum mainnet/Base/HyperLiquid)", "Curve (pool OUSD/USDC, <20% du collatéral)", "Yearn (co-curateur du vault Morpho)", "Multisig strategist 2-sur-9"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 219371,
+    "dailyLiquidityUsd": 594,
+    "ratioPct": 36950,
+    "note": "Ratio calculé sur le pool Curve OUSD/3Crv (profondeur totale ≈27 951$, volume 24h ≈594$, source GeckoTerminal, 2026-07) ; aucun pool WOUSD dédié significatif identifié. La vraie route de sortie est la redemption native OUSD→USDC (1:1, 10min-24h, frais 0,5%), pas le marché secondaire quasi inexistant."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "wousd.md"
+}

@@ -1,0 +1,46 @@
+{
+  "symbol": "stkWELL",
+  "name": "Staked WELL",
+  "addresses": { "8453": "0xe66E3A37C3274Ac24FE8590f7D84A2427194DC17" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "B",
+    "recentSecurity": "D"
+  },
+  "redFlags": [],
+  "maxAllocation": "skip (ou 1% max)",
+  "summary": "stkWELL est le WELL staké dans le Safety Module de Moonwell, servant de collatéral de dernier recours (backstop) pour le protocole en cas de shortfall event, avec un cooldown de déstaking de 7 jours (+ fenêtre de 2 jours) et un mécanisme de slashing pouvant confisquer jusqu'à 30% des actifs stakés. Ce design empile trois risques indépendants — volatilité du WELL sous-jacent, solvabilité de Moonwell lui-même (le slashing dépend de shortfalls sur les marchés de lending Moonwell, qui se sont matérialisés trois fois en 9 mois), et illiquidité forcée (aucun marché secondaire direct trouvé pour stkWELL) — ce qui en fait un collatéral structurellement plus risqué que WELL simple. Aucun slashing effectif n'a été recensé à ce jour (les bad debts récents ont été couverts via la trésorerie du protocole), mais le mécanisme reste latent et la fréquence croissante des shortfalls Moonwell l'expose davantage. Verdict lender : à éviter comme collatéral Morpho, ou allocation résiduelle seulement compte tenu de l'empilement de risques et de l'absence de sortie rapide en cas de stress.",
+  "incidents": [
+    "2022-08-01: hack du bridge Nomad (Moonbeam) — impact indirect sur l'écosystème Moonwell",
+    "2024-12: exploit flash loan/mToken malveillant, ~320k$",
+    "2025-10-10: bad debt ~1,7M$ pendant un crash de marché",
+    "2025-11-04: exploit oracle wrstETH ~1M$",
+    "2026-02-15/18: mauvaise configuration oracle cbETH, ~1,78M$ de bad debt (code partiellement généré par IA)",
+    "Aucun événement de slashing effectif du Safety Module recensé au 2026-07-13 malgré les trois shortfalls de 2025-2026 (bad debt couvert via trésorerie/Apollo Treasury à chaque fois)"
+  ],
+  "controversies": [
+    "2026-03: attaque de gouvernance sur le déploiement Moonriver — 1,08M$ d'actifs menacés pour 1 800$ dépensés, contrée par contre-vote communautaire",
+    "Le déclenchement et le taux de slashing du Safety Module dépendent d'un vote de gouvernance (pas d'une formule automatique on-chain transparente), ce qui introduit une opacité de processus propre à stkWELL"
+  ],
+  "dependencies": {
+    "issuer": "Moonwell (même émetteur/gouvernance que WELL : Temporal Governor Safe 3/5 + timelock 24h, Break Glass Guardian 2/3)",
+    "custodians": [],
+    "underlyings": ["WELL"],
+    "keyCounterparties": [
+      "La DAO Moonwell elle-même (décideur du déclenchement/taux de slashing en cas de shortfall event)",
+      "Anthias Labs (risk manager, surveillance des shortfalls potentiels)",
+      "Ensemble des emprunteurs des marchés de lending Moonwell (dont la santé collective détermine le risque de shortfall)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 53018,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": 15.5,
+    "note": "Aucune paire de trading DEX directe trouvée pour stkWELL (non trouvé sur GeckoTerminal/Aerodrome). Sortie uniquement via déstaking (cooldown 7 jours + fenêtre 2 jours) puis vente du WELL récupéré (≈343 142$/jour de liquidité). Ratio 53 018$/343 142$ ≈15,5% calculé sur le sous-jacent WELL après cooldown, mais sous-estime le risque réel car il ignore le délai incompressible de 7-9 jours d'illiquidité forcée — red flag de liquidité distinct de WELL simple."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "stkwell.md"
+}

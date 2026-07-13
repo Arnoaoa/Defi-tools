@@ -1,0 +1,48 @@
+{
+  "symbol": "BAL",
+  "name": "Balancer",
+  "addresses": { "1": "0xba100000625a3754423978a60c9317c58a424e3D" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "D",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Hack majeur du 2025-11-03 (~128M$ bruts / ~98-110M$ nets) sur les Composable Stable Pools Balancer V2 — bad debt largement socialisée sur les LPs, remboursement partiel seulement (~8M$ sur fonds récupérés)",
+    "Balancer Labs (entité fondatrice) annonce sa fermeture en 2026-03, invoquant des risques légaux persistants liés au hack"
+  ],
+  "maxAllocation": "1-5%",
+  "summary": "BAL est le token de gouvernance de Balancer, AMM lancé en 2020, dont le protocole a subi le 3 novembre 2025 l'un des plus gros hacks DeFi de l'année (~128M$ bruts, ~98-110M$ nets après récupération partielle) via une erreur d'arrondi dans les Composable Stable Pools de Balancer V2, non détectée par 11 audits antérieurs. Les conséquences sont structurelles et toujours actives : TVL protocole à ~157M$ contre un pic de 3,5Md$ en 2021 (-95%), prix BAL en chute de ~91% post-hack sans reprise, fermeture annoncée de Balancer Labs (mars 2026), gouvernance veBAL en cours de démantèlement, et class action en cours (Rosen Law Firm). Verdict lender : actif à éviter ou allocation résiduelle seulement — la combinaison hack majeur mal remboursé + fermeture de l'entité fondatrice + liquidité effondrée (179k$/jour) constitue un profil de risque équivalent à un no-go pratique pour un nouveau dépôt significatif.",
+  "incidents": [
+    "2020-06-28: premier hack (~500k$) via flash loan et token déflationniste STA, fonds non récupérés",
+    "2023-08-22: vulnérabilité critique sur Composable/Boosted Stable Pools (8 chaînes), divulgation responsable, mais exploit de ~900k$ quelques jours après sur pools non mitigés",
+    "2025-11-03: hack majeur ~128M$ bruts / ~98-110M$ nets sur Composable Stable Pools Balancer V2, 6-7 chaînes, ~19,3M$ récupérés, remboursement DAO ~8M$",
+    "2025-11-04: Stream Finance perd séparément ~93M$ (corrélation temporelle, lien de causalité non confirmé)"
+  ],
+  "controversies": [
+    "2026-03-24: Balancer Labs annonce sa fermeture, invoquant des risques légaux persistants liés au hack de nov. 2025",
+    "2026: class action pour valeurs mobilières déposée/en investigation par Rosen Law Firm au nom des investisseurs BAL",
+    "2026: gouvernance veBAL critiquée comme dominée par des entités de méta-gouvernance, propositions de démantèlement complet du modèle"
+  ],
+  "dependencies": {
+    "issuer": "Balancer DAO ; Balancer Labs (entité fondatrice en fermeture depuis mars 2026) ; nouvelle entité Balancer OpCo en cours de création",
+    "custodians": [],
+    "underlyings": [],
+    "keyCounterparties": [
+      "Multisig trésorerie/DAO 6-of-11",
+      "Multisig opérationnel Balancer Maxis (2-of-7 ou 3-of-7)",
+      "Rosen Law Firm (class action en cours contre BAL)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 45467,
+    "dailyLiquidityUsd": 178998,
+    "ratioPct": 25.4,
+    "note": "Volume 24h CoinGecko (2026-07-13) ≈179k$ pour un market cap ≈6,06M$. Ratio TVL Morpho/volume 24h ≈25,4%, en zone de vigilance (10-30%) — liquidité structurellement effondrée post-hack."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "bal.md"
+}

@@ -1,0 +1,36 @@
+{
+  "symbol": "ARM-WETH-eETH",
+  "name": "Ether.fi ARM",
+  "addresses": {
+    "1": "0xfB0A3CF9B019BFd8827443d131b235B3E0FC58d2"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "1-5% ou à éviter",
+  "summary": "ARM-WETH-eETH est le pendant Ether.fi du stETH ARM d'Origin Protocol : même mécanisme d'arbitrage (achat d'eETH décoté, rachat 1:1 via le canal de retrait Ether.fi, surplus prêté sur Morpho), mêmes audits partagés, mais produit lancé en février 2026 (~5 mois d'historique seulement) contre ~21 mois pour le stETH ARM. Forces : émetteur établi (Origin Protocol), audits continus. Faiblesses : très jeune produit, TVL très réduite (~2 M$ début 2026), aucun marché secondaire pour la part, contrat upgradeable, faille de comptabilité de la queue de retrait partagée avec le stETH ARM (yAudit nov. 2025), et sous-jacent eETH déjà noté C (risque de restaking EigenLayer, centralisation des validateurs Ether.fi). Verdict lender : collatéral D, trop récent et trop illiquide pour une allocation significative — à éviter ou allocation résiduelle uniquement, en attendant davantage de recul.",
+  "incidents": [
+    "2025-11/12: faille de comptabilité de la queue de retrait détectée par yAudit sur l'architecture ARM partagée (non-prise en compte du slashing de validateur), corrigée en deux temps (PR #165 puis #223) — voir arm-weth-steth.json pour le détail"
+  ],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Origin Protocol",
+    "custodians": [],
+    "underlyings": ["eETH (Ether.fi)"],
+    "keyCounterparties": ["Ether.fi (pool de liquidité interne, ~2/3 des validateurs opérés en interne)", "EigenLayer/AVS operators (risque de slashing hérité du sous-jacent)", "Morpho (marchés WETH partagés avec le stETH ARM)", "Opérateur Origin (pricing manuel de l'arbitrage)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 36779,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": 0,
+    "note": "Aucun marché secondaire identifié pour la part ARM-WETH-eETH. Ratio non calculable ; seule route de sortie = redemption native asynchrone du vault (10 min à 24h). TVL du vault hors Morpho ≈2,1 M$ en février 2026 (non confirmé pour juillet 2026), nettement plus petit et plus jeune que le stETH ARM."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "arm-weth-eeth.md"
+}

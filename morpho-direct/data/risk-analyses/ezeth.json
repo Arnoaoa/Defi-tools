@@ -1,0 +1,48 @@
+{
+  "symbol": "ezETH",
+  "name": "Renzo Restaked ETH",
+  "addresses": { "1": "0xbf5495Efe5DB9ce00f80364C8B423567e58d2110" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Dépeg réel documenté jusqu'à -78% intraday sur venues secondaires (avril 2024), le plus sévère de son groupe de comparables (weETH/wstETH/rETH)",
+    "Vulnérabilité de mint/burn illimité démontrée sur le multisig 3-of-5 (signataires non divulgués, PoC tiers 2024, non revérifiée en 2026)",
+    "TVL protocole Renzo <100 M$ et en effondrement continu (~3 Md$ avril 2024 → ~969 M$ mai 2025 → ~90 M$ juillet 2026)",
+    "Liquidité de sortie très fine : ratio TVL Morpho / volume 24h ≈ 62%, au-dessus du seuil de vigilance (30%)"
+  ],
+  "maxAllocation": "1-5% (skip recommandé)",
+  "summary": "ezETH est le liquid restaking token de Renzo Protocol (ETH + LST restakés via EigenLayer). Le protocole a subi un dépeg réel et sévère en avril 2024 (jusqu'à -78% intraday), causé par la fermeture totale du canal de retrait au moment d'une controverse tokenomics, provoquant plus de 60 M$ de liquidations en cascade sur Morpho et Gearbox. Depuis, la TVL du protocole s'est effondrée (~97% depuis le pic), la liquidité de sortie est devenue très fine, et un audit tiers a démontré une vulnérabilité de mint illimité sur le multisig de gouvernance. Verdict lender : collatéral à haut risque, pas d'impact direct trouvé lors du hack Kelp DAO (avril 2026), mais l'historique de dépeg réel et le déclin structurel du protocole justifient une allocation minimale ou un skip pur et simple.",
+  "incidents": [
+    "2024-04-23/24: dépeg majeur ezETH (jusqu'à -78% intraday sur Uniswap, ratio ezETH/ETH tombé à ~0,2-0,27), déclenché par une controverse tokenomics REZ alors que le retrait protocole n'existait pas encore ; >60-65 M$ de liquidations en cascade (Morpho + Gearbox), bad debt socialisée ~34 K$ (Morpho) et ~83 K$ (Gearbox) ; retraits ezETH activés en mai 2024 en réponse",
+    "2025-11-03: exploit Balancer V2 StableSwap (~128 M$ volés au total sur 6 chains, faille tierce) ; ~789,73 ezETH (~1,5-1,6 M$) dérobés depuis des positions de liquidité impliquant ezETH"
+  ],
+  "controversies": [
+    "2024-04: controverse tokenomics/airdrop REZ jugée défavorable par une partie de la communauté (allocation, points farmers) — cause directe du dépeg d'avril 2024 ; Renzo révise l'allocation communautaire (30%→32%) et le pool airdrop (10%→12%) le 25/04/2024 suite au tollé",
+    "Aucune procédure judiciaire ni action SEC identifiée nommément contre Renzo Protocol à ce jour (contrairement à Lido/Rocket Pool visés par l'action Consensys/SEC de 2023)"
+  ],
+  "dependencies": {
+    "issuer": "Renzo Protocol",
+    "custodians": [],
+    "underlyings": ["ETH", "stETH", "wBETH"],
+    "keyCounterparties": [
+      "Multisig protocole 3-of-5 (signataires non divulgués) — droits de mint/burn et upgrade",
+      "5 node operators professionnels permissionnés (Figment, p2p.org, Luganodes, HashKey Cloud, Pier Two)",
+      "AVS operators EigenLayer (slashing non activé pour Renzo à la date de l'analyse, sources 2024-2025)",
+      "Oracle wBETH (Binance, centralisé, sans liveness check)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 68038,
+    "dailyLiquidityUsd": 109425,
+    "ratioPct": 62,
+    "note": "Volume 24h ezETH tous exchanges (CoinGecko, juil. 2026), dominé par un pool 'Fluid' Ethereum (~66% du volume) ; pools Balancer/Curve classiques quasi inertes. Ratio proche du seuil red flag (30%), volume/market cap ≈0,12% (contre ~3,3% en avril 2024) — signe d'un actif en forte perte de traction."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "ezeth.md"
+}

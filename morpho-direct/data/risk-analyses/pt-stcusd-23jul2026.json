@@ -1,0 +1,43 @@
+{
+  "symbol": "PT-stcUSD-23JUL2026",
+  "name": "PT Staked cap USD 23JUL2026",
+  "addresses": {
+    "1": "0x2d3C279E5FcDF5b793c0a75ed90738D7369B0b83"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Pool Uniswap V4 stcUSD/ETH (marché secondaire de stcUSD) quasi mort (~594$ de liquidité, 0 volume 24h) — hérité de stcUSD, inchangé au 2026-07-13"
+  ],
+  "maxAllocation": "5-15%",
+  "summary": "PT-stcUSD-23JUL2026 est un Principal Token Pendle sur stcUSD, le jeton de rendement de Cap Labs déjà noté C dans l'analyse stcUSD (audits multiples reconnus, mécanisme Operators/Restakers). Rien de nouveau au 2026-07-13 : aucun incident, aucun slashing EigenLayer/Symbiotic rattaché à Cap, plafond de dépôt Aave V3 MegaETH saturé puis relevé (signal de demande). Le pool Pendle du PT a une liquidité modeste (~813K$, ratio TVL Morpho/liquidité ≈19,6%, zone de vigilance) et le pool DEX secondaire de stcUSD reste quasi mort. Maturité dans 10 jours, ce qui réduit le risque de convergence de prix. Verdict lender : grade C inchangé, hérité du sous-jacent ; allocation modérée appropriée.",
+  "incidents": [
+    "Aucun incident nouveau trouvé au 2026-07-13 (cf. stcusd.json pour l'historique complet)"
+  ],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Cap Labs (protocole Cap)",
+    "custodians": [],
+    "underlyings": ["stcUSD (cf. stcusd.json)", "cUSD (panier USDC, USDT, PYUSD, BUIDL, BENJI)"],
+    "keyCounterparties": [
+      "Aave V3 Core (>80% des réserves cUSD déployées comme buffer de liquidité)",
+      "Operators de trading institutionnels (Fasanara, GSR, Amber confirmés)",
+      "Restakers EigenLayer/Symbiotic (Gauntlet cité comme restaker)",
+      "Pool AMM Pendle (route de sortie avant maturité)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 158903,
+    "dailyLiquidityUsd": 812800,
+    "ratioPct": 19.6,
+    "note": "Liquidité du pool Pendle (API Pendle, consultée 2026-07-13), en forte baisse depuis ~8,5M$ (source Gauntlet/Euler, 04/02/2026), cohérent avec l'approche de la maturité dans 10 jours. Pool DEX secondaire Uniswap V4 stcUSD/ETH toujours quasi mort (~594$, 0 volume 24h)."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "pt-stcusd-23jul2026.md"
+}

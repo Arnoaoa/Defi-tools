@@ -1,0 +1,39 @@
+{
+  "symbol": "mBASIS",
+  "name": "Midas Basis Trading Token",
+  "addresses": {
+    "8453": "0x1C2757c1FeF1038428b5bEF062495ce94BBe92b2",
+    "1": "0x2a8c22E3b10036f3aef5875d04f8441d4188b656"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "1-3%",
+  "summary": "mBASIS est un certificat tokenisé émis par Midas (licence BaFin) qui réplique une stratégie de basis trading cash-and-carry (spot long + short futures/perp) avec un tour de levier via emprunt Aave, exécutée par un gérant institutionnel non nommé publiquement. Points forts relatifs : produit le plus ancien du lot Midas analysé (juin 2024, >2 ans), audit Sherlock ciblant nommément les vaults mBASIS/mTBILL, facility de liquidité instantanée MSL. Points faibles majeurs : identité du gérant et des venues CEX/perp non divulguées (risque de contrepartie non vérifiable), liquidité secondaire quasi inexistante (trading arrêté sur toutes les venues CoinGecko), design à effet de levier, retrait préventif d'allocations lors de la contagion Resolv Labs/USR de mars 2026 (sans exposition directe confirmée). Verdict lender : collatéral audité et plus mature que ses pairs Midas, mais opacité structurelle du gérant et des contreparties CEX justifie une allocation minimale.",
+  "incidents": [
+    "2026-03-22: Contagion Resolv Labs/USR (dépeg de USR à -97%, 1,00$ à 0,025$, clé SERVICE_ROLE compromise). mBASIS a retiré ses allocations Fluid sur Plasma par précaution, malgré l'absence d'exposition directe confirmée à USR. Aucune perte confirmée pour les détenteurs de mBASIS."
+  ],
+  "controversies": [
+    "Aucune controverse, poursuite ou action SEC spécifique à Midas ou mBASIS trouvée au 2026-07-13."
+  ],
+  "dependencies": {
+    "issuer": "Midas (Midas Software GmbH, Berlin, licence BaFin) — multisig et seuil de signataires non publiés",
+    "custodians": ["Midas (mint/redeem/pause du token)", "Fireblocks (infrastructure de garde citée pour les stratégies DeFi/yield Midas, détail non confirmé pour les positions CEX)"],
+    "underlyings": ["Positions spot BTC/ETH/altcoins + short futures/perp (venues CEX/perp DEX non divulguées)", "Emprunt à effet de levier sur Aave (USDC)"],
+    "keyCounterparties": ["Gérant institutionnel non nommé publiquement (identité introuvable malgré recherches, y compris journalistiques)", "Aave (jambe d'emprunt)", "Resolv Labs (contagion indirecte mars 2026, retrait préventif sans exposition directe)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 23334,
+    "dailyLiquidityUsd": 1.2,
+    "ratioPct": 1944500,
+    "note": "Volume 24h CoinGecko ≈1,20$ — le token a cessé de trader depuis 9 jours sur toutes les venues listées ; ratio hors barème, mitigé par la facility MSL (rachat instantané net de frais, capacité précise pour mBASIS non confirmée)"
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "mbasis.md"
+}

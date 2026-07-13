@@ -1,0 +1,42 @@
+{
+  "symbol": "pufETH",
+  "name": "Puffer Finance pufETH",
+  "addresses": {
+    "1": "0xD9A442856C234a39a81a089C06451EBAa4306a72"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "pufETH est le liquid restaking token de Puffer Finance (mai 2024), protocole de native restaking sur EigenLayer avec node operators permissionless (bond 1 ETH) et technologie anti-slashing propriétaire (Secure-Signer/TEE). Forces : 6 auditeurs reconnus, aucun hack de smart contract depuis la création, aucune déviation de peg pendant la crise Kelp d'avril 2026. Faiblesses lourdes : TVL protocole effondrée de ~1,28 Md$ à ~44-62 M$ (-90 %+), pas de bug bounty actif (Llamarisk), dépeg historique de -5,46 % (août 2024), liquidité DEX quasi morte (quelques milliers de $ par jour), concentration extrême des holders (top 10 = 57 %) et multisig Pauser 1/12 structurellement fragile. Verdict lender : collatéral C — techniquement propre mais en déclin commercial marqué, avec une liquidité de sortie qui rendrait toute liquidation significative très difficile.",
+  "incidents": [
+    "2024-08-05: dépeg maximal de pufETH à -5,46 % (résorbé, peg quasi stable depuis)",
+    "2024-10: attaque DDoS sur la page de claim de l'airdrop PUFFER (aucune perte de fonds)",
+    "2025-08: compromission du site web et des réseaux sociaux de Puffer (phishing/registrar), fonds sains, pause préventive du smart contract puis retour à la normale"
+  ],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Puffer Finance",
+    "custodians": [],
+    "underlyings": ["ETH", "stETH/wstETH (acceptés au mint)"],
+    "keyCounterparties": [
+      "EigenLayer (couche de restaking, risque de slashing AVS)",
+      "Comité des 8 Guardians (oracle de reporting validateurs, seuil 7/8)",
+      "Node operators permissionless (bond 1 ETH, Secure-Signer/TEE)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 1708,
+    "dailyLiquidityUsd": 5000,
+    "ratioPct": 34,
+    "note": "Volume 24h entre ~1 000 $ et ~15 200 $ selon la source (CoinGecko : 4 exchanges/6 marchés, Curve pufETH/wstETH ~973 $) — retenu ~5 000 $ par prudence. Montants absolus dérisoires des deux côtés ; canal primaire : rachat vault avec frais 1 % ou retrait 14-21 j."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "pufeth.md"
+}

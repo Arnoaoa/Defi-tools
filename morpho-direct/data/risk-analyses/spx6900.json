@@ -1,0 +1,48 @@
+{
+  "symbol": "SPX",
+  "name": "SPX6900",
+  "addresses": {
+    "1": "0xE0f63A424a4439cBE457D80E4f4b51aD25b2c56C"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "D",
+    "depegBacking": "D",
+    "counterparty": "B",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Liquidité primaire absente par construction (memecoin) : aucun filet sous le marché secondaire",
+    "Aucun audit du contrat soumis",
+    "Collatéral memecoin = short implicite de l'emprunteur : volatilité journalière jusqu'à ~50% documentée, liquidations pouvant échouer et générer de la bad debt"
+  ],
+  "maxAllocation": "1-5%",
+  "summary": "SPX6900 est un memecoin pur (parodie du S&P 500) lancé en août 2023 par des anonymes : fair launch, contrat ERC-20 renoncé à supply fixe, zéro backing, zéro émetteur responsable, zéro audit. Forces limitées : contrat immuable sans mint/blacklist, ancienneté > 2 ans, listings Coinbase/Kraken. Faiblesses structurelles : valeur purement réflexive (-83% depuis l'ATH de juillet 2025, chutes de ~50% en un jour en nov. 2024 et nov. 2025), volume 24h ≈ 4M$ pour 350M$ de market cap avec ~8M$ de depth Uniswap réelle, données de concentration holders contradictoires, homonymes/copycats multiples. Verdict lender : accepter SPX comme collatéral revient à assurer le short implicite d'un actif sans valeur intrinsèque capable de perdre 50% en une bougie — D, allocation minimale ou skip.",
+  "incidents": [
+    "2024-10: compromission du compte X officiel, promotion d'un faux token (montant non spécifié)",
+    "2024-11-21: chute journalière de ~50%",
+    "2025-11: nouvelle chute journalière de ~50%",
+    "2025-2026: campagne de phishing active (claim.spxv6900.com) usurpant le site officiel"
+  ],
+  "controversies": [
+    "2024-2026: allégations informelles de pump-and-dump (concentration whale, hype d'influenceurs) sans procédure légale documentée ; aucune action SEC trouvée au 2026-07-13"
+  ],
+  "dependencies": {
+    "issuer": "aucun (créateurs anonymes, projet communautaire sans entité légale)",
+    "custodians": [],
+    "underlyings": [],
+    "keyCounterparties": [
+      "Whales anonymes (wallets 10-100M tokens, vendeurs nets persistants documentés)",
+      "Influenceur Murad (position ~10M$ rapportée, point focal de la narration)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 99977,
+    "dailyLiquidityUsd": 4090000,
+    "ratioPct": 2.4,
+    "note": "Volume 24h ≈4,09M$ (CoinGecko 2026-07-13) soit ~1,2% du market cap (349,7M$) ; depth du pool Uniswap V2 principal ≈8,15M$ (DEX Screener). Ratio Morpho OK mais liquidité absolue faible pour la taille de l'actif."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "spx6900.md"
+}

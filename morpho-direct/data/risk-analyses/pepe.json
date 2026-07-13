@@ -1,0 +1,48 @@
+{
+  "symbol": "PEPE",
+  "name": "Pepe",
+  "addresses": {
+    "1": "0x6982508145454Ce325dDbE47a25d4ec3d2311933"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "D",
+    "depegBacking": "D",
+    "counterparty": "B",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Liquidité primaire absente par construction (memecoin) : aucun filet sous le marché secondaire",
+    "Misconduct insider avéré : abaissement du multisig 5/8 → 2/8 et dump de ~16M$ par des ex-membres (août 2023), plus allégations Bubblemaps de ~30% de supply genesis bundlée",
+    "Collatéral memecoin = short implicite de l'emprunteur : -71% de market cap sur oct. 2025, bad debt possible si les liquidations décrochent"
+  ],
+  "maxAllocation": "1-5%",
+  "summary": "PEPE est le 3e memecoin du marché (≈1,15 Md$ de market cap), lancé en avril 2023 : contrat ERC-20 renoncé, immuable, sans mint ni blacklist, avec la meilleure liquidité de sa catégorie (~110M$ de volume 24h, ~23M$ de depth Uniswap) — la sortie n'est pas le problème. Le problème est tout le reste : zéro backing, -90% depuis l'ATH, -71% de market cap sur le seul mois d'octobre 2025, et un historique d'équipe toxique (dump du multisig par des ex-membres en 2023, Wells Notice SEC en 2024, allégations d'insider bundling en 2025). Verdict lender : la liquidité exceptionnelle facilite les liquidations en conditions normales, mais un collatéral purement réflexif capable de perdre 70% en un mois reste un pari sur la vitesse de l'oracle — D, allocation minimale ou skip.",
+  "incidents": [
+    "2023-08-24: ex-membres de l'équipe abaissent le multisig 5/8 → 2/8 et vendent ~16T PEPE (~16M$) sur CEX, -15% le jour même, panique rug pull",
+    "2025-10-08: krach à un plus bas de 8 mois dans le sell-off global, >20M$ de liquidations PEPE, market cap -71% depuis le pic"
+  ],
+  "controversies": [
+    "2024-10: Wells Notice SEC à Eric Wallace sur le transfert d'août 2023 (~4% de la supply à l'équipe), qualification de security contestée, en suspens",
+    "2024-2025: accusations publiques d'insider trading par l'ex-promoteur Jeremy Cahen (9 adresses doxxées, ~16-17M$ allégués)",
+    "2025-12: rapport Bubblemaps alléguant ~30% de la supply genesis bundlée par une seule entité ayant dumpé ~2M$ dans les 24h du lancement"
+  ],
+  "dependencies": {
+    "issuer": "aucun (équipe pseudonyme d'origine, contrat renoncé, seul Eric Wallace publiquement identifié)",
+    "custodians": [],
+    "underlyings": [],
+    "keyCounterparties": [
+      "CEX majeurs (~45% de la supply sur wallets custodiaux : Binance ~27% cumulé, OKX, Bybit, Kraken...)",
+      "Ex-équipe / wallets insiders allégués (~16-17M$ sur 9 adresses selon Cahen)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 99977,
+    "dailyLiquidityUsd": 110000000,
+    "ratioPct": 0.1,
+    "note": "Volume 24h ≈109-119M$ (CoinGecko 2026-07-13, ~10% du market cap de 1,15 Md$) ; depth Uniswap V2 ≈21,36M$ + V3 ≈2,2M$ (GeckoTerminal). Meilleure liquidité de la catégorie memecoin après DOGE/SHIB."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "pepe.md"
+}

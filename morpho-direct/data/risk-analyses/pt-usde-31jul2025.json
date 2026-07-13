@@ -1,0 +1,41 @@
+{
+  "symbol": "PT-USDe-31JUL2025",
+  "name": "PT Ethena USDe 31JUL2025",
+  "addresses": {
+    "1": "0x917459337CaAC939D41d7493B3999f571D20D667"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "PT-USDe-31JUL2025 est un Principal Token Pendle arrivé à maturité il y a environ 11,5 mois (31/07/2025). Identité confirmée via son contrat SY (SY-USDe) référençant explicitement l'adresse USDe d'Ethena Labs, sans ambiguïté. Contrairement à un PT sur sous-jacent distressed, le redeem Pendle permissionless contourne ici la porte KYC native d'Ethena sans dégrader la qualité du collatéral : une fois redeemé, ce collatéral converge exactement vers la qualité d'USDe (note C), ni mieux ni pire. Point notable : il ne reste que 48 871$ de TVL sur un seul marché Morpho, un an après la maturité — un marché résiduel probablement composé de dust ou de positions sans urgence économique à clôturer (matured PT = collatéral statique, sans yield ni décote), plutôt qu'un signal d'un problème de backing. Verdict lender : profil identique à celui d'USDe, avec un point de vigilance sur la faible probabilité de surveillance active (liquidateurs) sur un marché aussi marginal.",
+  "incidents": [
+    "2025-07-31: maturité du PT-USDe-31JUL2025, redeem ouvert depuis cette date",
+    "2025-09: compromission du registrar de domaine Ethena, frontend hors ligne temporairement, fonds non affectés",
+    "2025-10-11: dépeg USDe à 0,65$ sur Binance spot (~90min, défaut oracle Binance, Curve stable à 0,3%)",
+    "2026-04: exploit KelpDAO (293M$, sans lien direct), ~1,6 Md$ de sorties USDe par contagion de confiance"
+  ],
+  "controversies": [
+    "Cf. usde.json pour l'historique complet des controverses (farming ENA Season 3, scrutiny SEC, comparaisons Terra/UST)"
+  ],
+  "dependencies": {
+    "issuer": "Pendle Finance (wrapper) sur Ethena Labs (entité offshore BVI)",
+    "custodians": ["Copper", "Ceffu", "Fireblocks"],
+    "underlyings": ["USDe (Ethena)", "ETH/BTC staké (jambe longue)", "Short perpetual futures CEX (jambe courte)"],
+    "keyCounterparties": ["Desks dérivés CEX (Binance, Bybit, OKX, Deribit)", "Ethena Labs (mint/redeem KYC institutionnel, contourné par le redeem Pendle)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 48871,
+    "dailyLiquidityUsd": 160000000,
+    "ratioPct": 0.03,
+    "note": "Post-maturité, liquidité mesurée sur le volume 24h agrégat CEX+DEX d'USDe (~160M$, CoinMarketCap, cf. usde.json). Ratio très en-dessous du seuil de vigilance (10%) : le goulot n'est pas la profondeur de marché mais l'absence probable de surveillance active sur ce marché résiduel (48 871$, 1 marché, ~1 an après maturité)."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "pt-usde-31jul2025.md"
+}

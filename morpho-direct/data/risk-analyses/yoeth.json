@@ -1,0 +1,37 @@
+{
+  "symbol": "yoETH",
+  "name": "yoVaultETH",
+  "addresses": {
+    "8453": "0x3A43AEC53490CB9Fa922847385D82fe25d0E9De7"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "yoETH est le vault ETH jumeau de yoUSD, émis par le même protocole YO (YO Labs), rebalançant quotidiennement l'ETH déposé entre 18+ protocoles DeFi de rendement (lending, LST/restaking, LP). Forces : cadence d'audits élevée (8 audits, 6 auditeurs distincts dont Spearbit), aucune bad debt socialisée, aucun incident propre à ce vault identifié, redemption native (buffer instant + queue 24h). Faiblesses : design complexe (agrégateur multi-stratégies), aucun marché secondaire DEX identifié, gouvernance encore 100% team-controlled (pas de DAO active), et un risque opérationnel systémique démontré par l'incident du vault jumeau yoUSD en janvier 2026 (même infrastructure de harvest automatisé) même s'il ne s'est pas matérialisé sur yoETH. Verdict lender : collatéral C — profil plus propre que yoUSD sur l'historique récent, mais partage la même centralisation et la même complexité structurelle.",
+  "incidents": [],
+  "controversies": [
+    "2026: analyse tierce indépendante (paragraph.com) critiquant le dimensionnement du bug bounty Immunefi (plafond 10 000$) jugé disproportionné face à une TVL protocole de ~80 M$ — applicable à l'ensemble des vaults YO",
+    "2026-01-12: incident opérationnel sur le vault jumeau yoUSD (même émetteur/infrastructure) — perte de 3,7 M$ compensée par la trésorerie, pertinent comme vigilance systémique pour yoETH bien que non affecté directement"
+  ],
+  "dependencies": {
+    "issuer": "YO Protocol / YO Labs Inc. (San Francisco) — cofondé par Mehdi Lebbar (CIO) et Driss Benamour, ex-Uber, cofondateurs d'Exponential.fi",
+    "custodians": [],
+    "underlyings": ["Positions diversifiées sur lending markets/stratégies de rendement ETH (Aave, Morpho, Fluid entre autres, allocation quotidienne variable)", "WETH natif (Base et Ethereum)"],
+    "keyCounterparties": ["YO Admin Multisig (Safe, seuil de signataires non public)", "YO Operator Multisig (rebalancing restreint à une liste blanche)", "YO Timelock 48h", "Foundation Capital, Coinbase Ventures, Paradigm (investisseurs)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 123699,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": 0.29,
+    "note": "Aucun pool DEX secondaire significatif identifié (recherche GeckoTerminal/Aerodrome/Uniswap Base infructueuse) ; ratio calculé ici contre la TVL totale du vault (~43 M$, source app.yo.xyz/DL News) plutôt que contre un volume DEX 24h introuvable. Route réelle de sortie = redemption native (buffer idle instantané + queue jusqu'à 24h, taille du buffer non publiée) ; yoETH n'a pas connu de pause à ce jour mais partage l'infrastructure ayant causé la pause de yoUSD en janvier 2026."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "yoeth.md"
+}

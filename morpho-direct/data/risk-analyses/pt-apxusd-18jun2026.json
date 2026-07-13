@@ -1,0 +1,49 @@
+{
+  "symbol": "PT-apxUSD-18JUN2026",
+  "name": "PT apxUSD 18JUN2026",
+  "addresses": {
+    "1": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Dépeg du sous-jacent apxUSD toujours actif un mois après la maturité du PT (0,869-0,92$ selon la venue, -8 à -16% sous le pair, ATH 1,04$ le 23/03/2026)",
+    "Backing corrélé à la solvabilité de Strategy Inc./STRC, elle-même sous pression (dette convertible 6,7 Md$, enquête boursière Rosen Law Firm)",
+    "PT arrivé à maturité (18/06/2026) : plus aucune protection résiduelle, exposition 1:1 immédiate et complète au prix spot dégradé de l'apxUSD",
+    "Marché primaire d'apxUSD fermé au grand public (whitelist institutionnelle uniquement)",
+    "Désaccord de prix de plusieurs points entre venues (0,869$ à 0,92$) signalant une liquidité secondaire fragmentée et fine"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "PT-apxUSD-18JUN2026 est un Principal Token Pendle arrivé à maturité le 18/06/2026 (il y a environ un mois) : le redeem 1:1 vers apxUSD est désormais permissionless et instantané, mais cela signifie que ce collatéral n'est plus qu'une créance directe sur un actif en dépeg actif et non résolu. apxUSD, backé par des preferred shares STRC (Strategy Inc./ex-MicroStrategy) corrélées au Bitcoin, cote encore 0,869-0,92$ selon la venue à la date de l'analyse, plus d'un mois après le pic du dépeg de juin 2026, contredisant le narratif de mean-reversion du protocole. Le mécanisme Pendle en lui-même est sain et le redeem fonctionne, mais le sous-jacent qu'il libère est impaired. Verdict lender : collatéral à éviter en taille significative, aucune amélioration du profil de risque depuis la maturité.",
+  "incidents": [
+    "2026-06-04: apxUSD dépeg à 0,93$ (-7%) suite à la chute du Bitcoin sous 64 000$",
+    "2026-06-05: pic de liquidations sur Morpho (>4M$ en une journée), sans bad debt",
+    "2026-06-25/26: second dépeg plus sévère, apxUSD à 0,7804$, ATL 0,7176$",
+    "2026-06-18: maturité du PT-apxUSD-18JUN2026, en pleine séquence de dépeg non résolue",
+    "2026-07-13 (date de l'analyse): apxUSD cote toujours entre 0,869$ et 0,92$ selon la venue — dépeg non résolu un mois après la maturité"
+  ],
+  "controversies": [
+    "2026-06: Rosen Law Firm ouvre une enquête boursière sur Strategy Inc./Michael Saylor",
+    "2026-07: STRC chute à ~26% sous son pair, Strategy suspend son programme ATM de STRC ; dette convertible résiduelle de 6,7 Md$ identifiée comme risque de solvabilité"
+  ],
+  "dependencies": {
+    "issuer": "Pendle Finance (wrapper) sur Apyx (apyx.fi)",
+    "custodians": [],
+    "underlyings": ["apxUSD (Apyx, stablecoin de base)", "STRC/SATA (Strategy Inc. et autres DAT, backing sous-jacent)"],
+    "keyCounterparties": ["Strategy Inc. (MSTR) via STRC", "DFDV (premier investisseur institutionnel)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 260285,
+    "dailyLiquidityUsd": 395617,
+    "ratioPct": 66,
+    "note": "Post-maturité, le pool Pendle n'est plus pertinent (PT non tradable) : liquidité mesurée sur le volume 24h spot de l'apxUSD lui-même (CoinGecko, donnée du 2026-07-12). Ratio très au-dessus du seuil red flag (30%) du framework."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "pt-apxusd-18jun2026.md"
+}

@@ -1,0 +1,40 @@
+{
+  "symbol": "srNUSD",
+  "name": "Strata Senior NUSD",
+  "addresses": { "1": "0x65a44528e8868166401eA08b549E19552af589dB" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "C",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "C"
+  },
+  "redFlags": [
+    "Tranche senior sur un sous-jacent déjà D (sNUSD/Neutrl) : le tranching ne peut pas transformer un actif D en actif sûr, règle du maillon faible",
+    "Protection senior explicitement non garantie en capital selon la documentation Strata elle-même en cas d'épuisement du junior",
+    "Backing NUSD en positions OTC off-exchange invérifiables + incident DNS récent (mars 2026, < 6 mois) sur l'écosystème Neutrl",
+    "Liquidité secondaire de srNUSD quasi nulle (~54$/24h)",
+    "Protocole Strata < 1 an d'existence, gouvernance non décentralisée"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "srNUSD est la tranche senior du marché NUSD de Strata (Frontera Labs), qui tranche sNUSD (Neutrl) en visant un rendement plancher (~8% APR annoncé) protégé en priorité par la tranche junior. Empilement à 3 couches (NUSD synthétique OTC -> sNUSD staking -> tranche senior Strata), marché récent (lancé 05/02/2026). Strata elle-même documente que le senior encaisse des pertes en capital si le junior est épuisé -- la protection n'est pas une garantie absolue. Le sous-jacent sNUSD est déjà noté D (backing en positions OTC off-exchange invérifiables, DNS hijack mars 2026, gouvernance opaque). Verdict lender : une tranche senior reste plafonnée par la solidité du sous-jacent ET du waterfall -> note D, allocation résiduelle ou skip malgré l'absence de cooldown propre au senior.",
+  "incidents": [
+    "2026-03-18/19: DNS hijack du frontend Neutrl (fournisseur DNS compromis, redirection site malveillant) -- smart contracts non touchés, pause préventive, révocation Permit2 demandée, pertes utilisateurs éventuelles non divulguées (hérité du sous-jacent sNUSD, pas un incident propre à Strata)"
+  ],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Strata / Frontera Labs (Londres) ; sous-jacent émis par Neutrl (Behrin Naidoo)",
+    "custodians": ["wallet custodial isolé de Neutrl pour le settlement OTC (contrepartie non divulguée)"],
+    "underlyings": ["sNUSD", "NUSD (USDC, USDT, USDe/USDS Ethena, positions delta-neutral OTC altcoins à décote + shorts perp)"],
+    "keyCounterparties": ["Desk de trading Neutrl (exécution OTC)", "Ethena (corrélation backing)", "Hypernative (pauser côté Neutrl)", "Admin multisig 3/4 et Guardian de Strata"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 4613,
+    "dailyLiquidityUsd": 54,
+    "ratioPct": 8543,
+    "note": "srNUSD se négocie sur Uniswap V4 (Ethereum), paire SRNUSD/USDC, volume 24h ~54$ (CoinGecko, 2026-07-13), market cap ~1,62M$. Pas de cooldown propre au senior mais dépendant de la capacité du junior et du cooldown 10j de sNUSD en amont."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "srnusd.md"
+}

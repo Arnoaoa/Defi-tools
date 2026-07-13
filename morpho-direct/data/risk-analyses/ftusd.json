@@ -1,0 +1,42 @@
+{
+  "symbol": "ftUSD",
+  "name": "Flying Tulip USD",
+  "addresses": { "1": "0xF7D85EC4E7710f71992752eac2111312e73E9C9C" },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "D",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Liquidité de sortie quasi nulle : seul pool secondaire connu (ftUSD/USDC, Curve, 1,9M$ TVL) affiche 0$ de volume 24h",
+    "Protocole et stablecoin lancés il y a moins de 6 mois (23/02/2026), sans historique de résistance à un stress de marché",
+    "Fondateur (Andre Cronje) associé à deux controverses majeures antérieures : hack Eminence Finance (15,6M$, 2020) et perception de \"rug pull\" sur Solidly (effondrement de 2,3Md$ de TVL après annonce brutale d'abandon, 03/2022)",
+    "Gouvernance par multisig à rôles (Configurator/Treasury/Strategy Manager) sans signataires ni seuil publiés, ni DAO/timelock documentés",
+    "Transition de backing annoncée vers une stratégie delta-neutral à effet de levier (shorts stETH/ETH type Ethena) — accroît la complexité et le risque de désancrage",
+    "Incohérence de supply/market cap non résolue entre CoinGecko (868K$) et Etherscan (3,9M$ onchain)"
+  ],
+  "maxAllocation": "1% ou skip",
+  "summary": "ftUSD est le stablecoin natif de Flying Tulip, plateforme DeFi unifiée lancée le 23/02/2026 par Andre Cronje (fondateur de Yearn Finance, Solidly). Backing initial simple (USDC déposé sur Aave) mais transition annoncée vers une stratégie delta-neutral à effet de levier non encore éprouvée. Points positifs limités : contest d'audit Sherlock (0 finding critique jugé valide) et bug bounty actif. Faiblesses majeures : protocole trop jeune pour avoir un historique de résistance, liquidité de sortie quasi nulle (0$ de volume 24h sur l'unique pool secondaire identifié), gouvernance opaque par multisig à rôles, et fondateur porteur d'un passif documenté de deux controverses majeures (Eminence, Solidly) impliquant abandons brutaux de projets. Verdict lender : actif expérimental sans aucun track record en conditions de stress — allocation résiduelle ou exclusion.",
+  "incidents": [],
+  "controversies": [
+    "2020-09-29 (Andre Cronje, projet Eminence Finance, antécédent du fondateur): contrat bugué exploité, ~15M$ de DAI retirés d'un projet non lancé publiquement, ~8M$ restitués par l'attaquant, menaces de poursuites collectives jamais abouties",
+    "2022-03-06 (Andre Cronje, projet Solidly, antécédent du fondateur): retrait brutal de Cronje et Anton Nell de plusieurs projets (Solidly, Yearn, Keep3r, écosystème Fantom), perception de \"rug pull\", TVL Solidly chutant de ~2,3Md$ à <20M$ en quelques mois"
+  ],
+  "dependencies": {
+    "issuer": "Flying Tulip (équipe / fondateur Andre Cronje)",
+    "custodians": [],
+    "underlyings": ["USDC (backing initial via Aave)", "positions delta-neutral internes prévues (stETH/ETH et équivalents, non encore pleinement déployées)"],
+    "keyCounterparties": ["Multisig Flying Tulip (rôles Configurator/Treasury/Strategy Manager, composition non publiée)", "Aave (dépôt USDC initial)", "Andre Cronje (single point of reputational failure)"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 49501,
+    "dailyLiquidityUsd": 1900000,
+    "ratioPct": 2.6,
+    "note": "Volume 24h réel constaté à 0$ sur le seul pool secondaire (ftUSD/USDC, Curve, GeckoTerminal 07/2026) — le ratio ci-dessus utilise la TVL du pool (1,9M$) comme plafond théorique optimiste faute de volume réel ; un volume nul constitue en soi un red flag de liquidité plus sévère que ce ratio ne le suggère"
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "ftusd.md"
+}

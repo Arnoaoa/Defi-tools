@@ -1,0 +1,47 @@
+{
+  "symbol": "USDC",
+  "name": "USD Coin",
+  "addresses": {
+    "1": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "8453": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+  },
+  "grade": "B",
+  "components": {
+    "assetDesign": "A",
+    "issuer": "A",
+    "depegBacking": "B",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "15-25%",
+  "summary": "USDC est le stablecoin fiat-backed de Circle (coté NYSE depuis juin 2025), ~73 Md$ de capitalisation, réserves en T-bills gérées par BlackRock avec custody BNY et divulgation quasi quotidienne, conforme MiCA et GENIUS Act. Forces : émetteur le plus régulé du secteur, liquidité secondaire massive (~11,4 Md$/24h), aucun hack du contrat depuis 2018. Faiblesses : dépeg réel à 0,87$ en mars 2023 (3,3 Md$ exposés à SVB, résolu en 3 jours), droits actifs de blacklist/pause/upgrade utilisés en pratique (Tornado Cash, Multichain), contentieux 2026 autour de la politique de gel. Verdict lender : collatéral tier-1 de facto, la note B (plutôt que A) reflète le précédent de dépeg bancaire et le pouvoir de censure de l'émetteur.",
+  "incidents": [
+    "2023-03-10: dépeg SVB — USDC chute à ~0,87$ (3,3 Md$ de réserves chez Silicon Valley Bank), retour au peg le 13 mars après garantie FDIC intégrale, zéro perte finale",
+    "2022-08-08: blacklist de 81 adresses USDC (~75 000 USDC) suite aux sanctions OFAC contre Tornado Cash",
+    "2023-07: gel de ~63-65 M$ d'USDC sur 3 adresses après le hack Multichain (mandat DOJ, confirmé par cour de faillite NY)"
+  ],
+  "controversies": [
+    "2026-04: class action Drift Protocol (Massachusetts) — Circle accusé de ne PAS avoir gelé les 280 M$ volés lors de l'exploit Drift du 1er avril 2026",
+    "2026-01: lettre des procureurs de New York accusant Circle de rejeter systématiquement les demandes de gel sans ordonnance judiciaire",
+    "2025-12: plainte pénale (misdemeanor) du comté de Walworth, Wisconsin — refus d'exécuter un mandat de burn-and-reissue de 381 000 USDC volés ; Circle invoque l'impossibilité technique, procédure en cours (2026-07)"
+  ],
+  "dependencies": {
+    "issuer": "Circle Internet Group (NYSE: CRCL) via Circle Internet Financial, LLC",
+    "custodians": ["BNY Mellon (Circle Reserve Fund)", "Banques G-SIB (portion cash)"],
+    "underlyings": ["T-bills US < 90 jours", "Repos overnight sur Treasuries", "Dépôts cash USD"],
+    "keyCounterparties": [
+      "BlackRock Advisors (gérant du Circle Reserve Fund)",
+      "Cross River Bank / BNY Mellon (partenaires bancaires post-SVB)",
+      "Régulateurs US (OCC, NYDFS, FinCEN) dont dépendent les licences"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 237689,
+    "dailyLiquidityUsd": 11400000000,
+    "ratioPct": 0.002,
+    "note": "Volume 24h ~11,4 Md$ (CoinGecko, juillet 2026) pour ~73,3 Md$ de market cap. Ratio négligeable — seul risque de blocage : blacklist Circle d'adresses spécifiques, pas la profondeur de marché."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "usdc.md"
+}

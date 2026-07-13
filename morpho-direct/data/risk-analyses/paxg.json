@@ -1,0 +1,44 @@
+{
+  "symbol": "PAXG",
+  "name": "PAX Gold",
+  "addresses": { "1": "0x45804880De22913dAFE09f4980848ECE6EcbAf78" },
+  "grade": "B",
+  "components": {
+    "assetDesign": "B",
+    "issuer": "B",
+    "depegBacking": "B",
+    "counterparty": "B",
+    "recentSecurity": "B"
+  },
+  "redFlags": [],
+  "maxAllocation": "15-25%",
+  "summary": "PAXG est le token d'or physique de Paxos Trust Company (régulé NYDFS depuis 2015, charte OCC nationale approuvée conditionnellement en déc. 2025), backé 1:1 par des barres LBMA Good Delivery allouées nominativement chez Brink's à Londres, avec attestations mensuelles KPMG et vrais audits de code (ChainSecurity, CertiK). Forces : le profil counterparty le plus propre du secteur or tokenisé — régulateur bancaire direct, custodian nommé, traçabilité par numéro de série — ce qui justifie son avantage sur XAUt (C). Faiblesses : dépeg réel de -11% le 10/10/2025 (vide de liquidité CEX, résolu en heures), droits actifs de freeze/wipe/pause/upgrade, et erreurs opérationnelles répétées de Paxos sur d'autres produits (frais BTC 500K$ en 2023, mint PYUSD 300T$ en 2025) plus le règlement NYDFS 48,5M$ (AML/Binance, août 2025). Verdict lender : collatéral or solide de qualité B, meilleur que XAUt sur l'émetteur mais avec une liquidité secondaire plus fragile sous stress.",
+  "incidents": [
+    "2025-10-10: dépeg par vide de liquidité CEX — PAXG spot -11% sur Binance, perpétuel jusqu'à -25%, or physique <2% de variation ; retour à parité en quelques heures",
+    "2023-09-10: erreur de frais Bitcoin — Paxos paie ~500K$ de frais pour un transfert de 0,07 BTC (bug interne, aucun client affecté)",
+    "2022-12: gel de 11 184 PAXG (~20M$) volés lors du hack FTX via assetProtectionRole, fonds intégralement récupérés en ~6 semaines"
+  ],
+  "controversies": [
+    "2025-10: erreur de mint PYUSD (produit Paxos distinct) — 300 000 Md$ mintés par erreur puis brûlés en ~20 min ; cause racine : supply contrôlé par un EOA sans multisig (Halborn), révélateur des contrôles opérationnels internes",
+    "2025-08: règlement NYDFS 48,5M$ (26,5M$ d'amende + 22M$ d'investissement conformité) pour manquements AML/KYC liés à Binance/BUSD sur 2017-2022 ; PAXG non concerné directement",
+    "2023-02: affaire BUSD — le NYDFS ordonne à Paxos de cesser d'émettre BUSD (surveillance insuffisante de la relation Binance) ; Wells notice SEC en parallèle, enquête close SANS action en juillet 2024 après jugement estimant que BUSD n'est pas un titre"
+  ],
+  "dependencies": {
+    "issuer": "Paxos Trust Company (NYDFS limited purpose trust depuis 2015 ; conversion en Paxos Trust Company, N.A. approuvée conditionnellement par l'OCC le 12/12/2025)",
+    "custodians": ["Brink's (coffres à Londres, or légalement séparé du bilan de Paxos)"],
+    "underlyings": ["Or physique LBMA Good Delivery (barres allouées, traçables par numéro de série)"],
+    "keyCounterparties": [
+      "Paxos (rôles on-chain : owner/pause, assetProtectionRole freeze/wipe, supplyController, admin du proxy upgradeable)",
+      "KPMG LLP (attestations mensuelles depuis février 2025, Withum avant)",
+      "NYDFS / OCC (régulateurs dont dépend la licence)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 148694,
+    "dailyLiquidityUsd": 50000000,
+    "ratioPct": 0.3,
+    "note": "Volume 24h ~42-59M$ tous exchanges (CoinGecko, 2026-07-11/12), milieu de fourchette retenu. Ratio négligeable, mais liquidité démontrée fragile sous stress systémique (épisode du 10/10/2025) et inférieure à celle de XAUt."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "paxg.md"
+}

@@ -1,0 +1,41 @@
+{
+  "symbol": "sUSG",
+  "name": "Savings USG",
+  "addresses": {
+    "1": "0xF17D6f98A5C6EAA99d149079984119e0A4EF6900"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "D",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Protocole en service depuis moins de 2 mois (lancement mai 2026), TVL total de l'ordre de quelques M$ seulement (25 473 $ sur Morpho, 690K$ de supply sUSG, 40 détenteurs)",
+    "Equipe fondatrice = celle de Convergence (CVG), protocole precedent dont un contrat a ete exploite en aout 2024 (mint non autorise, -99% du prix CVG)"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "sUSG (Savings USG) n'a aucun rapport avec USDG de Paxos malgre l'homonymie apparente : c'est le vault ERC-4626 de Tangent Finance, protocole lance en mai 2026, dont le stablecoin USG est un CDP surcollateralise adosse a des LP tokens Curve/Convex et des PT Pendle plutot qu'a du cash ou des T-Bills. Tangent Finance est le rebuild communautaire de Convergence (CVG), dont le token de gouvernance a ete vide a near-zero par un exploit en aout 2024. Forces : plusieurs audits obtenus (Sherlock, Egis Security, Pashow), mecanisme de peg-keeping documente via frxUSD/Curve. Faiblesses : protocole extremement jeune (moins de 2 mois de recul), TVL et liquidite secondaire quasi nulles (40 detenteurs sUSG), backing complexe et empile sur plusieurs protocoles tiers, gouvernance/multisig non documentes, et lignee directe avec une equipe ayant deja subi un exploit majeur sur son projet precedent. Verdict lender : collateral experimental a exposition minimale ou a eviter, aucun historique suffisant pour justifier une allocation significative.",
+  "incidents": [
+    "2024-08-01: exploit du protocole Convergence (predecesseur direct de Tangent Finance, meme equipe) - mint non autorise de 58M CVG (~210K$) via la fonction claimMultipleStaking du contrat CvxRewardDistributor, prix CVG -99%"
+  ],
+  "controversies": [
+    "2024-08: plus de 97% de la DAO Convergence vote pour pivoter vers Tangent plutot que de liquider le projet apres l'exploit, CVG jamais rehabilite en tant que token"
+  ],
+  "dependencies": {
+    "issuer": "Tangent Finance",
+    "custodians": [],
+    "underlyings": ["LP tokens Curve/Convex", "PT Pendle", "positions Stake DAO/Spectra", "frxUSD (Frax Finance)", "OUSD (Origin Protocol)"],
+    "keyCounterparties": ["Curve Finance", "Convex Finance", "Pendle Finance", "Frax Finance", "Origin Protocol"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 25473,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": 0,
+    "note": "non trouve: aucune donnee de volume DEX fiable disponible sur GeckoTerminal/DexScreener/CoinGecko au moment de l'analyse (2026-07-13); traite comme facteur d'opacite penalisant"
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "susg.md"
+}

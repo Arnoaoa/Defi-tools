@@ -1,0 +1,319 @@
+[
+  {
+    "symbol": "yoUSD",
+    "name": "yoVaultUSD",
+    "addresses": {
+      "8453": "0x0000000f2eB9f69274678c76222B35eEc7588a65"
+    },
+    "markets": 1,
+    "totalTvlUsd": 365083
+  },
+  {
+    "symbol": "PT-srUSDat-27AUG2026",
+    "name": "PT Strata Senior USDat 27AUG2026",
+    "addresses": {
+      "1": "0x2D433b943FB8c015AE409444B7F960ED288082b4"
+    },
+    "markets": 1,
+    "totalTvlUsd": 360846
+  },
+  {
+    "symbol": "mAPOLLO",
+    "name": "Midas Apollo Crypto",
+    "addresses": {
+      "1": "0x7CF9DEC92ca9FD46f8d86e7798B72624Bc116C05"
+    },
+    "markets": 1,
+    "totalTvlUsd": 351762
+  },
+  {
+    "symbol": "superOETHb",
+    "name": "Super OETH",
+    "addresses": {
+      "8453": "0xDBFeFD2e8460a6Ee4955A68582F85708BAEA60A3"
+    },
+    "markets": 1,
+    "totalTvlUsd": 342290
+  },
+  {
+    "symbol": "MORPHO",
+    "name": "Morpho Token",
+    "addresses": {
+      "1": "0x58D97B57BB95320F9a05dC918Aef65434969c2B2"
+    },
+    "markets": 1,
+    "totalTvlUsd": 329224
+  },
+  {
+    "symbol": "PT-cUSD-23JUL2026",
+    "name": "PT cap USD 23JUL2026",
+    "addresses": {
+      "1": "0x928FB6ED39100a92B2480f5cbB93453f98D9F4cE"
+    },
+    "markets": 3,
+    "totalTvlUsd": 307385
+  },
+  {
+    "symbol": "PT-apxUSD-18JUN2026",
+    "name": "PT apxUSD 18JUN2026",
+    "addresses": {
+      "1": "0x92a6A01B07984de46c24E8EBa248449beB8B1dCB"
+    },
+    "markets": 2,
+    "totalTvlUsd": 260285
+  },
+  {
+    "symbol": "stakedao-frxUsDOLA",
+    "name": "Stake DAO frxUSD/sDOLA",
+    "addresses": {
+      "1": "0x12D706F0aDFF3BE5d9Fa119424A85388FeCD6960"
+    },
+    "markets": 1,
+    "totalTvlUsd": 249155
+  },
+  {
+    "symbol": "LsETH",
+    "name": "Liquid Staked ETH",
+    "addresses": {
+      "1": "0x8c1BEd5b9a0928467c9B1341Da1D7BD5e10b6549"
+    },
+    "markets": 1,
+    "totalTvlUsd": 244215
+  },
+  {
+    "symbol": "USDC",
+    "name": "USD Coin",
+    "addresses": {
+      "1": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "8453": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+    },
+    "markets": 4,
+    "totalTvlUsd": 237689
+  },
+  {
+    "symbol": "YFI",
+    "name": "yearn.finance",
+    "addresses": {
+      "1": "0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e",
+      "8453": "0x9EaF8C1E34F05a589EDa6BAfdF391Cf6Ad3CB239"
+    },
+    "markets": 2,
+    "totalTvlUsd": 237605
+  },
+  {
+    "symbol": "WOUSD",
+    "name": "Wrapped OUSD",
+    "addresses": {
+      "1": "0xD2af830E8CBdFed6CC11Bab697bB25496ed6FA62"
+    },
+    "markets": 1,
+    "totalTvlUsd": 219371
+  },
+  {
+    "symbol": "PT-stcUSD-23JUL2026",
+    "name": "PT Staked cap USD 23JUL2026",
+    "addresses": {
+      "1": "0x2d3C279E5FcDF5b793c0a75ed90738D7369B0b83"
+    },
+    "markets": 3,
+    "totalTvlUsd": 158903
+  },
+  {
+    "symbol": "AERO",
+    "name": "Aerodrome Finance",
+    "addresses": {
+      "8453": "0x940181a94A35A4569E4529A3CDfB74e38FD98631"
+    },
+    "markets": 1,
+    "totalTvlUsd": 152568
+  },
+  {
+    "symbol": "wSPYx",
+    "name": "Wrapped SP500 xStock",
+    "addresses": {
+      "1": "0xc88FcD8B874fDb3256E8B55b3decB8c24EAb4c02"
+    },
+    "markets": 1,
+    "totalTvlUsd": 148985
+  },
+  {
+    "symbol": "PAXG",
+    "name": "PAX Gold",
+    "addresses": {
+      "1": "0x45804880De22913dAFE09f4980848ECE6EcbAf78"
+    },
+    "markets": 2,
+    "totalTvlUsd": 148694
+  },
+  {
+    "symbol": "yoETH",
+    "name": "yoVaultETH",
+    "addresses": {
+      "8453": "0x3A43AEC53490CB9Fa922847385D82fe25d0E9De7"
+    },
+    "markets": 1,
+    "totalTvlUsd": 123699
+  },
+  {
+    "symbol": "SPX",
+    "name": "SPX6900",
+    "addresses": {
+      "1": "0xE0f63A424a4439cBE457D80E4f4b51aD25b2c56C"
+    },
+    "markets": 1,
+    "totalTvlUsd": 99977
+  },
+  {
+    "symbol": "PEPE",
+    "name": "Pepe",
+    "addresses": {
+      "1": "0x6982508145454Ce325dDbE47a25d4ec3d2311933"
+    },
+    "markets": 1,
+    "totalTvlUsd": 99977
+  },
+  {
+    "symbol": "VVV",
+    "name": "Venice Token",
+    "addresses": {
+      "8453": "0xacfE6019Ed1A7Dc6f7B508C02d1b04ec88cC21bf"
+    },
+    "markets": 1,
+    "totalTvlUsd": 96268
+  },
+  {
+    "symbol": "ONDO",
+    "name": "Ondo",
+    "addresses": {
+      "1": "0xfAbA6f8e4a5E8Ab82F62fe7C39859FA577269BE3"
+    },
+    "markets": 1,
+    "totalTvlUsd": 91711
+  },
+  {
+    "symbol": "ezETH",
+    "name": "Renzo Restaked ETH",
+    "addresses": {
+      "1": "0xbf5495Efe5DB9ce00f80364C8B423567e58d2110"
+    },
+    "markets": 1,
+    "totalTvlUsd": 68038
+  },
+  {
+    "symbol": "syrupUSDT",
+    "name": "Syrup USDT",
+    "addresses": {
+      "1": "0x356B8d89c1e1239Cbbb9dE4815c39A1474d5BA7D"
+    },
+    "markets": 1,
+    "totalTvlUsd": 66603
+  },
+  {
+    "symbol": "stkWELL",
+    "name": "Staked WELL",
+    "addresses": {
+      "8453": "0xe66E3A37C3274Ac24FE8590f7D84A2427194DC17"
+    },
+    "markets": 1,
+    "totalTvlUsd": 53018
+  },
+  {
+    "symbol": "ftUSD",
+    "name": "Flying Tulip USD",
+    "addresses": {
+      "1": "0xF7D85EC4E7710f71992752eac2111312e73E9C9C"
+    },
+    "markets": 1,
+    "totalTvlUsd": 49501
+  },
+  {
+    "symbol": "PT-USDe-31JUL2025",
+    "name": "PT Ethena USDe 31JUL2025",
+    "addresses": {
+      "1": "0x917459337CaAC939D41d7493B3999f571D20D667"
+    },
+    "markets": 1,
+    "totalTvlUsd": 48871
+  },
+  {
+    "symbol": "PT-srUSDe-15JAN2026",
+    "name": "PT Strata Senior USDe 15JAN2026",
+    "addresses": {
+      "1": "0x1Fb3C5c35D95F48e48FFC8e36bCCe5CB5f29F57c"
+    },
+    "markets": 1,
+    "totalTvlUsd": 46920
+  },
+  {
+    "symbol": "BAL",
+    "name": "Balancer",
+    "addresses": {
+      "1": "0xba100000625a3754423978a60c9317c58a424e3D"
+    },
+    "markets": 1,
+    "totalTvlUsd": 45467
+  },
+  {
+    "symbol": "ARM-WETH-eETH",
+    "name": "Ether.fi ARM",
+    "addresses": {
+      "1": "0xfB0A3CF9B019BFd8827443d131b235B3E0FC58d2"
+    },
+    "markets": 1,
+    "totalTvlUsd": 36779
+  },
+  {
+    "symbol": "WELL",
+    "name": "WELL",
+    "addresses": {
+      "8453": "0xA88594D404727625A9437C3f886C7643872296AE"
+    },
+    "markets": 1,
+    "totalTvlUsd": 35223
+  },
+  {
+    "symbol": "jrUSDe",
+    "name": "Strata Junior USDe",
+    "addresses": {
+      "1": "0xC58D044404d8B14e953C115E67823784dEA53d8F"
+    },
+    "markets": 2,
+    "totalTvlUsd": 32690
+  },
+  {
+    "symbol": "ARM-WETH-stETH",
+    "name": "Lido ARM",
+    "addresses": {
+      "1": "0x85B78AcA6Deae198fBF201c82DAF6Ca21942acc6"
+    },
+    "markets": 1,
+    "totalTvlUsd": 27725
+  },
+  {
+    "symbol": "deSPXA",
+    "name": "DeFi Janus Henderson Anemoy S&P500® Fund Token",
+    "addresses": {
+      "8453": "0x9c5C365e764829876243d0b289733B9D2b729685"
+    },
+    "markets": 1,
+    "totalTvlUsd": 26158
+  },
+  {
+    "symbol": "sUSG",
+    "name": "Savings USG",
+    "addresses": {
+      "1": "0xF17D6f98A5C6EAA99d149079984119e0A4EF6900"
+    },
+    "markets": 1,
+    "totalTvlUsd": 25473
+  },
+  {
+    "symbol": "mBASIS",
+    "name": "Midas Basis Trading Token",
+    "addresses": {
+      "8453": "0x1C2757c1FeF1038428b5bEF062495ce94BBe92b2"
+    },
+    "markets": 1,
+    "totalTvlUsd": 23334
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "symbol": "PT-srUSDe-15JAN2026",
+  "name": "PT Strata Senior USDe 15JAN2026",
+  "addresses": {
+    "1": "0x1Fb3C5c35D95F48e48FFC8e36bCCe5CB5f29F57c"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "C",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "C"
+  },
+  "redFlags": [],
+  "maxAllocation": "5-15%",
+  "summary": "PT-srUSDe-15JAN2026 est un Principal Token Pendle sur srUSDe, la tranche senior du protocole de yield-tranching Strata (Frontera Labs) appliqué au sUSDe d'Ethena Labs — arrivé à maturité il y a environ 6 mois (15/01/2026). Chaîne confirmée via contrat SY : PT -> srUSDe (Strata) -> sUSDe (Ethena) -> USDe. Correction importante par rapport à une analyse antérieure sur un autre produit Strata (PT-srUSDat-27AUG2026, sur Saturn/STRC) : Strata a bien des audits publics (Quantstamp x2, Cyfrin x2, Guardian), contrairement à l'hypothèse 'aucun audit trouvé' retenue précédemment pour ce protocole — le red flag absolu ne s'applique pas ici. Le sous-jacent final (USDe/sUSDe, déjà noté C) est structurellement plus sain que la chaîne Saturn/STRC (notée D). La protection senior via coverage ratio (seuil 105%) est réelle mais non testée en stress prolongé, et le protocole Strata reste jeune (~9 mois). TVL résiduelle sur Morpho (46 920$, 1 marché) 6 mois après maturité, probablement due à la friction de sortie multi-étapes (coverage ratio + cooldown Ethena) plutôt qu'à un problème de fond. Verdict lender : allocation limitée acceptable (5-15%), nettement moins risqué que les produits Strata adossés à STRC/Saturn.",
+  "incidents": [
+    "2026-01-15: maturité du PT-srUSDe-15JAN2026, redeem ouvert depuis cette date",
+    "Aucun incident spécifique à Strata/Frontera Labs trouvé au 2026-07-13",
+    "Hérité du sous-jacent USDe/sUSDe: dépeg spot Binance 2025-10-11 (défaut oracle exchange, sans lien backing) ; exploit KelpDAO 2026-04 (contagion de confiance, sans lien direct)"
+  ],
+  "controversies": [
+    "Aucune controverse spécifique à Strata/Frontera Labs trouvée au 2026-07-13",
+    "Ne pas confondre avec l'historique de PT-srUSDat-27AUG2026 (SAT-001/SAT-002, dépeg STRC -17%) : ces incidents concernent le produit Strata-sur-Saturn/STRC, pas ce produit Strata-sur-Ethena"
+  ],
+  "dependencies": {
+    "issuer": "Strata / Frontera Labs (tranching) sur Ethena Labs (staking sUSDe)",
+    "custodians": ["Copper", "Ceffu", "Fireblocks (custodians Ethena, hérités via sUSDe/USDe)"],
+    "underlyings": ["srUSDe (Strata, senior)", "jrUSDe (Strata, junior)", "sUSDe (Ethena)", "USDe (Ethena)"],
+    "keyCounterparties": ["Strata/Frontera Labs (gouvernance non documentée)", "Desks dérivés CEX (jambe short USDe)", "Ethena Labs"]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 46920,
+    "dailyLiquidityUsd": 0,
+    "ratioPct": 0,
+    "note": "Post-maturité, pas de pool AMM pertinent (PT non tradable) : sortie via chaîne de redemption PT->srUSDe (1:1 instantané) -> sUSDe (frais 0,025%, gated par coverage ratio 105%, réclamation manuelle) -> USDe (cooldown Ethena 1-7 jours dynamique). TVL Morpho triviale comparée à la liquidité d'USDe/sUSDe en bout de chaîne ; risque réel = friction de sortie multi-étapes (jusqu'à ~7-10 jours), pas la profondeur de marché."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "pt-srusde-15jan2026.md"
+}

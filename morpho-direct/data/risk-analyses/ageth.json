@@ -1,0 +1,54 @@
+{
+  "symbol": "agETH",
+  "name": "Kelp Gain (agETH)",
+  "addresses": {
+    "1": "0xe1B4d34E8754600962Cd944B535180Bd758E6c2e"
+  },
+  "grade": "D",
+  "components": {
+    "assetDesign": "D",
+    "issuer": "D",
+    "depegBacking": "D",
+    "counterparty": "D",
+    "recentSecurity": "D"
+  },
+  "redFlags": [
+    "Aucun audit de sécurité dédié au contrat agETH trouvé (\"no contract security audit has been submitted\" sur Etherscan) — red flag absolu du framework",
+    "Hack de l'émetteur Kelp DAO il y a moins de 3 mois (292 M$, avril 2026, bridge LayerZero, attribution Lazarus)",
+    "Owner du proxy upgradeable aux pouvoirs étendus (alerte GoPlus : disable sells, mint, changement de fees)",
+    "Liquidité secondaire de quelques centaines de $/jour (Uniswap V4 uniquement) — choc de prix extrême le 19/04/2026 (ATL 495 $ vs ~1 900 $ de valeur théorique)",
+    "Modalités de redemption introuvables (FAQ officielle en 404) — opacité sur la sortie primaire"
+  ],
+  "maxAllocation": "1-5% ou skip",
+  "summary": "agETH (Kelp Gain, ex-Airdrop Gain) est le token receipt du Gain vault de Kelp DAO (août 2024) : dépôts ETH/rsETH/LST pontés vers des L2 et protocoles partenaires pour farmer des airdrops tiers, avec August Digital et Tulipa Capital comme gérants. L'émetteur Kelp a subi le plus gros hack DeFi de 2026 (292 M$, avril, bridge LayerZero) ; agETH n'a pas été hacké directement mais détient du rsETH en sous-jacent, a subi un choc de prix extrême le lendemain du hack (ATL à 495 $ contre ~1 900 $ de valeur théorique) et le vault Upshift associé a été mis en pause. Aucun audit dédié au contrat agETH n'est recensé, l'owner du proxy dispose de pouvoirs étendus, la liquidité secondaire est de quelques centaines de dollars par jour et les modalités de redemption sont introuvables. Verdict lender : D — cumul d'un red flag absolu (absence d'audit dédié), d'un incident majeur récent chez l'émetteur et d'une illiquidité totale ; à éviter.",
+  "incidents": [
+    "2024-07: DNS hijack de Kelp DAO (résolu en quelques heures, sans perte de fonds)",
+    "2025-04: bug de mint de frais Kelp (corrigé en 24 h, aucune perte utilisateur)",
+    "2026-04-18: hack Kelp DAO 292 M$ — 116 500 rsETH volés via bridge LayerZero ; agETH non ciblé directement mais exposition indirecte via rsETH sous-jacent",
+    "2026-04-19: choc de prix extrême d'agETH (ATH 6 714 $ et ATL 495 $ le même jour, CoinGecko) et pause précautionnelle du vault Kelp Gain sur Upshift",
+    "2026-05-25: recovery complétée — 117 132 rsETH restitués via la coalition DeFi United, migration du pont vers Chainlink CCIP"
+  ],
+  "controversies": [
+    "2026-05: dispute publique de responsabilité Kelp DAO vs LayerZero sur la config 1-of-1 du bridge (LayerZero reconnaît une erreur)",
+    "2026-05: ordonnance du tribunal SDNY bloquant Arbitrum DAO sur 30 766 ETH (~71 M$) gelés post-hack, réclamés par des créanciers de jugements contre la Corée du Nord — litige en cours"
+  ],
+  "dependencies": {
+    "issuer": "Kelp DAO / KernelDAO (Gain division)",
+    "custodians": [],
+    "underlyings": ["ETH", "rsETH (Kelp LRT)", "LST divers (stETH/wstETH, ETHx)"],
+    "keyCounterparties": [
+      "August Digital (infrastructure institutionnelle du vault)",
+      "Tulipa Capital (gérant de la stratégie)",
+      "L2 et protocoles partenaires du farming (Linea, Karak, Scroll, Pendle, Across, LayerZero, Spectra, Lyra) — risque de bridge cumulé",
+      "EigenLayer (restaking sous-jacent via rsETH)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 100,
+    "dailyLiquidityUsd": 1000,
+    "ratioPct": 10,
+    "note": "Volume 24h entre ~290 $ (total agETH) et ~1 794 $ (paire principale agETH/ETH), Uniswap V4 uniquement (CoinGecko, juil. 2026) — retenu ~1 000 $. Market cap (~15-17 M$) sans profondeur réelle ; illiquidité démontrée le 19/04/2026 (ATL 495 $). TVL Morpho négligeable (100 $)."
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "ageth.md"
+}

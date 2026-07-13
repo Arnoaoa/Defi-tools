@@ -1,0 +1,43 @@
+{
+  "symbol": "PT-cUSD-23JUL2026",
+  "name": "PT cap USD 23JUL2026",
+  "addresses": {
+    "1": "0x928FB6ED39100a92B2480f5cbB93453f98D9F4cE"
+  },
+  "grade": "C",
+  "components": {
+    "assetDesign": "C",
+    "issuer": "B",
+    "depegBacking": "C",
+    "counterparty": "C",
+    "recentSecurity": "B"
+  },
+  "redFlags": [
+    "Ratio de liquidité de sortie du pool Pendle au-dessus du seuil de vigilance du framework (~44% > 30%)",
+    "Plus bas historique cUSD à 0,9071$ (-9,3% sous pair) le 01/04/2026, cause non confirmée"
+  ],
+  "maxAllocation": "5-15%",
+  "summary": "PT-cUSD-23JUL2026 est un Principal Token Pendle sur cUSD, le stablecoin de base de Cap Labs backé 1:1 par un panier diversifié de stablecoins/RWA régulés (USDC, USDT, PYUSD, BUIDL, BENJI). Identité vérifiée (adresse sous-jacente confirmée, pas de confusion avec le Celo Dollar homonyme). Forces : protocole audité par plusieurs firmes reconnues (Trail of Bits, Zellic, Certora, Sherlock), aucun incident de sécurité connu, maturité proche (10 jours) réduisant le risque de convergence de prix. Faiblesses : liquidité du pool Pendle modeste (ratio TVL Morpho/liquidité ≈44%, au-dessus du seuil de vigilance), dépendance à Aave V3 pour >80% des réserves cUSD, un plus bas historique à -9,3% sous pair en avril 2026 dont la cause n'a pas pu être confirmée. Verdict lender : collatéral correct pour une allocation modérée, sans red flag absolu, mais la liquidité de sortie mérite un monitoring.",
+  "incidents": [
+    "Aucun incident (dépeg confirmé, hack, bad debt) connu sur Cap Labs/cUSD au 2026-07-13"
+  ],
+  "controversies": [],
+  "dependencies": {
+    "issuer": "Cap Labs (protocole Cap)",
+    "custodians": [],
+    "underlyings": ["cUSD (panier USDC, USDT, PYUSD, BUIDL, BENJI)"],
+    "keyCounterparties": [
+      "Aave V3 Core (>80% des réserves cUSD déployées comme buffer de liquidité)",
+      "Émetteurs des stablecoins du panier (Circle, Tether, PayPal, BlackRock, Franklin Templeton)",
+      "Pool AMM Pendle (route de sortie avant maturité)"
+    ]
+  },
+  "exitLiquidity": {
+    "morphoTvlUsd": 307385,
+    "dailyLiquidityUsd": 696000,
+    "ratioPct": 44.2,
+    "note": "Liquidité du pool Pendle (marché 0x9eaaeda23177b7168c55a3a0f937f67919733449, API Pendle, consultée 2026-07-13) ; à maturité (dans 10 jours), sortie alternative via redemption primaire cUSD (limites non trouvées) et DODO/Uniswap V4 (profondeur non quantifiée)"
+  },
+  "analyzedAt": "2026-07-13",
+  "vaultNote": "pt-cusd-23jul2026.md"
+}
