@@ -104,6 +104,19 @@ export const MORPHO_BLUE_ABI = [
   },
 ] as const
 
+// Morpho oracles return the collateral price in loan-token terms, scaled 1e36
+export const ORACLE_ABI = [
+  {
+    name: 'price',
+    type: 'function',
+    inputs: [],
+    outputs: [{ name: '', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+] as const
+
+export const ORACLE_PRICE_SCALE = 10n ** 36n
+
 export const ERC20_ABI = [
   {
     name: 'approve',

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { MarketCard } from './MarketCard'
+import { Positions } from './Positions'
 import { SupplyModal } from './SupplyModal'
 import { fetchMarkets, type ApiMarket } from '@/lib/api'
 
@@ -161,6 +162,8 @@ export function MarketBrowser() {
           Supply directly to Morpho Blue markets — no vault intermediaries
         </p>
       </div>
+
+      <Positions markets={markets} onManage={setSelectedMarket} />
 
       <div className="flex flex-wrap items-center gap-2 mb-3">
         {CHAINS.map((chain) => (
