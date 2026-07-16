@@ -114,16 +114,17 @@ export function MarketBrowser() {
     let cancelled = false
     setLoading(true)
     setError(null)
-    fetchMarkets(selectedChains)
+    fetchMarkets()
       .then((m) => { if (!cancelled) setMarkets(m) })
       .catch((e) => { if (!cancelled) setError(e.message) })
       .finally(() => { if (!cancelled) setLoading(false) })
     return () => { cancelled = true }
-  }, [selectedChains])
+  }, [])
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase()
     const result = markets.filter((m) => {
+      if (!selectedChains.includes(m.chain.id)) return false
       if (loanAsset !== 'all' && m.loanAsset.symbol !== loanAsset) return false
       if (q) {
         const matches =
@@ -140,7 +141,7 @@ export function MarketBrowser() {
     })
     if (sortBy === 'liquidity') return result // API order (TotalLiquidityUsd desc)
     return [...result].sort((a, b) => sortApy(b, sortBy) - sortApy(a, sortBy))
-  }, [markets, search, sortBy, minTvl, utilFilter, minApy, loanAsset])
+  }, [markets, search, sortBy, minTvl, utilFilter, minApy, loanAsset, selectedChains])
 
   function toggleChain(id: number) {
     setSelectedChains((prev) =>
