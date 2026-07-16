@@ -27,6 +27,9 @@ export interface ApiMarket {
     supplyAssets: string
     supplyAssetsUsd: number | null
     utilization: number
+    collateralAssets: string | null
+    collateralAssetsUsd: number | null
+    liquidityAssetsUsd: number | null
   } | null
 }
 
