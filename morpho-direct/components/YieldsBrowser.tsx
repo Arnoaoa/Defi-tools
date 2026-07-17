@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { fetchYields, YIELD_PROJECTS, type YieldPool, type YieldProject } from '@/lib/yields'
 import { getRiskAnalysis, isStale, GRADE_COLORS } from '@/lib/risk'
 import { FilterGroup } from './MarketBrowser'
+import { VaultModal } from './VaultModal'
 
 const CHAIN_OPTIONS = [
   { value: 'all', label: 'All' },
@@ -53,6 +54,7 @@ export function YieldsBrowser() {
   const [minTvl, setMinTvl] = useState(100_000)
   const [minApy, setMinApy] = useState(0)
   const [search, setSearch] = useState('')
+  const [selectedVault, setSelectedVault] = useState<YieldPool | null>(null)
 
   useEffect(() => {
     let cancelled = false
@@ -125,7 +127,7 @@ export function YieldsBrowser() {
 
           <div className="rounded-xl overflow-hidden" style={{ border: '1px solid var(--border)' }}>
             <div
-              className="grid grid-cols-[110px_1fr_90px_110px_110px_100px_70px] gap-2 px-4 py-2.5 text-xs font-medium"
+              className="grid grid-cols-[110px_1fr_90px_110px_110px_100px_150px] gap-2 px-4 py-2.5 text-xs font-medium"
               style={{ background: 'var(--surface)', color: 'var(--muted)' }}
             >
               <span>Protocol</span>
@@ -142,7 +144,7 @@ export function YieldsBrowser() {
               return (
                 <div
                   key={pool.pool}
-                  className="grid grid-cols-[110px_1fr_90px_110px_110px_100px_70px] gap-2 px-4 py-3 text-sm items-center"
+                  className="grid grid-cols-[110px_1fr_90px_110px_110px_100px_150px] gap-2 px-4 py-3 text-sm items-center"
                   style={{ borderTop: '1px solid var(--border)', color: 'var(--foreground)' }}
                 >
                   <span
@@ -187,15 +189,26 @@ export function YieldsBrowser() {
                     {(pool.apyBase ?? 0).toFixed(1)}% / {(pool.apyReward ?? 0).toFixed(1)}%
                   </span>
                   <span className="text-right text-xs">{formatUsd(pool.tvlUsd)}</span>
-                  <a
-                    href={pool.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-right cursor-pointer transition-opacity hover:opacity-80"
-                    style={{ color: 'var(--muted)' }}
-                  >
-                    {pool.project === 'morpho-vault' ? 'Morpho ↗' : 'Llama ↗'}
-                  </a>
+                  <span className="flex items-center justify-end gap-2">
+                    {pool.project === 'morpho-vault' && (
+                      <button
+                        onClick={() => setSelectedVault(pool)}
+                        className="text-xs font-medium px-3 py-1.5 rounded-lg cursor-pointer"
+                        style={{ background: 'var(--accent)', color: 'white' }}
+                      >
+                        Deposit
+                      </button>
+                    )}
+                    <a
+                      href={pool.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs cursor-pointer transition-opacity hover:opacity-80"
+                      style={{ color: 'var(--muted)' }}
+                    >
+                      {pool.project === 'morpho-vault' ? 'Morpho ↗' : 'Llama ↗'}
+                    </a>
+                  </span>
                 </div>
               )
             })}
@@ -208,6 +221,8 @@ export function YieldsBrowser() {
           )}
         </>
       )}
+
+      {selectedVault && <VaultModal pool={selectedVault} onClose={() => setSelectedVault(null)} />}
     </div>
   )
 }
