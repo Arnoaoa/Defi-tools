@@ -1,5 +1,5 @@
 export const YIELD_PROJECTS = {
-  'morpho-blue': 'Morpho',
+  'morpho-vault': 'Morpho',
   'aave-v3': 'Aave v3',
   'aave-v4': 'Aave v4',
   'euler-v2': 'Euler v2',
@@ -19,17 +19,16 @@ export interface YieldPool {
   tvlUsd: number
   underlyingToken: string | null
   poolMeta: string | null
+  url: string
+  listed: boolean | null // false = Morpho vault not curated by Morpho; null = non-Morpho
 }
 
-// Served by /api/yields — the server proxies and filters DefiLlama's full
-// pool list (~20MB) down to our protocols/chains (~200KB), cached 1h.
+// Served by /api/yields — Morpho vaults come straight from the Morpho API
+// (includes non-curated vaults DefiLlama doesn't track); Aave/Euler pools are
+// filtered out of DefiLlama's full pool list (~20MB → ~200KB), cached 1h.
 export async function fetchYields(): Promise<YieldPool[]> {
   const res = await fetch('/api/yields')
   if (!res.ok) throw new Error(`Yields API error: ${res.status}`)
   const json: { pools: YieldPool[] } = await res.json()
   return json.pools
-}
-
-export function llamaPoolUrl(pool: YieldPool): string {
-  return `https://defillama.com/yields/pool/${pool.pool}`
 }

@@ -1,52 +1,95 @@
 import type { ApiMarket } from '@/lib/api'
 import { morphoAppUrl } from '@/lib/api'
-import type { UserPosition } from '@/lib/morpho-api'
+import type { ApiVault, UserPosition, UserVaultPosition } from '@/lib/morpho-api'
+import { fetchVaultAllocations, morphoVaultUrl } from '@/lib/morpho-api'
 import { getRiskAnalysis, getMarketRisk } from '@/lib/risk'
 
 export const POSITION_APY_ALERT = 0.10 // alert if a lending position's APY falls below this
 export const OPPORTUNITY_APY_MIN = 0.20 // candidate threshold for new opportunities
+const POSITION_MIN_USD = 1 // ignore dust positions
 const MARKET_TVL_MIN_USD = 5_000 // ignore dust markets below this
 const SELL_TEST_FRACTION = 0.10 // liquidity check: quote selling 10% of pool collateral
 const MAX_PRICE_IMPACT = 0.05 // reject if the sell quote loses more than this
 const PRICE_DROP_REJECT = 0.20 // reject if collateral lost >20% over 7d (depeg/hack proxy)
-const MAX_QUOTES_PER_RUN = 12 // stay under Vercel's 30s function budget
+const MAX_QUOTES_PER_RUN = 14 // global quote budget, stays under Vercel's 30s limit
+const MAX_MARKET_CANDIDATES = 8
+// Vaults with aberrant netApy are usually allocated to a broken (100% utilization)
+// market and get rejected without spending any quote — screen enough of them in
+// parallel so real opportunities below aren't starved by the cap.
+const MAX_VAULT_CANDIDATES = 20
+const VAULT_ALLOCATION_MIN_SHARE = 0.05 // ignore allocations under 5% of vault TVL
 
 // Chain slugs shared by KyberSwap and DefiLlama for our supported chains
 const CHAIN_SLUGS: Record<number, string> = { 1: 'ethereum', 8453: 'base' }
 
-export interface PositionAlert {
-  market: ApiMarket
-  supplyAssetsUsd: number | null
-  supplyApy: number
-  weeklySupplyApy: number | null
-}
-
 export function positionKey(chainId: number, marketId: string): string {
   return `${chainId}-${marketId}`
+}
+
+// ---------------------------------------------------------------------------
+// Position alerts
+
+export interface PositionAlert {
+  label: string
+  apy: number
+  weeklyApy: number | null
+  sizeUsd: number | null
+  url: string
 }
 
 export function checkPositions(markets: ApiMarket[], positions: UserPosition[]): PositionAlert[] {
   const marketsByKey = new Map(markets.map((m) => [positionKey(m.chain.id, m.marketId), m]))
 
   return positions.flatMap((p) => {
+    if (p.supplyAssetsUsd !== null && p.supplyAssetsUsd < POSITION_MIN_USD) return []
     const market = marketsByKey.get(positionKey(p.chainId, p.marketId))
     if (!market?.state || market.state.supplyApy >= POSITION_APY_ALERT) return []
     return [
       {
-        market,
-        supplyAssetsUsd: p.supplyAssetsUsd,
-        supplyApy: market.state.supplyApy,
-        weeklySupplyApy: market.state.weeklySupplyApy,
+        label: marketLabel(market),
+        apy: market.state.supplyApy,
+        weeklyApy: market.state.weeklySupplyApy,
+        sizeUsd: p.supplyAssetsUsd,
+        url: morphoAppUrl(market),
       },
     ]
   })
 }
 
-export interface Opportunity {
-  market: ApiMarket
-  grade: string | null // null = collateral never analyzed
+export function checkVaultPositions(positions: UserVaultPosition[]): PositionAlert[] {
+  return positions.flatMap((p) => {
+    if (p.assetsUsd < POSITION_MIN_USD || !p.vault.state) return []
+    if (p.vault.state.netApy >= POSITION_APY_ALERT) return []
+    return [
+      {
+        label: vaultLabel(p.vault),
+        apy: p.vault.state.netApy,
+        weeklyApy: null,
+        sizeUsd: p.assetsUsd,
+        url: morphoVaultUrl(p.vault),
+      },
+    ]
+  })
+}
+
+// ---------------------------------------------------------------------------
+// Exit check — can a liquidator actually sell this market's collateral?
+
+interface ExitCheck {
+  ok: boolean
+  reason?: string
   sellTestUsd: number
   priceImpact: number
+}
+
+interface ScanContext {
+  priceChanges: Record<string, number>
+  exitCache: Map<string, ExitCheck>
+  quotesLeft: number
+}
+
+function coinKey(market: ApiMarket): string {
+  return `${CHAIN_SLUGS[market.chain.id]}:${market.collateralAsset!.address.toLowerCase()}`
 }
 
 // 7d price change (%) per `chain:address` coin key, batched in one call
@@ -67,17 +110,12 @@ function sellTestAmount(rawCollateralAssets: string | number): bigint | null {
   return BigInt(Math.round(amount))
 }
 
-interface KyberQuote {
-  amountInUsd: number
-  amountOutUsd: number
-}
-
 async function fetchKyberSellQuote(
   chainId: number,
   tokenIn: string,
   tokenOut: string,
   amountIn: bigint
-): Promise<KyberQuote | null> {
+): Promise<{ amountInUsd: number; amountOutUsd: number } | null> {
   const params = new URLSearchParams({
     tokenIn,
     tokenOut,
@@ -101,8 +139,72 @@ async function fetchKyberSellQuote(
   return { amountInUsd, amountOutUsd }
 }
 
+async function checkMarketExit(market: ApiMarket, ctx: ScanContext): Promise<ExitCheck> {
+  const key = positionKey(market.chain.id, market.marketId)
+  const cached = ctx.exitCache.get(key)
+  if (cached) return cached
+
+  const check = await computeMarketExit(market, ctx)
+  ctx.exitCache.set(key, check)
+  return check
+}
+
+async function computeMarketExit(market: ApiMarket, ctx: ScanContext): Promise<ExitCheck> {
+  const state = market.state!
+  const collateral = market.collateralAsset!
+  const fail = (reason: string): ExitCheck => ({ ok: false, reason, sellTestUsd: 0, priceImpact: 0 })
+
+  if (state.utilization >= 0.999) {
+    // 100% utilization = broken market, displayed rate is fictional (msY/AZND)
+    return fail('utilisation 100 % — marché cassé, taux fictif')
+  }
+
+  const change7d = ctx.priceChanges[coinKey(market)]
+  if (change7d !== undefined && change7d <= -PRICE_DROP_REJECT * 100) {
+    return fail(`prix collatéral ${change7d.toFixed(1)} % sur 7j — dépeg/hack probable`)
+  }
+
+  const amountIn = state.collateralAssets ? sellTestAmount(state.collateralAssets) : null
+  if (amountIn === null) return fail('collatéral on-pool inconnu — liquidité invérifiable')
+
+  if (ctx.quotesLeft <= 0) return fail('budget de quotes épuisé — non vérifié ce run')
+  ctx.quotesLeft--
+
+  // Sequential on purpose: KyberSwap public rate limit is ~1 req/s
+  const quote = await fetchKyberSellQuote(
+    market.chain.id,
+    collateral.address,
+    market.loanAsset.address,
+    amountIn
+  )
+  if (!quote) return fail('aucune route de vente du collatéral — liquidité insuffisante')
+
+  const priceImpact = 1 - quote.amountOutUsd / quote.amountInUsd
+  if (priceImpact > MAX_PRICE_IMPACT) {
+    return fail(`impact ${(priceImpact * 100).toFixed(1)} % en vendant ${usd(quote.amountInUsd)} de collatéral`)
+  }
+
+  return { ok: true, sellTestUsd: quote.amountInUsd, priceImpact }
+}
+
+// ---------------------------------------------------------------------------
+// Opportunity scan — markets and vaults share the exit checks and quote budget
+
+export interface MarketOpportunity {
+  market: ApiMarket
+  grade: string | null // null = collateral never analyzed
+  exit: ExitCheck
+}
+
+export interface VaultOpportunity {
+  vault: ApiVault
+  worstExit: ExitCheck
+  worstMarketLabel: string
+}
+
 export interface OpportunityScan {
-  opportunities: Opportunity[]
+  marketOpportunities: MarketOpportunity[]
+  vaultOpportunities: VaultOpportunity[]
   rejections: string[]
 }
 
@@ -110,89 +212,129 @@ function marketLabel(m: ApiMarket): string {
   return `${m.loanAsset.symbol}/${m.collateralAsset?.symbol ?? '?'} (${m.chain.network})`
 }
 
-// Candidates = high-APY markets that pass factual sanity checks only (no risk-grade
-// filter): live market, real TVL, collateral price stable over 7d (depeg/hack proxy),
-// and enough DEX liquidity to sell 10% of the pool's collateral at < 5% impact —
-// i.e. liquidators could actually exit the collateral.
-export async function findOpportunities(
+function vaultLabel(v: ApiVault): string {
+  return `[Vault] ${v.name} (${v.chain.network})`
+}
+
+function isMarketCandidate(m: ApiMarket): boolean {
+  return Boolean(
+    m.collateralAsset &&
+      m.oracle &&
+      m.state &&
+      m.state.supplyApy >= OPPORTUNITY_APY_MIN &&
+      // Filter broken markets before the candidate cap so they don't starve real ones
+      // (utilization is re-checked in computeMarketExit for vault allocations)
+      m.state.utilization < 0.999 &&
+      (m.state.supplyAssetsUsd ?? 0) >= MARKET_TVL_MIN_USD
+  )
+}
+
+// Candidates = high-yield markets/vaults that pass factual sanity checks only
+// (no risk-grade filter): live market, real TVL, collateral price stable over
+// 7d (depeg/hack proxy), and enough DEX liquidity to sell 10% of the pool's
+// collateral at < 5% impact — i.e. liquidators could actually exit.
+export async function scanOpportunities(
   markets: ApiMarket[],
-  excludeKeys: Set<string>
+  vaults: ApiVault[],
+  excludeMarketKeys: Set<string>,
+  excludeVaultAddresses: Set<string>
 ): Promise<OpportunityScan> {
-  const candidates = markets
-    .filter(
-      (m) =>
-        m.collateralAsset &&
-        m.oracle &&
-        m.state &&
-        m.state.supplyApy >= OPPORTUNITY_APY_MIN &&
-        m.state.utilization < 0.999 && // 100% utilization = broken market, displayed rate is fictional
-        (m.state.supplyAssetsUsd ?? 0) >= MARKET_TVL_MIN_USD &&
-        !excludeKeys.has(positionKey(m.chain.id, m.marketId))
-    )
+  const marketCandidates = markets
+    .filter((m) => isMarketCandidate(m) && !excludeMarketKeys.has(positionKey(m.chain.id, m.marketId)))
     .sort((a, b) => (b.state?.supplyApy ?? 0) - (a.state?.supplyApy ?? 0))
-    .slice(0, MAX_QUOTES_PER_RUN)
+    .slice(0, MAX_MARKET_CANDIDATES)
+
+  const vaultCandidates = vaults
+    .filter(
+      (v) =>
+        v.state &&
+        v.state.netApy >= OPPORTUNITY_APY_MIN &&
+        !excludeVaultAddresses.has(v.address.toLowerCase())
+    )
+    .sort((a, b) => (b.state?.netApy ?? 0) - (a.state?.netApy ?? 0))
+    .slice(0, MAX_VAULT_CANDIDATES)
 
   const rejections: string[] = []
 
-  const coinKeys = candidates.map(
-    (m) => `${CHAIN_SLUGS[m.chain.id]}:${m.collateralAsset!.address.toLowerCase()}`
-  )
-  // On DefiLlama outage, skip the depeg filter rather than losing the whole run
-  const priceChanges = await fetchPriceChanges7d([...new Set(coinKeys)]).catch(() => {
-    rejections.push('DefiLlama indisponible — check dépeg 7j non appliqué')
-    return {} as Record<string, number>
-  })
-
-  const opportunities: Opportunity[] = []
-
-  for (const market of candidates) {
-    const label = marketLabel(market)
-    const collateral = market.collateralAsset!
-    const state = market.state!
-
-    const change7d = priceChanges[`${CHAIN_SLUGS[market.chain.id]}:${collateral.address.toLowerCase()}`]
-    if (change7d !== undefined && change7d <= -PRICE_DROP_REJECT * 100) {
-      rejections.push(`${label} : prix collatéral ${change7d.toFixed(1)} % sur 7j — dépeg/hack probable`)
-      continue
-    }
-
-    const amountIn = state.collateralAssets ? sellTestAmount(state.collateralAssets) : null
-    if (amountIn === null) {
-      rejections.push(`${label} : collatéral on-pool inconnu — liquidité invérifiable`)
-      continue
-    }
-
-    // Sequential on purpose: KyberSwap public rate limit is ~1 req/s
-    const quote = await fetchKyberSellQuote(
-      market.chain.id,
-      collateral.address,
-      market.loanAsset.address,
-      amountIn
+  const allocationsByVault = new Map(
+    await Promise.all(
+      vaultCandidates.map(async (v) => {
+        const allocations = await fetchVaultAllocations(v).catch(() => null)
+        const minUsd = (v.state?.totalAssetsUsd ?? 0) * VAULT_ALLOCATION_MIN_SHARE
+        return [
+          v.address,
+          // Idle allocations (no collateral) are just liquidity — nothing to check
+          allocations?.filter((a) => a.supplyAssetsUsd >= minUsd && a.market.collateralAsset) ?? null,
+        ] as const
+      })
     )
-    if (!quote) {
-      rejections.push(`${label} : aucune route de vente du collatéral — liquidité insuffisante`)
+  )
+
+  const allocationMarkets = [...allocationsByVault.values()].flat().map((a) => a?.market)
+  const coinKeys = [...marketCandidates, ...allocationMarkets]
+    .filter((m): m is ApiMarket => Boolean(m?.collateralAsset))
+    .map(coinKey)
+
+  const ctx: ScanContext = {
+    // On DefiLlama outage, skip the depeg filter rather than losing the whole run
+    priceChanges: await fetchPriceChanges7d([...new Set(coinKeys)]).catch(() => {
+      rejections.push('DefiLlama indisponible — check dépeg 7j non appliqué')
+      return {}
+    }),
+    exitCache: new Map(),
+    quotesLeft: MAX_QUOTES_PER_RUN,
+  }
+
+  const marketOpportunities: MarketOpportunity[] = []
+  for (const market of marketCandidates) {
+    const exit = await checkMarketExit(market, ctx)
+    if (!exit.ok) {
+      rejections.push(`${marketLabel(market)} : ${exit.reason}`)
       continue
     }
-
-    const priceImpact = 1 - quote.amountOutUsd / quote.amountInUsd
-    if (priceImpact > MAX_PRICE_IMPACT) {
-      rejections.push(
-        `${label} : impact ${(priceImpact * 100).toFixed(1)} % en vendant ${usd(quote.amountInUsd)} de collatéral`
-      )
-      continue
-    }
-
-    const analysis = getRiskAnalysis(market.chain.id, collateral.address)
-    opportunities.push({
+    const analysis = getRiskAnalysis(market.chain.id, market.collateralAsset!.address)
+    marketOpportunities.push({
       market,
       grade: analysis ? getMarketRisk(market, analysis).grade : null,
-      sellTestUsd: quote.amountInUsd,
-      priceImpact,
+      exit,
     })
   }
 
-  return { opportunities, rejections }
+  const vaultOpportunities: VaultOpportunity[] = []
+  for (const vault of vaultCandidates) {
+    const allocations = allocationsByVault.get(vault.address)
+    if (!allocations) {
+      rejections.push(`${vaultLabel(vault)} : allocations irrécupérables — non vérifié`)
+      continue
+    }
+    if (allocations.length === 0) {
+      rejections.push(`${vaultLabel(vault)} : aucune allocation vérifiable`)
+      continue
+    }
+
+    let worst: { exit: ExitCheck; label: string } | null = null
+    let rejected = false
+    for (const allocation of allocations) {
+      const exit = await checkMarketExit(allocation.market, ctx)
+      if (!exit.ok) {
+        rejections.push(`${vaultLabel(vault)} : alloc ${marketLabel(allocation.market)} — ${exit.reason}`)
+        rejected = true
+        break
+      }
+      if (!worst || exit.priceImpact > worst.exit.priceImpact) {
+        worst = { exit, label: marketLabel(allocation.market) }
+      }
+    }
+    if (!rejected && worst) {
+      vaultOpportunities.push({ vault, worstExit: worst.exit, worstMarketLabel: worst.label })
+    }
+  }
+
+  return { marketOpportunities, vaultOpportunities, rejections }
 }
+
+// ---------------------------------------------------------------------------
+// Digest
 
 function usd(value: number): string {
   return `${Math.round(value).toLocaleString('fr-BE')} $`
@@ -202,8 +344,11 @@ function pct(value: number): string {
   return `${(value * 100).toFixed(1)} %`
 }
 
-export function buildDigest(positionAlerts: PositionAlert[], opportunities: Opportunity[]): string | null {
-  if (positionAlerts.length === 0 && opportunities.length === 0) return null
+export function buildDigest(positionAlerts: PositionAlert[], scan: OpportunityScan): string | null {
+  const { marketOpportunities, vaultOpportunities } = scan
+  if (positionAlerts.length === 0 && marketOpportunities.length === 0 && vaultOpportunities.length === 0) {
+    return null
+  }
 
   const date = new Date().toLocaleDateString('fr-BE', {
     timeZone: 'Europe/Brussels',
@@ -215,22 +360,26 @@ export function buildDigest(positionAlerts: PositionAlert[], opportunities: Oppo
   if (positionAlerts.length > 0) {
     lines.push('', `⚠️ Positions sous ${pct(POSITION_APY_ALERT)} :`)
     for (const alert of positionAlerts) {
-      const weekly = alert.weeklySupplyApy !== null ? ` (7j : ${pct(alert.weeklySupplyApy)})` : ''
-      const size = alert.supplyAssetsUsd !== null ? ` — ${usd(alert.supplyAssetsUsd)}` : ''
-      lines.push(
-        `• ${marketLabel(alert.market)} — ${pct(alert.supplyApy)}${weekly}${size}`,
-        `  ${morphoAppUrl(alert.market)}`
-      )
+      const weekly = alert.weeklyApy !== null ? ` (7j : ${pct(alert.weeklyApy)})` : ''
+      const size = alert.sizeUsd !== null ? ` — ${usd(alert.sizeUsd)}` : ''
+      lines.push(`• ${alert.label} — ${pct(alert.apy)}${weekly}${size}`, `  ${alert.url}`)
     }
   }
 
-  if (opportunities.length > 0) {
+  if (marketOpportunities.length > 0 || vaultOpportunities.length > 0) {
     lines.push('', `💡 Opportunités (APY ≥ ${pct(OPPORTUNITY_APY_MIN)}, prix stable 7j, liquidité OK) :`)
-    for (const opp of opportunities) {
+    for (const opp of marketOpportunities) {
       const risk = opp.grade ? `grade ${opp.grade}` : '⚠️ à analyser'
       lines.push(
-        `• ${marketLabel(opp.market)} — ${pct(opp.market.state!.supplyApy)} — ${risk} — vente 10 % pool (${usd(opp.sellTestUsd)}) : impact ${pct(opp.priceImpact)}`,
+        `• ${marketLabel(opp.market)} — ${pct(opp.market.state!.supplyApy)} — ${risk} — vente 10 % pool (${usd(opp.exit.sellTestUsd)}) : impact ${pct(opp.exit.priceImpact)}`,
         `  ${morphoAppUrl(opp.market)}`
+      )
+    }
+    for (const opp of vaultOpportunities) {
+      const curated = opp.vault.listed ? '' : ' — non curaté'
+      lines.push(
+        `• ${vaultLabel(opp.vault)} — ${pct(opp.vault.state!.netApy)} net${curated} — pire alloc ${opp.worstMarketLabel} : impact ${pct(opp.worstExit.priceImpact)} (vente ${usd(opp.worstExit.sellTestUsd)})`,
+        `  ${morphoVaultUrl(opp.vault)}`
       )
     }
   }

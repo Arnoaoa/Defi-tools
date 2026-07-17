@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { fetchYields, llamaPoolUrl, YIELD_PROJECTS, type YieldPool, type YieldProject } from '@/lib/yields'
+import { fetchYields, YIELD_PROJECTS, type YieldPool, type YieldProject } from '@/lib/yields'
 import { getRiskAnalysis, isStale, GRADE_COLORS } from '@/lib/risk'
 import { FilterGroup } from './MarketBrowser'
 
@@ -38,7 +38,7 @@ function formatUsd(num: number): string {
 }
 
 const PROJECT_COLORS: Record<YieldProject, string> = {
-  'morpho-blue': '#6366f1',
+  'morpho-vault': '#6366f1',
   'aave-v3': '#8b5cf6',
   'aave-v4': '#a855f7',
   'euler-v2': '#10b981',
@@ -84,7 +84,8 @@ export function YieldsBrowser() {
           Yields — Morpho · Aave · Euler
         </h1>
         <p className="text-sm" style={{ color: 'var(--muted)' }}>
-          Supply rates across protocols (Ethereum + Base) — data: DefiLlama, refreshed hourly
+          Supply rates across protocols (Ethereum + Base) — Morpho vaults from the Morpho API
+          (including non-curated), Aave/Euler from DefiLlama, refreshed hourly
         </p>
       </div>
 
@@ -168,6 +169,15 @@ export function YieldsBrowser() {
                     {pool.poolMeta && (
                       <span className="text-xs truncate" style={{ color: 'var(--muted)' }}>{pool.poolMeta}</span>
                     )}
+                    {pool.listed === false && (
+                      <span
+                        className="text-[10px] px-1 py-0.5 rounded shrink-0"
+                        style={{ background: '#78350f', color: '#fcd34d' }}
+                        title="Vault non curaté par Morpho — vérifier le curateur et les allocations avant dépôt"
+                      >
+                        non curaté
+                      </span>
+                    )}
                   </span>
                   <span className="text-xs" style={{ color: 'var(--muted)' }}>{pool.chain}</span>
                   <span className="text-right font-semibold" style={{ color: '#4ade80' }}>
@@ -178,13 +188,13 @@ export function YieldsBrowser() {
                   </span>
                   <span className="text-right text-xs">{formatUsd(pool.tvlUsd)}</span>
                   <a
-                    href={llamaPoolUrl(pool)}
+                    href={pool.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs text-right cursor-pointer transition-opacity hover:opacity-80"
                     style={{ color: 'var(--muted)' }}
                   >
-                    Llama ↗
+                    {pool.project === 'morpho-vault' ? 'Morpho ↗' : 'Llama ↗'}
                   </a>
                 </div>
               )

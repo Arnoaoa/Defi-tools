@@ -1,6 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { fetchMorphoMarkets, fetchUserPositions } from '@/lib/morpho-api'
-import { checkPositions, findOpportunities, buildDigest, positionKey, sendTelegram } from '@/lib/alerts'
+import { fetchMorphoMarkets, fetchMorphoVaults, fetchUserPositions } from '@/lib/morpho-api'
+import {
+  buildDigest,
+  checkPositions,
+  checkVaultPositions,
+  positionKey,
+  scanOpportunities,
+  sendTelegram,
+} from '@/lib/alerts'
 
 export const maxDuration = 30
 
@@ -18,25 +25,31 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const [markets, positions] = await Promise.all([
+    const [markets, vaults, positions] = await Promise.all([
       fetchMorphoMarkets(),
+      fetchMorphoVaults(),
       fetchUserPositions(address),
     ])
 
-    const positionAlerts = checkPositions(markets, positions)
-    const suppliedKeys = new Set(positions.map((p) => positionKey(p.chainId, p.marketId)))
-    const { opportunities, rejections } = await findOpportunities(markets, suppliedKeys)
+    const positionAlerts = [
+      ...checkPositions(markets, positions.markets),
+      ...checkVaultPositions(positions.vaults),
+    ]
+    const suppliedMarketKeys = new Set(positions.markets.map((p) => positionKey(p.chainId, p.marketId)))
+    const suppliedVaults = new Set(positions.vaults.map((p) => p.vault.address.toLowerCase()))
+    const scan = await scanOpportunities(markets, vaults, suppliedMarketKeys, suppliedVaults)
 
-    const digest = buildDigest(positionAlerts, opportunities)
+    const digest = buildDigest(positionAlerts, scan)
     const dryRun = request.nextUrl.searchParams.get('dry') === '1'
     if (digest && !dryRun) await sendTelegram(digest)
 
     return NextResponse.json({
       sent: digest !== null && !dryRun,
-      positionsChecked: positions.length,
+      positionsChecked: positions.markets.length + positions.vaults.length,
       positionAlerts: positionAlerts.length,
-      opportunities: opportunities.length,
-      rejections,
+      marketOpportunities: scan.marketOpportunities.length,
+      vaultOpportunities: scan.vaultOpportunities.length,
+      rejections: scan.rejections,
       digest,
     })
   } catch (err) {
