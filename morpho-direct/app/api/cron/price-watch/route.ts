@@ -6,7 +6,8 @@ import { sendTelegram } from '@/lib/alerts'
 export const maxDuration = 30
 
 const HEALTH_FACTOR_ALERT = 1.15 // borrow position approaching liquidation
-const DEFAULT_COOLDOWN_MINUTES = 60
+const DEFAULT_HEALTH_COOLDOWN_MINUTES = 60 // repeats are useful when near liquidation
+const PRICE_RULE_COOLDOWN_MINUTES = 6 * 60 // a durably crossed limit shouldn't spam
 
 // Price rules live in data/price-watch.json. `coin` is a DefiLlama coins id
 // ("coingecko:ethereum" or "ethereum:0x<token>"). Each rule needs at least one
@@ -44,7 +45,9 @@ export async function GET(request: NextRequest) {
 
   const address = process.env.MONITORED_ADDRESS
   const dryRun = params.get('dry') === '1'
-  const cooldownMs = Number(params.get('cooldown') ?? DEFAULT_COOLDOWN_MINUTES) * 60_000
+  const healthCooldownMs =
+    Number(params.get('cooldown') ?? DEFAULT_HEALTH_COOLDOWN_MINUTES) * 60_000
+  const priceCooldownMs = PRICE_RULE_COOLDOWN_MINUTES * 60_000
   const rules = priceWatchConfig.rules as PriceRule[]
 
   try {
@@ -118,6 +121,7 @@ export async function GET(request: NextRequest) {
 
     const now = Date.now()
     const fresh = triggered.filter((t) => {
+      const cooldownMs = t.key.startsWith('hf:') ? healthCooldownMs : priceCooldownMs
       if (now - (lastAlertAt.get(t.key) ?? 0) < cooldownMs) return false
       if (!dryRun) lastAlertAt.set(t.key, now)
       return true
