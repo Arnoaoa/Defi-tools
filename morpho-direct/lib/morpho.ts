@@ -102,6 +102,19 @@ export const MORPHO_BLUE_ABI = [
     ],
     stateMutability: 'view',
   },
+  {
+    name: 'idToMarketParams',
+    type: 'function',
+    inputs: [{ name: 'id', type: 'bytes32' }],
+    outputs: [
+      { name: 'loanToken', type: 'address' },
+      { name: 'collateralToken', type: 'address' },
+      { name: 'oracle', type: 'address' },
+      { name: 'irm', type: 'address' },
+      { name: 'lltv', type: 'uint256' },
+    ],
+    stateMutability: 'view',
+  },
 ] as const
 
 // Morpho oracles return the collateral price in loan-token terms, scaled 1e36
@@ -150,6 +163,13 @@ export const ERC20_ABI = [
     type: 'function',
     inputs: [],
     outputs: [{ name: '', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+  {
+    name: 'symbol',
+    type: 'function',
+    inputs: [],
+    outputs: [{ name: '', type: 'string' }],
     stateMutability: 'view',
   },
 ] as const
