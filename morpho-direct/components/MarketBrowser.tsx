@@ -22,6 +22,7 @@ const SORT_OPTIONS: { value: SortBy; label: string }[] = [
 
 const MIN_TVL_OPTIONS = [
   { value: 0, label: 'Any' },
+  { value: 3_000, label: '≥ $3K' },
   { value: 10_000, label: '≥ $10K' },
   { value: 100_000, label: '≥ $100K' },
   { value: 1_000_000, label: '≥ $1M' },

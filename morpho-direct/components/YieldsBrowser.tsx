@@ -19,6 +19,7 @@ const PROJECT_OPTIONS = [
 
 const MIN_TVL_OPTIONS = [
   { value: 0, label: 'Any' },
+  { value: 3_000, label: '≥ $3K' },
   { value: 100_000, label: '≥ $100K' },
   { value: 1_000_000, label: '≥ $1M' },
   { value: 10_000_000, label: '≥ $10M' },
