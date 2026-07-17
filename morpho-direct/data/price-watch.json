@@ -1,7 +1,7 @@
 {
   "rules": [
-    { "coin": "coingecko:kaito", "label": "KAITO", "below": 1 },
-    { "coin": "coingecko:pendle", "label": "PENDLE", "below": 1.8 },
+    { "coin": "coingecko:kaito", "label": "KAITO", "above": 1 },
+    { "coin": "coingecko:pendle", "label": "PENDLE", "above": 1.8 },
     { "coin": "coingecko:tether-gold", "label": "XAUt", "below": 3500, "above": 4700 },
     { "coin": "coingecko:bitcoin", "label": "BTC", "below": 52000 },
     { "coin": "ethereum:0x38EEb52F0771140d10c4E9A9a72349A329Fe8a6A", "label": "apyUSD", "below": 1 },
