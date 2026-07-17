@@ -5,6 +5,7 @@ import { fetchVaultAllocations, morphoVaultUrl } from '@/lib/morpho-api'
 import { getRiskAnalysis, getMarketRisk } from '@/lib/risk'
 
 export const POSITION_APY_ALERT = 0.10 // alert if a lending position's APY falls below this
+export const BORROW_APY_ALERT = 0.10 // alert if a borrow position's rate rises above this
 export const OPPORTUNITY_APY_MIN = 0.20 // candidate threshold for new opportunities
 const POSITION_MIN_USD = 1 // ignore dust positions
 const MARKET_TVL_MIN_USD = 5_000 // ignore dust markets below this
@@ -30,6 +31,7 @@ export function positionKey(chainId: number, marketId: string): string {
 // Position alerts
 
 export interface PositionAlert {
+  kind: 'lending' | 'borrow'
   label: string
   apy: number
   weeklyApy: number | null
@@ -41,18 +43,43 @@ export function checkPositions(markets: ApiMarket[], positions: UserPosition[]):
   const marketsByKey = new Map(markets.map((m) => [positionKey(m.chain.id, m.marketId), m]))
 
   return positions.flatMap((p) => {
-    if (p.supplyAssetsUsd !== null && p.supplyAssetsUsd < POSITION_MIN_USD) return []
     const market = marketsByKey.get(positionKey(p.chainId, p.marketId))
-    if (!market?.state || market.state.supplyApy >= POSITION_APY_ALERT) return []
-    return [
-      {
+    if (!market?.state) return []
+    const alerts: PositionAlert[] = []
+
+    const supplyUsd = p.supplyAssetsUsd
+    if (
+      p.supplyAssets > 0 &&
+      (supplyUsd === null || supplyUsd >= POSITION_MIN_USD) &&
+      market.state.supplyApy < POSITION_APY_ALERT
+    ) {
+      alerts.push({
+        kind: 'lending',
         label: marketLabel(market),
         apy: market.state.supplyApy,
         weeklyApy: market.state.weeklySupplyApy,
-        sizeUsd: p.supplyAssetsUsd,
+        sizeUsd: supplyUsd,
         url: morphoAppUrl(market),
-      },
-    ]
+      })
+    }
+
+    const borrowUsd = p.borrowAssetsUsd
+    if (
+      p.borrowAssets > 0 &&
+      (borrowUsd === null || borrowUsd >= POSITION_MIN_USD) &&
+      market.state.borrowApy > BORROW_APY_ALERT
+    ) {
+      alerts.push({
+        kind: 'borrow',
+        label: marketLabel(market),
+        apy: market.state.borrowApy,
+        weeklyApy: null,
+        sizeUsd: borrowUsd,
+        url: morphoAppUrl(market),
+      })
+    }
+
+    return alerts
   })
 }
 
@@ -62,6 +89,7 @@ export function checkVaultPositions(positions: UserVaultPosition[]): PositionAle
     if (p.vault.state.netApy >= POSITION_APY_ALERT) return []
     return [
       {
+        kind: 'lending' as const,
         label: vaultLabel(p.vault),
         apy: p.vault.state.netApy,
         weeklyApy: null,
@@ -357,13 +385,25 @@ export function buildDigest(positionAlerts: PositionAlert[], scan: OpportunitySc
   })
   const lines: string[] = [`🔔 Morpho Direct — ${date}`]
 
-  if (positionAlerts.length > 0) {
-    lines.push('', `⚠️ Positions sous ${pct(POSITION_APY_ALERT)} :`)
-    for (const alert of positionAlerts) {
+  const lendingAlerts = positionAlerts.filter((a) => a.kind === 'lending')
+  const borrowAlerts = positionAlerts.filter((a) => a.kind === 'borrow')
+
+  const pushAlertLines = (alerts: PositionAlert[]) => {
+    for (const alert of alerts) {
       const weekly = alert.weeklyApy !== null ? ` (7j : ${pct(alert.weeklyApy)})` : ''
       const size = alert.sizeUsd !== null ? ` — ${usd(alert.sizeUsd)}` : ''
       lines.push(`• ${alert.label} — ${pct(alert.apy)}${weekly}${size}`, `  ${alert.url}`)
     }
+  }
+
+  if (lendingAlerts.length > 0) {
+    lines.push('', `⚠️ Lending sous ${pct(POSITION_APY_ALERT)} :`)
+    pushAlertLines(lendingAlerts)
+  }
+
+  if (borrowAlerts.length > 0) {
+    lines.push('', `🔺 Emprunts au-dessus de ${pct(BORROW_APY_ALERT)} :`)
+    pushAlertLines(borrowAlerts)
   }
 
   if (marketOpportunities.length > 0 || vaultOpportunities.length > 0) {

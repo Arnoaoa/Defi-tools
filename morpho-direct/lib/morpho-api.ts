@@ -64,6 +64,8 @@ const POSITIONS_QUERY = `
         state {
           supplyAssets
           supplyAssetsUsd
+          borrowAssets
+          borrowAssetsUsd
         }
         market {
           marketId
@@ -161,6 +163,8 @@ export interface UserPosition {
   chainId: number
   supplyAssets: number
   supplyAssetsUsd: number | null
+  borrowAssets: number
+  borrowAssetsUsd: number | null
 }
 
 export interface ApiVault {
@@ -189,7 +193,12 @@ export interface UserPositions {
 interface PositionsData {
   userByAddress: {
     marketPositions: {
-      state: { supplyAssets: number; supplyAssetsUsd: number | null } | null
+      state: {
+        supplyAssets: number
+        supplyAssetsUsd: number | null
+        borrowAssets: number
+        borrowAssetsUsd: number | null
+      } | null
       market: { marketId: string; chain: { id: number } }
     }[]
     vaultPositions: {
@@ -212,13 +221,15 @@ export async function fetchUserPositions(address: string): Promise<UserPositions
     markets: results.flatMap(
       (data) =>
         data.userByAddress?.marketPositions.flatMap((p) =>
-          p.state && p.state.supplyAssets > 0
+          p.state && (p.state.supplyAssets > 0 || p.state.borrowAssets > 0)
             ? [
                 {
                   marketId: p.market.marketId,
                   chainId: p.market.chain.id,
                   supplyAssets: p.state.supplyAssets,
                   supplyAssetsUsd: p.state.supplyAssetsUsd,
+                  borrowAssets: p.state.borrowAssets,
+                  borrowAssetsUsd: p.state.borrowAssetsUsd,
                 },
               ]
             : []
