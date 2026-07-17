@@ -61,6 +61,8 @@ const POSITIONS_QUERY = `
   query GetUserPositions($chainId: Int!, $address: String!) {
     userByAddress(chainId: $chainId, address: $address) {
       marketPositions {
+        healthFactor
+        priceVariationToLiquidationPrice
         state {
           supplyAssets
           supplyAssetsUsd
@@ -165,6 +167,8 @@ export interface UserPosition {
   supplyAssetsUsd: number | null
   borrowAssets: number
   borrowAssetsUsd: number | null
+  healthFactor: number | null
+  priceVariationToLiquidationPrice: number | null
 }
 
 export interface ApiVault {
@@ -193,6 +197,8 @@ export interface UserPositions {
 interface PositionsData {
   userByAddress: {
     marketPositions: {
+      healthFactor: number | null
+      priceVariationToLiquidationPrice: number | null
       state: {
         supplyAssets: number
         supplyAssetsUsd: number | null
@@ -230,6 +236,8 @@ export async function fetchUserPositions(address: string): Promise<UserPositions
                   supplyAssetsUsd: p.state.supplyAssetsUsd,
                   borrowAssets: p.state.borrowAssets,
                   borrowAssetsUsd: p.state.borrowAssetsUsd,
+                  healthFactor: p.healthFactor,
+                  priceVariationToLiquidationPrice: p.priceVariationToLiquidationPrice,
                 },
               ]
             : []

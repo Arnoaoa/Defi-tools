@@ -18,4 +18,4 @@ Outbound TLS is intercepted on this machine — Node fetches fail unless the dev
 
 # External triggers (cron-job.org)
 
-Vercel Hobby crons are daily-only, so cron-job.org pings two routes more frequently: `/api/cron/liquidity-watch` (every minute, on-chain liquidity of a frozen market) and `/api/cron/alerts?scope=positions` (hourly; positions-only, no opportunity scan, per-position cooldown default 6h). Both accept the secret as `key` query param.
+Vercel Hobby crons are daily-only, so cron-job.org pings routes more frequently (all accept the secret as `key` query param): `/api/cron/liquidity-watch` (every minute, on-chain liquidity of a frozen market), `/api/cron/alerts?scope=positions` (hourly, rate checks only, cooldown 6h), `/api/cron/alerts?scope=opportunities` (every 3h, scan only, cooldown 24h), `/api/cron/price-watch` (every 5 min: coin price rules from `data/price-watch.json` + health factor < 1.15 on borrow positions, cooldown 1h).
