@@ -25,6 +25,9 @@ const VAULT_ALLOCATION_MIN_SHARE = 0.05 // ignore allocations under 5% of vault 
 // Chain slugs shared by KyberSwap and DefiLlama for our supported chains
 const CHAIN_SLUGS: Record<number, string> = { 1: 'ethereum', 8453: 'base' }
 
+// Loan assets Arnaud never wants opportunity alerts for (FX exposure, etc.)
+const IGNORED_LOAN_ASSETS = new Set(['MXNB'])
+
 export function positionKey(chainId: number, marketId: string): string {
   return `${chainId}-${marketId}`
 }
@@ -299,7 +302,8 @@ function vaultLabel(v: ApiVault): string {
 
 function isMarketCandidate(m: ApiMarket): boolean {
   return Boolean(
-    m.collateralAsset &&
+    !IGNORED_LOAN_ASSETS.has(m.loanAsset.symbol) &&
+      m.collateralAsset &&
       m.oracle &&
       m.state &&
       m.state.supplyApy >= OPPORTUNITY_APY_MIN &&
