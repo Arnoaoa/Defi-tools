@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createPublicClient, http, formatEther, getAddress } from 'viem'
+import { mainnet } from 'viem/chains'
 import priceWatchConfig from '@/data/price-watch.json'
 import { eulerChainName, eulerVaultUrl, fetchEulerPositions, fetchEulerVaultInfos, vaultKey } from '@/lib/euler'
 import { fetchUserPositions } from '@/lib/morpho-api'
+import { MORPHO_BLUE_ADDRESS, MORPHO_BLUE_ABI, ORACLE_ABI, ORACLE_PRICE_SCALE } from '@/lib/morpho'
 import { sendTelegram } from '@/lib/alerts'
 
 export const maxDuration = 30
@@ -14,6 +17,75 @@ const EULER_DAYS_TO_LIQUIDATION_ALERT = 30
 const DEFAULT_HEALTH_COOLDOWN_MINUTES = 60 // repeats are useful when near liquidation
 const PRICE_RULE_COOLDOWN_MINUTES = 6 * 60 // a durably crossed limit shouldn't spam
 const DUST_USD = 1
+
+// ynETHx liquidation-profitability watch: alert when liquidating the remaining
+// underwater borrower turns profitable (Curve effective price crosses
+// oracle / LIF). The exit contract pattern is ready to redeploy if it fires.
+const YNETHX_MARKET_ID = '0xf0edbb36183591ff28c56fdb283fdd6896cf1298990e5913208902adb87d2b75'
+const YNETHX_BIG_BORROWER = getAddress('0x14bCD9da052Cdc6fE0b9446d5a616D5b7B4d4550')
+const YNETHX_CURVE_POOL = getAddress('0xD65ed4BcE447195187f37cE7D82f56AdF1826F8F')
+const LIQ_PROFIT_ALERT = 0.005 // alert when a 1 WETH liquidation slice yields > +0.5%
+
+const CURVE_POOL_ABI = [
+  {
+    name: 'get_dy',
+    type: 'function',
+    inputs: [{ type: 'int128' }, { type: 'int128' }, { type: 'uint256' }],
+    outputs: [{ type: 'uint256' }],
+    stateMutability: 'view',
+  },
+] as const
+
+const mainnetClient = createPublicClient({
+  chain: mainnet,
+  transport: http(process.env.NEXT_PUBLIC_ETH_RPC_URL || 'https://ethereum-rpc.publicnode.com'),
+})
+
+interface LiquidationProfitability {
+  borrowerDebt: number
+  pnlPctSlice: number // on a 1 WETH repay slice
+  pnlPctFull: number // repaying the borrower's full debt
+}
+
+async function checkYnethxLiquidation(): Promise<LiquidationProfitability | null> {
+  const morpho = { address: MORPHO_BLUE_ADDRESS, abi: MORPHO_BLUE_ABI } as const
+  const marketId = YNETHX_MARKET_ID as `0x${string}`
+  const [params, marketState, position] = await mainnetClient.multicall({
+    contracts: [
+      { ...morpho, functionName: 'idToMarketParams', args: [marketId] },
+      { ...morpho, functionName: 'market', args: [marketId] },
+      { ...morpho, functionName: 'position', args: [marketId, YNETHX_BIG_BORROWER] },
+    ],
+    allowFailure: false,
+  })
+  const [, , oracle, , lltvRaw] = params
+  const [, , totalBorrowAssets, totalBorrowShares] = marketState
+  const borrowShares = position[1]
+  if (borrowShares === 0n || totalBorrowShares === 0n) return null // borrower gone
+
+  const debtWei =
+    (BigInt(borrowShares) * (totalBorrowAssets + 1n)) / (totalBorrowShares + 10n ** 6n)
+  const lltv = Number(lltvRaw) / 1e18
+  const lif = Math.min(1.15, 1 / (0.3 * lltv + 0.7))
+  const oraclePrice = Number(
+    await mainnetClient.readContract({ address: oracle, abi: ORACLE_ABI, functionName: 'price' })
+  ) / Number(ORACLE_PRICE_SCALE)
+
+  const pnlFor = async (repayWei: bigint) => {
+    const seizedWei = BigInt(Math.round((Number(repayWei) * lif) / oraclePrice))
+    const saleWei = await mainnetClient.readContract({
+      address: YNETHX_CURVE_POOL,
+      abi: CURVE_POOL_ABI,
+      functionName: 'get_dy',
+      args: [0n, 1n, seizedWei],
+    })
+    return Number(saleWei - repayWei) / Number(repayWei)
+  }
+
+  const sliceWei = debtWei < 10n ** 18n ? debtWei : 10n ** 18n
+  const [pnlPctSlice, pnlPctFull] = await Promise.all([pnlFor(sliceWei), pnlFor(debtWei)])
+  return { borrowerDebt: Number(formatEther(debtWei)), pnlPctSlice, pnlPctFull }
+}
 
 // Price rules live in data/price-watch.json. `coin` is a DefiLlama coins id
 // ("coingecko:ethereum" or "ethereum:0x<token>"). Each rule needs at least one
@@ -155,6 +227,15 @@ export async function GET(request: NextRequest) {
       })
     }
 
+    // On failure (RPC flake), skip this check rather than losing the whole run
+    const liq = await checkYnethxLiquidation().catch(() => null)
+    if (liq && liq.pnlPctSlice >= LIQ_PROFIT_ALERT) {
+      triggered.push({
+        key: 'ynethx-liq-profit',
+        text: `💰 Liquidation ynETHx RENTABLE : ${(liq.pnlPctSlice * 100).toFixed(2)} % sur 1 WETH, ${(liq.pnlPctFull * 100).toFixed(2)} % sur la totalité (dette ${liq.borrowerDebt.toFixed(3)} WETH). Le contrat d'exit est prêt à être adapté — fenêtre probablement courte.`,
+      })
+    }
+
     const now = Date.now()
     const fresh = triggered.filter((t) => {
       const cooldownMs = t.key.startsWith('hf:') ? healthCooldownMs : priceCooldownMs
@@ -172,6 +253,7 @@ export async function GET(request: NextRequest) {
       checked,
       borrowPositionsAtRisk: atRisk.length + eulerAtRisk.length,
       eulerPositionsChecked: eulerPositions.length,
+      ynethxLiquidation: liq,
       triggered: triggered.map((t) => t.text),
     })
   } catch (err) {
