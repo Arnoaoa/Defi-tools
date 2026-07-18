@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { morphoAppUrl } from '@/lib/api'
+import { fetchEulerPositions, fetchEulerVaultInfos } from '@/lib/euler'
 import { fetchMorphoMarkets, fetchMorphoVaults, fetchUserPositions, morphoVaultUrl } from '@/lib/morpho-api'
 import {
   buildDigest,
+  checkEulerPositions,
   checkPositions,
   checkVaultPositions,
   positionKey,
@@ -37,8 +39,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const address = process.env.MONITORED_ADDRESS
-  if (!address) {
+  // Comma-separated list of monitored wallets
+  const addresses = (process.env.MONITORED_ADDRESS ?? '').split(',').map((a) => a.trim()).filter(Boolean)
+  if (addresses.length === 0) {
     return NextResponse.json({ error: 'MONITORED_ADDRESS manquant' }, { status: 500 })
   }
 
@@ -48,14 +51,28 @@ export async function GET(request: NextRequest) {
   const dryRun = params.get('dry') === '1'
 
   try {
-    const [markets, vaults, positions] = await Promise.all([
+    const [markets, vaults, perAddress, eulerPerAddress] = await Promise.all([
       fetchMorphoMarkets(),
       withScan ? fetchMorphoVaults() : Promise.resolve([]),
-      fetchUserPositions(address),
+      Promise.all(addresses.map((a) => fetchUserPositions(a))),
+      withPositions
+        ? Promise.all(addresses.map((a) => fetchEulerPositions(a).catch(() => null)))
+        : Promise.resolve([]),
     ])
+    const positions = {
+      markets: perAddress.flatMap((p) => p.markets),
+      vaults: perAddress.flatMap((p) => p.vaults),
+    }
+    const eulerFailed = eulerPerAddress.some((p) => p === null)
+    const eulerPositions = eulerPerAddress.flatMap((p) => p ?? [])
+    const eulerVaultInfos = await fetchEulerVaultInfos(eulerPositions).catch(() => new Map())
 
     let positionAlerts = withPositions
-      ? [...checkPositions(markets, positions.markets), ...checkVaultPositions(positions.vaults)]
+      ? [
+          ...checkPositions(markets, positions.markets),
+          ...checkVaultPositions(positions.vaults),
+          ...checkEulerPositions(eulerPositions, eulerVaultInfos),
+        ]
       : []
 
     if (scope === 'positions') {
@@ -98,11 +115,12 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       sent: digest !== null && !dryRun,
       scope: scope ?? 'full',
-      positionsChecked: positions.markets.length + positions.vaults.length,
+      positionsChecked:
+        positions.markets.length + positions.vaults.length + eulerPositions.length,
       positionAlerts: positionAlerts.length,
       marketOpportunities: scan.marketOpportunities.length,
       vaultOpportunities: scan.vaultOpportunities.length,
-      rejections: scan.rejections,
+      rejections: eulerFailed ? [...scan.rejections, 'API Euler indisponible — positions Euler non vérifiées'] : scan.rejections,
       digest,
     })
   } catch (err) {

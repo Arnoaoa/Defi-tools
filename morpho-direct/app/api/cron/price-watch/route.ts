@@ -1,13 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
 import priceWatchConfig from '@/data/price-watch.json'
+import { eulerChainName, eulerVaultUrl, fetchEulerPositions, fetchEulerVaultInfos, vaultKey } from '@/lib/euler'
 import { fetchUserPositions } from '@/lib/morpho-api'
 import { sendTelegram } from '@/lib/alerts'
 
 export const maxDuration = 30
 
-const HEALTH_FACTOR_ALERT = 1.15 // borrow position approaching liquidation
+const HEALTH_FACTOR_ALERT = 1.15 // Morpho borrow position approaching liquidation
+// Euler thresholds are separate: his Euler stable loops sit at HF 1.03-1.06 by
+// design, so alert only on imminent danger or fast decay
+const EULER_HEALTH_FACTOR_ALERT = 1.02
+const EULER_DAYS_TO_LIQUIDATION_ALERT = 30
 const DEFAULT_HEALTH_COOLDOWN_MINUTES = 60 // repeats are useful when near liquidation
 const PRICE_RULE_COOLDOWN_MINUTES = 6 * 60 // a durably crossed limit shouldn't spam
+const DUST_USD = 1
 
 // Price rules live in data/price-watch.json. `coin` is a DefiLlama coins id
 // ("coingecko:ethereum" or "ethereum:0x<token>"). Each rule needs at least one
@@ -43,7 +49,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const address = process.env.MONITORED_ADDRESS
+  const addresses = (process.env.MONITORED_ADDRESS ?? '').split(',').map((a) => a.trim()).filter(Boolean)
   const dryRun = params.get('dry') === '1'
   const healthCooldownMs =
     Number(params.get('cooldown') ?? DEFAULT_HEALTH_COOLDOWN_MINUTES) * 60_000
@@ -52,7 +58,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const coins = [...new Set(rules.map((r) => r.coin))].join(',')
-    const [prices, changes, positions] = await Promise.all([
+    const [prices, changes, positions, eulerPositions] = await Promise.all([
       coins
         ? llamaJson<{ coins: Record<string, { price: number }> }>(
             `https://coins.llama.fi/prices/current/${coins}`
@@ -63,7 +69,12 @@ export async function GET(request: NextRequest) {
             `https://coins.llama.fi/percentage/${coins}?period=1d`
           ).catch(() => ({ coins: {} as Record<string, number> }))
         : Promise.resolve({ coins: {} as Record<string, number> }),
-      address ? fetchUserPositions(address) : Promise.resolve(null),
+      Promise.all(addresses.map((a) => fetchUserPositions(a))).then((all) => ({
+        markets: all.flatMap((p) => p.markets),
+      })),
+      Promise.all(addresses.map((a) => fetchEulerPositions(a).catch(() => []))).then((all) =>
+        all.flat()
+      ),
     ])
 
     // Stable `key` per condition (never includes the fluctuating price) so the
@@ -115,7 +126,32 @@ export async function GET(request: NextRequest) {
           : ''
       triggered.push({
         key: `hf:${p.chainId}-${p.marketId}`,
-        text: `🚨 Health factor ${p.healthFactor!.toFixed(3)} (< ${HEALTH_FACTOR_ALERT}) sur un emprunt${distance}\nhttps://app.morpho.org/${p.chainId === 1 ? 'ethereum' : 'base'}/market/${p.marketId}`,
+        text: `🚨 Health factor ${p.healthFactor!.toFixed(3)} (< ${HEALTH_FACTOR_ALERT}) sur un emprunt Morpho${distance}\nhttps://app.morpho.org/${p.chainId === 1 ? 'ethereum' : 'base'}/market/${p.marketId}`,
+      })
+    }
+
+    const eulerAtRisk = eulerPositions.filter(
+      (p) =>
+        p.isController &&
+        Number(p.borrowed) > 0 &&
+        (p.debtUsd === null || p.debtUsd >= DUST_USD) &&
+        ((p.healthFactor !== null && p.healthFactor < EULER_HEALTH_FACTOR_ALERT) ||
+          (typeof p.daysToLiquidation === 'number' &&
+            p.daysToLiquidation < EULER_DAYS_TO_LIQUIDATION_ALERT))
+    )
+    // Vault metadata fetched only for at-risk positions (normally zero)
+    const eulerInfos = eulerAtRisk.length
+      ? await fetchEulerVaultInfos(eulerAtRisk).catch(() => new Map())
+      : new Map()
+    for (const p of eulerAtRisk) {
+      const symbol = eulerInfos.get(vaultKey(p.chainId, p.vault))?.assetSymbol ?? p.vault.slice(0, 8)
+      const hf = p.healthFactor !== null ? `HF ${p.healthFactor.toFixed(3)}` : 'HF inconnu'
+      const ttl =
+        typeof p.daysToLiquidation === 'number' ? ` — liquidation estimée dans ${p.daysToLiquidation} j` : ''
+      const debt = p.debtUsd !== null ? ` — dette ${Math.round(p.debtUsd).toLocaleString('fr-BE')} $` : ''
+      triggered.push({
+        key: `ehf:${p.chainId}-${p.vault}-${p.account.toLowerCase()}`,
+        text: `🚨 [Euler] ${symbol} (${eulerChainName(p.chainId)}) : ${hf}${debt}${ttl}\n${eulerVaultUrl(p.chainId, p.vault)}`,
       })
     }
 
@@ -134,7 +170,8 @@ export async function GET(request: NextRequest) {
       sent: Boolean(message) && !dryRun,
       rules: rules.length,
       checked,
-      borrowPositionsAtRisk: atRisk.length,
+      borrowPositionsAtRisk: atRisk.length + eulerAtRisk.length,
+      eulerPositionsChecked: eulerPositions.length,
       triggered: triggered.map((t) => t.text),
     })
   } catch (err) {

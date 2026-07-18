@@ -1,5 +1,7 @@
 import type { ApiMarket } from '@/lib/api'
 import { morphoAppUrl } from '@/lib/api'
+import type { EulerPosition, EulerVaultInfo } from '@/lib/euler'
+import { eulerChainName, eulerVaultUrl, vaultKey } from '@/lib/euler'
 import type { ApiVault, UserPosition, UserVaultPosition } from '@/lib/morpho-api'
 import { fetchVaultAllocations, morphoVaultUrl } from '@/lib/morpho-api'
 import { getRiskAnalysis, getMarketRisk } from '@/lib/risk'
@@ -76,6 +78,57 @@ export function checkPositions(markets: ApiMarket[], positions: UserPosition[]):
         weeklyApy: null,
         sizeUsd: borrowUsd,
         url: morphoAppUrl(market),
+      })
+    }
+
+    return alerts
+  })
+}
+
+export function checkEulerPositions(
+  positions: EulerPosition[],
+  vaultInfos: Map<string, EulerVaultInfo>
+): PositionAlert[] {
+  return positions.flatMap((p) => {
+    const info = vaultInfos.get(vaultKey(p.chainId, p.vault))
+    if (!info) return []
+    const alerts: PositionAlert[] = []
+    const label = `[Euler] ${info.assetSymbol} (${eulerChainName(p.chainId)})`
+    const url = eulerVaultUrl(p.chainId, p.vault)
+
+    const supplied = Number(p.assets) / 10 ** info.assetDecimals
+    const suppliedUsd = info.assetPriceUsd !== null ? supplied * info.assetPriceUsd : null
+    // Escrow-style collateral (0% native APY, yield lives in the token itself,
+    // e.g. syzUSD/syrupUSDT loops) is not a lending position — don't alert on it
+    const escrowCollateral = p.isCollateral && info.supplyApy === 0
+    if (
+      supplied > 0 &&
+      !escrowCollateral &&
+      (suppliedUsd === null || suppliedUsd >= POSITION_MIN_USD) &&
+      info.supplyApy / 100 < POSITION_APY_ALERT
+    ) {
+      alerts.push({
+        kind: 'lending',
+        label,
+        apy: info.supplyApy / 100,
+        weeklyApy: null,
+        sizeUsd: suppliedUsd,
+        url,
+      })
+    }
+
+    if (
+      Number(p.borrowed) > 0 &&
+      (p.debtUsd === null || p.debtUsd >= POSITION_MIN_USD) &&
+      info.borrowApy / 100 > BORROW_APY_ALERT
+    ) {
+      alerts.push({
+        kind: 'borrow',
+        label,
+        apy: info.borrowApy / 100,
+        weeklyApy: null,
+        sizeUsd: p.debtUsd,
+        url,
       })
     }
 
