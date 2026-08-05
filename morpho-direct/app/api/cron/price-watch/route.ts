@@ -14,7 +14,7 @@ const HEALTH_FACTOR_ALERT = 1.15 // Morpho borrow position approaching liquidati
 // sufficient headroom — 1.15 would spam on normal funding rate fluctuations.
 const STABLE_LOOP_HF_ALERT = 1.03
 const STABLE_LOOP_MARKETS = new Set([
-  '0xbd9754505799c229af1b85a02e4f5cda74603411ba7edb585025eefd7ef9e5f4', // syzUSD loop (Base)
+  '0xbd9754505799c229af1b85a02e4f5cda74603411ba7edb585025eefd7ef9e5f4', // PT-sJEUR/JEUR (Base) — EUR stablecoins, near-zero price divergence
 ])
 // Euler thresholds are separate: his Euler stable loops sit at HF 1.03-1.06 by
 // design, so alert only on imminent danger or fast decay
