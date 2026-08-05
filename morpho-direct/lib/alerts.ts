@@ -9,6 +9,11 @@ import { getRiskAnalysis, getMarketRisk } from '@/lib/risk'
 export const POSITION_APY_ALERT = 0.10 // alert if a lending position's APY falls below this
 export const BORROW_APY_ALERT = 0.10 // alert if a borrow position's rate rises above this
 export const OPPORTUNITY_APY_MIN = 0.20 // candidate threshold for new opportunities
+// Health factor thresholds for Euler borrow positions.
+// Stablecoin loops have very low price volatility between assets, so 1.03 is
+// enough headroom — the default 1.15 would spam on small funding rate swings.
+const EULER_HF_ALERT_DEFAULT = 1.15
+const EULER_HF_ALERT_STABLE_LOOP = 1.03
 const POSITION_MIN_USD = 1 // ignore dust positions
 const MARKET_TVL_MIN_USD = 5_000 // ignore dust markets below this
 const SELL_TEST_FRACTION = 0.10 // liquidity check: quote selling 10% of pool collateral
@@ -36,12 +41,13 @@ export function positionKey(chainId: number, marketId: string): string {
 // Position alerts
 
 export interface PositionAlert {
-  kind: 'lending' | 'borrow'
+  kind: 'lending' | 'borrow' | 'health'
   label: string
   apy: number
   weeklyApy: number | null
   sizeUsd: number | null
   url: string
+  healthFactor?: number // only for kind: 'health'
 }
 
 export function checkPositions(markets: ApiMarket[], positions: UserPosition[]): PositionAlert[] {
@@ -92,6 +98,15 @@ export function checkEulerPositions(
   positions: EulerPosition[],
   vaultInfos: Map<string, EulerVaultInfo>
 ): PositionAlert[] {
+  // Group by sub-account to detect stablecoin loops: a sub-account with an
+  // escrow collateral (isCollateral + supplyApy === 0) is looping stablecoins.
+  const byAccount = new Map<string, EulerPosition[]>()
+  for (const p of positions) {
+    const group = byAccount.get(p.account) ?? []
+    group.push(p)
+    byAccount.set(p.account, group)
+  }
+
   return positions.flatMap((p) => {
     const info = vaultInfos.get(vaultKey(p.chainId, p.vault))
     if (!info) return []
@@ -133,6 +148,27 @@ export function checkEulerPositions(
         sizeUsd: p.debtUsd,
         url,
       })
+    }
+
+    // Health factor alert on controller (borrow) positions only
+    if (p.isController && p.healthFactor !== null) {
+      const accountPositions = byAccount.get(p.account) ?? []
+      const isStableLoop = accountPositions.some((ap) => {
+        const apInfo = vaultInfos.get(vaultKey(ap.chainId, ap.vault))
+        return ap.isCollateral && apInfo?.supplyApy === 0
+      })
+      const hfThreshold = isStableLoop ? EULER_HF_ALERT_STABLE_LOOP : EULER_HF_ALERT_DEFAULT
+      if (p.healthFactor < hfThreshold) {
+        alerts.push({
+          kind: 'health',
+          label: `${label}${isStableLoop ? ' (stable loop)' : ''}`,
+          apy: 0,
+          weeklyApy: null,
+          sizeUsd: p.debtUsd,
+          url,
+          healthFactor: p.healthFactor,
+        })
+      }
     }
 
     return alerts
@@ -444,12 +480,22 @@ export function buildDigest(positionAlerts: PositionAlert[], scan: OpportunitySc
 
   const lendingAlerts = positionAlerts.filter((a) => a.kind === 'lending')
   const borrowAlerts = positionAlerts.filter((a) => a.kind === 'borrow')
+  const healthAlerts = positionAlerts.filter((a) => a.kind === 'health')
 
   const pushAlertLines = (alerts: PositionAlert[]) => {
     for (const alert of alerts) {
       const weekly = alert.weeklyApy !== null ? ` (7j : ${pct(alert.weeklyApy)})` : ''
       const size = alert.sizeUsd !== null ? ` — ${usd(alert.sizeUsd)}` : ''
       lines.push(`• ${alert.label} — ${pct(alert.apy)}${weekly}${size}`, `  ${alert.url}`)
+    }
+  }
+
+  if (healthAlerts.length > 0) {
+    lines.push('', '🚨 Health factor critique :')
+    for (const a of healthAlerts) {
+      const hf = a.healthFactor !== undefined ? `ratio ${a.healthFactor.toFixed(3)}` : 'ratio ?'
+      const debt = a.sizeUsd !== null ? ` — dette ${usd(a.sizeUsd)}` : ''
+      lines.push(`• ${a.label} — ${hf}${debt}`, `  ${a.url}`)
     }
   }
 
