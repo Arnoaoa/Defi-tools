@@ -10,6 +10,12 @@ import { sendTelegram } from '@/lib/alerts'
 export const maxDuration = 30
 
 const HEALTH_FACTOR_ALERT = 1.15 // Morpho borrow position approaching liquidation
+// Stablecoin loops have near-zero price divergence between assets, so 1.03 is
+// sufficient headroom — 1.15 would spam on normal funding rate fluctuations.
+const STABLE_LOOP_HF_ALERT = 1.03
+const STABLE_LOOP_MARKETS = new Set([
+  '0xbd9754505799c229af1b85a02e4f5cda74603411ba7edb585025eefd7ef9e5f4', // syzUSD loop (Base)
+])
 // Euler thresholds are separate: his Euler stable loops sit at HF 1.03-1.06 by
 // design, so alert only on imminent danger or fast decay
 const EULER_HEALTH_FACTOR_ALERT = 1.02
@@ -188,17 +194,20 @@ export async function GET(request: NextRequest) {
     }
 
     const atRisk =
-      positions?.markets.filter(
-        (p) => p.borrowAssets > 0 && p.healthFactor !== null && p.healthFactor < HEALTH_FACTOR_ALERT
-      ) ?? []
+      positions?.markets.filter((p) => {
+        if (p.borrowAssets === 0 || p.healthFactor === null) return false
+        const threshold = STABLE_LOOP_MARKETS.has(p.marketId) ? STABLE_LOOP_HF_ALERT : HEALTH_FACTOR_ALERT
+        return p.healthFactor < threshold
+      }) ?? []
     for (const p of atRisk) {
+      const threshold = STABLE_LOOP_MARKETS.has(p.marketId) ? STABLE_LOOP_HF_ALERT : HEALTH_FACTOR_ALERT
       const distance =
         p.priceVariationToLiquidationPrice !== null
           ? ` — liquidation à ${(p.priceVariationToLiquidationPrice * 100).toFixed(1)} % du prix actuel`
           : ''
       triggered.push({
         key: `hf:${p.chainId}-${p.marketId}`,
-        text: `🚨 Health factor ${p.healthFactor!.toFixed(3)} (< ${HEALTH_FACTOR_ALERT}) sur un emprunt Morpho${distance}\nhttps://app.morpho.org/${p.chainId === 1 ? 'ethereum' : 'base'}/market/${p.marketId}`,
+        text: `🚨 Health factor ${p.healthFactor!.toFixed(3)} (< ${threshold}) sur un emprunt Morpho${distance}\nhttps://app.morpho.org/${p.chainId === 1 ? 'ethereum' : 'base'}/market/${p.marketId}`,
       })
     }
 
