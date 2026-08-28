@@ -6,7 +6,7 @@ import type { ApiVault, UserPosition, UserVaultPosition } from '@/lib/morpho-api
 import { fetchVaultAllocations, morphoVaultUrl } from '@/lib/morpho-api'
 import { getRiskAnalysis, getMarketRisk } from '@/lib/risk'
 
-export const POSITION_APY_ALERT = 0.10 // alert if a lending position's APY falls below this
+export const POSITION_APY_ALERT = 0.05 // alert if a lending position's APY falls below this
 export const BORROW_APY_ALERT = 0.10 // alert if a borrow position's rate rises above this
 export const OPPORTUNITY_APY_MIN = 0.20 // candidate threshold for new opportunities
 // Health factor thresholds for Euler borrow positions.
